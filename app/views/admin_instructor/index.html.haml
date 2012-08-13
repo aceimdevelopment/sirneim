@@ -1,0 +1,43 @@
+=button_to "Agregar nuevo instructor", :action=>"nuevo"
+=link_to "Generar pdf", :action=>"generar_pdf_instructor"
+=link_to "Generar xls", :action=>"generar_xls_instructor"
+%br/
+Filtrar Contenido:
+=text_field_tag "filtro"
+%table.tablesorter.tablefilter.likert
+  %thead
+    %tr
+      %th
+        No.
+      %th
+        Nombre y Apellido
+      %th
+        Cédula
+      %th
+        Correo Electrónico
+      %th
+        Teléfono Móvil
+      %th
+        Domina
+      %th
+        Secciones
+  %tbody
+    -@instructores.each_with_index do |s,i|
+      %tr
+        %td
+          =i+1
+        %td
+          =link_to s.usuario.nombre_completo, :action => "modificar", :ci => s.usuario_ci
+        %td
+          =s.usuario.ci
+        %td
+          =s.usuario.correo
+        %td
+          =s.usuario.telefono_movil
+        %td
+          =s.domina_descripcion
+        %td
+          =link_to "#{Seccion.where(:instructor_ci=>s.usuario.ci, :periodo_id=>@periodo_actual.id).count}", :action => "secciones", :ci => s.usuario_ci
+=button_to "Agregar nuevo instructor", :action=>"nuevo"
+%br/
+%br/

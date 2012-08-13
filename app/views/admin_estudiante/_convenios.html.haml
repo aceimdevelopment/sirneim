@@ -1,0 +1,34 @@
+%h3
+  Cursos del Estudiante
+%div.titulo
+  %table.tablesorter.liker
+    %thead
+      %tr
+        %th{:width => "20%"}
+          Curso
+        %th{:width => "20%"}
+          Último Nivel Aprobado
+        %th{:width => "20%"}
+          Convenio Actual
+        %th{:width => "10%"}
+          Opciones
+    %tbody
+      -@estudiante_curso.each do |ec|
+        %tr
+          %td
+            =ec.tipo_curso.descripcion
+          %td
+            -if ec.ultimo_historial_aprobado
+              ="#{ec.ultimo_historial_aprobado.tipo_nivel.descripcion}, periodo: #{ec.ultimo_historial_aprobado.periodo_id}"
+            -else
+              Ninguno
+          %td
+            =ec.tipo_convenio.descripcion
+          %td
+            - ha = ec.ultimo_historial_aprobado
+            =link_to_modal "Modificar_Convenio",{:action => "cambiar_convenio",:title =>"Modificar Convenio",:width=>500, :params => {:tipo_curso => "#{ec.tipo_curso.id}", :usuario_ci=>"#{ec.usuario_ci}"}}
+            %br/
+            = link_to_if(ha, "Generar_constancia_notas_aprobadas", :action=>"generar_constancia_notas",:tipo_curso=>ec.tipo_curso)
+            %br/
+           
+            = link_to_if(ha && ha.curso.grado == ha.tipo_curso.numero_grados, "Obtener Certificado", :action=>"generar_certificado", :tipo_curso=>ec.tipo_curso )

@@ -1,0 +1,32 @@
+%br
+=form_tag({:action => "guardar_parametros"}) do
+  %table.tablesorter.tablefilter.likert
+    %thead
+      %tr
+        %th
+          Acción
+        %th
+          SI
+        %th
+          NO
+    %tbody
+      %tr
+        %td
+          ¿Abrir la Preinscripción?
+        %td
+          -if @inscripcion_general == "SI"
+            =radio_button_tag "inscripcion_general","SI",true
+          -else
+            =radio_button_tag "inscripcion_general","SI",false
+        %td
+          -if @inscripcion_general == "NO"
+            =radio_button_tag "inscripcion_general","NO",true
+          -else
+            =radio_button_tag "inscripcion_general","NO",false
+
+
+  %p= submit_tag 'Guardar'
+
+%br/
+%br/
+

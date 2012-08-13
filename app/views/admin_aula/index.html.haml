@@ -1,0 +1,26 @@
+=button_to "Agregar nuevo aula", :action=>"nuevo"
+%br/
+Filtrar Contenido:
+=text_field_tag "filtro"
+%table.tablesorter.tablefilter.likert
+  %thead
+    %tr
+      %th{:width => "15%"}
+        Código
+      %th
+        Ubicación
+      %th
+        Opciones
+  %tbody
+    -@aulas.each do |a|
+      %tr
+        %td
+          =a.id
+        %td
+          =a.descripcion_completa
+        %td
+          =link_to_modal "Modificar",{:action => "modificar",:title =>"Modificar Aula",:width=>500, :params => {:id => "#{a.id}"}}
+        
+=button_to "Agregar nueva aula", :action=>"nuevo"
+%br/
+%br/

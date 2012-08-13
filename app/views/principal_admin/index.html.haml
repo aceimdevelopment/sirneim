@@ -1,0 +1,65 @@
+-if session[:administrador].rol == "VISOR"
+  %ul.navegador
+    %li
+      =link_to_if false, "Gestionar Cursos (Estado de la Inscripción)", :controller => "estado_inscripcion", :action=> "ver_secciones"
+    %li
+      =link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso" 
+-else
+  %ul.navegador
+    %li
+      =link_to_if true, "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
+    -#
+      %li
+        =link_to_if false, "Agregar Nuevo Estudiante", :controller=> "inscripcion_admin", :action => "paso0"
+    -#
+      %li 
+        %a.desplegable{:href=>"#"} Instructores
+        %ul.subnavegador
+          %li
+            =link_to "Gestionar Instructores Existentes", :controller=>"admin_instructor", :action=>"index"
+          %li
+            =link_to "Enviar Correo a Instructores", :action=>"redactar_correo"
+          %li
+            =link_to "Agregar Nuevo Instructor", :controller=> "admin_instructor", :action=>"nuevo"
+      %li
+        %a.desplegable{:href=>"#"} Aulas
+        %ul.subnavegador
+          %li  
+            =link_to "Gestionar Aulas", :controller=>"admin_aula"
+          %li
+            =link_to "Agregar Nueva Aula", :controller=> "admin_aula", :action=>"nuevo"
+      %li
+        =link_to "Estudiantes con Nivelación", :controller => "estudiante_nivelaciones", :action=> "index"
+          
+    %li
+      =link_to_if true, "Estado de la Preinscripción", :controller => "estado_inscripcion", :action=> "ver_preinscripcion"
+    %li
+      =link_to "Modificar cartelera", :controller => "gestionar_cartelera", :action=> "modificar"
+    %li
+      =link_to "Parámetros Generales", :controller => "parametros_generales", :action=> "index"
+
+    -#  
+      %li
+        =link_to "Estado de la Calificación - Período #{session[:parametros][:periodo_calificacion]}", :action=> "estado_instructores"
+      -if (session[:administrador].usuario_ci == "10264009") || (session[:administrador].usuario_ci == "14519813") || (session[:administrador].usuario_ci == "13736933")
+        %li
+          =link_to "Calificar Sección", :controller=>"calificacion", :action => "seleccionar_curso"
+
+      %li
+        %a.desplegable{:href=>"#"} Reportes
+        %ul.subnavegador
+          %li  
+            =link_to "Alumnos con Convenios", :controller=>"reportes", :action=>"index_reportes_convenios",  :controlador => controller_name
+          %li  
+            =link_to "Alumnos Congelados", :controller=>"reportes", :action=>"index_reporte_congelados", :controlador => controller_name
+          %li
+            =link_to "Alumnos por Edificio", :controller => "reportes", :action => "alumnos_por_edificio"
+          %li
+            =link_to "Nómina Instructores", :controller => "reportes", :action => "nomina_instructores"
+            
+      %li 
+        %a.desplegable{:href=>"#"} Banco de Preguntas
+        %ul.subnavegador
+          %li
+            =link_to "Agregar pregunta", "#{session[:parametros][:direccion_atest]}/principal_admin?controlador=#{controller_name}&usuario=#{session[:usuario].ci}"
+          

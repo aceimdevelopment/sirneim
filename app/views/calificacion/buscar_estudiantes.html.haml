@@ -1,0 +1,29 @@
+%p  
+  %b= "Curso:"
+  #{@curso}
+  %br
+  %b= "Nivel:" 
+  #{@nivel}
+  %br
+  %b= "Horario:"
+  #{@horario}
+  %br
+  %b= "Sección:" 
+  #{@seccion}
+  %br
+  
+  %p 
+    Para calificar, tome en cuenta los siguientes aspectos:
+    %ul
+      %li Las notas deben estar en un rango del 0 al 20
+      - if session[:idioma_id] != "IN"
+        %li No está permitido el uso de decimales
+      - else
+        %li Está permitido el uso de decimales
+      %li En caso de pérdida por inasistencia, colocar PI
+      %li Los datos se guardarán de forma definitiva una vez que se hayan calificado todos los estudiantes
+  %h3 Tabla de calificaciones 
+- if session[:idioma_id] != "IN"
+  =colocar_tabla(@usuarios,@historiales,true)
+- else
+  =colocar_tabla_ingles(@usuarios,@historiales,true)

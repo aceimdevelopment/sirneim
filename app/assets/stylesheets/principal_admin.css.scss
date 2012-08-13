@@ -1,0 +1,38 @@
+ul.navegador {
+	list-style: none;
+	margin-left: 30px;
+	color: white;
+	padding: 20px;
+	float: left;
+	font-size: 16px;
+	background: #00506E repeat;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+ul.navegador li {
+  margin: 20px;
+  color: white;
+  
+}
+
+ul.navegador li a{
+  color: white; 
+  text-decoration: none;
+  background: url(tria_der.png) no-repeat left;
+  padding-left: 20px; 
+}
+
+ul.navegador li a.desplegable{
+  background: url(tria.png) no-repeat left;
+
+
+}
+
+ul.subnavegador{
+  list-style: none;
+  margin-left: 0;
+  
+}
+

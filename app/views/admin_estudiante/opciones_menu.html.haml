@@ -1,0 +1,210 @@
+%p
+  =link_to "Descargar esta planilla", :action => "descargar_planilla", :id => @usuario.ci
+
+=form_tag :action => "paso2_guardar" do |f|
+  %fieldset
+    %legend Datos personales
+    %p
+      %label
+        Cédula de identidad
+      =@usuario.ci
+    %p
+      %label
+        Nombres
+        %span.req *  
+      =text_field :usuario, :nombres, :disabled => true
+      Ejemplo: María
+    %p
+      %label
+        Apellidos
+        %span.req *  
+      =text_field :usuario, :apellidos, :disabled => true
+      Ejemplo: Torres
+    %p
+      %label
+        Lugar de nacimiento
+        %span.req *  
+      =text_field :usuario, :lugar_nacimiento, :disabled => true
+      Ejemplo: Caracas
+    %p
+      %label
+        Fecha de nacimiento
+        %span.req *  
+      =text_field :usuario, :fecha_nacimiento, :disabled => true
+    %p
+      %label
+        Sexo
+        %span.req *  
+      =radio_button :usuario, :tipo_sexo_id, "M", :disabled => true
+      Masculino
+      =radio_button :usuario, :tipo_sexo_id, "0", :disabled => true
+      Femenino
+  %fieldset
+    %legend Datos de contacto
+    %p
+      %label
+        Teléfono habitación
+        %span.req *  
+      =text_field :usuario, :telefono_habitacion, :disabled => true
+      Ejemplo: 0212-5551122
+    %p
+      %label
+        Teléfono celular
+        %span.req *  
+      =text_field :usuario, :telefono_movil, :disabled => true
+      Ejemplo: 0414-2391212
+    %p
+      %label
+        Correo electrónico
+        %span.req *  
+      =text_field :usuario, :correo, :disabled => true
+      Ejemplo: maria@gmail.com
+    %p
+      %label
+        Correo electrónico (alternativo)
+      =text_field :usuario, :correo_alternativo, :disabled => true
+      Ejemplo: maria2@gmail.com
+    %p
+      %label
+        Dirección de domicilio
+        %span.req *  
+      =text_area :usuario, :direccion, :size => "60x4", :disabled => true
+      Ejemplo: Avenida A, con calle B. Caracas.
+    
+  %fieldset
+    %legend Datos laborales
+    %p
+      %label
+        ¿Usted trabaja?
+        %span.req *   
+      =radio_button :datos_estudiante, :trabaja, "1", :disabled => true
+      Si
+      =radio_button :datos_estudiante, :trabaja, "0", :disabled => true
+      No
+    #div-trabaja
+      %p
+        %label
+          Ocupación
+        =text_field :datos_estudiante, :ocupacion, :disabled => true
+        Ejemplo: Profesor
+      %p
+        %label
+          Institución
+        =text_field :datos_estudiante, :institucion, :disabled => true
+        Ejemplo: Colegio ABC
+      %p
+        %label
+          Cargo actual
+        =text_field :datos_estudiante, :cargo_actual, :disabled => true
+        Ejemplo: Director
+      %p
+        %label
+          Antiguedad
+        =text_field :datos_estudiante, :antiguedad, :disabled => true
+        Ejemplo: 3 años
+      %p
+        %label
+          Dirección de trabajo
+        =text_area :datos_estudiante, :direccion_de_trabajo, :size => "80x4", :disabled => true
+        Ejemplo: Avenida A, con calle B. Caracas.
+  %fieldset
+    %legend Estudios realizados
+    %p
+      %label
+        Título de bachiller
+      =radio_button :datos_estudiante, :titulo_estudio, "Ciencias", :disabled => true
+      Ciencias
+      =radio_button :datos_estudiante, :titulo_estudio, "Humanidades", :disabled => true
+      Humanidades
+    %p
+      %label
+        Institución
+        %span.req *   
+      =text_field :datos_estudiante, :institucion_estudio, :disabled => true
+      Ejemplo: Colegio BDC
+    %p
+      %label
+        Año de graduación
+        %span.req *   
+      =text_field :datos_estudiante, :ano_graduacion_estudio, :disabled => true
+      Ejemplo: 1997
+  %fieldset
+    %legend Estudios concluidos
+    %p
+      %label
+        Título obtenido
+      =text_field :datos_estudiante, :titulo_estudio_concluido, :disabled => true
+      Ejemplo: Licenciado en idiomas
+    %p
+      %label
+        Institución
+      =text_field :datos_estudiante, :institucion_estudio_concluido, :disabled => true
+      Ejemplo: UCV
+    %p
+      %label
+        Año de graduación
+      =text_field :datos_estudiante, :ano_estudio_concluido, :disabled => true
+      Ejemplo: 2004
+  %fieldset
+    %legend Estudios en curso
+    %p
+      %label
+        Nombre
+      =text_field :datos_estudiante, :titulo_estudio_en_curso, :disabled => true
+      Ejemplo: Alemán
+    %p
+      %label
+        Institución
+      =text_field :datos_estudiante, :institucion_estudio_en_curso, :disabled => true
+      Ejemplo: Instituto DFE
+    %p
+      %label
+        Fecha de inicio
+      =text_field :datos_estudiante, :fecha_inicio_estudio_en_curso, :disabled => true
+  %fieldset
+    %legend Experiencia en la enseñanza de idiomas
+    %p
+      %label
+        ¿Ha tenido experiencia en la enseñanza de idiomas?
+        %span.req *  
+      =radio_button :datos_estudiante, :tiene_experiencia_ensenanza_idiomas, "1", :disabled => true
+      Si
+      =radio_button :datos_estudiante, :tiene_experiencia_ensenanza_idiomas, "0", :disabled => true
+      No
+    #div-experiencia
+      %p
+        %label
+          Explique brevemente su experiencia
+        =text_area :datos_estudiante, :descripcion_experiencia, :size => "80x8", :disabled => true
+      %p
+        %label
+          ¿Ha dado clases de español?
+        =radio_button :datos_estudiante, :ha_dado_clases_espanol, "1", :disabled => true
+        Si
+        =radio_button :datos_estudiante, :ha_dado_clases_espanol, "0", :disabled => true
+        No
+      #div-espanol
+        %p
+          %label
+            ¿Dónde?
+          =text_field :datos_estudiante, :donde_clases_espanol, :disabled => true
+          Ejemplo: Colegio ASD
+        %p
+          %label
+            ¿Por cuánto tiempo?
+          =text_field :datos_estudiante, :tiempo_clases_espanol, :disabled => true
+          Ejemplo: 2 años
+    %p
+      %label
+        ¿Por qué le interesa cursar el diplomado?
+        %span.req *  
+      =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "80x4", :disabled => true
+    %p
+      %label
+        Expectativas sobre el diplomado
+        %span.req *  
+      =text_area :datos_estudiante, :expectativas_sobre_diplomado, :size => "80x4", :disabled => true
+    
+%p 
+  =link_to "< Buscar otro estudiante", :action => "index"
+%br/
