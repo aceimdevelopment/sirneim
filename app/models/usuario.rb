@@ -67,6 +67,10 @@ class Usuario < ActiveRecord::Base
   def datos_estudiante
     DatosEstudiante.where(:estudiante_ci => ci).limit(1).first
   end           
+
+  def inscripcion
+    Inscripcion.where(:estudiante_ci => ci).limit(1).first
+  end           
      
   def estudiante_curso
     EstudianteCurso.where(:usuario_ci => ci)

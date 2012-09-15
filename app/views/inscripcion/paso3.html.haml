@@ -1,35 +1,7 @@
 %p
-  Usted se ha inscrito en:
-%table.tablesorter
-  %thead
-    %tr
-      %th
-        Curso
-      %th
-        Nivel
-      %th
-        Horario
-      %th
-        Sección
-      %th
-        Aula
-  %tbody
-    %tr
-      %td
-        =@historial.tipo_curso.descripcion
-      %td
-        =@historial.tipo_nivel.descripcion
-      %td
-        =@historial.seccion.horario
-      %td
-        =@historial.seccion_numero
-      %td
-        =@historial.seccion.aula
-- if session[:nuevo] && false
+  Su inscripción ha sido realizada con éxito. Imprima su planilla de inscripción.
   %br/
-  %p
-    %div{:style => "margin:10px"}
-      =button_to "> Inscribir Siguiente", :action => "paso0"
-
-  
-    
+  =button_to "Planilla de inscripción", :action => "planilla_inscripcion"
+  %br/
+  %br/
+  =link_to "Ir a inicio", :action => "index", :controller => "inicio"

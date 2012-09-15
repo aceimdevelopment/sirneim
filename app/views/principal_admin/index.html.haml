@@ -8,6 +8,8 @@
   %ul.navegador
     %li
       =link_to_if true, "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
+    %li
+      =link_to_if true, "Preinscribir Estudiante", {:controller=> "preinscripcion", :action => "paso1"}, {:target => "blank"}
     -#
       %li
         =link_to_if false, "Agregar Nuevo Estudiante", :controller=> "inscripcion_admin", :action => "paso0"

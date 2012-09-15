@@ -7,4 +7,6 @@ config/database.yml
 .rvmrc
 codigos_barra/
 *.xls
+.sublime-project
+.sublime-workspace
 .DS_Store

@@ -1,6 +1,8 @@
 #creada por db2models
 class Estudiante < ActiveRecord::Base
 
+  belongs_to :tipo_forma_pago
+
   #autogenerado por db2models
   set_primary_key :usuario_ci
   #autogenerado por db2models

@@ -21,8 +21,8 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'composite_primary_keys'
 gem 'pdf-writer'
-gem 'rmagick'
-gem 'barby'
+#gem 'rmagick'
+#gem 'barby'
 gem 'resque-progress'
 gem 'tinymce-rails'
 gem 'spreadsheet'
@@ -30,6 +30,7 @@ gem 'elrte', '~> 0.0.4'
 
 # Use unicorn as the web server
 gem 'unicorn'
+#gem 'racer'
 
 # Deploy with Capistrano
 # gem 'capistrano'

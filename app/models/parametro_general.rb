@@ -2,6 +2,10 @@
 class ParametroGeneral < ActiveRecord::Base
 
   
+  def self.preinscripcion_abierta                                          
+    ParametroGeneral.first(:conditions=>["id = ?", "PREINSCRIPCION_ABIERTA"]).valor == "SI"
+  end
+
   def self.inscripcion_abierta                                          
     ParametroGeneral.first(:conditions=>["id = ?", "INSCRIPCION_ABIERTA"]).valor == "SI"
   end

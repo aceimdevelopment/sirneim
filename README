@@ -1,5 +1,5 @@
-insert into `aceimbbva_production`.`usuario` ( `telefono_movil`, `contrasena`, `activo`, `correo`, `direccion`, `tipo_sexo_id`, `apellidos`, `fecha_nacimiento`, `telefono_habitacion`, `nombres`, `ci`) values ( '-', '123123', '1', '\nyosamar_morin@provincial.com', '-', 'F', 'Morin', '1970-01-01', '-', 'Yosamar', '10180413');
-insert into `aceimbbva_production`.`administrador` ( `rol`, `usuario_ci`) values ( 'VISOR', '10180413');
+
+insert into `aceimdiplomados_production`.`parametro_general` ( `id`, `valor`) values ( 'PREINSCRIPCION_ABIERTA', 'NO')
 
 
 

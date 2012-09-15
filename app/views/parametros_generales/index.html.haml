@@ -14,6 +14,19 @@
         %td
           ¿Abrir la Preinscripción?
         %td
+          -if @preinscripcion_general == "SI"
+            =radio_button_tag "preinscripcion_general","SI",true
+          -else
+            =radio_button_tag "preinscripcion_general","SI",false
+        %td
+          -if @preinscripcion_general == "NO"
+            =radio_button_tag "preinscripcion_general","NO",true
+          -else
+            =radio_button_tag "preinscripcion_general","NO",false
+      %tr
+        %td
+          ¿Abrir la Inscripción?
+        %td
           -if @inscripcion_general == "SI"
             =radio_button_tag "inscripcion_general","SI",true
           -else

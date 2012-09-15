@@ -36,8 +36,13 @@
     %br/  
     %br/
     %br/
-    -if ParametroGeneral.inscripcion_abierta
+    -if ParametroGeneral.preinscripcion_abierta
       %div{:class => "titulo center"}
         %h2 Preinscripciones
       
       =button_to "Presinscribirse", :action => "paso1", :controller => "preinscripcion"
+    -if ParametroGeneral.inscripcion_abierta
+      %div{:class => "titulo center"}
+        %h2 Inscripciones
+      
+      =button_to "Inscribirse", :action => "paso1", :controller => "inscripcion"

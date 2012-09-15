@@ -5,8 +5,9 @@ class ParametrosGeneralesController < ApplicationController
 
     @titulo_pagina = "Configuraciones Generales"
 
-    @inscripcion_general = ParametroGeneral.find("INSCRIPCION_ABIERTA").valor
+    @preinscripcion_general = ParametroGeneral.find("PREINSCRIPCION_ABIERTA").valor
 
+    @inscripcion_general = ParametroGeneral.find("INSCRIPCION_ABIERTA").valor
   
   end
   
@@ -17,6 +18,9 @@ class ParametrosGeneralesController < ApplicationController
     inscripcion_general.valor = params[:inscripcion_general]
     inscripcion_general.save
 
+    inscripcion_general = ParametroGeneral.find("PREINSCRIPCION_ABIERTA")
+    inscripcion_general.valor = params[:preinscripcion_general]
+    inscripcion_general.save
 
   
     flash[:mensaje] = "Configuraciones almacenadas con éxito"

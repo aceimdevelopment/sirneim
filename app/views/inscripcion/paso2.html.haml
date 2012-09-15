@@ -1,18 +1,38 @@
-=form_tag :action => "paso2_guardar" do
+Ingrese los datos a continuación:
+
+=form_tag :action => "paso2_guardar" do 
+  -if @usuario.errors.any? || @inscripcion.errors.any?
+    %p
+      %div#error-explanation
+        %b
+          =pluralize(@usuario.errors.count+@datos_estudiante.errors.count, "error") 
+          en el formulario impiden que éste usuario sea registrado:
+        %ul
+          -@usuario.errors.full_messages.each do |msg|
+            %li
+              =msg
+          -@datos_estudiante.errors.full_messages.each do |msg|
+            %li
+              =msg
   %fieldset
-    %legend Horarios
+    %legend Datos personales
     %p
       %label
-        Curso - Nivel
-      =@historial.curso.descripcion
+        Cédula de identidad
+      =@usuario.ci
     %p
       %label
-        Horarios Disponibles
-        %span.req *
-      =select :usuario, :horario, @horarios
+        Nombre
+      =@usuario.nombre_completo
+    %p
+      %label
+        Expectativas sobre el diplomado
+        %span.req *  
+      =collection_select :inscripcion, :tipo_forma_pago_id, @tipos, :id, :descripcion
+    
   %p 
     %span.req *  
     Campos Obligatorios
   %p
-    =submit_tag "Confirmar inscripción", :confirm => "¿Está seguro de confirmar inscripción para este horario?"
-%br/
+    =submit_tag "Siguiente", :confirm => "¿Está seguro de enviar los datos?"
+%br/    

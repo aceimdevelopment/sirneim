@@ -71,6 +71,8 @@ require 'pdf/simpletable'
 require 'resque'
 require 'resque-meta'
 require 'resque/plugins/progress'
+
+=begin
 begin
   require 'barby'   
   require 'barby/barcode/code_128'
@@ -78,3 +80,4 @@ begin
   require 'resque/tasks'
 rescue
 end
+=end

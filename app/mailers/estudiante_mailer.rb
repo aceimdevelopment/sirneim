@@ -5,6 +5,10 @@ class EstudianteMailer < ActionMailer::Base
     mail(:to => usuario.correo, :subject => "DIPLOMADO: Bienvenido - Preinscripción Realizada")
   end
 
+  def bienvenida2(usuario)
+    mail(:to => usuario.correo, :subject => "DIPLOMADO: Bienvenido - Inscripción Realizada")
+  end
+
 
   def recordatorio(usuario)
     @nombre = usuario.nombre_completo     

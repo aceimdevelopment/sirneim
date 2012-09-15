@@ -4,7 +4,7 @@ class PreinscripcionController < ApplicationController
   def paso1
     session[:usuario] = nil
     @usuario = Usuario.new
-    @titulo_pagina = "Presincripción - Paso 1"
+    @titulo_pagina = "Preinscripción - Paso 1"
   end
 
   def paso1_guardar
@@ -37,7 +37,7 @@ class PreinscripcionController < ApplicationController
       @datos_estudiante = DatosEstudiante.new
     end
     
-    @titulo_pagina = "Presincripción - Paso 2"
+    @titulo_pagina = "Preinscripción - Paso 2"
   end
 
   def paso2_guardar
@@ -127,7 +127,7 @@ class PreinscripcionController < ApplicationController
   def paso3
     @usuario = session[:usuario]
     info_bitacora("Paso 3 preinscripcion realizado")
-    @titulo_pagina = "Presincripción - Paso 3"
+    @titulo_pagina = "Preinscripción - Paso 3"
   end
 
 end
