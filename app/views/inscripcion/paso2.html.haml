@@ -26,7 +26,7 @@ Ingrese los datos a continuación:
       =@usuario.nombre_completo
     %p
       %label
-        Expectativas sobre el diplomado
+        Forma de pago
         %span.req *  
       =collection_select :inscripcion, :tipo_forma_pago_id, @tipos, :id, :descripcion
     

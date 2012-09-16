@@ -20,7 +20,7 @@ class InscripcionController < ApplicationController
     session[:usuario] = usuario
     
     if Inscripcion.where(:estudiante_ci => ci).first
-      flash[:mensaje] = "Usted ya estaba inscrito, pero puede actualizar sus datos si lo desea."
+      flash[:mensaje] = "Usted ya está inscrito"
       redirect_to :action => "paso1"
       return
     end
