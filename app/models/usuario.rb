@@ -79,6 +79,10 @@ class Usuario < ActiveRecord::Base
   def descripcion
     "#{apellidos} #{nombres}, (#{ci})"
   end
+
+  def telefonos
+    "#{telefono_movil}, #{telefono_habitacion}"
+  end
   
   def datos_contacto
     "#{telefono_movil}, #{correo}"

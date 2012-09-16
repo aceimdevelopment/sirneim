@@ -1,4 +1,4 @@
 #creada por db2models
 class TipoFormaPago < ActiveRecord::Base
-	UNICO="UNICA"
+	UNICO="UNICO"
 end

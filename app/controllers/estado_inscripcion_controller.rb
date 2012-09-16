@@ -5,6 +5,38 @@ class EstadoInscripcionController < ApplicationController
     @preinscritos = Preinscripcion.all
   end
 
+  def ver_inscripcion
+    @titulo_pagina = "Estado de la Inscripción"
+    @inscritos = Inscripcion.all.sort_by{|x| x.usuario.nombre_completo}
+  end
+
+  def cargar_deposito
+    @ci = params[:parametros][:usuario_ci]
+    @usuario = Usuario.where(:ci => @ci).first
+    @tipo = params[:parametros][:tipo]
+    if @usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::UNICO
+      @tipo_descripcion = "Pago único"  
+    else
+      @tipo_descripcion = "Depósito #{@tipo}"  
+    end
+    render :layout => false
+  end
+
+  def cargar_deposito_guardar
+    @ci = params[:ci]
+    @tipo = params[:tipo].to_i
+    deposito = params[:inscripcion][:deposito]
+    deposito = "-------" if deposito.strip.size == 0 
+    inscripcion = Inscripcion.where(:estudiante_ci => @ci).first
+    inscripcion.deposito1 = deposito if @tipo == 1
+    inscripcion.deposito2 = deposito if @tipo == 2
+    inscripcion.deposito3 = deposito if @tipo == 3
+    inscripcion.save
+    info_bitacora "Se agrego el numero de deposito del usuario #{@ci}, tipo #{@tipo}"
+
+    flash[:mensaje] = "Se ha cargado el número depósito"
+    redirect_to :action => :ver_inscripcion
+  end
 
   def nivel1
     periodo = ParametroGeneral.periodo_actual

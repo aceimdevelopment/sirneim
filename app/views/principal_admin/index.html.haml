@@ -36,6 +36,8 @@
     %li
       =link_to_if true, "Estado de la Preinscripción", :controller => "estado_inscripcion", :action=> "ver_preinscripcion"
     %li
+      =link_to_if true, "Estado de la Inscripción", :controller => "estado_inscripcion", :action=> "ver_inscripcion"
+    %li
       =link_to "Modificar cartelera", :controller => "gestionar_cartelera", :action=> "modificar"
     %li
       =link_to "Parámetros Generales", :controller => "parametros_generales", :action=> "index"
