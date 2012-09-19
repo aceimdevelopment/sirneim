@@ -78,10 +78,11 @@ class InscripcionController < ApplicationController
   end
 
   def planilla_inscripcion
-    @usuario = Usuario.where(:ci => session[:usuario].ci).first
+    ci = params[:usuario_ci] || session[:usuario].ci
+    @usuario = Usuario.where(:ci => ci).first
     info_bitacora "Se busco la planilla de inscripcion de #{@usuario.descripcion}"
     pdf = Reportes.planilla_inscripcion(@usuario)
-    send_data pdf.render,:filename => "planilla_inscripcion_#{session[:usuario].ci}.pdf",
+    send_data pdf.render,:filename => "planilla_inscripcion_#{ci}.pdf",
                          :type => "application/pdf", :disposition => "attachment"
   end
 
