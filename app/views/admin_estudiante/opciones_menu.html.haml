@@ -1,5 +1,7 @@
 %p
   =link_to "Descargar esta planilla", :action => "descargar_planilla", :id => @usuario.ci
+  \|
+  =link_to "Descargar planilla de inscripcion", :action => "planilla_inscripcion", :controller => "inscripcion", :usuario_ci => @usuario.ci
 
 =form_tag :action => "paso2_guardar" do |f|
   %fieldset
