@@ -58,6 +58,7 @@ end
     periodo_actual = session[:parametros][:periodo_actual]
     @usuario = Usuario.where(:ci=>ci).limit(1).first
     @datos_estudiante = @usuario.datos_estudiante
+    @estudiante = @usuario.estudiante
     @titulo_pagina = "Detalle del estudiante"
   end
   

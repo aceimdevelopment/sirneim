@@ -53,6 +53,7 @@ class DocumentosPDF
     pdf.text to_utf16("<b>Teléfono celular: </b> #{usuario.telefono_movil}"), :justification => :left, :font_size => 12
     pdf.text to_utf16("<b>Correo electrónico: </b> #{usuario.correo}"), :justification => :left, :font_size => 12
     pdf.text to_utf16("<b>Correo electrónico (alternativo): </b> #{usuario.correo_alternativo}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Cuenta twitter: </b> #{usuario.estudiante.cuenta_twitter}"), :justification => :left, :font_size => 12
     pdf.text to_utf16("<b>Dirección de domicilio: </b> #{usuario.direccion}"), :justification => :left, :font_size => 12
 
     pdf.text to_utf16("\nDatos laborales"), :justification => :left, :font_size => 16
