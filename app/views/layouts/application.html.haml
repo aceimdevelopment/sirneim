@@ -5,6 +5,10 @@
     =stylesheet_link_tag  "application"
     =javascript_include_tag "application"
     =javascript_include_tag controller_name
+    <link href="/aceim_diplomados/assets/application.css" media="screen" rel="stylesheet" type="text/css">
+    <script src="/aceim_diplomados/assets/application.js" type="text/javascript"></script>
+    =javascript_include_tag "/aceim_diplomados/assets/#{controller_name}"    
+
   %body
     #banner
       #banner_barra

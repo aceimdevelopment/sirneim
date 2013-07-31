@@ -80,11 +80,11 @@ class Reportes
     datos = []
     
     datos << { "nombre" => to_utf16("<b>Banco:</b>"), "valor" => to_utf16("Banco de Venezuela") }
-    datos << { "nombre" => to_utf16("<b>Nro. de Cuenta:</b>"), "valor" => to_utf16("Cuenta Corriente Nro. 0102-0491-7100-0938-5674") }
-    datos << { "nombre" => to_utf16("<b>A nombre de:</b>"), "valor" => to_utf16("Ingresos propios de la Universidad Central de Venezuela") }
-    datos << { "nombre" => to_utf16("<b>Forma de pago:</b>"), "valor" => to_utf16("usuario.inscripcion.tipo_forma_pago.descripcion") }
+    datos << { "nombre" => to_utf16("<b>Nro. de Cuenta:</b>"), "valor" => to_utf16("Cuenta Corriente Nro. 0102-0140-3400-0442-6884") }
+    datos << { "nombre" => to_utf16("<b>A nombre de:</b>"), "valor" => to_utf16("Fundeim") }
+    datos << { "nombre" => to_utf16("<b>Forma de pago:</b>"), "valor" => to_utf16("#{usuario.inscripcion.tipo_forma_pago.descripcion}") }
     if usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::UNICO
-      datos << { "nombre" => to_utf16("<b>Pago:</b>"), "valor" => to_utf16("6.000 BsF. (Al momento de la inscripción)") }
+      datos << { "nombre" => to_utf16("<b>Pago:</b>"), "valor" => to_utf16("7.600 BsF. (Al momento de la inscripción)") }
       datos << { "nombre" => to_utf16(" "), "valor" => to_utf16(" ") }
       datos << { "nombre" => to_utf16("<b>Nro de depósito:</b>"), "valor" => to_utf16("_____________________________") }
 
@@ -106,7 +106,7 @@ class Reportes
     pdf.text to_utf16("<C:bullet/>La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido de 25 participantes, en cuyo caso se reintegrará el monto de la matrícula."), :font_size => 11, :justification => :full
 		pdf.text to_utf16("<C:bullet/>La asistencia a clases es obligatoria. Sólo se permite 1 inasistencia por módulo."), :font_size => 11, :justification => :full
     pdf.text to_utf16("<C:bullet/>Únicamente DEPOSITOS en EFECTIVO (NO CHEQUES)."), :font_size => 11, :justification => :full
-    pdf.text to_utf16("<C:bullet/>El voucher asociado al primer pago junto a la planilla deben ser entregados del lunes 17 al jueves 20 de sepetiembre de 2012 en extensión de (FUNDEIM) a partir de las 3pm."), :font_size => 11, :justification => :full
+    pdf.text to_utf16("<C:bullet/>El/los voucher(s) en original asociado al pago junto a la planilla deben ser entregados del lunes 17 al jueves 20 de sepetiembre de 2012 en extensión de (FUNDEIM) a partir de las 3pm."), :font_size => 11, :justification => :full
 
     # -- FIRMAS -----
 		pdf.text "\n", :font_size => 8
