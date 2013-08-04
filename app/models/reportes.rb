@@ -86,7 +86,7 @@ class Reportes
     datos << { "nombre" => to_utf16("<b>Banco:</b>"), "valor" => to_utf16("Banco de Venezuela") }
     datos << { "nombre" => to_utf16("<b>Nro. de Cuenta:</b>"), "valor" => to_utf16("Cuenta Corriente Nro. 0102-0140-3400-0442-6884") }
     datos << { "nombre" => to_utf16("<b>A nombre de:</b>"), "valor" => to_utf16("Fundeim") }
-    datos << { "nombre" => to_utf16("<b>Forma de pago:</b>"), "valor" => to_utf16("#{usuario.inscripcion.tipo_forma_pago.descripcion}") }
+    datos << { "nombre" => to_utf16("<b>Forma de pago:</b>"), "valor" => to_utf16("Pago Único") }
     if usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::UNICO
       datos << { "nombre" => to_utf16("<b>Pago:</b>"), "valor" => to_utf16("7.600 BsF. (Al momento de la inscripción)") }
       datos << { "nombre" => to_utf16("<b>Nro. de depósito:</b>"), "valor" => to_utf16("_____________________________") }
