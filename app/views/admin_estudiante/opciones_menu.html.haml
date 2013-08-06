@@ -1,9 +1,17 @@
 %p
   =link_to "Descargar esta planilla", :action => "descargar_planilla", :id => @usuario.ci
   \|
-  = link_to_if(!@usuario.inscripcion.nil?, "Descargar planilla de inscripcion", { :controller => "inscripcion", :action => "planilla_inscripcion"}, :usuario_ci => @usuario.ci)
+  = link_to_if(!@usuario.inscripcion.nil?, "Descargar planilla de inscripcion", { :controller => "inscripcion", :action => "planilla_inscripcion", :usuario_ci => @usuario.ci})
 
 =form_tag :action => "paso2_guardar" do |f|
+  -if @usuario.inscripcion
+    %fieldset
+      %legend Datos de Diplomados
+      %p
+        %label
+          Grupo Actual
+        =@usuario.inscripcion.descripcion_cohorte_grupo
+
   %fieldset
     %legend Datos personales
     %p

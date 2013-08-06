@@ -1,4 +1,5 @@
-Ingrese los datos a continuación:
+/ Ingrese los datos a continuación:
+Confirmación de Datos
 
 =form_tag :action => "paso2_guardar" do 
   -if @usuario.errors.any? || @inscripcion.errors.any?
@@ -27,12 +28,28 @@ Ingrese los datos a continuación:
     %p
       %label
         Forma de pago
-        %span.req *  
-      =collection_select :inscripcion, :tipo_forma_pago_id, @tipos, :id, :descripcion
-    
-  %p 
-    %span.req *  
-    Campos Obligatorios
+      = @preinscripcion.tipo_forma_pago.descripcion
+      = hidden_field_tag :tipo_forma_pago_id, @preinscripcion.tipo_forma_pago.id
+      
+      =#collection_select :inscripcion, :tipo_forma_pago_id, @preinscripcion.tipo_forma_pago, :id, :descripcion
+    %p
+      %label
+        Grupo
+      = @preinscripcion.grupo.nombre
+      = hidden_field_tag :grupo_id, @preinscripcion.grupo.id
+
+      =#collection_select :inscripcion, :grupo_id, @preinscripcion.grupo, :id, :nombre
+    %p
+      %label
+        Cohorte
+      = "#{@preinscripcion.cohorte.nombre} - #{@preinscripcion.cohorte.id}"
+      = hidden_field_tag :cohorte_id, @preinscripcion.cohorte.id
+
+      =#collection_select :inscripcion, :cohorte_id, @preinscripcion.cohorte, :id, :nombre
+
+  / %p 
+  /   %span.req *  
+  /   Campos Obligatorios
   %p
     =submit_tag "Siguiente", :confirm => "¿Está seguro de enviar los datos?"
 %br/    

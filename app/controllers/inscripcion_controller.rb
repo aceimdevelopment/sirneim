@@ -16,12 +16,19 @@ class InscripcionController < ApplicationController
       redirect_to :action => "paso1"
       return
     end
+
+    if estudiante=Preinscripcion.where(['estudiante_ci = ? AND grupo_id = ?', ci, nil]).first
+      flash[:mensaje] = "Cédula invalida, la persona no ha sido seleccionada para ningún grupo"
+      redirect_to :action => "paso1"
+      return
+    end
+
     usuario = Usuario.where(:ci => ci).first
     session[:usuario] = usuario
     
     if Inscripcion.where(:estudiante_ci => ci).first
-      flash[:mensaje] = "Usted ya está inscrito"
-      redirect_to :action => "paso1"
+      flash[:mensaje] = "Usted ya ha sido inscrito"
+      redirect_to :action => "paso3"
       return
     end
 
@@ -35,21 +42,25 @@ class InscripcionController < ApplicationController
     unless @inscripcion = @usuario.inscripcion 
       @inscripcion = Inscripcion.new
     end
-    @tipos = TipoFormaPago.all
+    # @tipos = TipoFormaPago.all
+    # @grupos = Grupo.all
+    # @cohorte = Cohorte.all
+    @preinscripcion = Preinscripcion.find @usuario.ci
     @titulo_pagina = "Inscripción - Paso 2"
   end
 
   def paso2_guardar
+
     usuario = session[:usuario]
-    inscripcion = params[:inscripcion]
     unless @inscripcion = usuario.inscripcion 
       @inscripcion = Inscripcion.new
     end
 
-
     @usuario = session[:usuario]
     @inscripcion.estudiante_ci = usuario.ci
-    @inscripcion.tipo_forma_pago_id = inscripcion[:tipo_forma_pago_id]
+    @inscripcion.tipo_forma_pago_id = params[:tipo_forma_pago_id]
+    @inscripcion.grupo_id = params[:grupo_id]
+    @inscripcion.cohorte_id = params[:cohorte_id]
     @inscripcion.fecha_hora = Time.now
 
     a = @usuario.valid?

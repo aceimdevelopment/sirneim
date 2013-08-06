@@ -7,6 +7,8 @@
 -else
   %ul.navegador
     %li
+      =#link_to "Seleccionar Preinscritos", :controller=> "preinscripcion", :action => "seleccionar_estudiantes"
+    %li
       =link_to_if true, "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
     %li
       =link_to_if true, "Preinscribir Estudiante", {:controller=> "preinscripcion", :action => "paso1"}, {:target => "blank"}

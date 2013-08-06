@@ -131,4 +131,23 @@ class PreinscripcionController < ApplicationController
     @titulo_pagina = "Preinscripción - Paso 3"
   end
 
+  def seleccionar_estudiantes
+    @preinscritos = Preinscripcion.all
+    @grupos = Grupo.all
+    @cohorte = Cohorte.all
+  end
+
+  def guardar_seleccionados
+    
+    seleccionados = params[:seleccionados]
+    puts "------------------"
+    seleccionados.each{|s| puts s}
+    puts "------------------"
+    1/0
+    seleccionados.each do |seleccionado|
+      intructores_ci << seleccionado.at(0) if seleccionado.at(1).eql? "1"
+    end    
+  end
+
+
 end

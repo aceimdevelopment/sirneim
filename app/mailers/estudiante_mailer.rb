@@ -6,6 +6,7 @@ class EstudianteMailer < ActionMailer::Base
   end
 
   def bienvenida2(usuario)
+    @inscripcion = usuario.inscripcion
     mail(:to => usuario.correo, :subject => "DIPLOMADO: Bienvenido - Inscripción Realizada")
   end
 

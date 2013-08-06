@@ -50,7 +50,7 @@ class Reportes
       col.justification = :right
     }
     tabla.columns["valor"] = PDF::SimpleTable::Column.new("valor") { |col|
-      col.width = 400
+      col.width = 420
       col.justification = :left
     }
     datos = []
@@ -58,6 +58,7 @@ class Reportes
     datos << { "nombre" => to_utf16("<b>Estudiante:</b>"), "valor" => to_utf16("<b>Nombres: </b>#{usuario.nombres}  |  <b>Apellidos:</b> #{usuario.apellidos}\n<b>CI:</b> #{usuario.ci}  |  <b>Cel:</b>#{usuario.telefono_movil}  |  <b>mail:</b>#{usuario.correo}") }
     datos << { "nombre" => to_utf16("<b>Horario:</b>"), "valor" => to_utf16("Sábado 9:00 a 12:30 pm (4 horas académicas semanales)") }
     datos << { "nombre" => to_utf16("<b>Aula:</b>"), "valor" => to_utf16("Aula 230 del 2do. piso de Trasbordo, Av. Minerva.") }
+    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("#{usuario.inscripcion.grupo.nombre} - #{usuario.inscripcion.cohorte.nombre}") }
     tabla.data.replace datos
     tabla.render_on(pdf)
     
@@ -78,7 +79,7 @@ class Reportes
       col.justification = :right
     }
     tabla.columns["valor"] = PDF::SimpleTable::Column.new("valor") { |col|
-      col.width = 400
+      col.width = 420
       col.justification = :left
     }
     datos = []
@@ -91,13 +92,9 @@ class Reportes
       datos << { "nombre" => to_utf16("<b>Pago:</b>"), "valor" => to_utf16("7.600 BsF. (Al momento de la inscripción)") }
       datos << { "nombre" => to_utf16("<b>Nro. de depósito:</b>"), "valor" => to_utf16("_____________________________") }
 
-    else
-      datos << { "nombre" => to_utf16("<b>Pago 1:</b>"), "valor" => to_utf16("3.000 BsF. (Al momento de la inscripción)") }
-      datos << { "nombre" => to_utf16("<b>Pago 2:</b>"), "valor" => to_utf16("1.500 BsF. (30 de Octubre de 2012)") }
-      datos << { "nombre" => to_utf16("<b>Pago 3:</b>"), "valor" => to_utf16("1.500 BsF. (1 de Diciembre de 2012)") }
-      datos << { "nombre" => to_utf16(" "), "valor" => to_utf16(" ") }
-      datos << { "nombre" => to_utf16("<b>Nro de depósito (Pago 1):</b>"), "valor" => to_utf16("_____________________________") }
-
+    elsif usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::MITAD  
+      datos << { "nombre" => to_utf16("<b>Pago 1:</b>"), "valor" => to_utf16("3.800 BsF. (Al momento de la inscripción)") }
+      datos << { "nombre" => to_utf16("<b>Nro de depósito:</b>"), "valor" => to_utf16("_____________________________") }
     end
     tabla.data.replace datos  
     tabla.render_on(pdf)
@@ -157,17 +154,14 @@ class Reportes
   def self.planilla_inscripcion(usuario=nil)
     pdf = PDF::Writer.new(:paper => "letter")  #:orientation => :landscape, 
     t = Time.now
-
     planilla_inscripcion_pagina(usuario,pdf)
 		pdf.text to_utf16("----- COPIA DEL ESTUDIANTE -----"), :font_size => 9, :justification => :center
-		pdf.text "\n", :font_size => 7
 		pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 1 de 2"), :font_size => 6, :justification => :right
 		
     pdf.new_page
     pdf.y = 756
     planilla_inscripcion_pagina(usuario,pdf)
 		pdf.text to_utf16("----- COPIA ADMINISTRACIÓN -----"), :font_size => 9, :justification => :center
-		pdf.text "\n", :font_size => 7
 		pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 2 de 2"), :font_size => 6, :justification => :right
    
     return pdf

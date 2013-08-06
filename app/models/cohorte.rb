@@ -1,8 +1,5 @@
-#creada por db2models
-class TipoFormaPago < ActiveRecord::Base
-	UNICO="UNICO"
-	MITAD="MITAD"
-	EXO="EXO"
+class Cohorte < ActiveRecord::Base
+
   has_many :inscripcion
   accepts_nested_attributes_for :inscripcion
 
