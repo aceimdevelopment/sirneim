@@ -3,6 +3,9 @@
   \|
   = link_to_if(!@usuario.inscripcion.nil?, "Descargar planilla de inscripcion", { :controller => "inscripcion", :action => "planilla_inscripcion", :usuario_ci => @usuario.ci})
 
+  = link_to_if((!@usuario.preinscripcion.blank? and @usuario.inscripcion.blank? and @usuario.preinscripcion.tipo_forma_pago_id.blank? and @usuario.preinscripcion.grupo_id.blank?), "habilitar para inscripcion", { :controller => "inscripcion", :action => "habilitar_inscripcion", :usuario_ci => @usuario.ci})
+
+
 =form_tag :action => "paso2_guardar" do |f|
   -if @usuario.inscripcion
     %fieldset

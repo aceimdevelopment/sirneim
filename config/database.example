@@ -12,11 +12,11 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: aceimbbva_development
-  host: 10.0.0.11
+  database: aceimdiplomados_development
+  host: localhost
   pool: 5
-  username: aceim
-  password: aceim@dmin2
+  username: root
+  password: 
 #  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and

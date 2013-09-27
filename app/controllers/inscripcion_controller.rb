@@ -97,4 +97,26 @@ class InscripcionController < ApplicationController
                          :type => "application/pdf", :disposition => "attachment"
   end
 
+  def habilitar_inscripcion
+    @usuario = Usuario.where(:ci => params[:usuario_ci]).first
+    @cohortes = Cohorte.all
+    @tipos_forma_pago = TipoFormaPago.all
+    @grupos = Grupo.all
+    
+  end
+
+  def habilitar_guardar
+    @usuario = Preinscripcion.where(:estudiante_ci => params[:ci]).first
+    @usuario.grupo_id = params[:preinscrito][:grupo_id]
+    @usuario.tipo_forma_pago_id = params[:preinscrito][:tipo_forma_pago_id]
+    if @usuario.save
+      flash[:mensaje] = "Estudiante habilitado para inscribirse"
+      redirect_to :controller => 'admin_estudiante' , :action => 'opciones_menu'
+     
+    else
+      flash[:mensaje] = "No se pudo habilitar, pongase en contacto con el Administrador del sistema"
+      render :action => 'habilitar_inscripcion'
+    end
+  end
+
 end

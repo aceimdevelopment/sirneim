@@ -5,6 +5,7 @@ class Usuario < ActiveRecord::Base
 	attr_accessor :contrasena_confirmation
   #autogenerado por db2models
   set_primary_key :ci
+  has_one :preinscripcion, :foreign_key => 'estudiante_ci'
   #autogenerado por db2models
   belongs_to :tipo_sexo,
     :class_name => 'TipoSexo',

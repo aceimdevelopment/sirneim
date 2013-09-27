@@ -1,0 +1,27 @@
+=form_tag(:action => "habilitar_guardar") do 
+
+
+
+  %p
+    %label
+      Datos del usuario
+    %p
+      = @usuario.ci
+    %p
+      = @usuario.nombre_completo
+      = hidden_field_tag :ci, @usuario.ci
+  %p
+    %label
+      Grupo
+      %span.req * 
+    %br/
+    =collection_select :preinscrito, :gruopo_id, @grupos, :id, :nombre, {:requerid=>true}
+  %p
+    %label
+      Forma de Pago
+      %span.req * 
+    %br/
+    =collection_select :preinscrito, :tipo_forma_pago_id, @tipos_forma_pago, :id, :descripcion, {:requerid=>true}
+  %p
+    =submit_tag "Habilitar"  
+%br/    
