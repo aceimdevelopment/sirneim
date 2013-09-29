@@ -23,6 +23,8 @@ Inscritos
         Tipo de pago
       %th
         Deposito(s)
+      %th
+        Opciones
   %tbody
     -@inscritos.each_with_index do |pre,i|
       -usuario = pre.usuario
@@ -52,4 +54,6 @@ Inscritos
             Pago 3:
             =link_to_modal dep3,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"3", :usuario_ci=>usuario.ci}}
             %br/
+          %td
+            =link_to 'Retirar', {:action => 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}
        

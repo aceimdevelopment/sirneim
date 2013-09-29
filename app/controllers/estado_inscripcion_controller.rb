@@ -489,4 +489,15 @@ def eliminar_seccion
     render :text => @estado, :layout => false
   end
   
+  def delete
+    @inscripcion = Inscripcion.where(:estudiante_ci => params[:ci]).first
+    @inscripcion.destroy
+
+    respond_to do |format|
+      flash[:mensaje] = "Retiro satisfactorio"
+      format.html { redirect_to :controller => 'estado_inscripcion', :action => 'ver_inscripcion' }
+      format.json { head :no_content }
+    end
+  end
+
 end
