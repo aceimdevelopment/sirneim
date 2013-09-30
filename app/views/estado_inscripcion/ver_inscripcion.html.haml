@@ -7,53 +7,117 @@
     Filtrar Contenido:
     =text_field_tag "filtro_particular"
 
-Inscritos    
-%table.tablesorter.tablefilter.likert
-  %thead
-    %tr
-      %th
-        \#
-      %th
-        Estudiante
-      %th
-        Teléfonos
-      %th
-        Correo
-      %th
-        Tipo de pago
-      %th
-        Deposito(s)
-      %th
-        Opciones
-  %tbody
-    -@inscritos.each_with_index do |pre,i|
-      -usuario = pre.usuario
-      -dep1 = pre.deposito1 || "----------"
-      -dep2 = pre.deposito2 || "----------"
-      -dep3 = pre.deposito3 || "----------"
+:javascript
+  $(document).ready( function() {
+    $("#tabs").tabs();
+  } );
 
-      %tr
-        %td=(i+1)
-        %td 
-          =usuario.descripcion
-        %td=usuario.telefonos
-        %td=usuario.correo
-        %td 
-          =pre.tipo_forma_pago.descripcion
-        %td 
-          -if pre.tipo_forma_pago_id == TipoFormaPago::UNICO
-            Pago único:
-            =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
-          -else
-            Pago 1:
-            =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
-            %br/
-            Pago 2:
-            =link_to_modal dep2,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"2", :usuario_ci=>usuario.ci}}
-            %br/
-            Pago 3:
-            =link_to_modal dep3,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"3", :usuario_ci=>usuario.ci}}
-            %br/
-          %td
-            =link_to 'Retirar', {:action => 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}
-       
+#tabs
+  %ul
+    %li
+      %a{:href => "#tabs-1"} 
+        = "Grupo A - #{@inscritos_a.count}" 
+    %li
+      %a{:href => "#tabs-2"}
+        = "Grupo B - #{@inscritos_b.count}" 
+
+  #tabs-1
+    Inscritos    
+    %table.tablesorter.tablefilter.likert
+      %thead
+        %tr
+          %th
+            \#
+          %th
+            Estudiante
+          %th
+            Teléfonos
+          %th
+            Correo
+          %th
+            Tipo de pago
+          %th
+            Deposito(s)
+          %th
+            Opciones
+        %tbody
+        -@inscritos_a.each_with_index do |pre,i|
+          -usuario = pre.usuario
+          -dep1 = pre.deposito1 || "----------"
+          -dep2 = pre.deposito2 || "----------"
+          -dep3 = pre.deposito3 || "----------"
+
+          %tr
+            %td=(i+1)
+            %td 
+              =usuario.descripcion
+            %td=usuario.telefonos
+            %td=usuario.correo
+            %td 
+              =pre.tipo_forma_pago.descripcion
+            %td 
+              -if pre.tipo_forma_pago_id == TipoFormaPago::UNICO
+                Pago único:
+                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+              -else
+                Pago 1:
+                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+                %br/
+                Pago 2:
+                =link_to_modal dep2,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"2", :usuario_ci=>usuario.ci}}
+                %br/
+                Pago 3:
+                =link_to_modal dep3,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"3", :usuario_ci=>usuario.ci}}
+                %br/
+              %td
+                =link_to 'Retirar', {:action => 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}
+  #tabs-2
+    Inscritos    
+    %table.tablesorter.tablefilter.likert
+      %thead
+        %tr
+          %th
+            \#
+          %th
+            Estudiante
+          %th
+            Teléfonos
+          %th
+            Correo
+          %th
+            Tipo de pago
+          %th
+            Deposito(s)
+          %th
+            Opciones
+        %tbody
+        -@inscritos_b.each_with_index do |pre,i|
+          -usuario = pre.usuario
+          -dep1 = pre.deposito1 || "----------"
+          -dep2 = pre.deposito2 || "----------"
+          -dep3 = pre.deposito3 || "----------"
+
+          %tr
+            %td=(i+1)
+            %td 
+              =usuario.descripcion
+            %td=usuario.telefonos
+            %td=usuario.correo
+            %td 
+              =pre.tipo_forma_pago.descripcion
+            %td 
+              -if pre.tipo_forma_pago_id == TipoFormaPago::UNICO
+                Pago único:
+                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+              -else
+                Pago 1:
+                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+                %br/
+                Pago 2:
+                =link_to_modal dep2,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"2", :usuario_ci=>usuario.ci}}
+                %br/
+                Pago 3:
+                =link_to_modal dep3,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"3", :usuario_ci=>usuario.ci}}
+                %br/
+              %td
+                =link_to 'Retirar', {:action => 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}

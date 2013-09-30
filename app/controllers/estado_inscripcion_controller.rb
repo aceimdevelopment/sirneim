@@ -8,6 +8,15 @@ class EstadoInscripcionController < ApplicationController
   def ver_inscripcion
     @titulo_pagina = "Estado de la Inscripción"
     @inscritos = Inscripcion.all.sort_by{|x| x.usuario.nombre_completo}
+    # @grupos = Grupo.all
+
+    # @grupos.each_with_index do |grupo, i|
+    #   @inscritos_grupos[i] = Inscripcion.where(:grupo_id => grupo.id).sort_by{|x| x.usuario.nombre_completo}  
+    # end
+
+    @inscritos_a = Inscripcion.where(:grupo_id => 'a').sort_by{|x| x.usuario.nombre_completo}
+    @inscritos_b = Inscripcion.where(:grupo_id => 'b').sort_by{|x| x.usuario.nombre_completo}    
+
   end
 
   def cargar_deposito
