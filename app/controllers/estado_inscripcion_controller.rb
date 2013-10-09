@@ -499,8 +499,12 @@ def eliminar_seccion
   end
   
   def delete
-    @inscripcion = Inscripcion.where(:estudiante_ci => params[:ci]).first
-    @inscripcion.destroy
+    @inscripcion = Inscripcion.where(:estudiante_ci => params[:ci]).limit(1).first
+
+    @preinscripcion = Preinscripcion.where(:estudiante_ci => params[:ci]).limit(1).first
+    @preinscripcion.tipo_forma_pago_id = nil
+    @preinscripcion.grupo_id = nil
+    @inscripcion.destroy if @preinscripcion.save
 
     respond_to do |format|
       flash[:mensaje] = "Retiro satisfactorio"
