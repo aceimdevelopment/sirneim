@@ -1,0 +1,27 @@
+=form_for(@cohorte,:url=>{:action => "crear"}) do |a|
+  -if @cohorte.errors.any?
+    %div#error_explanation
+      %ul
+        -@cohorte.errors.full_messages.each do |msg|
+          %li
+            *
+            =msg
+            
+  %fieldset
+    %legend Registro de Nueva Cohorte 
+    %p
+      %br
+      %label
+        Año:
+        =a.select :id, options_for_select((Date.today.year..Date.today.year+10).to_a), {:include_blank => '--'}
+        %span.req *  
+    %p
+      %label 
+        Nombre:
+        =a.text_field :nombre
+  %p 
+    %span.req *  
+    Campos Obligatorios
+  %p
+    =link_to "<Atrás", :controller => "principal_admin", :action => "index"
+    =a.submit "Registrar"

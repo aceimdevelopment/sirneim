@@ -14,7 +14,12 @@ class Estudiante < ActiveRecord::Base
   belongs_to :tipo_nivel_academico,
     :class_name => 'TipoNivelAcademico',
     :foreign_key => ['tipo_nivel_academico_id']
-    
+
+  has_many :inscripciones,
+    :foreign_key => ['estudiante_ci']
+  accepts_nested_attributes_for :inscripciones
+
+  # validates_associated :inscripcion    
    def preinscrito?          
      @periodo = ParametroGeneral.periodo_actual
      HistorialAcademico.first(

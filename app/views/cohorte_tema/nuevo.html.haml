@@ -1,0 +1,10 @@
+
+-@diplomados_cohorte.each do |diplomado_cohorte|
+	%h2
+	=diplomado_cohorte.diplomado.descripcion_completa
+	-diplomado_cohorte.diplomado.modulos.each do |modulo|
+		%h3
+		= modulo.descripcion_completa
+		-modulo.temas.each do |tema|
+			
+			= tema.descripcion_completa

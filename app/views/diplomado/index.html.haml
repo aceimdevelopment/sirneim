@@ -1,0 +1,27 @@
+-if @mensaje
+  %h3
+    = @mensaje
+
+%h1
+  Diplomados
+
+-@diplomados.each do |diplomado|
+  %h2
+    =link_to diplomado.descripcion_completa, "#{controller_name}/vista/#{diplomado.id}" 
+
+/ %table
+/   %thead
+/     %tr
+/       %th
+/         Id
+/       %th
+/         Descripcion
+/   %tbody
+/     -@diplomados.each do |diplomado|
+/       %tr
+/         %td
+/           =diplomado.id
+/         %td
+/           =diplomado.descripcion
+
+=link_to "Nuevo Diplomado", :action => "nuevo"

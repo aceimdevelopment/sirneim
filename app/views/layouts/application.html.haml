@@ -75,10 +75,11 @@
               %li
                 =link_to "Cerrar sesión", :action => "cerrar_sesion", :controller => "inicio" 
         %br
-        -if session[:rol] == "Administrador" && false
-          #cambio_periodo
-            ="Periodo #{session[:parametros][:periodo_actual]}" 
-            =link_to_modal "Cambiar",{:title => "Cambio de Periodo",:controller => "principal", :action => "cambiar_periodo_modal", :params => {:controlador => controller_name,:accion => action_name},:width=>300}
+        -if session[:rol] == "Administrador"
+          #cambio_cohorte
+            ="Cohorte #{session[:parametros][:cohorte_actual]}" 
+            = link_to "Cambiar Cohorte", :controller => "parametros_generales", :action => "cambiar_cohorte"
+            =#link_to_modal "Cambiar",{:title => "Cambio de Periodo",:controller => "principal", :action => "cambiar_periodo_modal", :params => {:controlador => controller_name,:accion => action_name},:width=>300}
       #interno 
         %h2
           =@titulo_pagina

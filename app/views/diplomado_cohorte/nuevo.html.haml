@@ -1,0 +1,28 @@
+=form_for(@diplomado_cohorte,:url=>{:action => "crear"}) do |a|
+  -if @diplomado_cohorte.errors.any?
+    %div#error_explanation
+      %ul
+        -@diplomado_cohorte.errors.full_messages.each do |msg|
+          %li
+            *
+            =msg
+            
+  %fieldset
+    %legend Diplomados para esta Cohorte
+    %p
+      %br
+      %b Cohorte:
+      =@diplomado_cohorte.cohorte.descripcion
+      =a.hidden_field :cohorte_id
+      %p
+        %b Diplomado:
+        
+        =a.collection_select :diplomado_id, Diplomado.all, :id, :descripcion, {:prompt => "Diplomado"}, {:required => true, :multiple => "multiple"} 
+        %span.req *  
+
+  %p 
+    %span.req *  
+    Campos Obligatorios
+  %p
+    =link_to "<Atrás", :controller => "principal_admin", :action => "index"
+    =a.submit "Registrar"

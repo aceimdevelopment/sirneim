@@ -1,0 +1,92 @@
+=form_tag :action => "registrar_guardar" do 
+  -if @usuario.errors.any?
+    %p
+      %div#error-explanation
+        %b
+          =pluralize(@usuario.errors.count, "error") 
+          en el formulario impiden que éste usuario sea registrado:
+        %ul
+          -@usuario.errors.full_messages.each do |msg|
+            %li
+              =msg
+
+  %fieldset
+    %legend Datos personales
+    %p
+      %label
+        Cédula de Identidad:
+        %span.req *  
+      =text_field :usuario, :ci
+      Ejemplo: 12345678
+    %p
+      %label
+        Nombres
+        %span.req *  
+      =text_field :usuario, :nombres
+      Ejemplo: María
+    %p
+      %label
+        Apellidos
+        %span.req *  
+      =text_field :usuario, :apellidos
+      Ejemplo: Torres
+    %p
+      %label
+        Lugar de nacimiento
+        %span.req *  
+      =text_field :usuario, :lugar_nacimiento
+      Ejemplo: Caracas
+    %p
+      %label
+        Fecha de nacimiento
+        %span.req *  
+      =text_field :usuario, :fecha_nacimiento
+    %p
+      %label
+        Sexo
+        %span.req *  
+      =radio_button :usuario, :tipo_sexo_id, "M"
+      Masculino
+      =radio_button :usuario, :tipo_sexo_id, "F"
+      Femenino
+  %fieldset
+    %legend Datos de contacto
+    %p
+      %label
+        Teléfono habitación
+      =text_field :usuario, :telefono_habitacion
+      Ejemplo: 0212-5551122
+    %p
+      %label
+        Teléfono celular
+        %span.req *  
+      =text_field :usuario, :telefono_movil
+      Ejemplo: 0414-2391212
+    %p
+      %label
+        Correo electrónico
+        %span.req *  
+      =text_field :usuario, :correo
+      Ejemplo: maria@gmail.com
+    %p
+      %label
+        Correo electrónico (alternativo)
+      =text_field :usuario, :correo_alternativo
+      Ejemplo: maria2@gmail.com
+    %p
+      %label
+        Cuenta twitter
+      =text_field :estudiante, :cuenta_twitter
+      Ejemplo: @maria2
+    %p
+      %label
+        Dirección de domicilio
+        %span.req *  
+      =text_area :usuario, :direccion, :size => "60x4"
+      Ejemplo: Avenida A, con calle B. Caracas.
+  %p 
+    %span.req *  
+    Campos Obligatorios
+  %p
+    =submit_tag "Registrar"#, :confirm => "¿Está seguro de enviar los datos?"
+%br/    

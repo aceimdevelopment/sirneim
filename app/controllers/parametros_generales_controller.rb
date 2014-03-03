@@ -28,6 +28,20 @@ class ParametrosGeneralesController < ApplicationController
 
   end
 
+  def cambiar_cohorte
+    @cohortes = Cohorte.all.sort_by{|x| "#{x.id}"}.reverse()
+    # render :layout => false    
+  end
+
+  def guardar_cambio_cohorte
+      periodo_actual = ParametroGeneral.find("COHORTE_ACTUAL")
+      periodo_actual.valor = params[:cohorte][:id] 
+      periodo_actual.save
+      session[:parametros][:cohorte_actual] = periodo_actual.valor
+
+      redirect_to :controller => "principal_admin"
+  end
+
   def cambiar_periodo_modal
     @metodo_invocador = params[:parametros][:invocador]
     @periodos = Periodo.all.collect{|x| x}.sort_by{|x| "#{x.ano} #{x.id}"}.reverse()

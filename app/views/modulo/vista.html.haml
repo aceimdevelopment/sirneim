@@ -1,0 +1,15 @@
+-if @mensaje
+	%h3
+		=@mensaje
+%h2
+	= "Diplomado: #{@modulo.diplomado.descripcion_completa}"
+	%br
+	="#{@modulo.descripcion_completa}"
+	-@modulo.temas.each do |tema|
+		%p
+			=tema.descripcion_completa
+%p
+	
+	=link_to "<Atrás", :controller => "diplomado", :action => "index"
+	|
+	=link_to "Agregar Tema>", :controller => "tema", :action => "nuevo", :id => "#{@modulo.id}"

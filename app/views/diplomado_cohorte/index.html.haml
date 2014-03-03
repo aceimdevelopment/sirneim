@@ -1,0 +1,11 @@
+-if @diplomados_cohortes.count > 0
+	%h2 
+		= "Diplomados para esta cohorte #{@diplomados_cohortes.first.cohorte.descripcion}"
+	-@diplomados_cohortes.each do |diplomado_cohorte|
+		%h3
+			=diplomado_cohorte.descripcion
+-else
+	%h3 No se han agregado Diplomados en este Cohorte
+
+%p
+	=link_to "Agregar Diplomados a esta Cohorte >", :action => "nuevo"

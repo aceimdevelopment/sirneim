@@ -5,11 +5,18 @@ class PrincipalController < ApplicationController
   def index
     session[:nuevo] = nil 
     @titulo_pagina = "Principal"
-    @preinscrito = !!HistorialAcademico.where(
-      :usuario_ci => session[:usuario].ci,
-      :idioma_id => session[:tipo_curso].idioma_id,
-      :tipo_categoria_id => session[:tipo_curso].tipo_categoria_id,
-      :periodo_id => session[:parametros][:periodo_inscripcion]).limit(1).first
+    cohorte_actual = ParametroGeneral.cohorte_actual
+    if @estudiante = session[:estudiante]
+      @inscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci) 
+      @preinscripciones_cohorte_actual = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => cohorte_actual, :tipo_estado_id => "pre")
+      @inscripciones_cohorte_actual = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => cohorte_actual, :tipo_estado_id => "ins")
+    end
+
+    # @preinscrito = !!HistorialAcademico.where(
+    #   :usuario_ci => session[:usuario].ci,
+    #   :idioma_id => session[:tipo_curso].idioma_id,
+    #   :tipo_categoria_id => session[:tipo_curso].tipo_categoria_id,
+    #   :periodo_id => session[:parametros][:periodo_inscripcion]).limit(1).first
   end
 
   def principal

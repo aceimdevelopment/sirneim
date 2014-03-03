@@ -6,6 +6,61 @@ class InicioController < ApplicationController
     @content = reg.contenido
   end
   
+  def registrar
+    session[:usuario] = nil
+    @usuario = Usuario.new
+    @titulo_pagina = "Registro de Usuario"
+  end
+  
+  def registrar_guardar
+    @usuario = Usuario.new (params[:usuario])
+
+    # Creación de Contraseña Inicial
+    @usuario.contrasena = "00#{@usuario.ci}11"
+    @usuario.contrasena_confirmation = @usuario.contrasena
+
+    if @usuario.save
+      # Buscamos que no exista ningun estudiante con esa ci y lo creamos 
+      unless @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+        @estudiante = Estudiante.new
+        @estudiante.usuario_ci = @usuario.ci
+        @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
+      end
+      @estudiante.save
+      session[:usuario] = @usuario
+      session[:ci] = @usuario.ci
+
+      flash[:mensaje] = "Usuario Registrado Satisfactoriamente"
+      info_bitacora("Usuario: #{@usuario.descripcion} registrado.")
+      redirect_to :action => "registrar_datos_profesionales"
+    else
+      flash[:mensaje] = "Error(es) en el formulario impide(n) que este sea completado"
+      render :action => "registrar"
+    end
+  end
+
+  def registrar_datos_profesionales
+    @datos_estudiante = DatosEstudiante.new
+    @titulo_pagina = "Registro de Datos Profesionales"
+  end
+
+  def registrar_datos_profesionales_guardar
+    @usuario = session[:usuario]
+    # @usuario = Usuario.find(session[:ci])
+    @datos_estudiante = DatosEstudiante.new (params[:datos_estudiante])
+    @datos_estudiante.estudiante_ci = @usuario.ci
+    if @datos_estudiante.save
+      flash[:mensaje] = "Datos Profesionales Registrado Satisfactoriamente, su registro ha sido completado con éxito"
+      info_bitacora("Datos Estudiantes: #{@usuario.descripcion} registrado.")
+      redirect_to :action => "index"
+      begin
+        EstudianteMailer.bienvenida(@usuario).deliver
+      rescue
+      end
+
+    end
+  end
+
   def validar  
     unless params[:usuario]
       redirect_to :action => "index"
@@ -22,6 +77,7 @@ class InicioController < ApplicationController
       session[:usuario] = usuario
       roles = []
       roles << "Administrador" if usuario.administrador
+      roles << "Estudiante" if usuario.estudiante
       #roles << "Instructor" if usuario.instructor
       #ests = EstudianteCurso.where(:usuario_ci => login) 
       #ests.each{ |ec|
@@ -54,14 +110,15 @@ class InicioController < ApplicationController
     @roles = []
     @roles << { :tipo => "Administrador", :descripcion => "Administrador"} if usuario.administrador
     @roles << { :tipo => "Instructor", :descripcion => "Instructor"} if usuario.instructor
-    usuario.estudiante_curso.each{|ec|
-      @roles << { 
-        :tipo => "Estudiante",
-        :descripcion => ec.descripcion,
-        :tipo_categoria_id => ec.tipo_categoria_id,
-        :idioma_id => ec.idioma_id
-      }  
-    }                                             
+    @roles << { :tipo => "Estudiante", :descripcion => "Estudiante"} if usuario.estudiante
+    # usuario.estudiante_curso.each{|ec|
+    #   @roles << { 
+    #     :tipo => "Estudiante",
+    #     :descripcion => ec.descripcion,
+    #     :tipo_categoria_id => ec.tipo_categoria_id,
+    #     :idioma_id => ec.idioma_id
+    #   }  
+    # }
   end 
   
   def un_rol 
@@ -80,28 +137,34 @@ class InicioController < ApplicationController
       redirect_to :controller => "principal_instructor"
       return  
     elsif tipo ==  "Estudiante"
-      ec = nil
-      if params[:tipo_categoria_id] && params[:idioma_id]
-        ec = EstudianteCurso.where(
-          :usuario_ci => usuario.ci,
-          :tipo_categoria_id => params[:tipo_categoria_id],
-          :idioma_id => params[:idioma_id]).limit(1).first
-      else
-        ec = EstudianteCurso.where(
-          :usuario_ci => usuario.ci).limit(1).first
-      end
-      if ec      
-        session[:estudiante] = usuario.estudiante
-        session[:rol] = ec.descripcion
-        session[:tipo_curso] = ec.tipo_curso  
-        info_bitacora "Inicio de sesion del estudiante"
-        redirect_to :controller => "principal"
-        return
-      end
+      session[:rol] = tipo
+      session[:estudiante] = usuario.estudiante 
+      info_bitacora "Inicio de sesion del Estudiante"
+      redirect_to :controller => "principal"
+      return
+      # ec = nil
+      # if params[:tipo_categoria_id] && params[:idioma_id]
+      #   ec = EstudianteCurso.where(
+      #     :usuario_ci => usuario.ci,
+      #     :tipo_categoria_id => params[:tipo_categoria_id],
+      #     :idioma_id => params[:idioma_id]).limit(1).first
+      # else
+      #   ec = EstudianteCurso.where(
+      #     :usuario_ci => usuario.ci).limit(1).first
+      # end
+      # if ec      
+      #   session[:estudiante] = usuario.estudiante
+      #   session[:rol] = ec.descripcion
+      #   session[:tipo_curso] = ec.tipo_curso  
+      #   info_bitacora "Inicio de sesion del estudiante"
+      #   redirect_to :controller => "principal"
+      #   return
+      # end
+    else
+      flash[:mensaje_login] = "Inicio inválido"
+      redirect_to :action => "index"
+      return
     end
-    flash[:mensaje_login] = "Inicio inválido"
-    redirect_to :action => "index"
-    return
   end
   
   def cerrar_sesion

@@ -1,0 +1,30 @@
+=form_for(@diplomado,:url=>{:action => "crear"}) do |a|
+  -if @diplomado.errors.any?
+    %div#error_explanation
+      %ul
+        -@diplomado.errors.full_messages.each do |msg|
+          %li
+            *
+            =msg
+            
+  %fieldset
+    %legend Registro de Nuevo Diplomado
+    %p
+      %label
+        Identificación:
+      =a.text_field :id, :autofocus => "true"
+      %span.req * 
+      %em Recuerde NO usar caracteres especiales para la identificación
+    %p
+      %label 
+        Descripción:
+      =a.text_field :descripcion
+      %span.req *
+  %p 
+    %span.req *  
+    Campos Obligatorios
+  %p
+    =a.submit "Registrar"
+%br/
+%br/
+=link_to "<Atrás", :action => "index"

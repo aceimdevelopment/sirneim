@@ -1,6 +1,7 @@
 class UsuarioController < ApplicationController
   before_filter :filtro_logueado
-  
+
+
   def modificar
     @usuario = session[:usuario] 
     @controlador = params[:controlador]

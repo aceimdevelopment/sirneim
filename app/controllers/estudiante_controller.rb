@@ -150,6 +150,13 @@ class EstudianteController < ApplicationController
 		
 		
 	end
+
+  def diplomados_realizados
+    @diplomados_realizados = Inscripcion.where(:estudiante_ci => params[:ci]) 
+
+    # estudiante = Estudiante.where(:ci = params[:ci])
+    
+  end
 	
 	def cursos
 		@titulo_pagina = "Consultar Historial de Cursos"

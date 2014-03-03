@@ -2,6 +2,10 @@
 class ParametroGeneral < ActiveRecord::Base
 
   
+  def self.cohorte_actual
+  	ParametroGeneral.first(:conditions=>["id = ?", "COHORTE_ACTUAL"]).valor
+  end
+
   def self.preinscripcion_abierta                                          
     ParametroGeneral.first(:conditions=>["id = ?", "PREINSCRIPCION_ABIERTA"]).valor == "SI"
   end

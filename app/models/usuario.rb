@@ -7,18 +7,17 @@ class Usuario < ActiveRecord::Base
   set_primary_key :ci
   has_one :preinscripcion, :foreign_key => 'estudiante_ci'
   #autogenerado por db2models
+  attr_accessible :ci, :nombres, :apellidos, :fecha_nacimiento, :contrasena, :telefono_movil, :correo, :correo_alternativo, :direccion, :lugar_nacimiento, :tipo_sexo_id, :telefono_habitacion
+  # attr_protected
   belongs_to :tipo_sexo,
     :class_name => 'TipoSexo',
     :foreign_key => ['tipo_sexo_id']
 
   validates :ci, :presence => true,  
-                 :uniqueness => true
-                 
-                # ,
-                # :numericality => { :only_integer => true, 
-                #                    :greater_than => 1000, 
-                #                    :less_than => 100000000  }, 
-                # :ci => true           
+                 :uniqueness => true,
+                :numericality => { :only_integer => true, 
+                                   :greater_than => 1000, 
+                                   :less_than => 90000000 }
                  
   validates :nombres,  :presence => true
   validates :apellidos, :presence => true  

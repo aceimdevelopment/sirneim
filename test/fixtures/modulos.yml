@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  numero: 1
+  diplomado_id: MyString
+  descripcion: MyString
+
+two:
+  numero: 1
+  diplomado_id: MyString
+  descripcion: MyString

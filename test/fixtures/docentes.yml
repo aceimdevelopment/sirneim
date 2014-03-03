@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  usuario_ci: MyString
+  asignado: 1
+
+two:
+  usuario_ci: MyString
+  asignado: 1

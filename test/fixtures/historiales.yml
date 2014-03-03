@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cohorte_id: 1
+  tema_id: 1
+  modulo_id: 1
+  diplomado_id: MyString
+  grupo_id: MyString
+  estudiante_ci: MyString
+  calificacion: 1
+
+two:
+  cohorte_id: 1
+  tema_id: 1
+  modulo_id: 1
+  diplomado_id: MyString
+  grupo_id: MyString
+  estudiante_ci: MyString
+  calificacion: 1
