@@ -1,0 +1,40 @@
+-unless session[:usuario]
+	=form_tag({:action => "validar"}, :id => "sesion") do
+		-if flash[:mensaje_login]
+			#error-login
+				=flash[:mensaje_login]
+		=link_to "Olvidó su clave", :action => "olvido_clave"
+		=text_field :usuario, :cedula, :size => 10, :autofocus => "true", :placeholder => "Cédula"
+		=password_field :usuario, :clave, :size => 10, :placeholder => "Contraseña"
+		=submit_tag "Ingresar", :class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'  
+-else
+	%br
+
+	%ul.topnav.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icons{:role=>"button", "aria-disabled"=>"false"}
+		%li
+		%span.ui-button-icon-primary.ui-icon.ui-icon-gear
+		%span.ui-button-text
+			=session[:usuario].nombre_completo
+		%a
+			%span.ui-button-icon-secondary.ui-icon.ui-icon-triangle-1-s
+		%li
+			%ul.subnav
+				%li
+					=link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+				%li
+					=link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name
+				%li
+					=link_to "Cerrar sesión", :action => "cerrar_sesion", :controller => "inicio" 
+:javascript
+	$(function() {
+		return $("ul.topnav ").click(function() {
+			$(this).parent().find("ul.subnav").slideDown('fast').show();
+			return $(this).parent().hover(function() {
+				return $(this).parent().find("ul.subnav").slideUp("slow");
+			}).hover(function() {
+				return $(this).addClass("subhover", function() {
+					return $(this).removeClass("subhover");
+				});
+			});
+		});
+	});
