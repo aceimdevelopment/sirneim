@@ -1,50 +1,9 @@
 .contenedor
-  .subcontenedorizquierdo
-    %div
-      -if flash[:mensaje]
-        #mensaje-flash{:style => "display:none;"}
-          %p{ :class => "ui-state-highlight ui-corner-all", :style => "margin-top: 20px; padding: 3px 3px" }
-            %span.ui-icon.ui-icon-info{ :style =>"display:inline-block;" }
-            #{flash[:mensaje]}  
-        =javascript_tag "$(document).ready(function(){ $('#mensaje-flash').show('pulsate',{},'fast'); });"
-      .titulo
-        =@content.html_safe
-
-
-  .subcontenedorderecho
-    =form_tag({:action => "validar"}, :class => "formulario") do
-      %div{:class => "titulo center"}
-        %h2 Inicio de Sesión
-        -if flash[:mensaje_login]
-          #error-login
-            =flash[:mensaje_login]
-      =label :usuario, :cedula, "Cédula de Identidad"
-      %br/
-      =text_field :usuario, :cedula, :size => 10, :autofocus => "true"
-      %br/
-      %br/
-      =label :usuario, :clave, "Contraseña"
-      %br/
-      =password_field :usuario, :clave, :size => 10
-      %br/
-      %br/
-      =submit_tag "Ingresar"      
-      %br/
-      %p
-        =link_to "Olvidó su clave", :action => "olvido_clave"
-    %br/
-    %br/  
-    %br/
-    %br/
-    -if ParametroGeneral.preinscripcion_abierta
-      %div{:class => "titulo center"}
-        %h2 Preinscripciones
-      
-      =button_to "Presinscribirse", :action => "paso1", :controller => "preinscripcion"
-    -if ParametroGeneral.inscripcion_abierta
-      %div{:class => "titulo center"}
-        %h2 Inscripciones
-      
+  -if ParametroGeneral.inscripcion_abierta
+    %div{:class => "titulo center"}
+      %h2 Inscripciones
       =button_to "Inscribirse", :action => "paso1", :controller => "inscripcion"
 
-    =button_to "Registrarse", :action => "registrar"
+  =button_to "Registrarse", :action => "registrar"
+
+  =@content.html_safe

@@ -5,103 +5,34 @@
     =stylesheet_link_tag  "application"
     =javascript_include_tag "application"
     =javascript_include_tag controller_name
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/resource/1358914798000/bootstrap/bootstrap/js/bootstrap.js"></script>
 
     <link href="/aceim_diplomados/assets/application.css" media="screen" rel="stylesheet" type="text/css">
     <script src="/aceim_diplomados/assets/application.js" type="text/javascript"></script>
-    =javascript_include_tag "/aceim_diplomados/assets/#{controller_name}"    
+    =javascript_include_tag "/aceim_diplomados/assets/#{controller_name}"
+    
+    :javascript
+      $(document).ready(function() {
+        $("button").button();
+      }); 
 
   %body
-    #banner
-      #banner_barra
-        #banner_contenido
-          Universidad Central de Venezuela
-          %br/
-          Facultad de Humanidades y Educación
-          %br/
-          Escuela de Idiomas Modernos
-          %br/
-          Coordinación Académica
-          %br/
-          ACEIM - DIPLOMADOS
-          %br/
-    #menubar
-      .detalle_derecha
-        :javascript
-          var mydate=new Date()
-          var year=mydate.getYear()
-          if (year < 1000) year+=1900
-          var day=mydate.getDay()
-          var month=mydate.getMonth()
-          var daym=mydate.getDate()
-          if (daym<10)
-            daym="0"+daym
-          var dayarray=new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado")
-          var montharray=new Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")
-          document.write("<small><font color='000000' face='Arial'>"+dayarray[day]+", "+daym+" de "+montharray[month]+" de "+year+"</font></small>")
-      %nav#sitenav 
-        -if controller_name == "planificacion" || controller_name == "convenio" || controller_name == "reportes" || controller_name == "gestionar_cartelera" || controller_name == "admin_seccion" || action_name == "ingresar_aulas_planificacion" || action_name == "ingresar_horario_aulas_planificacion" || action_name == "emparejar_aulas_manualmente" || action_name == "ingresar_horario_disponible_instructores" || controller_name == "parametros_generales"
-          %li
-            =link_to "Principal", :controller => "principal", :action => "principal"
-        -else
-          %li.current
-            =link_to "Principal", :controller => "principal", :action => "principal"
-        -if session[:rol] == "Administrador"
-          -if (session[:administrador].usuario_ci == "10264009") || (session[:administrador].usuario_ci == "14519813") || (session[:administrador].usuario_ci == "13736933" || session[:administrador].usuario_ci == "19220025" || session[:administrador].usuario_ci == "19395140" || session[:administrador].usuario_ci == "13872341" || session[:administrador].usuario_ci == "19499931")
-            -if controller_name == "planificacion" || controller_name == "convenio" || controller_name == "reportes" || controller_name == "gestionar_cartelera" || controller_name == "admin_seccion" || action_name == "ingresar_aulas_planificacion" || action_name == "ingresar_horario_aulas_planificacion" || action_name == "emparejar_aulas_manualmente" || action_name == "ingresar_horario_disponible_instructores" || controller_name == "parametros_generales"
-              %li.current
-                =#link_to "Gestión y Planificación", :controller=>"planificacion", :action => "index"
-            -else
-              %li
-                =#link_to "Gestión y Planificación", :controller=>"planificacion", :action => "index"
-        %li
-          =link_to "Contacto", "mailto:diplomado.ele.eim.ucv@gmail.com"
+    = render 'layouts/banner' 
+    = render 'layouts/navegacion'
     .contenedor
-      .detalle_derecha   
-        =session[:rol]
-      %br/
       .detalle_derecha
-        %b
-          =session[:usuario].nombre_completo    
-      %br/
-      .detalle_derecha
-        %ul.topnav
-          %li 
-            %a Opciones de la sesión
-            %ul.subnav
-              %li
-                =link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
-              %li
-                =link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name
-              %li
-                =link_to "Cerrar sesión", :action => "cerrar_sesion", :controller => "inicio" 
-        %br
         -if session[:rol] == "Administrador"
           #cambio_cohorte
             ="Cohorte #{session[:parametros][:cohorte_actual]}" 
             = link_to "Cambiar Cohorte", :controller => "parametros_generales", :action => "cambiar_cohorte"
             =#link_to_modal "Cambiar",{:title => "Cambio de Periodo",:controller => "principal", :action => "cambiar_periodo_modal", :params => {:controlador => controller_name,:accion => action_name},:width=>300}
-      #interno 
-        %h2
-          =@titulo_pagina
-        -if @subtitulo_pagina
-          .titulo
-            =@subtitulo_pagina
-        -if flash[:mensaje]
-          #mensaje-flash{:style => "display:none;"}
-            %p{ :class => "ui-state-highlight ui-corner-all", :style => "margin-top: 20px; padding: 3px 3px" }
-              %span.ui-icon.ui-icon-info{ :style =>"display:inline-block;" }
-              #{flash[:mensaje]}  
-          =javascript_tag "$(document).ready(function(){ $('#mensaje-flash').show('pulsate',{},'fast'); });"
-        =yield
-        -if (controller_name != "principal" || action_name != "index") && (controller_name != "principal_admin" || action_name != "index") && (controller_name != "principal_instructor" || action_name != "index") && (controller_name != "reportes") && (controller_name != "planificacion") && (controller_name != "convenio") && (controller_name != "admin_seccion") && (controller_name != "gestionar_cartelera") && (action_name != "ingresar_horario_disponible_instructores") && (controller_name != "parametros_generales")
-          %p 
-            =link_to "<< Regresar a principal", :controller => "principal", :action => "principal"
-    #pie
-      CIUDAD UNIVERSITARIA DE CARACAS - PATRIMONIO CULTURAL DE LA HUMANIDAD
-      %br/
-      Ciudad Universitaria de Caracas, Galpón 7, Frente a Farmacia. Telf.: (0212) 6052982
-      %br/
-    =image_tag "bottom.png"
-    #ventana-modal 
-    %div{ :id => "action_#{action_name}" }   
+      = render 'layouts/titulo'
+      = render 'layouts/mensaje'
+      =yield
+      -if (controller_name != "principal" || action_name != "index") && (controller_name != "principal_admin" || action_name != "index") && (controller_name != "principal_instructor" || action_name != "index") && (controller_name != "reportes") && (controller_name != "planificacion") && (controller_name != "convenio") && (controller_name != "admin_seccion") && (controller_name != "gestionar_cartelera") && (action_name != "ingresar_horario_disponible_instructores") && (controller_name != "parametros_generales")
+        %p 
+          =#link_to "<< Regresar a principal", :controller => "principal", :action => "principal"
+
+  = render 'layouts/pie'
     

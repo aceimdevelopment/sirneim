@@ -29,17 +29,15 @@ $ ->
       showOn: 'both',
       dateFormat: 'yy-mm-dd'
 
-    
 $ ->
   $("ul.subnav").parent().append "<span></span>"
-  $("ul.topnav li span").click ->
+  $("ul.topnav li ").click ->
     $(this).parent().find("ul.subnav").slideDown('fast').show()
     $(this).parent().hover ->
-      $(this).parent().find("ul.subnav").slideUp "slow"
+      $(this).parent().find("ul.subnav").slideUp "fast"
     .hover ->
       $(this).addClass "subhover", ->
         $(this).removeClass "subhover"
-
 
 
 

@@ -1,16 +1,18 @@
--if @mensaje
-	%h3
-		=@mensaje
-%h2
-	="Diplomado: #{@diplomado.descripcion_completa}"
-	-@diplomado.modulos.each do |modulo|
-		%p
-			
-			=link_to "#{modulo.descripcion_completa}", :controller => "modulo", :action => "vista", :id => "#{modulo.id}"
+.subcontenedor
+	-if @mensaje
+		%h3
+			= @mensaje
+	=button_to "Agregar Módulo", {:controller => "modulo", :action => "nuevo", :id => "#{@diplomado.id}"}, {:class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only', :href => "modulo/nuevo/id=#{@diplomado.id}"}
 
-		-modulo.temas.each do |tema|
-			%p
-				= tema.descripcion_completa
 
-%p
-	=link_to "Agregar Módulo", :controller => "modulo", :action => "nuevo", :id => "#{@diplomado.id}"
+	%ul.navegador
+		-@diplomado.modulos.each do |modulo|
+			%li
+				=link_to "#{modulo.descripcion_completa}", :controller => "modulo", :action => "vista", :id => "#{modulo.id}"
+				=link_to "Agregar Tema", {:controller => "tema", :action => "nuevo", :id => "#{modulo.id}"},{:class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'}
+				-if modulo.temas.count > 0
+					%ul
+					-modulo.temas.each do |tema|
+						%li
+							= tema.descripcion_completa
+	%br

@@ -5,6 +5,7 @@ class DiplomadoController < ApplicationController
   # attr_accessible :id
 
   def index
+    @titulo_pagina = "Diplomados"
   	@diplomados = Diplomado.all
   	@mensaje = params[:mensaje] if params[:mensaje]
   end
@@ -28,6 +29,7 @@ class DiplomadoController < ApplicationController
   def vista
     @mensaje = params[:mensaje]
     @diplomado = Diplomado.where(:id => params[:id]).first
+    @titulo_pagina = "Diplomado: #{@diplomado.descripcion_completa}"
     @nuevo_modulo = params[:nuevo_modulo]
   end
 end

@@ -16,12 +16,11 @@ footer, header, nav, section, video, object, output {
 	display: block;
 }
 */
-
+.ui-button:hover { color: orange;}
 #banner{
-	border-top: 2px solid black;
 	margin:0;
 	min-height:0;
-	height:115px;
+	height:120px;
 	background: url(encabezado_bg.gif)	 repeat-x center top;
 	text-decoration:none;
 	padding-right: 30px;
@@ -30,43 +29,48 @@ footer, header, nav, section, video, object, output {
 
 #banner_barra{ 
 	background: url(barra_amarilla_ucv.png) no-repeat left;
-  background-position: 10px 20px;
-  letter-spacing: 3px;
+	background-position: 10px 20px;
+	letter-spacing: 3px;
 }
+
+#banner_contenido{
+	padding-top: 30px;
+	padding-left: 30px;
+	background:url(../assets/logo_fhye.png) no-repeat right; 
+	height:90px; 
+	font-size: 13px; 
+	text-align: left; 
+	color: white; 
+	font-weight: lighter;}
 
 .detalle_derecha{
-  float: right;
-  letter-spacing: 2px;
-  padding-left: 3%; 
-  margin: 0px 10px;
+	float: right;
+	letter-spacing: 2px;
+	padding-left: 3%; 
+	margin: 2px 10px;
+
+}
+#sesion {
+	letter-spacing: 1px;
+	font-size: 9px;
 }
 
-#banner_contenido{padding-top: 30px;padding-left: 30px; background:url(../assets/logo_fhye.png) no-repeat right; height:90px; font-size: 13px; text-align: left; color: white; font-weight: lighter;}
-
-
 #menubar {
-   background: url(barra_amarilla.png) repeat-x left; 
-   padding-left: 38px;}
-#sitenav {float:center; font-family:Verdana;}
-#sitenav a {color:#444444;
-font-family:inherit;}
-#sitenav li {display:inline; }
-#sitenav li a {display:inline; float:center; height:33px; line-height:300%; padding:1.5% 25px;text-decoration:none;}
-#sitenav li a:hover {background:url(../assets/tria.png) center bottom no-repeat; color: black;padding:2% 25px;}
-#sitenav li.current a {color:black;font-weight: bold;background:url(../assets/tria_gris.png) center bottom no-repeat; }
+	background: url(barra_amarilla.png) repeat-x left; 
+	padding-left: 60px;
+	height: 70px;
+}
 
+#sitenav li {display:inline;line-height: 70px;}
+#sitenav li a {color:#444; float:center; text-decoration:none; padding: 27px 27px 27px 0px;}
+#sitenav li a:hover {background-color: orange; color: black;}
+#sitenav li.current a {color:black;font-weight: bold;background-color:darkorange; }
 
 .contenedor{
 	min-height:200px;
 	background: #e6e6e6;
-	border-top: 1px solid #bbb;
 	padding-top: 20px;
 	padding-bottom:20px;
-	border-bottom: 1px solid #bbb;
-	-webkit-box-shadow:rgba(0,0,0,.2) 0px 0px 5px;
-	-moz-box-shadow:rgba(0,0,0,.2) 0px 0px 5px;
-	-o-box-shadow:rgba(0,0,0,.2) 0px 0px 5px;
-	box-shadow:rgba(0,0,0,.2) 0px 0px 5px;
 	overflow: auto;
 }
 
@@ -80,11 +84,14 @@ font-family:inherit;}
 	font-size: 9px;
   }
 
-
 .subcontenedorizquierdo{
 	float:left;
 	width: 60%;
 	border-right: 1px solid #bbb;
+	padding: 0px 10% 0px 4%;
+}
+
+.subcontenedor{
 	padding: 0px 10% 0px 4%;
 }
 
@@ -107,7 +114,6 @@ font-family:inherit;}
 padding-left: 30px;
 margin-top: 10%;
 }
-
 
 #boton_iniciar_sesion{
 margin-left: 30%;
@@ -232,9 +238,6 @@ ul.topnav {
 	float: left;
 	font-size: 11px;
 	background: url(barra_amarilla.png) repeat-x;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 }
 ul.topnav li {
 	float: left;
@@ -250,16 +253,10 @@ ul.topnav li a{
 	float: left;
 	font-weight: bold;
 }
-ul.topnav li span { /*--Drop down trigger styles--*/
-	width: 17px;
-	height: 15px;
-	float: left;
-	background: url(abajo.png) no-repeat center bottom;
-}
+
 ul.topnav li ul.subnav {
 	list-style: none;
 	position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
-	left: 0; top: 22px;
 	background: #333;
 	margin: 0; padding: 0;
 	display: none;

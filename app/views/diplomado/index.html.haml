@@ -1,27 +1,11 @@
--if @mensaje
-  %h3
-    = @mensaje
+.subcontenedor
+	-if @mensaje
+		%h3
+			= @mensaje
 
-%h1
-  Diplomados
+	=button_to "Nuevo Diplomado", {:action => "nuevo"}, {:class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only', :href => 'diplomado/nuevo'}
 
--@diplomados.each do |diplomado|
-  %h2
-    =link_to diplomado.descripcion_completa, "#{controller_name}/vista/#{diplomado.id}" 
-
-/ %table
-/   %thead
-/     %tr
-/       %th
-/         Id
-/       %th
-/         Descripcion
-/   %tbody
-/     -@diplomados.each do |diplomado|
-/       %tr
-/         %td
-/           =diplomado.id
-/         %td
-/           =diplomado.descripcion
-
-=link_to "Nuevo Diplomado", :action => "nuevo"
+	%ul
+		-@diplomados.each do |diplomado|
+			%li=link_to diplomado.descripcion_completa, "#{controller_name}/vista/#{diplomado.id}"
+			%br
