@@ -11,8 +11,7 @@
   %fieldset
     %legend 
       ="Registro de Nuevo Tema para Diplomado #{@tema.modulo.descripcion_diplomado}" 
-    %p
-      
+    %p      
       %b Diplomado:
       =@tema.modulo.diplomado.descripcion_completa
       =a.hidden_field :diplomado_id
@@ -25,7 +24,7 @@
       %br
       %label
         Número de Identificación:
-        =a.select :numero, options_for_select((1..10)to_a), {:include_blank => '--'}
+        =a.select :numero, options_for_select((1..10).to_a), {:include_blank => '--'}
         %span.req *  
     %p
       %label 

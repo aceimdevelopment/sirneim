@@ -11,6 +11,11 @@ class Tema < ActiveRecord::Base
 
   	def descripcion_completa
   		aux = "#{numero}.- "
-  		aux += descripcion if descripcion 
+  		aux += descripcion if descripcion
+      return aux
+  	end
+
+  	def diplomado
+  		modulo.diplomado
   	end
 end

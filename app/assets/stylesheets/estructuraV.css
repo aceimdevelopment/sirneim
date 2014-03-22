@@ -62,7 +62,7 @@ footer, header, nav, section, video, object, output {
 }
 
 #sitenav li {display:inline;line-height: 70px;}
-#sitenav li a {color:#444; float:center; text-decoration:none; padding: 27px 27px 27px 0px;}
+#sitenav li a {color:#444; float:center; text-decoration:none; padding: 27px 27px 27px 27px;}
 #sitenav li a:hover {background-color: orange; color: black;}
 #sitenav li.current a {color:black;font-weight: bold;background-color:darkorange; }
 

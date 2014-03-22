@@ -10,9 +10,15 @@ class TemaController < ApplicationController
 	end
 
 	def crear
-  		tema = Tema.new(params[:tema])
+		
+  		# tema = Tema.new(params[:tema])
+  		tema = Tema.new
+  		tema.diplomado_id = params[:tema][:diplomado_id]
+  		tema.modulo_numero = params[:tema][:modulo_numero]
+  		tema.descripcion = params[:tema][:decripcion]
+  		tema.numero = params[:tema][:numero]
 	    if tema.save
-	      redirect_to :controller => "modulo", :action => "vista", :id => "#{tema.modulo.id}", :mensaje => "Modulo Registrado"
+	      redirect_to :controller => "diplomado", :action => "vista", :id => "#{tema.diplomado.id}", :mensaje => "Tema Registrado"
 	    else
 	      redirect_to :action => "nuevo", :id => tema.id, :mensaje => "Error encontrado: #{tema.errors.full_messages}"
 	  	end

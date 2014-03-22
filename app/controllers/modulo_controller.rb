@@ -10,7 +10,7 @@ class ModuloController < ApplicationController
 	def crear
 		modulo = Modulo.new(params[:modulo])
     if modulo.save
-      redirect_to :action => "vista", :id => "#{modulo.id}", :mensaje => "Modulo Registrado"
+    	redirect_to :controller => "diplomado", :action => "vista", :id => "#{tema.diplomado.id}", :mensaje => "Módulo Registrado"	
     else
       redirect_to :action => "nuevo", :id => modulo.diplomado_id, :mensaje => "Error encontrado: #{modulo.errors.full_messages}"
   	end	  	

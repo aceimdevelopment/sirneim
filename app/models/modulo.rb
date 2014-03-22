@@ -4,10 +4,10 @@ class Modulo < ActiveRecord::Base
 	belongs_to :diplomado
 	
 	has_many :temas,
-	:foreign_key => ['numero', 'diplomado_id']
-  	accepts_nested_attributes_for :temas
+	:foreign_key => ['modulo_numero', 'diplomado_id']
+  accepts_nested_attributes_for :temas
 
-  	validates_uniqueness_of :numero, :scope => [:diplomado_id]
+  validates_uniqueness_of :numero, :scope => [:diplomado_id]
 
   	def descripcion_completa 
   		aux = "Modulo: #{numero} "
