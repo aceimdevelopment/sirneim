@@ -68,9 +68,9 @@ require 'composite_primary_keys'
 require "pdf/writer"
 require 'iconv'
 require 'pdf/simpletable' 
-require 'resque'
-require 'resque-meta'
-require 'resque/plugins/progress'
+# require 'resque'
+# require 'resque-meta'
+# require 'resque/plugins/progress'
 
 =begin
 begin
