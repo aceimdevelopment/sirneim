@@ -12,21 +12,21 @@ gem 'json'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
-  gem 'uglifier'
+	gem "therubyracer"
+	gem "less-rails" 
+	gem 'twitter-bootstrap-rails'
 end
 
-gem 'jquery-rails' 
+# gem 'jquery-rails' 
 gem 'haml'
 gem 'composite_primary_keys'
 gem 'pdf-writer'
 #gem 'rmagick'
 #gem 'barby'
-gem 'resque-progress'
-gem 'tinymce-rails'
-gem 'spreadsheet'
-gem 'elrte', '~> 0.0.4'
+# gem 'resque-progress'
+# gem 'tinymce-rails'
+# gem 'spreadsheet'
+# gem 'elrte', '~> 0.0.4'
 
 # Use unicorn as the web server
 gem 'unicorn'
@@ -38,6 +38,9 @@ gem 'unicorn'
 # To use debugger
 # gem 'ruby-debug'
 
-gem "therubyracer"
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
+
+# group :development do
+# 	gem "therubyracer", '~> 0.11.1'
+# 	gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+# 	gem 'twitter-bootstrap-rails', '~> 2.2.8'
+# end

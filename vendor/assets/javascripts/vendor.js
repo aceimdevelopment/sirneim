@@ -3,8 +3,4 @@
 // be included in the compiled file accessible from http://example.com/assets/application.js
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
-//
-//= require_tree ./jquery_datepicker_es
-//= require_tree ./table_sorter
-//= require_tree ./table_filter
-//= require_tree ./tooltip
+
