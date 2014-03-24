@@ -1,9 +1,8 @@
-.contenedor
-  -if ParametroGeneral.inscripcion_abierta
-    %div{:class => "titulo center"}
-      %h2 Inscripciones
-      =button_to "Inscribirse", :action => "paso1", :controller => "inscripcion"
+-if ParametroGeneral.inscripcion_abierta	
+	%h3 Preinscripciones      
+	=button_to "PresInscribirse", {:action => "paso1", :controller => "inscripcion"},:class => 'btn'
+	=button_to "Registrarse", {:action => "registrar"}, :class => 'btn'
 
-  =button_to "Registrarse", :action => "registrar"
-
-  =@content.html_safe
+.well{:style=>"overflow-y: scroll;height: 200px;"}
+	=@content.html_safe
+  

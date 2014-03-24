@@ -1,71 +1,45 @@
--if session[:administrador].rol == "VISOR"
-  %ul.navegador
-    %li
-      =link_to_if false, "Gestionar Cursos (Estado de la Inscripción)", :controller => "estado_inscripcion", :action=> "ver_secciones"
-    %li
-      =link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso" 
--else
-  %ul.navegador
-    %li
-      =#link_to "Seleccionar Preinscritos", :controller=> "preinscripcion", :action => "seleccionar_estudiantes"
-    %li
-      =link_to_if true, "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
-    %li
-      =link_to_if true, "Preinscribir Estudiante", {:controller=> "preinscripcion", :action => "paso1"}, {:target => "blank"}
-    -#
-      %li
-        =link_to_if false, "Agregar Nuevo Estudiante", :controller=> "inscripcion_admin", :action => "paso0"
-    -#
-      %li 
-        %a.desplegable{:href=>"#"} Instructores
-        %ul.subnavegador
-          %li
-            =link_to "Gestionar Instructores Existentes", :controller=>"admin_instructor", :action=>"index"
-          %li
-            =link_to "Enviar Correo a Instructores", :action=>"redactar_correo"
-          %li
-            =link_to "Agregar Nuevo Instructor", :controller=> "admin_instructor", :action=>"nuevo"
-      %li
-        %a.desplegable{:href=>"#"} Aulas
-        %ul.subnavegador
-          %li  
-            =link_to "Gestionar Aulas", :controller=>"admin_aula"
-          %li
-            =link_to "Agregar Nueva Aula", :controller=> "admin_aula", :action=>"nuevo"
-      %li
-        =link_to "Estudiantes con Nivelación", :controller => "estudiante_nivelaciones", :action=> "index"
-          
-    %li
-      =link_to_if true, "Estado de la Preinscripción", :controller => "estado_inscripcion", :action=> "ver_preinscripcion"
-    %li
-      =link_to_if true, "Estado de la Inscripción", :controller => "estado_inscripcion", :action=> "ver_inscripcion"
-    %li
-      =link_to "Modificar cartelera", :controller => "gestionar_cartelera", :action=> "modificar"
-    %li
-      =link_to "Parámetros Generales", :controller => "parametros_generales", :action=> "index"
-
-    -#  
-      %li
-        =link_to "Estado de la Calificación - Período #{session[:parametros][:periodo_calificacion]}", :action=> "estado_instructores"
-      -if (session[:administrador].usuario_ci == "10264009") || (session[:administrador].usuario_ci == "14519813") || (session[:administrador].usuario_ci == "13736933")
-        %li
-          =link_to "Calificar Sección", :controller=>"calificacion", :action => "seleccionar_curso"
-
-      %li
-        %a.desplegable{:href=>"#"} Reportes
-        %ul.subnavegador
-          %li  
-            =link_to "Alumnos con Convenios", :controller=>"reportes", :action=>"index_reportes_convenios",  :controlador => controller_name
-          %li  
-            =link_to "Alumnos Congelados", :controller=>"reportes", :action=>"index_reporte_congelados", :controlador => controller_name
-          %li
-            =link_to "Alumnos por Edificio", :controller => "reportes", :action => "alumnos_por_edificio"
-          %li
-            =link_to "Nómina Instructores", :controller => "reportes", :action => "nomina_instructores"
-            
-      %li 
-        %a.desplegable{:href=>"#"} Banco de Preguntas
-        %ul.subnavegador
-          %li
-            =link_to "Agregar pregunta", "#{session[:parametros][:direccion_atest]}/principal_admin?controlador=#{controller_name}&usuario=#{session[:usuario].ci}"
-          
+#accordionMenu.accordion
+  .accordion-group
+    .nav-header
+      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDiplomados"}
+        .nav-header
+          Diplomados
+    #collapseDiplomados.accordion-body.collapse
+      .accordion-inner
+        %ul.nav.nav-list
+          %li=link_to "Gestionar Diplomados", "#"
+          %li=link_to "Gestionar Cohorte", "#"
+          %li=link_to "Asociar Diplomado-Cohorte", "#"
+          %li=link_to "Gestionar Diplomado-Cohorte", "#"
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDocentes"}
+        .nav-header
+          Docentes
+    #collapseDocentes.accordion-body.collapse
+      .accordion-inner
+        %ul.nav.nav-list
+          %li=link_to "Listar Docentes", "#"
+          %li=link_to "Enviar Correo", "#"
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseEstudiantes"}
+        .nav-header
+          Estudiantes
+    #collapseEstudiantes.accordion-body.collapse
+      .accordion-inner
+        %ul.nav.nav-list
+          %li=link_to "Listar Estudiantes", "#"
+          %li=link_to_if true, "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
+          %li=link_to_if true, "Inscribir Estudiante", :controller=> "inscripcion_admin", :action => "paso0"
+          %li=link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso" 
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseCartelera"}
+        .nav-header
+          Cartelera & Parámetros Generales
+    #collapseCartelera.accordion-body.collapse
+      .accordion-inner
+        %ul.nav.nav-list
+          %li=link_to "Parámetros Generales", :controller => "parametros_generales", :action=> "index"
+          %li=link_to "Gestionar Cartelera Principal", "#"

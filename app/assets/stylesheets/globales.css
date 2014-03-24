@@ -1,0 +1,44 @@
+
+#banner{
+	border-top: 2px solid black;
+	margin:0;
+	min-height:0;
+	height:135px;
+	background: url(encabezado_bg.gif)	 repeat-x center top;
+	text-decoration:none;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+#banner_barra{ 
+	background: url(barra_amarilla_ucv.png) no-repeat left;
+  	background-position: 10px 20px;
+  	letter-spacing: 3px;
+}
+
+.detalle_derecha{
+	float: right;
+	letter-spacing: 2px;
+	padding-left: 3%; 
+	margin: 0px 10px;
+}
+
+#banner_contenido{padding-top: 30px;padding-left: 30px; background:url(../assets/diplomado_logo.png) no-repeat right; background-size: 22%; height:120px; font-size: 13px; text-align: left; color: white; font-weight: lighter;}
+
+#pie {	
+	padding: 10px 0 0 0;
+	display:block;
+	background: url(encabezado_bg.gif) repeat-x center bottom;
+	color: white;
+	font-size: 10px;
+	letter-spacing: 3px;
+}
+
+#DanMo {
+	background-color: darkred;
+	color: white;
+	margin: 0 530px;
+	font-size: 9px;
+}
+
+.center{text-align:center;}
