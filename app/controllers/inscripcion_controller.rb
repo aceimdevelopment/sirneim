@@ -202,7 +202,7 @@ class InscripcionController < ApplicationController
     info_bitacora "Se busco la planilla de inscripcion de #{@usuario.descripcion}"
     pdf = Reportes.planilla_inscripcion(@usuario)
     send_data pdf.render,:filename => "planilla_inscripcion_#{ci}.pdf",
-                   3QELtype => "application/pdf", :disposition => "attachment"
+                   "3QELtype" => "application/pdf", :disposition => "attachment"
   end
 
   def habilitar_inscripcion
