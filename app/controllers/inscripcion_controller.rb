@@ -201,8 +201,7 @@ class InscripcionController < ApplicationController
     @usuario = Usuario.where(:ci => ci).first
     info_bitacora "Se busco la planilla de inscripcion de #{@usuario.descripcion}"
     pdf = Reportes.planilla_inscripcion(@usuario)
-    send_data pdf.render,:filename => "planilla_inscripcion_#{ci}.pdf",
-                   "3QELtype" => "application/pdf", :disposition => "attachment"
+    # send_data pdf.render,:filename => "planilla_inscripcion_#{ci}.pdf", "3QELtype" => "application/pdf", :disposition => "attachment"
   end
 
   def habilitar_inscripcion
