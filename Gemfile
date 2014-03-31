@@ -12,6 +12,7 @@ gem 'json'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+	gem 'uglifier', '>= 1.0.3'
 	gem "therubyracer", '~> 0.11.1'
 	gem "less-rails" 
 	gem 'twitter-bootstrap-rails', '~> 2.2.8'
@@ -37,7 +38,7 @@ gem 'unicorn'
 
 # To use debugger
 # gem 'ruby-debug'
-gem 'uglifier', '>= 1.0.3'
+
 
 # group :development do
 # 	gem "therubyracer", '~> 0.11.1'
