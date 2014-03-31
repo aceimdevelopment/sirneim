@@ -68,8 +68,7 @@ require 'composite_primary_keys'
 require "pdf/writer"
 require 'iconv'
 require 'pdf/simpletable'
-# require 'less/rails/railstie'
-require 'twitter-bootstrap-rails'
+
 # require 'resque'
 # require 'resque-meta'
 # require 'resque/plugins/progress'

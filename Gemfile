@@ -11,12 +11,12 @@ gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
+# group :assets do
 	gem 'uglifier', '>= 1.0.3'
 	gem "therubyracer", '~> 0.11.1'
 	gem "less-rails" 
 	gem 'twitter-bootstrap-rails', '~> 2.2.8', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-end
+# end
 
 gem 'jquery-rails' 
 gem 'haml'
