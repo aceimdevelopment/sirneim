@@ -78,7 +78,7 @@ class InicioController < ApplicationController
       roles = []
       roles << "Administrador" if usuario.administrador
       roles << "Estudiante" if usuario.estudiante
-      #roles << "Instructor" if usuario.instructor
+      roles << "Docente" if usuario.docente
       #ests = EstudianteCurso.where(:usuario_ci => login) 
       #ests.each{ |ec|
       #  roles << "Estudiante"
@@ -109,7 +109,7 @@ class InicioController < ApplicationController
     usuario = session[:usuario]
     @roles = []
     @roles << { :tipo => "Administrador", :descripcion => "Administrador"} if usuario.administrador
-    @roles << { :tipo => "Instructor", :descripcion => "Instructor"} if usuario.instructor
+    @roles << { :tipo => "Docente", :descripcion => "Docente"} if usuario.docente
     @roles << { :tipo => "Estudiante", :descripcion => "Estudiante"} if usuario.estudiante
     # usuario.estudiante_curso.each{|ec|
     #   @roles << { 

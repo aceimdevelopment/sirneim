@@ -4,4 +4,7 @@ class Docente < ActiveRecord::Base
 	has_many :cohortes_temas
   	accepts_nested_attributes_for :cohortes_temas
 
+	belongs_to :usuario,
+	:class_name => 'Usuario',
+	:foreign_key => ['usuario_ci']
 end
