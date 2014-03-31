@@ -40,7 +40,8 @@
     %br
     .container-fluid
       .well
-        =#bootstrap_flash
+        -flash[:alert] = "Disculpe las molestias, trabajamos para ofrecerle un mejor servicio"
+        =bootstrap_flash
         = yield
       / /row
     =render 'layouts/pie'
