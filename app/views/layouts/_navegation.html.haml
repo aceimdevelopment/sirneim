@@ -19,14 +19,14 @@
               = menu_item "Top Sellers", "#"  
               = drop_down_divider
               = menu_item "Discount Items", "#"
-        = menu_group :pull => :right do
-          -if session[:usuario]
-            = drop_down "#{session[:usuario].nombre_completo}" do
-              %li
-                =link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
-              %li
-                =link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
-              = drop_down_divider
-              = menu_item "Cerrar sesión", "inicio/cerrar_sesion"
-          -else
-            =render 'layouts/cargar_sesion'
+        =# menu_group :pull => :right do
+        -if session[:usuario]
+          = drop_down "#{session[:usuario].nombre_completo}" do
+            %li
+              =link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+            %li
+              =link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
+            = drop_down_divider
+            = menu_item "Cerrar sesión", "inicio/cerrar_sesion"
+        -else
+          =render 'layouts/cargar_sesion'
