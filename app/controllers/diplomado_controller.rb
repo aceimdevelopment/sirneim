@@ -26,6 +26,10 @@ class DiplomadoController < ApplicationController
   	end
   end
 
+  def editar
+    1/0
+  end
+
   def vista
     @mensaje = params[:mensaje]
     @diplomado = Diplomado.where(:id => params[:id]).first

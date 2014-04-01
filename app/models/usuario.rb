@@ -13,6 +13,10 @@ class Usuario < ActiveRecord::Base
     :class_name => 'TipoSexo',
     :foreign_key => ['tipo_sexo_id']
 
+  has_one :docente, :foreign_key => 'usuario_ci'
+  has_one :administrador, :foreign_key => 'usuario_ci'
+  has_one :estudiante, :foreign_key => 'usuario_ci'
+
   validates :ci, :presence => true,  
                  :uniqueness => true,
                 :numericality => { :only_integer => true, 
@@ -52,17 +56,13 @@ class Usuario < ActiveRecord::Base
     "#{apellidos} #{nombres}"
   end 
   
-  def administrador
-    Administrador.where(:usuario_ci => ci).limit(1).first
-  end
+  # def administrador
+  #   Administrador.where(:usuario_ci => ci).limit(1).first
+  # end          
 
-  def instructor
-    Instructor.where(:usuario_ci => ci).limit(1).first
-  end           
-
-  def estudiante
-    Estudiante.where(:usuario_ci => ci).limit(1).first
-  end
+  # def estudiante
+  #   Estudiante.where(:usuario_ci => ci).limit(1).first
+  # end
 
   def datos_estudiante
     DatosEstudiante.where(:estudiante_ci => ci).limit(1).first

@@ -1,11 +1,19 @@
-.subcontenedor
-	-if @mensaje
-		%h3
-			= @mensaje
+%h2
+	="Diplomados"
 
-	=button_to "Nuevo Diplomado", {:action => "nuevo"}, {:class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only', :href => 'diplomado/nuevo'}
+=button_to "Nuevo Diplomado", {:action => "nuevo"}, {:class => 'btn'}
 
-	%ul
-		-@diplomados.each do |diplomado|
-			%li=link_to diplomado.descripcion_completa, "#{controller_name}/vista/#{diplomado.id}"
-			%br
+#accordionDiplomados.accordion
+	-@diplomados.each do |diplomado|
+		.accordion-group
+			.nav-header
+				%a.accordion-toggle{"data-parent" => "#accordionDiplomados", "data-toggle" => "collapse", :href => "#collapseModulos"}
+					.nav-header
+						=diplomado.descripcion_completa
+						=#glyph(:pencil)
+		#collapseModulos.accordion-body.collapse
+			.accordion-inner
+				%ul.nav.nav-list
+					-diplomado.modulos.each do |modulo|
+						%li=link_to "#{modulo.descripcion_completa}", "modulo/#{modulo.id}"
+
