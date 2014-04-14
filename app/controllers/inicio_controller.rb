@@ -78,7 +78,7 @@ class InicioController < ApplicationController
       roles = []
       roles << "Administrador" if usuario.administrador
       roles << "Estudiante" if usuario.estudiante
-      roles << "Docente" if usuario.docente
+      # roles << "Docente" if usuario.docente
       #ests = EstudianteCurso.where(:usuario_ci => login) 
       #ests.each{ |ec|
       #  roles << "Estudiante"
