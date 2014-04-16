@@ -18,10 +18,16 @@
 						=a.hidden_field :tema_numero
 						=a.hidden_field :modulo_numero
 						%p
-							= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :required => true, :start_year => Date.current.year, :class => 'span1'}
-							=a.text_field :fecha_final, :placeholder => "Fecha Final…", :class => "input-small"
-							=a.text_field :grupo_id, :placeholder => "Grupo…", :class => "input-small"
-							=a.text_field :docente_ci, :placeholder => "Docente…", :class => "input-small"
+							%b Fecha Inicial:
+							= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => Date.current.year }, {:required => true, :class => 'span1'}
+
+							%b Fecha Final:
+							= a.date_select :fecha_final, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => Date.current.year }, {:required => true, :class => 'span1'}
+							|
+							= a.collection_select :grupo_id, Grupo.all, :id, :descripcion, {:prompt => 'Grupo'}, {:required => true, :class => 'span2'}
+							|
+							= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}, {:required => true, :class => 'span2'}
+							|
 							=a.submit "Asignar", :class => "btn btn-primary"
 				- else
 					%p

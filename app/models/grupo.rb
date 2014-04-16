@@ -12,5 +12,11 @@ class Grupo < ActiveRecord::Base
   validates :id, :presence => true, :uniqueness => true, :length => {:maximum => 1}
   # has_many :preinscripcion
   # accepts_nested_attributes_for :preinscripcion
-
+  def descripcion
+  	if nombre
+  		"#{id}-#{nombre}"
+  	else
+  		id
+  	end
+  end
 end

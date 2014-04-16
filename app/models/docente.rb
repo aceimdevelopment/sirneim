@@ -7,4 +7,8 @@ class Docente < ActiveRecord::Base
 	belongs_to :usuario,
 	:class_name => 'Usuario',
 	:foreign_key => ['usuario_ci']
+
+	def nombre_completo
+    	usuario.nombre_completo
+    end 
 end
