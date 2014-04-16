@@ -1,10 +1,10 @@
 -if @cohortes.count > 0
-	%h2 Cohortes
 	-@cohortes.each do |cohorte|
-		%h3
+		%h2
 			=cohorte.descripcion
 -else
-	%h3 No se encontraron Cohortes
+	%h2 Sin Cohortes
 
-%p
-	=link_to "Agregar Cohorte >", :action => "nuevo"
+= link_to "cohorte/nuevo", {:class => 'btn btn-primary'} do
+	%i.icon-plus.icon-white
+	Agregar Cohorte

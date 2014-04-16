@@ -1,10 +1,31 @@
-
--@diplomados_cohorte.each do |diplomado_cohorte|
-	%h2
-	=diplomado_cohorte.diplomado.descripcion_completa
-	-diplomado_cohorte.diplomado.modulos.each do |modulo|
-		%h3
-		= modulo.descripcion_completa
-		-modulo.temas.each do |tema|
-			
-			= tema.descripcion_completa
+-@cohorte_tema.diplomado.modulos.each do |modulo|
+	%dl.well.dl-horizontal
+		%dt= "#{modulo.descripcion_completa}"
+		%dd
+			-modulo.temas.each do |tema|
+				- unless @cohortes_temas.include? tema
+					=form_for(@cohorte_tema,:url=>{:action => "crear"}) do |a|
+						%dd= tema.descripcion_completa
+						-@cohorte_tema.tema_numero = tema.numero
+						-@cohorte_tema.modulo_numero = tema.modulo_numero
+						-if @cohorte_tema.errors.any?
+							%ul
+								-flash[:alert] = ""
+								-@cohorte_tema.errors.full_messages.each do |msg|
+									-flash[:alert] += "#{msg}\n"
+						=a.hidden_field :diplomado_id
+						=a.hidden_field :cohorte_id
+						=a.hidden_field :tema_numero
+						=a.hidden_field :modulo_numero
+						%p
+							= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :required => true, :start_year => Date.current.year, :class => 'span1'}
+							=a.text_field :fecha_final, :placeholder => "Fecha Final…", :class => "input-small"
+							=a.text_field :grupo_id, :placeholder => "Grupo…", :class => "input-small"
+							=a.text_field :docente_ci, :placeholder => "Docente…", :class => "input-small"
+							=a.submit "Asignar", :class => "btn btn-primary"
+				- else
+					%p
+						= tema.descripcion_completa
+						- cohorte_tema_aux = CohorteTema.where("cohorte_id = ? AND tema_id = ?", @cohorte_tema.cohorte_id, tema.id)
+						= cohorte_tema_aux.fecha_inicial
+						= cohorte_tema_aux.fecha_final

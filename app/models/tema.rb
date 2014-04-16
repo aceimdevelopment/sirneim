@@ -3,11 +3,14 @@ class Tema < ActiveRecord::Base
 	
 	belongs_to :modulo,
 	:class_name => 'Modulo',
-    :foreign_key => ['modulo_numero', 'diplomado_id']
+  :foreign_key => ['modulo_numero', 'diplomado_id']
 
-	has_many :cohortes_temas,
-	:foreign_key => ['numero', 'modulo_numero','diplomado_id']
-  	accepts_nested_attributes_for :cohortes_temas
+	has_many :cohorte_tema,
+	:foreign_key => ['tema_numero', 'modulo_numero','diplomado_id']
+  accepts_nested_attributes_for :cohorte_tema
+
+  validates_uniqueness_of :numero, :scope => [:modulo_numero, :diplomado_id]
+  validates_presence_of :numero
 
   	def descripcion_completa
   		aux = "#{numero}.- "

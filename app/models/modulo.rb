@@ -8,9 +8,10 @@ class Modulo < ActiveRecord::Base
   accepts_nested_attributes_for :temas
 
   validates_uniqueness_of :numero, :scope => [:diplomado_id]
+  validates_presence_of :numero
 
   	def descripcion_completa 
-  		aux = "Modulo: #{numero} "
+  		aux = "Modulo #{numero}.- "
   		aux += descripcion if descripcion
   	end
 

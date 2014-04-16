@@ -14,4 +14,5 @@
 $(document).ready(function() {
 	$('.dropdown-toggle').dropdown()
 	$('.tooltip').tooltip()
+	$('.nav-tabs').tab()
 });

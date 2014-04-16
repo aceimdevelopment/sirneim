@@ -1,5 +1,8 @@
 class Grupo < ActiveRecord::Base
 
+# OJO: PARA INSERTAR GRUPOS
+# INSERT INTO `grupo` (`id`, `nombre`) VALUES ('A', NULL)
+# INSERT INTO `grupo` (`id`, `nombre`) VALUES ('B', NULL)
   has_many :inscripciones
   accepts_nested_attributes_for :inscripciones
 

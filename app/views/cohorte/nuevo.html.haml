@@ -1,27 +1,25 @@
 =form_for(@cohorte,:url=>{:action => "crear"}) do |a|
   -if @cohorte.errors.any?
-    %div#error_explanation
-      %ul
-        -@cohorte.errors.full_messages.each do |msg|
-          %li
-            *
-            =msg
-            
+    %ul
+      -flash[:alert] = ""
+      -@cohorte.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
   %fieldset
-    %legend Registro de Nueva Cohorte 
+    %legend Registro de Nuevo Diplomado
     %p
-      %br
       %label
-        Año:
-        =a.select :id, options_for_select((Date.today.year..Date.today.year+10).to_a), {:include_blank => '--'}
-        %span.req *  
-    %p
-      %label 
-        Nombre:
-        =a.text_field :nombre
-  %p 
-    %span.req *  
-    Campos Obligatorios
-  %p
-    =link_to "<Atrás", :controller => "principal_admin", :action => "index"
-    =a.submit "Registrar"
+        %b Año:
+      =a.number_field :id, :in => Date.today.year...Date.today.year+10, :include_blank => 'Seleccione...', :class => "span1", :required => true
+    %p 
+      %label
+        %b Nombre:
+      =a.text_field :nombre, :placeholder => "Descripcion…", :class => "input"
+    
+    %br
+    =a.submit "Registrar >", :class => "btn btn-primary"
+
+%p  
+  = link_to "/aceim_diplomados/cohorte/index", {:class => "btn"} do
+    %i.icon-backward
+    Atrás

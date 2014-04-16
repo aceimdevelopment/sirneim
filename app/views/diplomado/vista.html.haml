@@ -1,17 +1,21 @@
-.subcontenedor
-	-if @mensaje
-		%h3
-			= @mensaje
-	=button_to "Agregar Módulo", {:controller => "modulo", :action => "nuevo", :id => "#{@diplomado.id}"}, {:class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only', :href => "modulo/nuevo/id=#{@diplomado.id}"}
+-@diplomado.modulos.each do |modulo|
+	%dl.well.dl-horizontal
+		%dt= "#{modulo.descripcion_completa}"
+		%dd
+			-modulo.temas.each do |tema|
+				%li
+					%p= tema.descripcion_completa
+		%dd
+			= link_to "/aceim_diplomados/tema/nuevo/#{modulo.id}", {:class => 'btn btn-primary btn-mini'}do
+				%i.icon-plus.icon-white
+				Agregar Tema
 
+%p
+	= link_to "/aceim_diplomados/modulo/nuevo/#{@diplomado.id}", {:class => 'btn btn-primary'}do
+		%i.icon-plus.icon-white
+		Agregar Módulo
 
-	%ul.navegador
-		-@diplomado.modulos.each do |modulo|
-			%li
-				%a.desplegable{:href=>"#"}= "#{modulo.descripcion_completa}"
-				=link_to "Agregar Tema", {:controller => "tema", :action => "nuevo", :id => "#{modulo.id}"},{:class => 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only'}
-				%ul.subnavegador
-					-modulo.temas.each do |tema|
-						%li
-							=tema.descripcion_completa
-
+%p	
+	= link_to "/aceim_diplomados/diplomado/index", {:class => "btn"} do
+		%i.icon-backward
+		Atrás

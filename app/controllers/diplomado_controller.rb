@@ -5,13 +5,13 @@ class DiplomadoController < ApplicationController
   # attr_accessible :id
 
   def index
-    @titulo_pagina = "Diplomados"
+    @titulo = "Diplomados"
   	@diplomados = Diplomado.all
-  	@mensaje = params[:mensaje] if params[:mensaje]
   end
 
   def nuevo
   	@diplomado = Diplomado.new
+    @titulo = "Registro de Nuevo Diplomado"
   end
 
   def crear
@@ -20,7 +20,8 @@ class DiplomadoController < ApplicationController
     @diplomado.descripcion = params[:diplomado][:descripcion]
 
     if @diplomado.save
-      redirect_to :action => "vista", :id => @diplomado.id, :mensaje => "Diplomado Registrado"
+      flash[:success] = "Diplomado Registrado Satisfactoriamente"
+      redirect_to :action => "vista", :id => @diplomado.id 
     else
       render :action => "nuevo"
   	end
@@ -31,9 +32,8 @@ class DiplomadoController < ApplicationController
   end
 
   def vista
-    @mensaje = params[:mensaje]
     @diplomado = Diplomado.where(:id => params[:id]).first
-    @titulo_pagina = "Diplomado: #{@diplomado.descripcion_completa}"
-    @nuevo_modulo = params[:nuevo_modulo]
+    @titulo = "Diplomado: #{@diplomado.descripcion_completa}"
+    # @nuevo_modulo = params[:nuevo_modulo]
   end
 end

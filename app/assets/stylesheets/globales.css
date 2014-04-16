@@ -1,4 +1,8 @@
-
+.titulo{
+	color: grey;
+	border-bottom: 1px solid #ACCEF3;
+}
+.tilulo h3{margin: 0px;}
 #banner{
 	border-top: 2px solid black;
 	margin:0;

@@ -1,19 +1,23 @@
-%h2
-	="Diplomados"
+.tabbable.tabs-left
+	%ul.nav.nav-tabs
+		-@diplomados.each do |diplomado|
+			%li
+				=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
+	.tab-content
+		-@diplomados.each do |diplomado|
+			.tab-pane{:id=>"#{diplomado.id}"}
+				= link_to "diplomado/vista/#{diplomado.id}", {:class => 'btn btn-info'}do
+					%i.icon-pencil.icon-white
+					=diplomado.descripcion_completa
 
-=button_to "Nuevo Diplomado", {:action => "nuevo"}, {:class => 'btn'}
+				-diplomado.modulos.each do |modulo|
+					%dl.well.dl-horizontal
+						%dt= "#{modulo.descripcion_completa}"
+						%dd
+							-modulo.temas.each do |tema|
+								%li
+									%p= tema.descripcion_completa
 
-#accordionDiplomados.accordion
-	-@diplomados.each do |diplomado|
-		.accordion-group
-			.nav-header
-				%a.accordion-toggle{"data-parent" => "#accordionDiplomados", "data-toggle" => "collapse", :href => "#collapseModulos"}
-					.nav-header
-						=diplomado.descripcion_completa
-						=#glyph(:pencil)
-		#collapseModulos.accordion-body.collapse
-			.accordion-inner
-				%ul.nav.nav-list
-					-diplomado.modulos.each do |modulo|
-						%li=link_to "#{modulo.descripcion_completa}", "modulo/#{modulo.id}"
-
+= link_to "diplomado/nuevo", {:class => 'btn btn-primary'}do
+	%i.icon-plus.icon-white
+	Agregar Diplomado

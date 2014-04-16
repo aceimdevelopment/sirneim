@@ -1,40 +1,34 @@
-
 =form_for(@tema,:url=>{:action => "crear"}) do |a|
   -if @tema.errors.any?
-    %div#error_explanation
-      %ul
-        -@tema.errors.full_messages.each do |msg|
-          %li
-            *
-            =msg
-            
+    %ul
+      -flash[:alert] = ""
+      -@tema.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
   %fieldset
-    %legend 
-      ="Registro de Nuevo Tema para Diplomado #{@tema.modulo.descripcion_diplomado}" 
-    %p      
+    %legend      
+      %ul.nav.nav-pills
+        %li.active= link_to "#{@tema.modulo.descripcion_diplomado}"
+
+    %label
       %b Diplomado:
-      =@tema.modulo.diplomado.descripcion_completa
-      =a.hidden_field :diplomado_id
-      =a.hidden_field :modulo_numero
-      %br
-      %br
-      %b Modulo:
-      =@tema.modulo.descripcion_completa
-      %br
-      %br
-      %label
-        Número de Identificación:
-        =a.select :numero, options_for_select((1..10).to_a), {:include_blank => '--'}
-        %span.req *  
-    %p
-      %label 
-        Descripción:
-        =a.text_field :descripcion
-  %p 
-    %span.req *  
-    Campos Obligatorios
-  %p
-    =a.submit "Registrar"
-%br/
-%br/
-=link_to "<Atrás", :controller => "diplomado", :action => "index"
+    =a.text_field :diplomado_id, :class => "input", :readonly => true,  :required => true
+
+    %label
+      %b Módulo:
+    =a.text_field :modulo_numero, :class => "input", :readonly => true,  :required => true
+
+    %label 
+      %b Número de Identificación:
+    =a.number_field :numero, :in => 1...11, :include_blank => 'Seleccione...', :class => "span1", :required => true
+    =#a.select :numero, options_for_select((1..10)), {:include_blank => 'Seleccione...'}, :required => true
+    %label
+      %b Descripción:
+    =a.text_field :descripcion, :placeholder => "Descripcion…", :class => "input"
+    %br
+    =a.submit "Registrar >", :class => "btn btn-primary"
+
+%p  
+  = link_to "/aceim_diplomados/diplomado/vista/#{@tema.diplomado.id}", {:class => "btn"} do
+    %i.icon-backward
+    Atrás

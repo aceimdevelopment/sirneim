@@ -1,30 +1,25 @@
 =form_for(@diplomado,:url=>{:action => "crear"}) do |a|
   -if @diplomado.errors.any?
-    %div#error_explanation
-      %ul
-        -@diplomado.errors.full_messages.each do |msg|
-          %li
-            *
-            =msg
+    %ul
+      -flash[:alert] = ""
+      -@diplomado.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
             
   %fieldset
     %legend Registro de Nuevo Diplomado
     %p
       %label
-        Identificación:
-      =a.text_field :id, :autofocus => "true"
-      %span.req * 
-      %em Recuerde NO usar caracteres especiales para la identificación
+        %b Identificación:
+      = a.text_field :id, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium"
+      %span.help-block
+        Recuerde NO usar caracteres especiales (%/$#) como parte de la Identificación
     %p
-      %label 
-        Descripción:
-      =a.text_field :descripcion
-      %span.req *
-  %p 
-    %span.req *  
-    Campos Obligatorios
-  %p
-    =a.submit "Registrar"
-%br/
-%br/
-=link_to "<Atrás", :action => "index"
+      %label
+        %b Descripción:
+      = a.text_field :descripcion, :placeholder => "Descripcion…", :required => true, :class => "input-medium"
+  =a.submit "Registrar", :class => "btn btn-primary"
+
+%p  
+  = link_to "/aceim_diplomados/diplomado/index", {:class => "btn"} do
+    %i.icon-backward
+    Atrás

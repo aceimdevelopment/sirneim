@@ -7,6 +7,12 @@ class CohorteTemaController < ApplicationController
 	end
 
 	def nuevo
-		@diplomados_cohorte = DiplomadoCohorte.where("cohorte_id = ?", ParametroGeneral.cohorte_actual) 
+		@cohorte_tema = CohorteTema.new
+		@cohortes_temas = CohorteTema.all
+		diplomado_id, cohorte_id = params[:id].split ","
+		@cohorte_tema.diplomado_id = diplomado_id
+		@cohorte_tema.cohorte_id = cohorte_id
+		@titulo = "Asignación de Temas por Cohorte"
+		# @diplomados_cohorte = DiplomadoCohorte.where("cohorte_id = ?", ParametroGeneral.cohorte_actual) 
 	end
 end
