@@ -1,0 +1,32 @@
+- if action_name.eql? "editar"
+  - @accion = "guardar"
+
+- else 
+  - @accion = "crear"
+
+=form_for(@estado_inscripcion,:url=>{:action => @accion}) do |a|
+  -if @estado_inscripcion.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@estado_inscripcion.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+              
+  %fieldset
+    %legend Registro de Estado de Inscripción
+    - if action_name.eql? "nuevo"    
+      %p
+        %label
+          %b Identificación:
+        = a.text_field :id, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium"
+    - else
+      = a.hidden_field :id
+    %p
+      %label
+        %b Nombre:
+      = a.text_field :nombre, :placeholder => "Nombre…", :required => true, :class => "input-medium"
+  =a.submit "Registrar", :class => "btn btn-primary"
+
+%p  
+  = link_to "/aceim_diplomados/diplomado/index", {:class => "btn"} do
+    %i.icon-backward
+    Atrás

@@ -1,0 +1,2 @@
+module TipoEstadoInscripcionHelper
+end
