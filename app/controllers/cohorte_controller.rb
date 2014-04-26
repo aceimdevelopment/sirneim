@@ -15,14 +15,14 @@ class CohorteController < ApplicationController
 
 	def crear
 		# cohorte = Cohorte.new(params[:cohorte])
-		cohorte = Cohorte.new
-		cohorte.id = params[:cohorte][:id]
-		cohorte.nombre = params[:cohorte][:nombre]
+		@cohorte = Cohorte.new
+		@cohorte.id = params[:cohorte][:id]
+		@cohorte.nombre = params[:cohorte][:nombre]
 
-	    if cohorte.save
+	    if @cohorte.save
 	      redirect_to :action => "index"
 	    else
-	      redirect_to :action => "nuevo", :mensaje => "Error encontrado: #{cohorte.errors.full_messages.join(" , ")}"
+	      render :action => "nuevo"
 	  	end	  	
 	end
 

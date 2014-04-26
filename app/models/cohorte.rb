@@ -6,11 +6,12 @@ class Cohorte < ActiveRecord::Base
   has_many :cohortes_temas
   accepts_nested_attributes_for :cohortes_temas
 
-	validates :id, :presence => true, :uniqueness => true,  :numericality => { :greater_than => 2013, :less_than_or_equal_to => 2030 }
+	validates :id, :presence => true, :uniqueness => true,  :numericality => { :greater_than => 2010, :less_than_or_equal_to => 2030 }
 
 	def descripcion
 		aux = "#{id}"
-		aux += " - #{nombre}" if nombre
+		aux += " - #{nombre}" unless nombre.blank?
+    return aux
 	end
   # has_many :inscripcion
   # accepts_nested_attributes_for :inscripcion

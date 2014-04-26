@@ -1,4 +1,7 @@
 class TipoEstadoInscripcion < ActiveRecord::Base
-  has_many :inscripcion
-  accepts_nested_attributes_for :inscripcion
+	attr_accessible :id, :nombre
+
+	has_many :inscripcion
+	accepts_nested_attributes_for :inscripcion
+
 end

@@ -9,7 +9,7 @@ class InicioController < ApplicationController
   def registrar
     session[:usuario] = nil
     @usuario = Usuario.new
-    @titulo_pagina = "Registro de Usuario"
+    @titulo = "Registro de Usuario"
   end
   
   def registrar_guardar

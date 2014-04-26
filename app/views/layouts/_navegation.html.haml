@@ -11,17 +11,24 @@
         %ul.nav
           -if session[:administrador]
             %li= link_to "Estudiantes", "estudiante"
-
             %li= link_to "Docentes", "docentes"
         .nav.pull-right
+          -if session[:administrador]
+          - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
+            = drop_down "Cohorte: #{cohorte_altual.descripcion}" do              
+              %li
+                = link_to "Cambiar Cohorte", :controller=>"parametros_generales",:action=>"cambiar_cohorte"
+              -if session[:administrador].rol == "super"
+                %li
+                  = link_to "Nueva Cohorte", :controller=>"Cohorte",:action=>"nuevo"  
           -if session[:usuario]
             = drop_down "#{session[:usuario].nombre_completo}" do
               
               %li
-                =link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+                = link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
               %li
-                =link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
+                = link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
               = drop_down_divider
-              = menu_item "Cerrar sesión", "inicio/cerrar_sesion"
+              = menu_item "Cerrar sesión", "/aceim_diplomados/inicio/cerrar_sesion"
           -else
             =render 'layouts/cargar_sesion'
