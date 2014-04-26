@@ -19,6 +19,10 @@ class Estudiante < ActiveRecord::Base
     :foreign_key => ['estudiante_ci']
   accepts_nested_attributes_for :inscripciones
 
+  has_many :preinscripciones,
+    :foreign_key => ['estudiante_ci']
+  accepts_nested_attributes_for :preinscripciones
+
   # validates_associated :inscripcion    
    def preinscrito?          
      @periodo = ParametroGeneral.periodo_actual

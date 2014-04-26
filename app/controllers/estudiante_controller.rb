@@ -6,8 +6,13 @@ class EstudianteController < ApplicationController
 	
   def index
   	usuario = session[:usuario]
-  	@estudiante = Estudiante.where(:usuario_ci => usuario[:ci]).limit(1).first
-  
+  	# @estudiante = Estudiante.where(:usuario_ci => usuario[:ci]).limit(1).first
+    @estudiantes = Estudiante.all
+
+    @grupo_a = Preinscripcion.where(:grupo_id => "a")
+    @grupo_b = Preinscripcion.where(:grupo_id => "b")
+    @sin_grupo = Preinscripcion.where(:grupo_id => nil)
+    @titulo = "Estudiantes"
   end
   
   def paso1

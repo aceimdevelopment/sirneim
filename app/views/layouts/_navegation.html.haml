@@ -12,13 +12,7 @@
           -if session[:administrador]
             %li= link_to "Estudiantes", "estudiante"
 
-            %li= link_to "Instructores", "instructor"
-            %li= link_to "Link3", "/path3"
-            = drop_down "Products" do
-              = menu_item "Latest", "#"   
-              = menu_item "Top Sellers", "#"  
-              = drop_down_divider
-              = menu_item "Discount Items", "#"
+            %li= link_to "Docentes", "docentes"
         .nav.pull-right
           -if session[:usuario]
             = drop_down "#{session[:usuario].nombre_completo}" do
