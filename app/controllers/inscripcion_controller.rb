@@ -78,7 +78,7 @@ class InscripcionController < ApplicationController
       @datos_estudiante.ano_estudio_concluido = datos_estudiante[:ano_estudio_concluido]
       @datos_estudiante.titulo_estudio_en_curso = datos_estudiante[:titulo_estudio_en_curso]
       @datos_estudiante.institucion_estudio_en_curso = datos_estudiante[:institucion_estudio_en_curso]
-      @datos_estudiante.fecha_inicio_estudio_en_curso = datos_estudiante[:fecha_inicio_estudio_en_curso].to_date
+      @datos_estudiante.fecha_inicio_estudio_en_curso = datos_estudiante[:fecha_inicio_estudio_en_curso]
       @datos_estudiante.tiene_experiencia_ensenanza_idiomas = datos_estudiante[:tiene_experiencia_ensenanza_idiomas]
       @datos_estudiante.descripcion_experiencia = datos_estudiante[:descripcion_experiencia]
       @datos_estudiante.ha_dado_clases_espanol = datos_estudiante[:ha_dado_clases_espanol]
