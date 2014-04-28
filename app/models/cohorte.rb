@@ -13,6 +13,10 @@ class Cohorte < ActiveRecord::Base
 		aux += " - #{nombre}" unless nombre.blank?
     return aux
 	end
+
+  def self.actual
+    Cohorte.find ParametroGeneral.cohorte_actual
+  end
   # has_many :inscripcion
   # accepts_nested_attributes_for :inscripcion
 

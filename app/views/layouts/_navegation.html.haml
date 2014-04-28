@@ -31,4 +31,4 @@
               = drop_down_divider
               = menu_item "Cerrar sesión", "/aceim_diplomados/inicio/cerrar_sesion"
           -else
-            =render 'layouts/cargar_sesion'
+            =render 'layouts/cargar_sesion' if (action_name != "registrar")

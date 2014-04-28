@@ -1,26 +1,194 @@
-Recuerde que sólo se permitirá la inscripción a estudiantes preinscritos y seleccionados. Ingrese los datos a continuación:
 
-=form_tag :action => "paso1_guardar" do 
-  -if @usuario.errors.any?
-    %p
-      %div#error-explanation
-        %b
-          =pluralize(@usuario.errors.count, "error") 
-          en el formulario impiden que éste usuario sea registrado:
-        %ul
-          -@usuario.errors.full_messages.each do |msg|
-            %li
-              =msg
-  %fieldset
-    %legend Datos Personales
-    %p
-      %label
-        Cédula de Identidad
-      =text_field :usuario, :ci
-      Ejemplo: 18234543. 
-  %p 
-    %span.req *  
-    Campos Obligatorios
-  %p
-    =submit_tag "Siguiente"
-%br/    
+=form_tag "paso1_guardar", :class => "form-horizontal" do 
+  -if @datos_estudiante.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@datos_estudiante.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
+  %fieldset.well.well-small
+    %legend Datos laborales
+
+    .control-group
+      %label.control-label
+        ¿Usted trabaja?
+      .controls
+        %label.checkbox
+          %span.label.label-info
+            =radio_button :datos_estudiante, :trabaja, "1", :required => true, :onclick => "$('#div-trabaja').show();"
+            Si
+          |
+          %span.label.label-info
+            =radio_button :datos_estudiante, :trabaja, "0", :required => true, :onclick => "$('#div-trabaja').hide();"
+            No
+
+    #div-trabaja.well.well-small{:style=>"display:none;"}
+      .control-group
+        %label.control-label
+          Ocupación:
+        .controls
+          =text_field :datos_estudiante, :ocupacion, :placeholder => "Ejemplo: Profesor…"
+
+      .control-group
+        %label.control-label
+          Institución:
+        .controls
+          =text_field :datos_estudiante, :institucion, :placeholder => "Ejemplo: Colegio ABC…"
+
+      .control-group
+        %label.control-label
+          Cargo Actual:
+        .controls
+          =text_field :datos_estudiante, :cargo_actual, :placeholder => "Ejemplo: Director…"
+
+      .control-group
+        %label.control-label
+          Antigüedad:
+        .controls
+          =text_field :datos_estudiante, :antiguedad, :placeholder => "Ejemplo: 3 años…"
+      .control-group
+        %label.control-label
+          Dirección Laboral:
+        .controls
+          =text_area :datos_estudiante, :direccion_de_trabajo, :size => "60x4", :placeholder => "Ejemplo: Avenida A, con calle B. Los D…"
+
+
+
+  %fieldset.well.well-small
+    %legend Estudios realizados
+
+    .control-group
+      %label.control-label
+        Título de bachiller:
+      .controls
+        %label.checkbox
+          %span.label.label-info
+            =radio_button :datos_estudiante, :titulo_estudio, "Ciencias", :required => true
+            Ciencias
+          |
+          %span.label.label-info
+            =radio_button :datos_estudiante, :titulo_estudio, "Humanidades", :required => true
+            Humanidades
+    
+    .control-group
+      %label.control-label
+        Institución:
+      .controls
+        =text_field :datos_estudiante, :institucion_estudio, :placeholder => "Ejemplo: Colegio BDC…", :required => true
+
+    .control-group
+      %label.control-label
+        Año de graduación:
+      .controls
+        =number_field :datos_estudiante, :ano_graduacion_estudio, {:in => 1950...Date.today.year+1, :include_blank => true, :class => "span1", :required => true}
+          
+
+  %fieldset.well.well-small
+    %legend Estudios concluidos
+    
+    .control-group
+      %label.control-label
+        Título obtenido:
+      .controls
+        =text_field :datos_estudiante, :titulo_estudio_concluido, :placeholder => "Ejemplo: Licenciado en idiomas…", :required => true
+
+    .control-group
+      %label.control-label
+        Institución:
+      .controls
+        =text_field :datos_estudiante, :institucion_estudio_concluido, :placeholder => "Ejemplo: UCV…", :required => true
+
+    .control-group
+      %label.control-label
+        Año de graduación:
+      .controls
+        =number_field :datos_estudiante, :ano_estudio_concluido, {:in => 1950...Date.today.year+1, :include_blank => true, :class => "span1", :required => true}
+
+  %fieldset.well.well-small
+    %legend Estudios en curso
+
+    .control-group
+      %label.control-label
+        Nombre:
+      .controls
+        =text_field :datos_estudiante, :titulo_estudio_en_curso, :placeholder => "Ejemplo: Alemán…", :required => true
+
+    .control-group
+      %label.control-label
+        Institución:
+      .controls
+        =text_field :datos_estudiante, :institucion_estudio_en_curso, :placeholder => "Ejemplo: Instituto DFE…", :required => true
+
+    .control-group
+      %label.control-label
+        Fecha de inicio:
+      .controls
+        =text_field :datos_estudiante, :fecha_inicio_estudio_en_curso, :placeholder => "Ejemplo: 24/05/2009…", :required => true
+        =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 2000 }, {:required => true, :class => 'span2'}
+
+
+  %fieldset.well.well-small
+    %legend Experiencia en la enseñanza de idiomas
+
+    .control-group
+      %label.control-label
+        ¿Ha tenido experiencia en la enseñanza de idiomas?
+      .controls
+        %label.checkbox
+          %span.label.label-info
+            =radio_button :datos_estudiante, :tiene_experiencia_ensenanza_idiomas, "1", :required => true, :onclick => "$('#div-experiencia').show();"
+            Sí
+          |
+          %span.label.label-info
+            =radio_button :datos_estudiante, :tiene_experiencia_ensenanza_idiomas, "0", :required => true, :onclick => "$('#div-experiencia').hide();"
+            No
+
+    #div-experiencia.well.well-small{:style=>"display:none;"}
+
+      .control-group
+        %label.control-label
+          Explique brevemente su experiencia:
+        .controls
+          =text_area :datos_estudiante, :descripcion_experiencia, :size => "60x4", :placeholder => "Describa su experiencia…"
+
+      .control-group
+        %label.control-label
+          ¿Ha dado clases de español?
+        .controls
+          %label.checkbox
+            %span.label.label-info          
+              =radio_button :datos_estudiante, :ha_dado_clases_espanol, "1", :required => true, :onclick => "$('#div-espanol').show();"
+              Sí
+            |
+            %span.label.label-info
+              =radio_button :datos_estudiante, :ha_dado_clases_espanol, "0", :required => true, :onclick => "$('#div-espanol').hide();"
+              No
+
+      #div-espanol.well.well-small{:style=>"display:none;"}
+        .control-group
+          %label.control-label
+            ¿Dónde?
+          .controls
+            =text_field :datos_estudiante, :donde_clases_espanol, :placeholder => "Ejemplo: Colegio ABC…"
+
+        .control-group
+          %label.control-label
+            ¿Por cuánto tiempo?
+          .controls  
+            =text_field :datos_estudiante, :tiempo_clases_espanol, :placeholder => "Ejamplo: 2 años…"
+
+    .well.well-small
+      .control-group
+        %label.control-label
+          ¿Por qué le interesa cursar el diplomado?
+        .controls  
+          =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "60x4", :placeholder => "¿Cuál es su interés en el diplomado?…"
+
+      .control-group
+        %label.control-label
+          Expectativas sobre el diplomado
+        .controls  
+          =text_area :datos_estudiante, :expectativas_sobre_diplomado, :size => "60x4", :placeholder => "Expectativas sobre el diplomado", :required => true
+
+
+    =submit_tag "Siguiente", :confirm => "¿Está seguro de enviar los datos? \n Con esto culminará la Inscripción de: \n Diplomado: #{@diplomado} \n Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"

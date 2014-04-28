@@ -16,7 +16,9 @@ class Diplomado < ActiveRecord::Base
   accepts_nested_attributes_for :modulos  
 
   def descripcion_completa
-    "#{id} - #{descripcion}"
+    aux = "#{id}"
+    aux += " - #{descripcion}" unless descripcion.blank?
+    return aux
   end
 
 end

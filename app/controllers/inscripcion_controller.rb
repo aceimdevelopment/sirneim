@@ -1,47 +1,114 @@
 class InscripcionController < ApplicationController
-  layout "visitante2"
 
-    def paso1
-      session[:usuario] = nil
-      @usuario = Usuario.new
-      @titulo_pagina = "Incripción - Paso 1"
+    def paso0
+      session[:diplomado] = params[:diplomado]
+      @usuario = Usuario.where(:ci => params[:ci]).limit(1).first
+      @accion = "paso0_guardar"
+      @titulo = "Preinscripcion > Paso 0: Actualización de Datos Personales" 
     end
 
-    def paso1_guardar
+    def paso0_guardar
       ci = params[:usuario][:ci]
+      @usuario = Usuario.where(:ci => ci).first
+      # Ajustes menores de Capitalize de nombres, apellidos y nacimiento
+      aux = params[:usuario][:nombres]
+      aux = aux.split.map(&:capitalize).join(' ') if aux
+      params[:usuario][:nombres] = aux
 
-      if Usuario.where(:ci => ci)
-        flash[:mensaje] = "Usuario ya registrado. Ingrese con su cédula y contraseña al sistema para realizar su requerimiento"
+      aux = params[:usuario][:apellidos]
+      aux = aux.split.map(&:capitalize).join(' ') if aux
+      params[:usuario][:apellidos] = aux
+
+      aux = params[:usuario][:lugar_nacimiento]
+      aux = aux.split.map(&:capitalize).join(' ') if aux
+      params[:usuario][:lugar_nacimiento] = aux
+
+      @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+      @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
+      @estudiante.save
+
+
+      if @usuario.update_attributes(params[:aparicion])
+        flash[:success] = "Datos Actualizados Satisfactoriamente"
+        info_bitacora("Usuario: #{@usuario.descripcion} Actualizado.")
+        session[:usuario] = @usuario
+        session[:estudiante] = @estudiante
         redirect_to :action => "paso1"
-        return
+      else
+        render :action => "paso0"
+      end
+    end
+
+  def paso1
+    @usuario = session[:usuario]
+    unless @datos_estudiante = @usuario.datos_estudiante 
+      @datos_estudiante = DatosEstudiante.new
+    end
+    @titulo = "Preinscripcion > Paso 1: Actualización de Datos Académicos"
+    @diplomado = session[:diplomado]
+  end
+
+
+    # def paso1
+    #   session[:usuario] = nil
+    #   @usuario = Usuario.new
+    #   @titulo_pagina = "Incripción - Paso 1"
+    # end
+
+    def paso1_guardar
+      datos_estudiante = params[:datos_estudiante]
+
+      @usuario = session[:usuario]
+      unless @datos_estudiante = @usuario.datos_estudiante 
+        @datos_estudiante = DatosEstudiante.new
       end
 
-      ci = ci.gsub(".","").gsub("-","").gsub(" ","").strip
-      if ci.size < 3
-        flash[:mensaje] = "Cédula invalida"
-        redirect_to :action => "paso1"
-        return
+      @datos_estudiante.trabaja = datos_estudiante[:trabaja]
+      @datos_estudiante.trabaja = datos_estudiante[:trabaja]
+      @datos_estudiante.ocupacion = datos_estudiante[:ocupacion]
+      @datos_estudiante.institucion = datos_estudiante[:institucion]
+      @datos_estudiante.cargo_actual = datos_estudiante[:cargo_actual]
+      @datos_estudiante.antiguedad = datos_estudiante[:antiguedad]
+      @datos_estudiante.direccion_de_trabajo = datos_estudiante[:direccion_de_trabajo]
+      @datos_estudiante.titulo_estudio = datos_estudiante[:titulo_estudio]
+      @datos_estudiante.institucion_estudio = datos_estudiante[:institucion_estudio]
+      @datos_estudiante.ano_graduacion_estudio = datos_estudiante[:ano_graduacion_estudio]
+      @datos_estudiante.titulo_estudio_concluido = datos_estudiante[:titulo_estudio_concluido]
+      @datos_estudiante.institucion_estudio_concluido = datos_estudiante[:institucion_estudio_concluido]
+      @datos_estudiante.ano_estudio_concluido = datos_estudiante[:ano_estudio_concluido]
+      @datos_estudiante.titulo_estudio_en_curso = datos_estudiante[:titulo_estudio_en_curso]
+      @datos_estudiante.institucion_estudio_en_curso = datos_estudiante[:institucion_estudio_en_curso]
+      @datos_estudiante.fecha_inicio_estudio_en_curso = datos_estudiante[:fecha_inicio_estudio_en_curso].to_date
+      @datos_estudiante.tiene_experiencia_ensenanza_idiomas = datos_estudiante[:tiene_experiencia_ensenanza_idiomas]
+      @datos_estudiante.descripcion_experiencia = datos_estudiante[:descripcion_experiencia]
+      @datos_estudiante.ha_dado_clases_espanol = datos_estudiante[:ha_dado_clases_espanol]
+      @datos_estudiante.donde_clases_espanol = datos_estudiante[:donde_clases_espanol]
+      @datos_estudiante.tiempo_clases_espanol = datos_estudiante[:tiempo_clases_espanol]
+      @datos_estudiante.por_que_interesa_diplomado = datos_estudiante[:por_que_interesa_diplomado]
+      @datos_estudiante.expectativas_sobre_diplomado = datos_estudiante[:expectativas_sobre_diplomado]
+      @datos_estudiante.estudiante_ci = @usuario.ci
+
+      if @datos_estudiante.save
+        diplomado_id = session[:diplomado]
+        cohorte_actual = Cohorte.actual
+        inscripcion = Inscripcion.new
+        inscripcion.fecha_hora = DateTime.now
+        inscripcion.estudiante_ci = @usuario.ci
+        inscripcion.tipo_estado_inscripcion_id = "PRE"
+        inscripcion.diplomado_id = diplomado_id 
+        inscripcion.cohorte_id = cohorte_actual.id
+        inscripcion.tipo_forma_pago_id = "UNICO"
+
+        inscripcion.save
+
+        flash[:success] = "Inscripción del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
+        info_bitacora("Preinscripcion de #{@usuario.ci} Satisfactoriamente en Diplomado #{diplomado_id} para Cohorte: #{cohorte_actual.descripcion}")
+        redirect_to :controller => "principal"
+
+      else
+        render :action => "paso1"
       end
 
-      usuario = Usuario.new
-      usuario.ci = ci
-      session[:usuario] = usuario
-
-      info_bitacora("Paso 1 preinscripcion realizado")
-      redirect_to :action => "paso2"
-      return
-
-
-
-      # if Inscripcion.where(:estudiante_ci => ci).first
-      #   flash[:mensaje] = "Usted ya ha sido inscrito"
-      #   redirect_to :action => "paso3"
-      #   return
-      # end
-
-      # info_bitacora("Paso 1 inscripcion realizado")
-      # redirect_to :action => "paso2"
-      # return
     end
 
     def paso2

@@ -15,6 +15,11 @@ class InicioController < ApplicationController
   def registrar_guardar
     @usuario = Usuario.new (params[:usuario])
 
+    #Correccion Capitalizar nombre y datos
+    @usuario.nombres = @usuario.nombres.split.map(&:capitalize).join(' ') if @usuario.nombres
+    @usuario.apellidos = @usuario.apellidos.split.map(&:capitalize).join(' ') if @usuario.apellidos
+    @usuario.lugar_nacimiento = @usuario.lugar_nacimiento.split.map(&:capitalize).join(' ') if @usuario.lugar_nacimiento
+
     # Creación de Contraseña Inicial
     @usuario.contrasena = "00#{@usuario.ci}11"
     @usuario.contrasena_confirmation = @usuario.contrasena
@@ -28,13 +33,14 @@ class InicioController < ApplicationController
       end
       @estudiante.save
       session[:usuario] = @usuario
+      session[:estudiante] = @estudiante
       session[:ci] = @usuario.ci
 
-      flash[:mensaje] = "Usuario Registrado Satisfactoriamente"
+      flash[:success] = "Usuario Registrado Satisfactoriamente\n"
+      flash[:success] << "Su contraseña inicial es: #{@usuario.contrasena}, puede cambiarla en el menú de la parte superior."
       info_bitacora("Usuario: #{@usuario.descripcion} registrado.")
-      redirect_to :action => "registrar_datos_profesionales"
+      redirect_to :controller => "principal"
     else
-      flash[:mensaje] = "Error(es) en el formulario impide(n) que este sea completado"
       render :action => "registrar"
     end
   end

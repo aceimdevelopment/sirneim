@@ -3,13 +3,15 @@ class PrincipalController < ApplicationController
   before_filter :filtro_logueado
   
   def index
-    session[:nuevo] = nil 
-    @titulo_pagina = "Principal"
-    cohorte_actual = ParametroGeneral.cohorte_actual
+    session[:nuevo] = nil
+    @titulo = "Principal"
+    @cohorte_actual = Cohorte.actual
     if @estudiante = session[:estudiante]
-      @inscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci) 
-      @preinscripciones_cohorte_actual = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => cohorte_actual, :tipo_estado_id => "pre")
-      @inscripciones_cohorte_actual = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => cohorte_actual, :tipo_estado_id => "ins")
+      @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => @cohorte_actual.id)
+      @inscripciones = Inscripcion.where("estudiante_ci = ? & cohorte_id = ?", @estudiante.usuario_ci, @cohorte_actual.id) 
+      @preinscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "PRE")
+      @inscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "INS")
+      @aprobados = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "APR")
     end
 
     # @preinscrito = !!HistorialAcademico.where(

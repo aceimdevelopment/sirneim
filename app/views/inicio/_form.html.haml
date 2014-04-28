@@ -1,4 +1,4 @@
--@accion = "registrar_guardar" if @accion.blank?
+-@accion = "registrar_guardar" if @accion.blank? 
 =form_tag @accion, :class => "form-horizontal" do 
   -if @usuario.errors.any?
     %ul
@@ -6,15 +6,15 @@
       -@usuario.errors.full_messages.each do |msg|
         -flash[:alert] += "#{msg}\n"
 
-  %fieldset.well.well-small
+  %fieldset
     %legend Datos Personales
     .control-group
       %label.control-label
         Cédula de Identidad:  
       .controls  
-        =@usuario.ci
-      =hidden_field :usuario, :ci
-
+        =text_field :usuario, :ci, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium"
+        %span.help-block
+          Ejemplo: 12345678
 
     .control-group
       %label.control-label
@@ -58,7 +58,7 @@
           Femenino
 
 
-  %fieldset.well.well-small
+  %fieldset
     %legend Datos de Contacto
 
     .control-group
@@ -108,6 +108,9 @@
         =text_area :usuario, :direccion, :size => "60x4", :placeholder => "Domicilio…", :required => true
         %span.help-block
           Ejemplo: Avenida A, con calle B. Los Naranjos.
-  =link_to "Cancelar", {:controller => "principal"}, :class => "btn"
-  =submit_tag "Siguiente", :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
+    - unless @accion.blank?
+      - @submit = "Siguiente"
+    - else
+      - @submit = "Registrar"
+    =submit_tag @submit, :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
 %br/    

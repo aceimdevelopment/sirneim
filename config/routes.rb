@@ -59,7 +59,7 @@ Aceim::Application.routes.draw do
   # just remember to delete public/index.html.
    root :to => 'inicio#index'
    
-   match 'nuevos' => 'inscripcion#paso0' 
+   # match 'nuevos' => 'inscripcion#paso0' 
    
   # See how all your routes lay out with "rake routes"
 
