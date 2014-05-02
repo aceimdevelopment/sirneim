@@ -123,7 +123,7 @@
       %label.control-label
         Fecha de inicio:
       .controls
-        =text_field :datos_estudiante, :fecha_inicio_estudio_en_curso, :placeholder => "Ejemplo: 24/05/2009…", :required => true
+        =text_field :datos_estudiante, :fecha_inicio_estudio_en_curso, :placeholder => "Ejemplo: 24/05/2009…", :required => true, 'data-behaviour' => 'datepicker'
         =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year =>2000}, {:required => true, :class => 'span1'}
         =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 2000 }, {:required => true, :class => 'span2'}
 
@@ -193,3 +193,6 @@
 
 
     =submit_tag "Siguiente", :confirm => "¿Está seguro de enviar los datos? \n Con esto culminará la Inscripción de: \n Diplomado: #{@diplomado} \n Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"
+
+:javascript
+  $("[data-behaviour~=datepicker]").datepicker()

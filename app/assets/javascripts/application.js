@@ -8,11 +8,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require twitter/bootstrap
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 //= require_self
 //= require_tree .
 
-$(document).ready(function() {
-	$('.dropdown-toggle').dropdown()
-	$('.tooltip').tooltip()
-	$('.nav-tabs').tab()
-});

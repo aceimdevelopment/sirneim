@@ -16,6 +16,7 @@ gem 'json'
 	gem "therubyracer", '~> 0.11.1'
 	gem "less-rails" 
 	gem 'twitter-bootstrap-rails', '~> 2.2.8', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+	gem 'bootstrap-datepicker-rails'
 # end
 
 gem 'jquery-rails' 
