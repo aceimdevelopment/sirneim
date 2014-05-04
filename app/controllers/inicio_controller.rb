@@ -2,8 +2,9 @@ class InicioController < ApplicationController
   layout "visitante"
   
   def index
-    @titulo = "Diplomados"
-    @diplomados = Diplomado.all
+    @titulo = "Diplomados Ofertados"
+    cohorte_actual = Cohorte.actual
+    @diplomados = DiplomadoCohorte.where (:cohorte_id => cohorte_actual.id)
 		reg = ContenidoWeb.where(:id => 'INI_CONTENT').first
     @content = reg.contenido
   end

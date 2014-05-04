@@ -2,9 +2,8 @@
 -#if ParametroGeneral.inscripcion_abierta
 =#button_to "PresInscribirse", {:action => "paso1", :controller => "inscripcion"},:class => 'btn'
 =#button_to "Registrarse", {:action => "registrar"}, :class => 'btn'
-
 / .well{:style=>"overflow-y: scroll;height: 200px;"}
-=#@content.html_safe
+=#ontent.html_safe
 
 
 
@@ -18,44 +17,43 @@
 
 .tabbable.tabs-left
 	%ul.nav.nav-tabs
-		-@diplomados.each do |diplomado|
+		-@diplomados.each do |dc|
 			%li
-				=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
+				=link_to dc.diplomado.id, "##{dc.diplomado.id}", "data-toggle"=> "tab"
 	.tab-content
-		-@diplomados.each do |diplomado|
-			.tab-pane{:id=>"#{diplomado.id}"}
+		-@diplomados.each do |dc|
+			.tab-pane{:id=>"#{dc.diplomado.id}"}
 
 				#accordionMenu.accordion
 					.accordion-group
 						.nav-header
-							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{diplomado.id}_caracteristica"}
+							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_caracteristica"}
 								.nav-header
 									Características
-					.accordion-body.collapse{:id=>"#{diplomado.id}_caracteristica"}
+					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_caracteristica"}
 						.accordion-inner
+							%h3= dc.diplomado.descripcion_completa
 							%b Objetivo:
-							%p= diplomado.objetivo
+							%p= dc.diplomado.objetivo
 							%b Destinatario:
-							%p= diplomado.destinatario
+							%p= dc.diplomado.destinatario
 							%p
 								%b Modalidad:
-								= diplomado.modalidad
+								= dc.diplomado.modalidad
 							%p
 								%b Duración:
-								= diplomado.duracion
+								= dc.diplomado.duracion
 							%b Horario:
-							%p= diplomado.horario
-							%b Descripción
-							%p= diplomado.descripcion_completa
+							%p= dc.diplomado.horario
 					.accordion-group
 						.nav-header
-							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{diplomado.id}_modulos"}
+							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_modulos"}
 								.nav-header
 									Módulos
-					.accordion-body.collapse{:id=>"#{diplomado.id}_modulos"}
+					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_modulos"}
 						.accordion-inner
 
-							-diplomado.modulos.each do |modulo|
+							-dc.diplomado.modulos.each do |modulo|
 								%dl.well.dl-horizontal
 									%dt= "#{modulo.descripcion_completa}"
 									%dd
@@ -65,18 +63,18 @@
 
 					.accordion-group
 						.nav-header
-							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{diplomado.id}_docentes"}
+							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_docentes"}
 								.nav-header
 									Grupo Docente
-					.accordion-body.collapse{:id=>"#{diplomado.id}_docentes"}
+					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_docentes"}
 						.accordion-inner
 
 					.accordion-group
 						.nav-header
-							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{diplomado.id}_inscripcion"}
+							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_inscripcion"}
 								.nav-header
 									Inscripciones
-					.accordion-body.collapse{:id=>"#{diplomado.id}_inscripcion"}
+					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_inscripcion"}
 						.accordion-inner
 							%b Datos de la cuenta:
 							%p Banco de Venezuela
@@ -84,13 +82,13 @@
 							%p A nombre de FUNDEIM
 							%p
 								%b Inversión:
-								Bs. 7.600,ºº (pago único)
+								/ Bs. 7.600,ºº (pago único)
 							%p
 								%b Fecha de inscripciones:
-								del 16 al 19 de septiembre
+								/ del 16 al 19 de septiembre
 							%p
 								%b Horario de inscripciones:
-								de 3:00  a 7:00 pm. Escuela de Idiomas Modernos, ofic. FUNDEIM, Cursos de Extensión de Idiomas.  Galpón Nº 7; frente a la Facultad de Farmacia.
+								/ de 3:00  a 7:00 pm. Escuela de Idiomas Modernos, ofic. FUNDEIM, Cursos de Extensión de Idiomas.  Galpón Nº 7; frente a la Facultad de Farmacia.
 							%p
 								%b Nota: 
 								La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido.
