@@ -27,8 +27,10 @@ class InscripcionController < ApplicationController
       @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
       @estudiante.save
 
-
-      if @usuario.update_attributes(params[:aparicion])
+      fn = params[:usuario][:fecha_nacimiento]
+      dia,mes,año = fn.split("/")
+      params[:usuario][:fecha_nacimiento] = "#{mes}/#{dia}#{año}" 
+      if @usuario.update_attributes(params[:usuario])
         flash[:success] = "Datos Actualizados Satisfactoriamente"
         info_bitacora("Usuario: #{@usuario.descripcion} Actualizado.")
         session[:usuario] = @usuario
