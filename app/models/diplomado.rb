@@ -1,4 +1,5 @@
 class Diplomado < ActiveRecord::Base
+  attr_accessible :id, :modalidad, :horario, :descripcion, :duracion, :destinatario, :objetivo
   # set_primary_keys :id
 
   # has_many :inscripcion
@@ -7,7 +8,12 @@ class Diplomado < ActiveRecord::Base
   # validates :brand_id, :uniqueness => {:scope => [:name, :identifer]}
 
   validates :id, :presence => true, :uniqueness => true, :length => {:maximum => 15}
-  validates :descripcion, :presence => true, :uniqueness => true
+  validates :objetivo, :presence => true, :uniqueness => true
+  validates :destinatario, :presence => true, :uniqueness => true
+  validates :modalidad, :presence => true, :uniqueness => true
+  validates :duracion, :presence => true, :uniqueness => true
+  validates :horario, :presence => true, :uniqueness => true
+
 
   has_many :diplomado_cohorte
   accepts_nested_attributes_for :diplomado_cohorte

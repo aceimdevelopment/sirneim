@@ -2,6 +2,8 @@ class InicioController < ApplicationController
   layout "visitante"
   
   def index
+    @titulo = "Diplomados"
+    @diplomados = Diplomado.all
 		reg = ContenidoWeb.where(:id => 'INI_CONTENT').first
     @content = reg.contenido
   end

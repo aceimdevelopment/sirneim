@@ -15,9 +15,12 @@ class DiplomadoController < ApplicationController
   end
 
   def crear
-    @diplomado = Diplomado.new #(params[:tipo_estado])
-    @diplomado.id = params[:diplomado][:id]
-    @diplomado.descripcion = params[:diplomado][:descripcion]
+
+    diplomado = params[:diplomado]
+    diplomado["id"] = diplomado["id"].gsub(/[\t\n\r \/]/, '')
+    @diplomado = Diplomado.new (diplomado)
+    # @diplomado.id = params[:diplomado][:id]
+    # @diplomado.descripcion = params[:diplomado][:descripcion]
 
     if @diplomado.save
       flash[:success] = "Diplomado Registrado Satisfactoriamente"

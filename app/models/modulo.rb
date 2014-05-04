@@ -11,7 +11,7 @@ class Modulo < ActiveRecord::Base
   validates_presence_of :numero
 
   	def descripcion_completa 
-  		aux = "Modulo #{numero}.- "
+  		aux = "Módulo #{numero}.- "
   		aux += descripcion if descripcion
   	end
 

@@ -41,7 +41,7 @@
     %br
     .container-fluid
       .well
-        -flash[:alert] = "Disculpe las molestias, trabajamos para ofrecerle un mejor servicio" if action_name =="index" and controller_name=="inicio" 
+        -#flash[:alert] = "Disculpe las molestias, trabajamos para ofrecerle un mejor servicio" if action_name =="index" and controller_name=="inicio" 
         =render 'layouts/titulo'
         =bootstrap_flash
         = yield

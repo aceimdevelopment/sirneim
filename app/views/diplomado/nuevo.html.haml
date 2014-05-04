@@ -1,4 +1,4 @@
-=form_for(@diplomado,:url=>{:action => "crear"}) do |a|
+=form_for(@diplomado,:url=>{:action => "crear"}) do |d|
   -if @diplomado.errors.any?
     %ul
       -flash[:alert] = ""
@@ -10,14 +10,35 @@
     %p
       %label
         %b Identificación:
-      = a.text_field :id, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium"
+      = d.text_field :id, :autofocus => "true", :placeholder => "Identificación…", :required => true
       %span.help-block
-        Recuerde NO usar caracteres especiales (%/$#) como parte de la Identificación
+        Recuerde NO usar caracteres especiales (%/$#) como parte de la Identificación. Estos serán suprimidos
     %p
       %label
         %b Descripción:
-      = a.text_field :descripcion, :placeholder => "Descripcion…", :required => true, :class => "input-medium"
-  =a.submit "Registrar", :class => "btn btn-primary"
+      = d.text_area :descripcion, :placeholder => "Descripcion…"  , :rows => "4"
+    %p
+      %label
+        %b Objetivo:
+      = d.text_area :objetivo, :autofocus => "true", :placeholder => "Objetivo…", :required => true, :rows => "4"
+    %p
+      %label
+        %b Destinatario:
+      = d.text_area :destinatario, :autofocus => "true", :placeholder => "Destinatario…", :required => true, :rows => "4"
+    %p
+      %label
+        %b Modalidad:
+      = d.text_field :modalidad, :autofocus => "true", :placeholder => "Modalidad…", :required => true
+    %p
+      %label
+        %b Duración:
+      = d.text_field :duracion, :autofocus => "true", :placeholder => "Duración…", :required => true
+    %p
+      %label
+        %b Horario:
+      = d.text_field :horario, :autofocus => "true", :placeholder => "Horario…", :required => true
+
+  =d.submit "Registrar", :class => "btn btn-primary"
 
 %p  
   = link_to "/aceim_diplomados/diplomado/index", {:class => "btn"} do
