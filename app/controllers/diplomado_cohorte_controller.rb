@@ -20,11 +20,11 @@ class DiplomadoCohorteController < ApplicationController
 	end
 
 	def actualizar
-		
-		@diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => params[:diplomado_cohorte][:diplomado_id], :cohorte_id => params[:diplomado_cohorte][:cohorte_id] ).first
+		dc = params[:diplomado_cohorte]
+		@diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => dc[:diplomado_id], :cohorte_id => dc[:cohorte_id] ).first
 
-		if @diplomado_cohorte.update_attributes(params[:diplomado_cohorte])
-			flash[:success] = "Asignación actualización"
+		if @diplomado_cohorte.update_attributes(dc)
+			flash[:success] = "Diplomado actualizado"
 			redirect_to :action => "index"
 		else
 			render :action => "nuevo"

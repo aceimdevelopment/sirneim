@@ -36,7 +36,7 @@ class CohorteTemaController < ApplicationController
 		@cohorte_tema = CohorteTema.where(:diplomado_id => cohorte_tema[:diplomado_id], :cohorte_id => cohorte_tema[:cohorte_id], :tema_numero => cohorte_tema[:tema_numero], :modulo_numero => cohorte_tema[:modulo_numero], :grupo_id => cohorte_tema[:grupo_id]).first
 
 		if @cohorte_tema.update_attributes(cohorte_tema)
-			flash[:success] = "Asignación actualización"
+			flash[:success] = "Asignación actualizada"
 			redirect_to :action => "nuevo"
 		else
 			render :action => "nuevo"

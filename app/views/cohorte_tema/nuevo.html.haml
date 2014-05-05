@@ -8,11 +8,11 @@
 					- @cohorte_tema.tema_numero = tema.numero
 					- @cohorte_tema.modulo_numero = modulo.numero
 					- unless (@cohortes_temas.include? @cohorte_tema)
-						- #@cohorte_tema = @cohortes_temas.where(:grupo_id => grupo.id, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
 						- @accion = "asignar"
 						- @btn_tipo =  "btn-primary"
 						- @bg = ""
 					- else
+						- @cohorte_tema = @cohortes_temas.where(:grupo_id => grupo.id, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
 						- @accion = "actualizar"
 						- @btn_tipo = "btn-info" 
 						- @bg = "background-color:lightgreen;"
