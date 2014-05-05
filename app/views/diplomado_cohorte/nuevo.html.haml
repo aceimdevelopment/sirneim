@@ -13,9 +13,44 @@
 
     %p
       %label
-        %b Diplomado:
+        %b Diplomado
       =a.collection_select :diplomado_id, Diplomado.all, :id, :descripcion,{}, {:required => true, :multiple => "multiple"}
+    %p
+      %label
+        %b Fecha Inscripción:
+      = a.date_select :fecha_inscripcion, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+
+    %p
+      %label
+        %b Horario de Inscripción:
+      =a.text_field :horario_inscripcion, :class => "input", :required => true
+
+    %p
+      %label
+        %b Inversión:
+      =a.number_field :inversion, :class => "input", :required => true
+      Bs.
+
+    %p
+      %label
+        %b Banco:
+      =a.text_field :cuenta_bancaria_banco, :class => "input", :required => true
+
+    %p
+      %label
+        %b Tipo de cuenta:
+      = a.select :cuenta_bancaria_tipo, ["Ahorro", "Corriente"], {:prompt => true}, {:required => true, :class => 'span2'}
+    %p
+      %label
+        %b Número de Cuenta:
+      =a.text_field :cuenta_bancaria_numero, :class => "input", :required => true
+    %p
+      %label
+        %b A Nombre de:
+      =a.text_field :cuenta_bancaria_cliente, :class => "input", :required => true
+      
     %p= a.submit "Registrar >", :class => "btn btn-primary"
+
 
 %p  
   = link_to "/aceim_diplomados/diplomado_cohorte/index", {:class => "btn"} do

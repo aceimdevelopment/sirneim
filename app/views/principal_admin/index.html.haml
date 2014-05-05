@@ -8,9 +8,8 @@
       .accordion-inner
         %ul.nav.nav-list
           %li=link_to "Gestionar Diplomados", :controller => "diplomado"
-          %li=link_to "Gestionar Cohorte", :controller => "cohorte"
-          %li=link_to "Asociar Diplomado-Cohorte", :controller => "diplomado_cohorte"
-          %li=link_to "Gestionar Diplomado-Cohorte", "#"
+          %li=link_to "Gestionar Cohortes", :controller => "cohorte"
+          %li=link_to "Gestionar Cronograma Académico", :controller => "diplomado_cohorte"
   .accordion-group
     .accordion-heading
       %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDocentes"}

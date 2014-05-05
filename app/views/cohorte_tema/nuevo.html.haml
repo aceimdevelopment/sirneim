@@ -1,37 +1,45 @@
 -@cohorte_tema.diplomado.modulos.each do |modulo|
 	%dl.well.dl-horizontal
-		%dt= "#{modulo.descripcion_completa}"
-		%dd
-			-modulo.temas.each do |tema|
-				- unless @cohortes_temas.include? tema
-					=form_for(@cohorte_tema,:url=>{:action => "crear"}) do |a|
-						%dd= tema.descripcion_completa
-						-@cohorte_tema.tema_numero = tema.numero
-						-@cohorte_tema.modulo_numero = tema.modulo_numero
-						-if @cohorte_tema.errors.any?
-							%ul
-								-flash[:alert] = ""
-								-@cohorte_tema.errors.full_messages.each do |msg|
-									-flash[:alert] += "#{msg}\n"
-						=a.hidden_field :diplomado_id
-						=a.hidden_field :cohorte_id
-						=a.hidden_field :tema_numero
-						=a.hidden_field :modulo_numero
-						%p
-							%b Fecha Inicial:
-							= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => Date.current.year }, {:required => true, :class => 'span1'}
+		%p= "#{modulo.descripcion_completa}"
+		-modulo.temas.each do |tema|
+			.well.well-small
+				-@grupos.each do |grupo|
+					- @cohorte_tema.grupo_id = grupo.id
+					- @cohorte_tema.tema_numero = tema.numero
+					- @cohorte_tema.modulo_numero = modulo.numero
+					- unless (@cohortes_temas.include? @cohorte_tema)
+						- #@cohorte_tema = @cohortes_temas.where(:grupo_id => grupo.id, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
+						- @accion = "asignar"
+						- @btn_tipo =  "btn-primary"
+						- @bg = ""
+					- else
+						- @accion = "actualizar"
+						- @btn_tipo = "btn-info" 
+						- @bg = "background-color:lightgreen;"
+					.well.well-small{:style => @bg}
+						=form_for(@cohorte_tema,:url=>{:action => @accion}) do |a|
+							%b= "#{tema.descripcion_completa} - Grupo #{grupo.descripcion}"
 
-							%b Fecha Final:
-							= a.date_select :fecha_final, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => Date.current.year }, {:required => true, :class => 'span1'}
-							|
-							= a.collection_select :grupo_id, Grupo.all, :id, :descripcion, {:prompt => 'Grupo'}, {:required => true, :class => 'span2'}
-							|
-							= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}, {:required => true, :class => 'span2'}
-							|
-							=a.submit "Asignar", :class => "btn btn-primary"
-				- else
-					%p
-						= tema.descripcion_completa
-						- cohorte_tema_aux = CohorteTema.where("cohorte_id = ? AND tema_id = ?", @cohorte_tema.cohorte_id, tema.id)
-						= cohorte_tema_aux.fecha_inicial
-						= cohorte_tema_aux.fecha_final
+							-if @cohorte_tema.errors.any?
+								%ul
+									-flash[:alert] = ""
+									-@cohorte_tema.errors.full_messages.each do |msg|
+										-flash[:alert] += "#{msg}\n"
+							=a.hidden_field :diplomado_id
+							=a.hidden_field :cohorte_id
+							=a.hidden_field :tema_numero
+							=a.hidden_field :modulo_numero
+							%p
+								%b Fecha Inicial:
+								= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+
+								%b Fecha Final:
+								= a.date_select :fecha_final, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+								=# a.collection_select :grupo_id, Grupo.all, :id, :descripcion, {:prompt => 'Grupo'}, {:required => true, :class => 'span2'}
+								= a.hidden_field :grupo_id
+								|
+								=# a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}, {:class => 'span2'}
+								|
+								-@cohorte_tema.docente_ci = nil
+
+								=a.submit @accion.capitalize, :class => "btn #{@btn_tipo}"
