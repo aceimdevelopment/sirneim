@@ -1,3 +1,4 @@
+%h4= @cohorte_tema.diplomado.descripcion
 -@cohorte_tema.diplomado.modulos.each do |modulo|
 	%dl.well.dl-horizontal
 		%p= "#{modulo.descripcion_completa}"
@@ -38,8 +39,7 @@
 								=# a.collection_select :grupo_id, Grupo.all, :id, :descripcion, {:prompt => 'Grupo'}, {:required => true, :class => 'span2'}
 								= a.hidden_field :grupo_id
 								|
-								=# a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}, {:class => 'span2'}
+								= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}, {:class => 'span2'}
 								|
-								-@cohorte_tema.docente_ci = nil
 
-								=a.submit @accion.capitalize, :class => "btn #{@btn_tipo}"
+								=a.submit @accion.capitalize, :class => "btn btn-mini #{@btn_tipo}"
