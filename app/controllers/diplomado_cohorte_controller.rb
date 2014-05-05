@@ -14,6 +14,23 @@ class DiplomadoCohorteController < ApplicationController
 		@diplomado_cohorte.cohorte_id = ParametroGeneral.cohorte_actual
 	end
 
+	def editar
+		diplomado_id, cohorte_id = params[:id].split ","
+		@diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id).limit(1).first
+	end
+
+	def actualizar
+		
+		@diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => params[:diplomado_cohorte][:diplomado_id], :cohorte_id => params[:diplomado_cohorte][:cohorte_id] ).first
+
+		if @diplomado_cohorte.update_attributes(params[:diplomado_cohorte])
+			flash[:success] = "Asignación actualización"
+			redirect_to :action => "index"
+		else
+			render :action => "nuevo"
+		end
+	end
+
 	def crear
 		diplomados_ids = params[:diplomado_cohorte][:diplomado_id]
 		cohorte_id = params[:diplomado_cohorte][:cohorte_id]

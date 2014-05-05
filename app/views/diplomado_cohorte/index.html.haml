@@ -4,9 +4,15 @@
 			%h4= "Diplomados para la Cohorte: #{@diplomados_cohortes.first.cohorte.descripcion}"
 		-@diplomados_cohortes.each do |diplomado_cohorte|
 			%li  
-				= link_to "/aceim_diplomados/cohorte_tema/nuevo/#{diplomado_cohorte.id}" do
+				%p 
 					= diplomado_cohorte.diplomado.descripcion_completa
-					%i.icon-forward
+
+					= link_to "/aceim_diplomados/cohorte_tema/nuevo/#{diplomado_cohorte.id}", {:class => "btn"} do
+						Cronograma
+						%i.icon-forward
+					= link_to "/aceim_diplomados/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {:class => "btn"} do
+						Editar
+						%i.icon-edit
 
 -else
 	%h5 No se han agregado Diplomados en este Cohorte
