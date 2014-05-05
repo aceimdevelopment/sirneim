@@ -24,7 +24,7 @@ class CohorteTemaController < ApplicationController
 		params[:cohorte_tema][:docente_ci] = nil if params[:cohorte_tema][:docente_ci].eql? ""
 		if @cohorte_tema.save
 			flash[:success] = "Asiganción correcta" 
-			redirect_to :action => "nuevo"
+			redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 		else
 			render "nuevo"
 		end
