@@ -1,6 +1,6 @@
 Aceim::Application.routes.draw do
 
-  resources :docentes
+  # resources :docentes
 
   get "preinscripcion/paso1"
 

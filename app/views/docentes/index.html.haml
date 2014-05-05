@@ -1,6 +1,6 @@
 
 %br
-= link_to 'Nuevo Docente', new_docente_path, :class => "btn btn-primary"
+= link_to 'Nuevo Docente', {:action => "nuevo"}, :class => "btn btn-primary"
 %br
 %br
 %table.table.table-striped.table-hover.table-condensed.table-bordered
@@ -15,9 +15,9 @@
         %td= i
         %td= docente.usuario.nombre_completo if docente.usuario
         %td
-          = link_to 'Show', docente
-          = link_to 'Edit', edit_docente_path(docente)
-          = link_to 'Destroy', docente, :confirm => 'Are you sure?', :method => :delete
+          =# link_to 'Detalle', :action => "vista"
+          = link_to 'Editar', :action => "editar", :id => docente.usuario_ci
+          =# link_to 'Eliminar', :action => "eliminar", :id => docente.usuario_ci, :confirm => 'Are you sure?', :method => :delete
 %br
 
-= link_to 'Nuevo Docente', new_docente_path, :class => "btn btn-primary"
+= link_to 'Nuevo Docente', {:action => "nuevo"}, :class => "btn btn-primary"

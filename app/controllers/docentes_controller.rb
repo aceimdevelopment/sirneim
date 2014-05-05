@@ -8,7 +8,7 @@ class DocentesController < ApplicationController
 
   # GET /docentes/1
   # GET /docentes/1.json
-  def show
+  def vista
     @docente = Docente.find(params[:id])
 
     respond_to do |format|
@@ -17,41 +17,58 @@ class DocentesController < ApplicationController
     end
   end
 
-  # GET /docentes/new
-  # GET /docentes/new.json
-  def new
-    @docente = Docente.new
+  def nuevo
+    @usuario = Usuario.new
+    @accion = "crear"
+    @titulo = "Nuevo Docente"
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @docente }
-    end
+
   end
 
   # GET /docentes/1/edit
-  def edit
-    @docente = Docente.find(params[:id])
+  def editar
+    @titulo = "Editar Docente"
+    @accion = "actualizar"
+    @usuario = Usuario.where (:ci => params[:id]).limit(1).first
   end
 
   # POST /docentes
   # POST /docentes.json
-  def create
-    @docente = Docente.new(params[:docente])
+  def crear
+    @usuario = Usuario.new (params[:usuario])
 
-    respond_to do |format|
-      if @docente.save
-        format.html { redirect_to @docente, :notice => 'Docente was successfully created.' }
-        format.json { render :json => @docente, :status => :created, :location => @docente }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @docente.errors, :status => :unprocessable_entity }
-      end
+    #Correccion Capitalizar nombre y datos
+    @usuario.nombres = @usuario.nombres.split.map(&:capitalize).join(' ') if @usuario.nombres
+    @usuario.apellidos = @usuario.apellidos.split.map(&:capitalize).join(' ') if @usuario.apellidos
+    @usuario.lugar_nacimiento = @usuario.lugar_nacimiento.split.map(&:capitalize).join(' ') if @usuario.lugar_nacimiento
+
+    # Creación de Contraseña Inicial
+    @usuario.contrasena = "00#{@usuario.ci}11"
+    @usuario.contrasena_confirmation = @usuario.contrasena
+
+    if @usuario.save
+      # Buscamos que no exista ningun estudiante con esa ci y lo creamos 
+      @docente = Docente.new
+      @docente.usuario_ci = @usuario.ci
+
+      @docente.save
+      session[:usuario] = @usuario
+      session[:docente] = @estudiante
+      session[:ci] = @usuario.ci
+
+      flash[:success] = "Usuario Registrado Satisfactoriamente\n"
+      flash[:success] << "Su contraseña inicial es: #{@usuario.contrasena}, puede cambiarla en el menú de la parte superior."
+      info_bitacora("Docente: #{@usuario.descripcion} registrado.")
+      redirect_to :action => "index"
+    else
+      render :action => "nuevo"
     end
   end
 
   # PUT /docentes/1
   # PUT /docentes/1.json
-  def update
+  def actualizar
+    1/0
     @docente = Docente.find(params[:id])
 
     respond_to do |format|
@@ -67,7 +84,7 @@ class DocentesController < ApplicationController
 
   # DELETE /docentes/1
   # DELETE /docentes/1.json
-  def destroy
+  def eliminar
     @docente = Docente.find(params[:id])
     @docente.destroy
 
