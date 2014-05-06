@@ -2,8 +2,8 @@
 -#if ParametroGeneral.inscripcion_abierta
 =#button_to "PresInscribirse", {:action => "paso1", :controller => "inscripcion"},:class => 'btn'
 =#button_to "Registrarse", {:action => "registrar"}, :class => 'btn'
-.well{:style=>"overflow-y: scroll;height: 200px;"}
-	= @content.html_safe
+/ .well{:style=>"overflow-y: scroll;height: 200px;"}
+= #@content.html_safe
 
 
 
@@ -95,7 +95,7 @@
 							%p= "A nombre de:#{dc.cuenta_bancaria_cliente}" 
 							%p
 								%b Inversión (pago único):
-								= dc.inversion 
+								= "#{dc.inversion} Bs." 
 							%p
 								%b Fecha de inscripciones:
 								= dc.fecha_inscripcion.to_s
