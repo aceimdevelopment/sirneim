@@ -18,11 +18,9 @@ class DocentesController < ApplicationController
   end
 
   def nuevo
-    @usuario = Usuario.new
-    @accion = "crear"
     @titulo = "Nuevo Docente"
-
-
+    @accion = "crear"
+    @usuario = Usuario.new
   end
 
   # GET /docentes/1/edit
@@ -30,7 +28,7 @@ class DocentesController < ApplicationController
     @titulo = "Editar Docente"
     @accion = "actualizar"
     @usuario = Usuario.where (:ci => params[:id]).limit(1).first
-    @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first if @usuario
+    @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first unless @usuario.nil?
   end
 
   # POST /docentes
@@ -73,8 +71,14 @@ class DocentesController < ApplicationController
     @docente = Docente.where(:usuario_ci => params[:usuario][:ci]).limit(1).first
     @usuario = Usuario.where(:ci => params[:usuario][:ci]).limit(1).first
 
+    params[:usuario][:nombres] = params[:usuario][:nombres].split.map(&:capitalize).join(' ') if params[:usuario][:nombres]
+    params[:usuario][:apellidos] = params[:usuario][:apellidos].split.map(&:capitalize).join(' ') if params[:usuario][:apellidos]
+    params[:usuario][:lugar_nacimiento] = params[:usuario][:lugar_nacimiento].split.map(&:capitalize).join(' ') if params[:usuario][:lugar_nacimiento]
+
+
+
     if @docente.update_attributes(params[:docente]) and @usuario.update_attributes(params[:usuario])
-      flash[:success] = "Usuario Actualizado Satisfactoriamente\n"
+      flash[:success] = "Usuario Actualizado Satisfactoriamente"
       info_bitacora("Docente: #{@usuario.descripcion} Actualizado.")
       redirect_to :action => "index"
     else
