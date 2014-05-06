@@ -35,6 +35,7 @@ class DocentesController < ApplicationController
   # POST /docentes
   # POST /docentes.json
   def crear
+    1/0
     @usuario = Usuario.new (params[:usuario])
 
     #Correccion Capitalizar nombre y datos
@@ -50,6 +51,7 @@ class DocentesController < ApplicationController
       # Buscamos que no exista ningun estudiante con esa ci y lo creamos 
       @docente = Docente.new
       @docente.usuario_ci = @usuario.ci
+      @docente.experiencia = params[:docente][:experiencia]
 
       @docente.save
       session[:usuario] = @usuario

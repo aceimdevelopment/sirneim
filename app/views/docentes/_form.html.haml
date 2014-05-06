@@ -94,19 +94,23 @@
 
     .control-group
       %label.control-label
-        Cuenta twitter
+        Dirección de domicilio
       .controls
-        =text_field :estudiante, :cuenta_twitter, :placeholder => "Twitter…"
+        =text_area :usuario, :direccion, :rows => 4, :placeholder => "Domicilio…", :required => true
         %span.help-block
-          Ejemplo: @maria2
+          Ejemplo: Avenida A, con calle B. Los Naranjos.
+
+  %fieldset
+    %legend Experiencia
 
     .control-group
       %label.control-label
-        Dirección de domicilio
+        Experiencia
       .controls
-        =text_area :usuario, :direccion, :size => "60x4", :placeholder => "Domicilio…", :required => true
+        =text_area :docente, :experiencia, :rows => 4, :placeholder => "Experiencia…"
         %span.help-block
-          Ejemplo: Avenida A, con calle B. Los Naranjos.
+
+
     - unless @accion.blank?
       - @submit = "Siguiente"
     - else
