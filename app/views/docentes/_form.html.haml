@@ -1,4 +1,4 @@
-=form_tag @accion, :class => "form-horizontal" do 
+=form_tag "/aceim_diplomados/docentes/#{@accion}", :class => "form-horizontal" do 
   -if @usuario.errors.any?
     %ul
       -flash[:alert] = ""

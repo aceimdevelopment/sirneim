@@ -30,12 +30,12 @@ class DocentesController < ApplicationController
     @titulo = "Editar Docente"
     @accion = "actualizar"
     @usuario = Usuario.where (:ci => params[:id]).limit(1).first
+    @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first if @usuario
   end
 
   # POST /docentes
   # POST /docentes.json
   def crear
-    1/0
     @usuario = Usuario.new (params[:usuario])
 
     #Correccion Capitalizar nombre y datos
@@ -70,18 +70,17 @@ class DocentesController < ApplicationController
   # PUT /docentes/1
   # PUT /docentes/1.json
   def actualizar
-    1/0
-    @docente = Docente.find(params[:id])
+    @docente = Docente.where(:usuario_ci => params[:usuario][:ci]).limit(1).first
+    @usuario = Usuario.where(:ci => params[:usuario][:ci]).limit(1).first
 
-    respond_to do |format|
-      if @docente.update_attributes(params[:docente])
-        format.html { redirect_to @docente, :notice => 'Docente was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @docente.errors, :status => :unprocessable_entity }
-      end
+    if @docente.update_attributes(params[:docente]) and @usuario.update_attributes(params[:usuario])
+      flash[:success] = "Usuario Actualizado Satisfactoriamente\n"
+      info_bitacora("Docente: #{@usuario.descripcion} Actualizado.")
+      redirect_to :action => "index"
+    else
+      render :action => "editar"
     end
+ 
   end
 
   # DELETE /docentes/1

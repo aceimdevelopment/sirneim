@@ -10,8 +10,8 @@
       .container-fluid.nav-collapse
         %ul.nav
           -if session[:administrador]
-            %li= link_to "Estudiantes", "estudiante"
-            %li= link_to "Docentes", "docentes"
+            %li= link_to "Estudiantes", "/aceim_diplomados/estudiante"
+            %li= link_to "Docentes", "/aceim_diplomados/docentes"
         .nav.pull-right
           -if session[:administrador]
           - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
