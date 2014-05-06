@@ -9,9 +9,9 @@
     %legend Datos Personales
     .control-group
       %label.control-label
-        Cédula de Identidad:  
-      .controls  
-        =text_field :usuario, :ci, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium"
+        Cédula de Identidad:
+      .controls
+        =text_field :usuario, :ci, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium", :readonly => (@accion.eql? "actualizar")
         %span.help-block
           Ejemplo: 12345678
 

@@ -21,6 +21,7 @@ class DocentesController < ApplicationController
     @titulo = "Nuevo Docente"
     @accion = "crear"
     @usuario = Usuario.new
+    @docente = Docente.new
   end
 
   # GET /docentes/1/edit
@@ -45,13 +46,13 @@ class DocentesController < ApplicationController
     @usuario.contrasena = "00#{@usuario.ci}11"
     @usuario.contrasena_confirmation = @usuario.contrasena
 
-    if @usuario.save
-      # Buscamos que no exista ningun estudiante con esa ci y lo creamos 
-      @docente = Docente.new
-      @docente.usuario_ci = @usuario.ci
-      @docente.experiencia = params[:docente][:experiencia]
+    # Buscamos que no exista ningun estudiante con esa ci y lo creamos 
+    @docente = Docente.new
+    @docente.usuario_ci = @usuario.ci
+    @docente.experiencia = params[:docente][:experiencia]
 
-      @docente.save
+    if @usuario.save and @docente.save
+      
       session[:usuario] = @usuario
       session[:docente] = @estudiante
       session[:ci] = @usuario.ci
