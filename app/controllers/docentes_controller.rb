@@ -52,11 +52,6 @@ class DocentesController < ApplicationController
     @docente.experiencia = params[:docente][:experiencia]
 
     if @usuario.save and @docente.save
-      
-      session[:usuario] = @usuario
-      session[:docente] = @estudiante
-      session[:ci] = @usuario.ci
-
       flash[:success] = "Usuario Registrado Satisfactoriamente\n"
       flash[:success] << "Su contraseña inicial es: #{@usuario.contrasena}, puede cambiarla en el menú de la parte superior."
       info_bitacora("Docente: #{@usuario.descripcion} registrado.")
