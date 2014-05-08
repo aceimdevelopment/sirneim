@@ -1,45 +1,55 @@
 %h4= @cohorte_tema.diplomado.descripcion
--@cohorte_tema.diplomado.modulos.each do |modulo|
-	%dl.well.dl-horizontal
-		%p= "#{modulo.descripcion_completa}"
-		-modulo.temas.each do |tema|
-			.well.well-small
-				-@grupos.each do |grupo|
-					- @cohorte_tema.grupo_id = grupo.id
-					- @cohorte_tema.tema_numero = tema.numero
-					- @cohorte_tema.modulo_numero = modulo.numero
-					- unless (@cohortes_temas.include? @cohorte_tema)
-						- @accion = "asignar"
-						- @btn_tipo =  "btn-primary"
-						- @bg = ""
-					- else
-						- @cohorte_tema = @cohortes_temas.where(:grupo_id => grupo.id, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
-						- @accion = "actualizar"
-						- @btn_tipo = "btn-info" 
-						- @bg = "background-color:lightgreen;"
-					.well.well-small{:style => @bg}
-						=form_for(@cohorte_tema,:url=>{:action => @accion}) do |a|
-							%b= "#{tema.descripcion_completa} - Grupo #{grupo.descripcion}"
+.well.well-small
+	-@cohorte_tema.diplomado.modulos.each do |modulo|
+		%b= "#{modulo.descripcion_completa}"
+		.div{:id=>modulo.numero}
+		%table.table.table-hover.table-condensed.table-bordered
+			%thead
+				%tr
+					%th{:style=> "width: 350px;"} Tema
+					%th Grupo
+					%th Inicio
+					%th Culminación
+					%th{:style=> "width: 100px;"} Docente
+					%th
+			%tbody
+				-modulo.temas.each do |tema|
+					-@grupos.each do |grupo|
+						- @cohorte_tema.grupo_id = grupo.id
+						- @cohorte_tema.tema_numero = tema.numero
+						- @cohorte_tema.modulo_numero = modulo.numero
+						- unless (@cohortes_temas.include? @cohorte_tema)
+							- @accion = "asignar"
+							- @btn_tipo =  "btn-primary"
+							- @bg = "background-color:white;"
+						- else
+							- @cohorte_tema = @cohortes_temas.where(:grupo_id => grupo.id, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
+							- @accion = "actualizar"
+							- @btn_tipo = "btn-info" 
+							- @bg = "background-color:lightgreen;"
+						%tr{:style => @bg}
+							=form_for(@cohorte_tema,:url=>{:action => @accion}) do |a|
+								-if @cohorte_tema.errors.any?
+									%ul
+										-flash[:alert] = ""
+										-@cohorte_tema.errors.full_messages.each do |msg|
+											-flash[:alert] += "#{msg}\n"
+								=a.hidden_field :diplomado_id
+								=a.hidden_field :cohorte_id
+								=a.hidden_field :tema_numero
+								=a.hidden_field :modulo_numero
+								=a.hidden_field :grupo_id
 
-							-if @cohorte_tema.errors.any?
-								%ul
-									-flash[:alert] = ""
-									-@cohorte_tema.errors.full_messages.each do |msg|
-										-flash[:alert] += "#{msg}\n"
-							=a.hidden_field :diplomado_id
-							=a.hidden_field :cohorte_id
-							=a.hidden_field :tema_numero
-							=a.hidden_field :modulo_numero
-							%p
-								%b Fecha Inicial:
-								= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+								%td
+									%b= "#{tema.descripcion_completa}"
+								%td
+									%b= "#{grupo.descripcion}"
 
-								%b Fecha Final:
-								= a.date_select :fecha_final, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
-								=# a.collection_select :grupo_id, Grupo.all, :id, :descripcion, {:prompt => 'Grupo'}, {:required => true, :class => 'span2'}
-								= a.hidden_field :grupo_id
-								|
-								= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}, {:class => 'span2'}
-								|
-
-								=a.submit @accion.capitalize, :class => "btn btn-mini #{@btn_tipo}"
+								%td
+									= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span4'}
+								%td
+									= a.date_select :fecha_final, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span4	'}
+								%td 
+									= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}
+								%td
+									=a.submit @accion.capitalize, :class => "btn btn-mini #{@btn_tipo}"
