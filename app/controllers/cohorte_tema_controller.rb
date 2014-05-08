@@ -37,7 +37,7 @@ class CohorteTemaController < ApplicationController
 
 		if @cohorte_tema.update_attributes(cohorte_tema)
 			flash[:success] = "Asignación actualizada"
-			redirect_to :action => "nuevo"
+			redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 		else
 			render :action => "nuevo"
 		end
