@@ -4,6 +4,12 @@
       -flash[:alert] = ""
       -@usuario.errors.full_messages.each do |msg|
         -flash[:alert] += "#{msg}\n"
+  -if @docente.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@docente.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
 
   %fieldset
     %legend Datos Personales

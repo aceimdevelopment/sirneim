@@ -46,7 +46,8 @@
       .controls
         =#date_select :usuario, :fecha_nacimiento, {:prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 1920 }, {:required => true, :class => 'span1'}
         =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 2000 }, {:required => true, :class => 'span2'}
-        =text_field :usuario, :fecha_nacimiento, :placeholder => "Ejemplo: 24/05/2009…", :required => true, 'data-behaviour' => 'datepicker'
+        =#text_field :usuario, :fecha_nacimiento, :placeholder => "Ejemplo: 24/05/2009…", :required => true, 'data-behaviour' => 'datepicker'
+        =date_select :usuario, :fecha_nacimiento, {:start_year => 1950}, {:required => true, :class => 'span1'}
     .control-group
       %label.control-label
         Sexo:
