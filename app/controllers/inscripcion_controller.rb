@@ -43,6 +43,7 @@ class InscripcionController < ApplicationController
 
   def paso1
     @usuario = session[:usuario]
+    @inscripcion = Inscripcion.new
     unless @datos_estudiante = @usuario.datos_estudiante 
       @datos_estudiante = DatosEstudiante.new
     end
@@ -58,54 +59,57 @@ class InscripcionController < ApplicationController
     # end
 
     def paso1_guardar
-      datos_estudiante = params[:datos_estudiante]
+      # datos_estudiante = params[:datos_estudiante]
 
       @usuario = session[:usuario]
       unless @datos_estudiante = @usuario.datos_estudiante 
-        @datos_estudiante = DatosEstudiante.new
+        @datos_estudiante = DatosEstudiante.new params[:datos_estudiante]
       end
 
-      @datos_estudiante.trabaja = datos_estudiante[:trabaja]
-      @datos_estudiante.trabaja = datos_estudiante[:trabaja]
-      @datos_estudiante.ocupacion = datos_estudiante[:ocupacion]
-      @datos_estudiante.institucion = datos_estudiante[:institucion]
-      @datos_estudiante.cargo_actual = datos_estudiante[:cargo_actual]
-      @datos_estudiante.antiguedad = datos_estudiante[:antiguedad]
-      @datos_estudiante.direccion_de_trabajo = datos_estudiante[:direccion_de_trabajo]
-      @datos_estudiante.titulo_estudio = datos_estudiante[:titulo_estudio]
-      @datos_estudiante.institucion_estudio = datos_estudiante[:institucion_estudio]
-      @datos_estudiante.ano_graduacion_estudio = datos_estudiante[:ano_graduacion_estudio]
-      @datos_estudiante.titulo_estudio_concluido = datos_estudiante[:titulo_estudio_concluido]
-      @datos_estudiante.institucion_estudio_concluido = datos_estudiante[:institucion_estudio_concluido]
-      @datos_estudiante.ano_estudio_concluido = datos_estudiante[:ano_estudio_concluido]
-      @datos_estudiante.titulo_estudio_en_curso = datos_estudiante[:titulo_estudio_en_curso]
-      @datos_estudiante.institucion_estudio_en_curso = datos_estudiante[:institucion_estudio_en_curso]
-      @datos_estudiante.fecha_inicio_estudio_en_curso = datos_estudiante[:fecha_inicio_estudio_en_curso]
-      @datos_estudiante.tiene_experiencia_ensenanza_idiomas = datos_estudiante[:tiene_experiencia_ensenanza_idiomas]
-      @datos_estudiante.descripcion_experiencia = datos_estudiante[:descripcion_experiencia]
-      @datos_estudiante.ha_dado_clases_espanol = datos_estudiante[:ha_dado_clases_espanol]
-      @datos_estudiante.donde_clases_espanol = datos_estudiante[:donde_clases_espanol]
-      @datos_estudiante.tiempo_clases_espanol = datos_estudiante[:tiempo_clases_espanol]
-      @datos_estudiante.por_que_interesa_diplomado = datos_estudiante[:por_que_interesa_diplomado]
-      @datos_estudiante.expectativas_sobre_diplomado = datos_estudiante[:expectativas_sobre_diplomado]
+      # @datos_estudiante.trabaja = datos_estudiante[:trabaja]
+      # @datos_estudiante.trabaja = datos_estudiante[:trabaja]
+      # @datos_estudiante.ocupacion = datos_estudiante[:ocupacion]
+      # @datos_estudiante.institucion = datos_estudiante[:institucion]
+      # @datos_estudiante.cargo_actual = datos_estudiante[:cargo_actual]
+      # @datos_estudiante.antiguedad = datos_estudiante[:antiguedad]
+      # @datos_estudiante.direccion_de_trabajo = datos_estudiante[:direccion_de_trabajo]
+      # @datos_estudiante.titulo_estudio = datos_estudiante[:titulo_estudio]
+      # @datos_estudiante.institucion_estudio = datos_estudiante[:institucion_estudio]
+      # @datos_estudiante.ano_graduacion_estudio = datos_estudiante[:ano_graduacion_estudio]
+      # @datos_estudiante.titulo_estudio_concluido = datos_estudiante[:titulo_estudio_concluido]
+      # @datos_estudiante.institucion_estudio_concluido = datos_estudiante[:institucion_estudio_concluido]
+      # @datos_estudiante.ano_estudio_concluido = datos_estudiante[:ano_estudio_concluido]
+      # @datos_estudiante.titulo_estudio_en_curso = datos_estudiante[:titulo_estudio_en_curso]
+      # @datos_estudiante.institucion_estudio_en_curso = datos_estudiante[:institucion_estudio_en_curso]
+      # @datos_estudiante.fecha_inicio_estudio_en_curso = datos_estudiante[:fecha_inicio_estudio_en_curso]
+      # @datos_estudiante.tiene_experiencia_ensenanza_idiomas = datos_estudiante[:tiene_experiencia_ensenanza_idiomas]
+      # @datos_estudiante.descripcion_experiencia = datos_estudiante[:descripcion_experiencia]
+      # @datos_estudiante.ha_dado_clases_espanol = datos_estudiante[:ha_dado_clases_espanol]
+      # @datos_estudiante.donde_clases_espanol = datos_estudiante[:donde_clases_espanol]
+      # @datos_estudiante.tiempo_clases_espanol = datos_estudiante[:tiempo_clases_espanol]
+      # @datos_estudiante.por_que_interesa_diplomado = datos_estudiante[:por_que_interesa_diplomado]
+      # @datos_estudiante.expectativas_sobre_diplomado = datos_estudiante[:expectativas_sobre_diplomado]
       @datos_estudiante.estudiante_ci = @usuario.ci
 
       if @datos_estudiante.save
         diplomado_id = session[:diplomado]
         cohorte_actual = Cohorte.actual
-        inscripcion = Inscripcion.new
-        inscripcion.fecha_hora = DateTime.now
-        inscripcion.estudiante_ci = @usuario.ci
-        inscripcion.tipo_estado_inscripcion_id = "PRE"
-        inscripcion.diplomado_id = diplomado_id 
-        inscripcion.cohorte_id = cohorte_actual.id
-        inscripcion.tipo_forma_pago_id = "UNICO"
+        @inscripcion = Inscripcion.new
+        @inscripcion.fecha_hora = DateTime.now
+        @inscripcion.estudiante_ci = @usuario.ci
+        @inscripcion.tipo_estado_inscripcion_id = "PRE"
+        @inscripcion.diplomado_id = diplomado_id 
+        @inscripcion.cohorte_id = cohorte_actual.id
+        @inscripcion.tipo_forma_pago_id = "UNICO"
 
-        inscripcion.save
+        if @inscripcion.save
 
-        flash[:success] = "Inscripción del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
-        info_bitacora("Preinscripcion de #{@usuario.ci} Satisfactoriamente en Diplomado #{diplomado_id} para Cohorte: #{cohorte_actual.descripcion}")
-        redirect_to :controller => "principal"
+          flash[:success] = "Inscripción del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
+          info_bitacora("Preinscripcion de #{@usuario.ci} Satisfactoriamente en Diplomado #{diplomado_id} para Cohorte: #{cohorte_actual.descripcion}")
+          redirect_to :controller => "principal"
+        else
+          render :action => "paso1"
+        end
 
       else
         render :action => "paso1"
