@@ -2,7 +2,7 @@ class EstudianteController < ApplicationController
 	
 	layout "application"
 	before_filter :filtro_logueado
-  
+  before_filter :filtro_administrador
 	
   def index
   	usuario = session[:usuario]

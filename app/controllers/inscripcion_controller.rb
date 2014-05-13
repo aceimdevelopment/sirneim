@@ -1,15 +1,15 @@
 class InscripcionController < ApplicationController
-
+    before_filter :filtro_logueado
+    
     def paso0
       session[:diplomado] = params[:diplomado]
-      @usuario = Usuario.where(:ci => params[:ci]).limit(1).first
+      @usuario = session[:estudiante].usuario
       @accion = "paso0_guardar"
       @titulo = "Preinscripcion > Paso 0: Actualización de Datos Personales" 
     end
 
     def paso0_guardar
-      ci = params[:usuario][:ci]
-      @usuario = Usuario.where(:ci => ci).first
+      @usuario = session[:estudiante].usuario
       # Ajustes menores de Capitalize de nombres, apellidos y nacimiento
       aux = params[:usuario][:nombres]
       aux = aux.split.map(&:capitalize).join(' ') if aux
@@ -42,7 +42,7 @@ class InscripcionController < ApplicationController
     end
 
   def paso1
-    @usuario = session[:usuario]
+    @usuario = session[:estudiante].usuario
     @inscripcion = Inscripcion.new
     unless @datos_estudiante = @usuario.datos_estudiante 
       @datos_estudiante = DatosEstudiante.new
@@ -52,16 +52,10 @@ class InscripcionController < ApplicationController
   end
 
 
-    # def paso1
-    #   session[:usuario] = nil
-    #   @usuario = Usuario.new
-    #   @titulo_pagina = "Incripción - Paso 1"
-    # end
-
     def paso1_guardar
       # datos_estudiante = params[:datos_estudiante]
 
-      @usuario = session[:usuario]
+      @usuario = session[:estudiante].usuario
       unless @datos_estudiante = @usuario.datos_estudiante 
         @datos_estudiante = DatosEstudiante.new params[:datos_estudiante]
       end
@@ -128,7 +122,7 @@ class InscripcionController < ApplicationController
       # # @cohorte = Cohorte.all
       # @preinscripcion = Preinscripcion.find @usuario.ci
 
-      @usuario = session[:usuario]
+      @usuario = session[:estudiante].usuario
       unless @datos_estudiante = @usuario.datos_estudiante 
         @datos_estudiante = DatosEstudiante.new
       end
@@ -139,7 +133,7 @@ class InscripcionController < ApplicationController
     def paso2_guardar
 
 
-      @usuario = session[:usuario]
+      @usuario = session[:estudiante].usuario
       unless @datos_estudiante = @usuario.datos_estudiante 
         @datos_estudiante = DatosEstudiante.new
       end

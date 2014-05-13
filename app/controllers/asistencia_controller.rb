@@ -1,5 +1,8 @@
 class AsistenciaController < ApplicationController
   
+  before_filter :filtro_logueado
+  before_filter :filtro_administrador
+
   def seleccionar_curso
     @titulo_pagina = "Seleccionar curso"
     if session[:instructor]

@@ -1,6 +1,7 @@
 class ParametrosGeneralesController < ApplicationController
   
-  
+  before_filter :filtro_logueado
+  before_filter :filtro_administrador
   def index
 
     @titulo_pagina = "Configuraciones Generales"

@@ -57,7 +57,7 @@ private
   
   def filtro_administrador
     unless session[:administrador]
-      flash[:mensaje_login] = "Debe iniciar sesión como administrador"  
+      flash[:alert] = "Debe iniciar sesión como administrador"  
       info_bitacora "Intento malo del administrador"
       redirect_to :action => "index", :controller => "inicio"  
       return false

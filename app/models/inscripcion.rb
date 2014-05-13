@@ -21,6 +21,7 @@ class Inscripcion < ActiveRecord::Base
 
   belongs_to :tipo_estado_inscripcion
 
+  # scope :actuales, -> {where("cohorte_id IS ?", ParametroGeneral.cohorte_actual)}
   # belongs_to :diplomado
   # belongs_to :cohorte
   

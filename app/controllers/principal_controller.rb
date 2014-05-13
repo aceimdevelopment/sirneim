@@ -8,9 +8,10 @@ class PrincipalController < ApplicationController
     @cohorte_actual = Cohorte.actual
     if @estudiante = session[:estudiante]
       @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => @cohorte_actual.id)
-      @inscripciones = Inscripcion.where("estudiante_ci = ? & cohorte_id = ?", @estudiante.usuario_ci, @cohorte_actual.id) 
+      @inscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci, :cohorte_id => @cohorte_actual.id)
+
       @preinscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "PRE")
-      @inscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "INS")
+      # @inscripciones = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "INS")
       @aprobados = Inscripcion.where(:estudiante_ci => @estudiante.usuario_ci , :cohorte_id => @cohorte_actual.id, :tipo_estado_inscripcion_id => "APR")
     end
 

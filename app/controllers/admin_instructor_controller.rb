@@ -1,4 +1,8 @@
 class AdminInstructorController < ApplicationController
+  
+  before_filter :filtro_logueado
+  before_filter :filtro_administrador
+
   def index
     @periodo_actual = ParametroGeneral.periodo_actual 
     @titulo_pagina = "Listado de Instructores"  

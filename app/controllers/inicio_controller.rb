@@ -94,7 +94,7 @@ class InicioController < ApplicationController
       #}                       
       if roles.size == 0
         info_bitacora "No tiene roles el usuario #{login}"
-        flash[:mensaje_login] = "Usuario sin rol"
+        flash[:alert] = "Usuario sin rol"
         redirect_to :action => "index"          
         return
       elsif roles.size == 1 
@@ -104,13 +104,13 @@ class InicioController < ApplicationController
       else   
         info_bitacora "Tiene mas de un rol el usuario #{login}"
         cargar_parametros_generales   
-        flash[:mensaje] = "Usted tiene más de un rol, debe seleccionar un rol"
+        flash[:info] = "Usted tiene más de un rol, debe seleccionar un rol"
         redirect_to :action => "seleccionar_rol"
         return
       end
     end           
     info_bitacora "Error en el login o clave #{login}"
-    flash[:mensaje_login] = "Error en login o clave"
+    flash[:alert] = "Error en login o clave"
     redirect_to :action => "index"
   end  
   
@@ -170,7 +170,7 @@ class InicioController < ApplicationController
       #   return
       # end
     else
-      flash[:mensaje_login] = "Inicio inválido"
+      flash[:alert] = "Inicio inválido"
       redirect_to :action => "index"
       return
     end
@@ -178,6 +178,7 @@ class InicioController < ApplicationController
   
   def cerrar_sesion
     reset_session
+    flash[:info] = "Sesión finalizada"
     redirect_to :action => "index", :controller => "inicio"
   end 
   
@@ -207,10 +208,10 @@ class InicioController < ApplicationController
     if usuario
       EstudianteMailer.olvido_clave(usuario).deliver  
       info_bitacora "El usuario #{usuario.descripcion} olvido su clave y la pidio recuperar"
-      flash[:mensaje] = "Se ha enviado la clave al correo: #{usuario.correo}"
+      flash[:info] = "Se ha enviado la clave al correo: #{usuario.correo}"
       redirect_to :action => :index
     else
-      flash[:mensaje] = "Usuario no registrado"
+      flash[:alert] = "Usuario no registrado"
       redirect_to :action => :olvido_clave
     end
     

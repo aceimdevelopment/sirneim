@@ -1,6 +1,9 @@
 class DocentesController < ApplicationController
   # GET /docentes
   # GET /docentes.json
+  before_filter :filtro_logueado
+  before_filter :filtro_administrador
+
   def index
     @titulo = "Lista de Docentes"
     @docentes = Docente.all

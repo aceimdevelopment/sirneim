@@ -7,44 +7,32 @@
 /   =link_to "Consultar Historial de Cursos", :action => "cursos", :controller => "estudiante"
 / %div.titulo Consulta el listado de tus Cursos Realizados
 
-%h3= @estudiante.usuario.descripcion
+%h6
+	%b Estudiante:
+	= @estudiante.usuario.descripcion
 
-%h3= "Cohorte Actual: #{@cohorte_actual.descripcion}"
-%ul	
-	%li
-		%h4 Preinscritos: 
-		-if @preinscripciones.count > 0
-			-@preinscripciones.each do |preinscrito|
-				%h5= preinscrito.diplomado_cohorte.diplomado.descripcion_completa
-		- else 
-			%h5 Sin diplomados preinscritos
+%h6= "Cohorte Actual: #{@cohorte_actual.descripcion}"
 
-	%li
-		%h4 Aprobados para Inscribir:
-		-if @aprobados.count > 0
-			-@aprobados.each do |aprobado|
-				%h5= aprobado.diplomado_cohorte.diplomado.descripcion_completa
-		- else 
-			%h5 Sin diplomados aún aprobados
-
-	%li
-		%h4 Inscribitos:
-		-if @inscripciones.count > 0
-			-@inscripciones.each do |inscrito|
-				%h5= inscrito.diplomado_cohorte.diplomado.descripcion_completa
-		- else 
-			%h5 Sin diplomados Inscritos
-
-
-	%li
-		%h4 Diplomados Ofertados:
-		-@diplomados_ofertados.each do |ofertado|
-			%p= link_to ofertado.diplomado.id, {:action => "paso0", :controller => "inscripcion", :ci => @estudiante.usuario_ci, :diplomado => ofertado.diplomado_id}, :class => "btn btn-primary btn-mini"
+%table.table.table-striped.table-hover.table-condensed.table-bordered
+	%thead
+		%table-bordered
+			%th Diplomado
+			%th Estado
+	-@diplomados_ofertados.each do |oferta|
+		%tdody
+			%tr
+				%td= oferta.diplomado.descripcion_completa
+				-if inscripcion = @inscripciones.where(:diplomado_id => oferta.diplomado_id, :cohorte_id => oferta.cohorte_id).limit(1).first
+					%td
+						%span.label.label-inverse
+							= inscripcion.tipo_estado_inscripcion.nombre
+				-else
+					%td= link_to "Preinscribir #{oferta.diplomado.id}", {:action => "paso0", :controller => "inscripcion", :ci => @estudiante.usuario_ci, :diplomado => oferta.diplomado_id}, :class => "btn btn-primary btn-mini"
 
 -if false and ParametroGeneral.preinscripcion_abierta
 	%h3
 		=link_to "Preinscribir Diplomados", :action => "cursos", :controller => "estudiante"
 -if false and ParametroGeneral.inscripcion_abierta
-	- @inscripciones.each do |inscripcion|
+	-@inscripciones.each do |inscripcion|
 		%h3
 			=link_to "Inscribir Diplomados: #{inscripcion.diplomado_id}", :action => "cursos", :controller => "estudiante"
