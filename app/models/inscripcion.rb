@@ -30,7 +30,7 @@ class Inscripcion < ActiveRecord::Base
   	"#{grupo.nombre} - #{cohorte.nombre}"
   end
 
-  validates_uniqueness_of [:estudiante_ci, :diplomado_id, :cohorte_id], :message => "Ud. ya inscribió este diplomado en esta Cohorte"
+  validates_uniqueness_of :estudiante_ci, :scope => [:diplomado_id, :cohorte_id], :message => "Ud. ya inscribió este diplomado en esta Cohorte"
   
   # validates_uniqueness_of :estudiante_id, :scope => :friend_id
 end
