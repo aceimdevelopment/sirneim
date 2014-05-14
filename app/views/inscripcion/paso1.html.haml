@@ -117,20 +117,19 @@
       %label.control-label
         Nombre:
       .controls
-        =text_field :datos_estudiante, :titulo_estudio_en_curso, :placeholder => "Ejemplo: Alemán…", :required => true
-
+        =text_field :datos_estudiante, :titulo_estudio_en_curso, :placeholder => "Ejemplo: Alemán…"
     .control-group
       %label.control-label
         Institución:
       .controls
-        =text_field :datos_estudiante, :institucion_estudio_en_curso, :placeholder => "Ejemplo: Instituto DFE…", :required => true
+        =text_field :datos_estudiante, :institucion_estudio_en_curso, :placeholder => "Ejemplo: Instituto DFE…"
 
     .control-group
       %label.control-label
         Fecha de inicio:
       .controls
         =#text_field :datos_estudiante, :fecha_inicio_estudio_en_curso, :placeholder => "Ejemplo: 24/05/2009…", :required => true, 'data-behaviour' => 'datepicker'
-        =date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:start_year => 2000}, {:required => true, :class => 'span1'}
+        =date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 2000}, {:class => 'span1'}
         =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year =>2000}, {:required => true, :class => 'span1'}
         =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 2000 }, {:required => true, :class => 'span2'}
 
