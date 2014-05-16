@@ -1,0 +1,30 @@
+=form_tag "completar_inscripcion", :class => "form-horizontal" do
+
+  -if @inscripcion and @inscripcion.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@inscripcion.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
+  -if session[:administrador]  
+    %h4.well.well-small
+      Participante:  
+      %b= @usuario.descripcion.capitalize
+      
+  .control-group
+    %label.control-label
+      Cohorte:
+    .controls
+      %b= @cohorte_actual.descripcion
+
+  .control-group
+    %label.control-label
+      Diplomado:
+    .controls
+      =collection_select :inscripcion, :diplomado_id, @diplomado_cohorte, :diplomado_id, :diplomado_id, {:prompt => '--Seleccione Diplomado--'}, :required => true
+
+  .control-group
+    %label.control-label
+      %b= link_to 'Atrás', '#' 
+    .controls
+      =submit_tag "Terminar", :confirm => "¿Está seguro de enviar los datos? \n Con esto culminará la Inscripción de: \n Diplomado: #{@diplomado} \n Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"

@@ -1,0 +1,11 @@
+=form_tag "#{@url}", :class => "form-horizontal" do 
+  .well.well-small
+    .control-group
+      %label.control-label
+        Cédula de Identidad:
+      .controls
+        .input-append
+          =text_field :usuario, :ci, :placeholder => "Ingrese Cédula de Identidad…", :required => true, :class => 'span8'
+          =submit_tag "Siguiente", :class => "btn btn-primary"
+
+=link_to "Cancelar", {:controller => "principal_admin"}, :class => "btn"
