@@ -1,45 +1,45 @@
 class InscripcionController < ApplicationController
-    before_filter :filtro_logueado
-    
-    def paso0
-      session[:diplomado] = params[:diplomado]
-      @usuario = session[:estudiante].usuario
-      @accion = "paso0_guardar"
-      @titulo = "Preinscripcion > Paso 0: Actualización de Datos Personales" 
+  before_filter :filtro_logueado
+  
+  def paso0
+    session[:diplomado] = params[:diplomado] if params[:diplomado] 
+    @usuario = session[:estudiante].usuario
+    @accion = "paso0_guardar"
+    @titulo = "Preinscripcion > Paso 0: Actualización de Datos Personales" 
+  end
+
+  def paso0_guardar
+    @usuario = session[:estudiante].usuario
+    # Ajustes menores de Capitalize de nombres, apellidos y nacimiento
+    aux = params[:usuario][:nombres]
+    aux = aux.split.map(&:capitalize).join(' ') if aux
+    params[:usuario][:nombres] = aux
+
+    aux = params[:usuario][:apellidos]
+    aux = aux.split.map(&:capitalize).join(' ') if aux
+    params[:usuario][:apellidos] = aux
+
+    aux = params[:usuario][:lugar_nacimiento]
+    aux = aux.split.map(&:capitalize).join(' ') if aux
+    params[:usuario][:lugar_nacimiento] = aux
+
+    @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+    @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
+    @estudiante.save
+
+    # fn = params[:usuario][:fecha_nacimiento]
+    # dia,mes,año = fn.split("/")
+    # params[:usuario][:fecha_nacimiento] = "#{mes}/#{dia}#{año}" 
+    if @usuario.update_attributes(params[:usuario])
+      flash[:success] = "Datos Actualizados Satisfactoriamente"
+      info_bitacora("Usuario: #{@usuario.descripcion} Actualizado.")
+      session[:usuario] = @usuario
+      session[:estudiante] = @estudiante
+      redirect_to :action => "paso1"
+    else
+      render :action => "paso0"
     end
-
-    def paso0_guardar
-      @usuario = session[:estudiante].usuario
-      # Ajustes menores de Capitalize de nombres, apellidos y nacimiento
-      aux = params[:usuario][:nombres]
-      aux = aux.split.map(&:capitalize).join(' ') if aux
-      params[:usuario][:nombres] = aux
-
-      aux = params[:usuario][:apellidos]
-      aux = aux.split.map(&:capitalize).join(' ') if aux
-      params[:usuario][:apellidos] = aux
-
-      aux = params[:usuario][:lugar_nacimiento]
-      aux = aux.split.map(&:capitalize).join(' ') if aux
-      params[:usuario][:lugar_nacimiento] = aux
-
-      @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
-      @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
-      @estudiante.save
-
-      # fn = params[:usuario][:fecha_nacimiento]
-      # dia,mes,año = fn.split("/")
-      # params[:usuario][:fecha_nacimiento] = "#{mes}/#{dia}#{año}" 
-      if @usuario.update_attributes(params[:usuario])
-        flash[:success] = "Datos Actualizados Satisfactoriamente"
-        info_bitacora("Usuario: #{@usuario.descripcion} Actualizado.")
-        session[:usuario] = @usuario
-        session[:estudiante] = @estudiante
-        redirect_to :action => "paso1"
-      else
-        render :action => "paso0"
-      end
-    end
+  end
 
   def paso1
     @usuario = session[:estudiante].usuario
@@ -52,40 +52,19 @@ class InscripcionController < ApplicationController
   end
 
 
-    def paso1_guardar
-      # datos_estudiante = params[:datos_estudiante]
+  def paso1_guardar
+    # datos_estudiante = params[:datos_estudiante]
 
-      @usuario = session[:estudiante].usuario
-      unless @datos_estudiante = @usuario.datos_estudiante 
-        @datos_estudiante = DatosEstudiante.new params[:datos_estudiante]
-      end
+    @usuario = session[:estudiante].usuario
+    unless @datos_estudiante = @usuario.datos_estudiante 
+      @datos_estudiante = DatosEstudiante.new params[:datos_estudiante]
+    end
 
-      # @datos_estudiante.trabaja = datos_estudiante[:trabaja]
-      # @datos_estudiante.trabaja = datos_estudiante[:trabaja]
-      # @datos_estudiante.ocupacion = datos_estudiante[:ocupacion]
-      # @datos_estudiante.institucion = datos_estudiante[:institucion]
-      # @datos_estudiante.cargo_actual = datos_estudiante[:cargo_actual]
-      # @datos_estudiante.antiguedad = datos_estudiante[:antiguedad]
-      # @datos_estudiante.direccion_de_trabajo = datos_estudiante[:direccion_de_trabajo]
-      # @datos_estudiante.titulo_estudio = datos_estudiante[:titulo_estudio]
-      # @datos_estudiante.institucion_estudio = datos_estudiante[:institucion_estudio]
-      # @datos_estudiante.ano_graduacion_estudio = datos_estudiante[:ano_graduacion_estudio]
-      # @datos_estudiante.titulo_estudio_concluido = datos_estudiante[:titulo_estudio_concluido]
-      # @datos_estudiante.institucion_estudio_concluido = datos_estudiante[:institucion_estudio_concluido]
-      # @datos_estudiante.ano_estudio_concluido = datos_estudiante[:ano_estudio_concluido]
-      # @datos_estudiante.titulo_estudio_en_curso = datos_estudiante[:titulo_estudio_en_curso]
-      # @datos_estudiante.institucion_estudio_en_curso = datos_estudiante[:institucion_estudio_en_curso]
-      # @datos_estudiante.fecha_inicio_estudio_en_curso = datos_estudiante[:fecha_inicio_estudio_en_curso]
-      # @datos_estudiante.tiene_experiencia_ensenanza_idiomas = datos_estudiante[:tiene_experiencia_ensenanza_idiomas]
-      # @datos_estudiante.descripcion_experiencia = datos_estudiante[:descripcion_experiencia]
-      # @datos_estudiante.ha_dado_clases_espanol = datos_estudiante[:ha_dado_clases_espanol]
-      # @datos_estudiante.donde_clases_espanol = datos_estudiante[:donde_clases_espanol]
-      # @datos_estudiante.tiempo_clases_espanol = datos_estudiante[:tiempo_clases_espanol]
-      # @datos_estudiante.por_que_interesa_diplomado = datos_estudiante[:por_que_interesa_diplomado]
-      # @datos_estudiante.expectativas_sobre_diplomado = datos_estudiante[:expectativas_sobre_diplomado]
-      @datos_estudiante.estudiante_ci = @usuario.ci
+    @datos_estudiante.estudiante_ci = @usuario.ci
 
-      if @datos_estudiante.save
+    
+    if @datos_estudiante.save
+      unless session[:administrador]
         diplomado_id = session[:diplomado]
         cohorte_actual = Cohorte.actual
         @inscripcion = Inscripcion.new
@@ -97,19 +76,51 @@ class InscripcionController < ApplicationController
         @inscripcion.tipo_forma_pago_id = "UNICO"
 
         if @inscripcion.save
-
+          session[:diplomado] = nil
           flash[:success] = "Inscripción del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
           info_bitacora("Preinscripcion de #{@usuario.ci} Satisfactoriamente en Diplomado #{diplomado_id} para Cohorte: #{cohorte_actual.descripcion}")
           redirect_to :controller => "principal"
         else
           render :action => "paso1"
         end
-
       else
-        render :action => "paso1"
+        redirect_to :action => "seleccionar_diplomado"
       end
 
+    else
+      render :action => 'paso1'
     end
+    
+  end
+
+  def seleccionar_diplomado
+    @usuario = session[:estudiante].usuario
+    @cohorte_actual = Cohorte.actual
+    @diplomado_cohorte = DiplomadoCohorte.where(:cohorte_id => @cohorte_actual.id) 
+    @inscripcion = Inscripcion.new
+
+  end
+
+  def completar_inscripcion
+    diplomado_id = params[:inscripcion][:diplomado_id]
+    @usuario = session[:estudiante].usuario
+    @cohorte_actual = Cohorte.actual
+    @inscripcion = Inscripcion.new
+    @inscripcion.fecha_hora = DateTime.now
+    @inscripcion.estudiante_ci = @usuario.ci
+    @inscripcion.tipo_estado_inscripcion_id = "PRE"
+    @inscripcion.diplomado_id = diplomado_id 
+    @inscripcion.cohorte_id = @cohorte_actual.id
+    @inscripcion.tipo_forma_pago_id = "UNICO"
+
+    if @inscripcion.save
+      flash[:success] = "#{@usuario.descripcion}, ha sido inscrit@ satisfactoriamente en el Diplomado: #{diplomado_id}"
+      redirect_to :controller => "inscripcion_admin", :action => "buscar"
+    else
+      @diplomado_cohorte = DiplomadoCohorte.where(:cohorte_id => @cohorte_actual.id) 
+      render :action => 'seleccionar_diplomado'
+    end
+  end
 
     def paso2
 

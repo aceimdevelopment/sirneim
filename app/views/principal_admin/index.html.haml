@@ -28,9 +28,9 @@
     #collapseEstudiantes.accordion-body.collapse
       .accordion-inner
         %ul.nav.nav-list
-          %li=link_to "Listar Estudiantes", "#"
+          %li=link_to "Listar Estudiantes", :controller => "estudiante"
           %li=link_to_if true, "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
-          %li=link_to_if true, "Inscribir Estudiante", :controller=> "inscripcion_admin", :action => "paso0"
+          %li=link_to_if true, "Inscribir Estudiante", :controller=> "inscripcion_admin", :action => "buscar"
           %li=link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso" 
   .accordion-group
     .accordion-heading

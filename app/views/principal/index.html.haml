@@ -27,7 +27,7 @@
 						%span.label.label-inverse
 							= inscripcion.tipo_estado_inscripcion.nombre
 				-else
-					%td= link_to "Preinscribir #{oferta.diplomado.id}", {:action => "paso0", :controller => "inscripcion", :ci => @estudiante.usuario_ci, :diplomado => oferta.diplomado_id}, :class => "btn btn-primary btn-mini"
+					%td= link_to "Preinscribir #{oferta.diplomado.id}", {:action => "paso0", :controller => "inscripcion", :diplomado => oferta.diplomado_id}, :class => "btn btn-primary btn-mini"
 
 -if false and ParametroGeneral.preinscripcion_abierta
 	%h3

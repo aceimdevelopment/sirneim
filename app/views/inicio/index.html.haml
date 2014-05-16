@@ -11,7 +11,10 @@
 	=#button_to "PresInscribirse", {:action => "paso1", :controller => "inscripcion"},:class => 'btn'
 	.well.well-small
 		%h4.center
-			%b Para Inscribrir un Diplomado debe ingresar en su cuenta o registrarse
+			%b 
+				Para Inscribrir un Diplomado debe 
+				= link_to "Ingresar en su Cuenta", "#usuario_cedula"
+				o registrarse
 		%div
 			=button_to "Registrarse", {:action => "registrar"}, :class => 'btn btn-primary btn-block btn-large center'
 

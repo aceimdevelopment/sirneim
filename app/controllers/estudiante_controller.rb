@@ -16,7 +16,7 @@ class EstudianteController < ApplicationController
   end
   
   def paso1
-  	@usuario = session[:usuario]
+  	@usuario = session[:estudiante].usuario
   end
 
 	def paso1_actualizar_datos

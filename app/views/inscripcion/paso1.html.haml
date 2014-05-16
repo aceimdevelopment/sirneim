@@ -6,15 +6,20 @@
       -@datos_estudiante.errors.full_messages.each do |msg|
         -flash[:alert] += "#{msg}\n"
 
-  -if @inscripcion.errors.any?
+  -if @inscripcion and @inscripcion.errors.any?
     %ul
       -flash[:alert] = ""
       -@inscripcion.errors.full_messages.each do |msg|
         -flash[:alert] += "#{msg}\n"
 
+  -if session[:administrador]  
+    %h4.well.well-small
+      Participante:  
+      %b= @usuario.descripcion.capitalize
+
+
   %fieldset.well.well-small
     %legend Datos laborales
-
     .control-group
       %label.control-label
         ¿Usted trabaja?
@@ -57,8 +62,6 @@
           Dirección Laboral:
         .controls
           =text_area :datos_estudiante, :direccion_de_trabajo, :size => "60x4", :placeholder => "Ejemplo: Avenida A, con calle B. Los D…"
-
-
 
   %fieldset.well.well-small
     %legend Estudios realizados
@@ -184,21 +187,21 @@
           .controls  
             =text_field :datos_estudiante, :tiempo_clases_espanol, :placeholder => "Ejamplo: 2 años…"
 
-    .well.well-small
-      .control-group
-        %label.control-label
-          ¿Por qué le interesa cursar el diplomado?
-        .controls  
-          =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "60x4", :placeholder => "¿Cuál es su interés en el diplomado?…"
+    .control-group
+      %label.control-label
+        ¿Por qué le interesa cursar el diplomado?
+      .controls  
+        =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "60x4", :placeholder => "¿Cuál es su interés en el diplomado?…"
 
-      .control-group
-        %label.control-label
-          Expectativas sobre el diplomado
-        .controls  
-          =text_area :datos_estudiante, :expectativas_sobre_diplomado, :size => "60x4", :placeholder => "Expectativas sobre el diplomado", :required => true
-
-
-    =submit_tag "Siguiente", :confirm => "¿Está seguro de enviar los datos? \n Con esto culminará la Inscripción de: \n Diplomado: #{@diplomado} \n Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"
+    .control-group
+      %label.control-label
+        Expectativas sobre el diplomado
+      .controls  
+        =text_area :datos_estudiante, :expectativas_sobre_diplomado, :size => "60x4", :placeholder => "Expectativas sobre el diplomado", :required => true
+    - if session[:administrador]
+      =submit_tag "Siguiente", :class => "btn btn-primary"
+    - else
+      =submit_tag "Terminar", :confirm => "¿Está seguro de enviar los datos? \n Con esto culminará la Inscripción de: \n Diplomado: #{@diplomado} \n Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"
 
 :javascript
   $("[data-behaviour~=datepicker]").datepicker.defaults.format = "dd/mm/yyyy"

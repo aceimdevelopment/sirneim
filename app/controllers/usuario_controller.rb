@@ -1,6 +1,35 @@
 class UsuarioController < ApplicationController
   before_filter :filtro_logueado
+  # before_filter :filtro_administrador
 
+  def registrar
+    @usuario = Usuario.new
+    @usuario.ci = params[:usuario_ci]
+    @titulo = "Registro de Usuario"
+    @inscripcion_admin = params[:inscripcion]
+  end
+
+   def registrar_guardar
+    @usuario = Usuario.new (params[:usuario])
+
+    #Correccion Capitalizar nombre y datos
+    @usuario.nombres = @usuario.nombres.split.map(&:capitalize).join(' ') if @usuario.nombres
+    @usuario.apellidos = @usuario.apellidos.split.map(&:capitalize).join(' ') if @usuario.apellidos
+    @usuario.lugar_nacimiento = @usuario.lugar_nacimiento.split.map(&:capitalize).join(' ') if @usuario.lugar_nacimiento
+
+    # Creación de Contraseña Inicial
+    @usuario.contrasena = "00#{@usuario.ci}11"
+    @usuario.contrasena_confirmation = @usuario.contrasena
+
+    if @usuario.save
+      flash[:success] = "Usuario Registrado Satisfactoriamente\n"
+      flash[:success] << "Su contraseña inicial es: #{@usuario.contrasena}, puede cambiarla en el menú de la parte superior."
+      info_bitacora("Usuario: #{@usuario.descripcion} registrado por administrador #{session[:administrador].usuario.descripcion}")
+      redirect_to :controller => "inscripcion_admin", :action => "paso1"
+    else
+      render :action => "registrar"
+    end
+  end
 
   def modificar
     @usuario = session[:usuario] 

@@ -1,5 +1,5 @@
 class InicioController < ApplicationController
-  layout "visitante"
+  # layout "visitante"
   
   def index
     cohorte_actual = Cohorte.actual
@@ -10,8 +10,9 @@ class InicioController < ApplicationController
   end
   
   def registrar
-    session[:usuario] = nil
+    session[:usuario] = nil unless session[:administrador]
     @usuario = Usuario.new
+    @usuario.ci = params[:usuario_ci]
     @titulo = "Registro de Usuario"
   end
   
@@ -35,14 +36,22 @@ class InicioController < ApplicationController
         @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
       end
       @estudiante.save
-      session[:usuario] = @usuario
+
+      session[:usuario] = @usuario unless session[:administrador]
       session[:estudiante] = @estudiante
       session[:ci] = @usuario.ci
 
       flash[:success] = "Usuario Registrado Satisfactoriamente\n"
-      flash[:success] << "Su contraseña inicial es: #{@usuario.contrasena}, puede cambiarla en el menú de la parte superior."
-      info_bitacora("Usuario: #{@usuario.descripcion} registrado.")
-      redirect_to :controller => "principal"
+
+      
+      if session[:administrador]
+        info_bitacora("Usuario: #{@usuario.descripcion} registrado por Adminsitrador #{session[:administrador]}.")
+        redirect_to :controller => "inscripcion", :action => "paso1"
+      else
+        flash[:success] << "Su contraseña inicial es: #{@usuario.contrasena}, puede cambiarla en el menú de la parte superior."
+        info_bitacora("Usuario: #{@usuario.descripcion} registrado.")
+        redirect_to :controller => "principal"
+      end
     else
       render :action => "registrar"
     end
@@ -114,7 +123,8 @@ class InicioController < ApplicationController
     redirect_to :action => "index"
   end  
   
-  def seleccionar_rol    
+  def seleccionar_rol
+    @titulo = "Roles en el Sistema" 
     usuario = session[:usuario]
     @roles = []
     @roles << { :tipo => "Administrador", :descripcion => "Administrador"} if usuario.administrador

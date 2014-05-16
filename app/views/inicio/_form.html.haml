@@ -92,14 +92,14 @@
         =text_field :usuario, :correo_alternativo, :placeholder => "Correo Alternativo…", :required => true
         %span.help-block
           Ejemplo: maria2@gmail.com
-
-    .control-group
-      %label.control-label
-        Cuenta twitter
-      .controls
-        =text_field :estudiante, :cuenta_twitter, :placeholder => "Twitter…"
-        %span.help-block
-          Ejemplo: @maria2
+    - if controller_name.eql? "inicio"
+      .control-group
+        %label.control-label
+          Cuenta twitter
+        .controls
+          =text_field :estudiante, :cuenta_twitter, :placeholder => "Twitter…"
+          %span.help-block
+            Ejemplo: @maria2
 
     .control-group
       %label.control-label
