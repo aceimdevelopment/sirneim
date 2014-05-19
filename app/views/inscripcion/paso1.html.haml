@@ -191,13 +191,15 @@
       %label.control-label
         ¿Por qué le interesa cursar el diplomado?
       .controls  
-        =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "60x4", :placeholder => "¿Cuál es su interés en el diplomado?…"
+        =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "60x4", :placeholder => "¿Cuál es su interés en el diplomado?…", :required => true
 
     .control-group
       %label.control-label
         Expectativas sobre el diplomado
       .controls  
         =text_area :datos_estudiante, :expectativas_sobre_diplomado, :size => "60x4", :placeholder => "Expectativas sobre el diplomado", :required => true
+
+    =link_to "Atrás", {:controller => 'inscripcion', :action => 'paso0'}, :class => "btn"
     - if session[:administrador]
       =submit_tag "Siguiente", :class => "btn btn-primary"
     - else

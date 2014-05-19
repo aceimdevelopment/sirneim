@@ -20,7 +20,7 @@
       %label.control-label
         Nombres:
       .controls
-        =text_field :usuario, :nombres, :placeholder => "Nombre…", :required => true
+        =text_field :usuario, :nombres, :placeholder => "Nombre…", :required => true, :autofocus => true
         %span.help-block
           Ejemplo: María
 
@@ -47,7 +47,7 @@
         =#date_select :usuario, :fecha_nacimiento, {:prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 1920 }, {:required => true, :class => 'span1'}
         =#date_select :datos_estudiante, :fecha_inicio_estudio_en_curso, {:order => [:day, :month, :year], :prompt => { :day => 'dia', :month => 'mes', :year => 'año' }, :start_year => 2000 }, {:required => true, :class => 'span2'}
         =#text_field :usuario, :fecha_nacimiento, :placeholder => "Ejemplo: 24/05/2009…", :required => true, 'data-behaviour' => 'datepicker'
-        =date_select :usuario, :fecha_nacimiento, {:start_year => 1950}, {:required => true, :class => 'span1'}
+        =date_select :usuario, :fecha_nacimiento, {:start_year => 1930}, {:required => true, :class => 'span1'}
     .control-group
       %label.control-label
         Sexo:
@@ -110,7 +110,10 @@
         =text_area :usuario, :direccion, :size => "60x4", :placeholder => "Domicilio…", :required => true
         %span.help-block
           Ejemplo: Avenida A, con calle B. Los Naranjos.
-  =link_to "Cancelar", {:controller => "principal"}, :class => "btn"
+  - if session[:administrador]
+    =link_to "Cancelar", {:controller => "principal_admin"}, :class => "btn"
+  - else
+    =link_to "Cancelar", {:controller => "principal"}, :class => "btn"
   =submit_tag "Siguiente", :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
 :javascript
   $("[data-behaviour~=datepicker]").datepicker.defaults.format = "dd/mm/yyyy"

@@ -33,7 +33,7 @@ class InscripcionController < ApplicationController
     if @usuario.update_attributes(params[:usuario])
       flash[:success] = "Datos Actualizados Satisfactoriamente"
       info_bitacora("Usuario: #{@usuario.descripcion} Actualizado.")
-      session[:usuario] = @usuario
+      session[:usuario] = @usuario unless session[:administrador]
       session[:estudiante] = @estudiante
       redirect_to :action => "paso1"
     else

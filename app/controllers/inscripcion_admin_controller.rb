@@ -23,7 +23,7 @@ class InscripcionAdminController < ApplicationController
 
       end
       session[:estudiante] = estudiante
-      redirect_to :controller => 'inscripcion', :action => 'paso1'
+      redirect_to :controller => 'inscripcion', :action => 'paso0'
     end
 
   end
