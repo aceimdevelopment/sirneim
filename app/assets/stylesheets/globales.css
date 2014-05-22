@@ -27,7 +27,7 @@
 	margin: 0px 10px;
 }
 
-#banner_contenido{padding-top: 30px;padding-left: 30px; background:url(../assets/diplomado_logo.png) no-repeat right; background-size: 22%; height:120px; font-size: 13px; text-align: left; color: white; font-weight: lighter;}
+#banner_contenido{padding-top: 30px;padding-left: 30px; background:url(../assets/diplomado_logo.png) no-repeat right; background-size: 25%; height:120px; font-size: 13px; text-align: left; color: white; font-weight: lighter;}
 
 #pie {	
 	padding: 10px 0 0 0;
@@ -42,8 +42,8 @@
 #DanMo {
 	background-color: darkred;
 	color: white;
-	margin: 0 530px;
-	font-size: 9px;
+	/*margin: 0 530px;*/
+	font-size: 8px;
 }
 
 .center{text-align:center;}

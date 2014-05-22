@@ -1,0 +1,26 @@
+-@preinscritos = Inscripcion.preinscritos_actuales_diplomado oferta.diplomado_id
+-@aprobados = Inscripcion.aprobados_actuales_diplomado oferta.diplomado_id
+-@otros = Inscripcion.otros_actuales_diplomado oferta.diplomado_id
+- @active =  (@diplomado_actual_id and (@diplomado_actual_id.eql? oferta.diplomado_id)) ? "active" : ""
+.tab-pane{:id=>"#{oferta.diplomado_id}", :class => @active}
+	.span6.well
+		%h3 Preinscritos
+		%table.table.table-striped.table-hover.table-condensed.table-bordered
+			%thead
+				%th #
+				%th Nombre Completo
+				%th Opciones
+			%tbody{:id => "preinscritos_#{oferta.diplomado_id}"}
+			- @preinscritos.each_with_index do |preinscrito,i|
+				=render "preinscrito", :preinscrito => preinscrito, :i => i
+
+
+	.span6.well
+		%h3 Aprobados
+		%table.table.table-striped.table-hover.table-condensed.table-bordered
+			%thead
+				%th #
+				%th Nombre Completo
+			%tbody{:id => "aprobados_#{oferta.diplomado_id}"}
+			- @aprobados.each_with_index do |aprobado,i|
+				=render "aprobado", :aprobado => aprobado, :i => i

@@ -391,5 +391,15 @@ end
     end
   end
 
+  def descargar_planilla_pre_diplomado_cohorte
+    
+    estudiante_ci = params[:estudiante_ci]
+    diplomado_id = params[:diplomado_id]
+    cohorte_id = params[:cohorte_id]
+
+    if pdf = DocumentosPDF.generar_planilla_pre_diplomado_cohorte(estudiante_ci,diplomado_id,cohorte_id)
+      send_data pdf.render,:filename => "preinscripcion_#{estudiante_ci}_#{diplomado_id}_#{cohorte_id}.pdf",:type => "application/pdf", :disposition => "attachment"
+    end
+  end
 
 end

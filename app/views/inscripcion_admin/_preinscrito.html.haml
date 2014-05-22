@@ -1,0 +1,20 @@
+%tr.warning{:id => "preinscrito_#{preinscrito.estudiante_ci}"}
+	%td= i
+	%td= preinscrito.estudiante.usuario.descripcion
+	%td
+		= #link_to "#", {:class => 'btn btn-success btn-mini', :onclick => "return aprobar(#{preinscrito.estudiante_ci},'#{preinscrito.diplomado_id}',#{preinscrito.cohorte_id})"} do
+		=#%i.icon-plus.icon-white
+		=#Aprobar
+
+		= #form_tag url_for(:action => "aprobar"), :remote => true do
+		=#hidden_field_tag :id, preinscrito.id 
+		=#submit_tag "aprobar", :class => "btn btn-mini"
+
+		= #link_to "aprobar?estudiante_ci=#{preinscrito.estudiante_ci}&diplomado_id=#{preinscrito.diplomado_id}&cohorte_id=#{preinscrito.cohorte_id}", {:class => 'btn btn-success btn-mini'} do
+
+		= link_to url_for (:action => "aprobar", :id => preinscrito.id), {:class => 'btn btn-success btn-mini'} do
+			%i.icon-plus.icon-white
+			Aprobar
+		= link_to "/aceim_diplomados/admin_estudiante/descargar_planilla_pre_diplomado_cohorte?estudiante_ci=#{preinscrito.estudiante_ci}&diplomado_id=#{preinscrito.diplomado_id}&cohorte_id=#{preinscrito.cohorte_id}", {:class => 'btn btn-success btn-mini'} do
+			%i.icon-download.icon-white
+			Planilla

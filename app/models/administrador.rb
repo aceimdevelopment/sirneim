@@ -1,5 +1,6 @@
 #creada por db2models
 class Administrador < ActiveRecord::Base
+# class Administrador < Usuario
 
   #autogenerado por db2models
   set_primary_key :usuario_ci

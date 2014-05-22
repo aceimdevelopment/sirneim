@@ -26,6 +26,14 @@ class CohorteController < ApplicationController
 	  	end	  	
 	end
 
+	def editar
+		1/0
+	end
+
+	def actualizar
+		1/0
+	end
+
 	private
 	def find_model
 		@model = Cohorte.find(params[:id]) if params[:id]

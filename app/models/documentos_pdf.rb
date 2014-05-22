@@ -105,6 +105,108 @@ class DocumentosPDF
   end
 
 
+  def self.generar_planilla_pre_diplomado_cohorte(estudiante_ci, diplomado_id, cohorte_id)
+    estudiante = Estudiante.find estudiante_ci
+    usuario = estudiante.usuario
+
+    preinscripcion = estudiante.inscripciones.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id).limit(1).first
+    datos = DatosEstudiante.where(:estudiante_ci => estudiante_ci).first
+    pdf = PDF::Writer.new
+    pdf.margins_cm(1.8)
+    
+    pdf.add_image_from_file 'app/assets/images/logo_fhe_ucv.jpg', 465, 710, 50,nil
+    pdf.add_image_from_file 'app/assets/images/logo_eim.jpg', 515, 710+10, 50,nil
+    pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 45, 710, 50,nil
+ 
+    pdf.add_text 100,745,to_utf16("Universidad Central de Venezuela"),11
+    pdf.add_text 100,735,to_utf16("Facultad de Humanidades y Educación"),11
+    pdf.add_text 100,725,to_utf16("Escuela de Idiomas Modernos"),11
+    pdf.add_text 100,715,to_utf16("Diplomados"),11
+
+    pdf.text "\n\n\n\n"
+    pdf.text to_utf16("Planilla Preinscripción"), :justification => :center, :font_size => 20
+
+    pdf.text to_utf16("\nDiplomado"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>Diplomado: </b> #{preinscripcion.diplomado_cohorte.diplomado.descripcion}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Cohorte: </b> #{preinscripcion.diplomado_cohorte.cohorte.descripcion}"), :justification => :left, :font_size => 12
+
+    pdf.text to_utf16("\nDatos personales"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>Cédula de identidad: </b> #{usuario.ci}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Nombres: </b> #{usuario.nombres}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Apellidos: </b> #{usuario.apellidos}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Lugar de nacimiento: </b> #{usuario.lugar_nacimiento}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Fecha de nacimiento: </b> #{usuario.fecha_nacimiento.strftime('%d/%m/%Y')}"), :justification => :left, :font_size => 12
+
+    bDate = usuario.fecha_nacimiento
+    age = Date.today.year - bDate.year
+    if Date.today.month < bDate.month ||
+      (Date.today.month == bDate.month && bDate.day >= Date.today.day)
+      age = age - 1
+    end
+    edad = age.to_s
+    pdf.text to_utf16("<b>Edad: </b> #{edad} años"), :justification => :left, :font_size => 12
+
+    sexo = (usuario.tipo_sexo_id == "M")? "Masculino" : "Femenino" 
+    pdf.text to_utf16("<b>Sexo: </b> #{sexo}"), :justification => :left, :font_size => 12
+
+    pdf.text to_utf16("\nDatos de contacto"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>Teléfono habitación: </b> #{usuario.telefono_habitacion}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Teléfono celular: </b> #{usuario.telefono_movil}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Correo electrónico: </b> #{usuario.correo}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Correo electrónico (alternativo): </b> #{usuario.correo_alternativo}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Cuenta twitter: </b> #{usuario.estudiante.cuenta_twitter}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Dirección de domicilio: </b> #{usuario.direccion}"), :justification => :left, :font_size => 12
+
+    pdf.text to_utf16("\nDatos laborales"), :justification => :left, :font_size => 16
+
+    trabaja = (datos.trabaja == 1 ? "Si" : "No")
+    pdf.text to_utf16("<b>Trabaja: </b> #{trabaja}"), :justification => :left, :font_size => 12
+    if trabaja == "Si"
+      pdf.text to_utf16("<b>Ocupación: </b> #{datos.ocupacion}"), :justification => :left, :font_size => 12
+      pdf.text to_utf16("<b>Institución: </b> #{datos.institucion}"), :justification => :left, :font_size => 12
+      pdf.text to_utf16("<b>Cargo actual: </b> #{datos.cargo_actual}"), :justification => :left, :font_size => 12
+      pdf.text to_utf16("<b>Antigüedad: </b> #{datos.antiguedad}"), :justification => :left, :font_size => 12
+      pdf.text to_utf16("<b>Dirección de trabajo: </b> #{datos.direccion_de_trabajo}"), :justification => :left, :font_size => 12
+    end
+
+    pdf.text to_utf16("\nEstudios realizados"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>Título de estudio: </b> #{datos.titulo_estudio}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Institución de estudio: </b> #{datos.institucion_estudio}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Año de graduación: </b> #{datos.ano_graduacion_estudio}"), :justification => :left, :font_size => 12
+
+    pdf.text to_utf16("\nEstudios concluidos"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>Título de estudio: </b> #{datos.titulo_estudio_concluido}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Institución de estudio: </b> #{datos.institucion_estudio_concluido}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Año de graduación: </b> #{datos.ano_estudio_concluido}"), :justification => :left, :font_size => 12
+
+    pdf.text to_utf16("\nEstudios en curso"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>Título de estudio: </b> #{datos.titulo_estudio_en_curso}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Institución de estudio: </b> #{datos.institucion_estudio_en_curso}"), :justification => :left, :font_size => 12
+    fecha_inicio = (datos.fecha_inicio_estudio_en_curso)? datos.fecha_inicio_estudio_en_curso.strftime('%d/%m/%Y') : ""
+    pdf.text to_utf16("<b>Fecha de inicio: </b> #{fecha_inicio}"), :justification => :left, :font_size => 12
+
+    pdf.text to_utf16("\nExperiencia en la enseñanza de idiomas"), :justification => :left, :font_size => 16
+    experiencia = (datos.tiene_experiencia_ensenanza_idiomas == 1 ? "Si" : "No")
+    pdf.text to_utf16("<b>¿Ha tenido experiencia en la enseñanza de idiomas?: </b> #{experiencia}"), :justification => :left, :font_size => 12
+    if experiencia == "Si"
+      pdf.text to_utf16("<b>Descripción de la experiencia: </b> #{datos.descripcion_experiencia}"), :justification => :left, :font_size => 12
+    end
+    espanol = (datos.ha_dado_clases_espanol == 1 ? "Si" : "No")
+    pdf.text to_utf16("<b>¿Ha dado clases de español?: </b> #{espanol}"), :justification => :left, :font_size => 12
+    if espanol == "Si"
+      pdf.text to_utf16("<b>¿Dónde?: </b> #{datos.donde_clases_espanol}"), :justification => :left, :font_size => 12
+      pdf.text to_utf16("<b>¿Por cuánto tiempo?: </b> #{datos.tiempo_clases_espanol}"), :justification => :left, :font_size => 12
+    end
+
+    pdf.text to_utf16("\nIntereses"), :justification => :left, :font_size => 16
+    pdf.text to_utf16("<b>¿Por qué le interesa cursar el diplomado?: </b> #{datos.por_que_interesa_diplomado}"), :justification => :left, :font_size => 12
+    pdf.text to_utf16("<b>Expectativas sobre el diplomado: </b> #{datos.expectativas_sobre_diplomado}"), :justification => :left, :font_size => 12
+
+    return pdf
+  end
+
+
+
   def self.notas(historiales,session)
     usuario = session[:usuario]
     pdf = PDF::Writer.new

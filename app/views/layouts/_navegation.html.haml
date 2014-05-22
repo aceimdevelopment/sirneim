@@ -10,24 +10,40 @@
       .container-fluid.nav-collapse
         %ul.nav
           -if session[:administrador]
-            %li= link_to "Estudiantes", "/aceim_diplomados/estudiante"
-            %li= link_to "Docentes", "/aceim_diplomados/docentes"
-        .nav.pull-right
+            = drop_down "Estudiantes" do
+              %li
+                = link_to "Gestionar Estudiantes de Diplomados", :controller => "inscripcion_admin", :action => "gestionar"
+                =#link_to "Listar Estudiantes", :controller => "estudiante"
+              %li=link_to_if session[:administrador].rol == "super", "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
+              %li=link_to_if session[:administrador].rol == "super", "Inscribir Estudiante", :controller=> "inscripcion_admin", :action => "buscar"
+              %li=#link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso"
+            = drop_down "Docentes" do
+              %li=link_to "Listar Docente", :controller => "docente"
+
+        %ul.nav
           -if session[:administrador]
-          - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
-            = drop_down "Cohorte: #{cohorte_altual.descripcion}" do              
-              %li
-                = link_to "Cambiar Cohorte", :controller=>"parametros_generales",:action=>"cambiar_cohorte"
+            - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
+            = drop_down "Cohortes" do
+              %li= link_to "Lista de Cohortes", :controller=>"cohorte"
+              %li= link_to "Cambiar Cohorte Actual", :controller=>"parametros_generales",:action=>"cambiar_cohorte"
               -if session[:administrador].rol == "super"
-                %li
-                  = link_to "Nueva Cohorte", :controller=>"Cohorte",:action=>"nuevo"  
+                %li= link_to "Nueva Cohorte", :controller=>"cohorte",:action=>"nuevo"
+            = drop_down "Diplomados" do
+              %li= link_to "Lista de Cohortes", :controller=>"diplomado"
+              -if session[:administrador].rol == "super"
+                %li= link_to "Nueva Diplomado", :controller=>"diplomado",:action=>"nuevo"
+
+        .nav.pull-right
+          - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
           -if session[:usuario]
+          
+            %li
+              %a
+                Cohorte Actual:
+                %b= "#{cohorte_altual.descripcion}"
             = drop_down "#{session[:usuario].nombre_completo}" do
-              
-              %li
-                = link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
-              %li
-                = link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
+              %li= link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+              %li= link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
               = drop_down_divider
               = menu_item "Cerrar sesión", "/aceim_diplomados/inicio/cerrar_sesion"
           -else

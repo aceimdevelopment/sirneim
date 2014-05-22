@@ -1,7 +1,9 @@
 -if @cohortes.count > 0
-	-@cohortes.each do |cohorte|
-		%h2
-			=cohorte.descripcion
+	.well.well-small
+		%ul
+			-@cohortes.each do |cohorte|
+				%li
+					=cohorte.descripcion
 -else
 	%h2 Sin Cohortes
 

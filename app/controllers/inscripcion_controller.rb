@@ -77,7 +77,7 @@ class InscripcionController < ApplicationController
 
         if @inscripcion.save
           session[:diplomado] = nil
-          flash[:success] = "Inscripción del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
+          flash[:success] = "Preinscripción correcta del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
           info_bitacora("Preinscripcion de #{@usuario.ci} Satisfactoriamente en Diplomado #{diplomado_id} para Cohorte: #{cohorte_actual.descripcion}")
           redirect_to :controller => "principal"
         else

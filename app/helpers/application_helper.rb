@@ -25,4 +25,8 @@ module ApplicationHelper
                    :sn => s.seccion_numero    
   end    
   
+  def yield_content!(content_key)
+    view_flow.content.delete(content_key)
+  end
+  
 end

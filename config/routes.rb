@@ -8,6 +8,8 @@ Aceim::Application.routes.draw do
 
   get "preinscripcion/paso3"
 
+  post "inscripcion_admin/aprobar"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

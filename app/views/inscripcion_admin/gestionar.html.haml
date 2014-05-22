@@ -1,0 +1,50 @@
+.tabbable.tabs-left
+	%ul.nav.nav-tabs
+		- @diplomados_ofertados.each_with_index do |oferta,i|
+			- #@active =  (i.eql? 0) ? "active" : ""
+			- @active =  (@diplomado_actual_id and (@diplomado_actual_id.eql? oferta.diplomado_id)) ? "active" : ""
+			%li{:class => @active}
+				=link_to "#{oferta.diplomado.descripcion}", "##{oferta.diplomado_id}", "data-toggle"=> "tab"
+	.tab-content
+		- @diplomados_ofertados.each do |oferta|
+			= render "pendientes", :oferta => oferta
+
+		/ .tabbable.tabs-top
+		/ 	%ul.nav.nav-tabs
+		/ 		%li= link_to "Preinscritos", "##{oferta.diplomado_id}_preincritos", "data-toggle"=> "tab"
+		/ 		%li= link_to "Aprobados", "##{oferta.diplomado_id}_aprobados", "data-toggle"=> "tab"
+		/ 		%li= link_to "Otros", "##{oferta.diplomado_id}_otros", "data-toggle"=> "tab"		
+		/ 	.tab-content
+		/ 		.tab-pane{:id=> "#{oferta.diplomado_id}_preincritos"}
+		/ 			%table.table.table-striped.table-hover.table-condensed.table-bordered
+		/ 				%thead
+		/ 					%th #
+		/ 					%th Nombre Completo
+		/ 				%tbody
+		/ 				- @preinscripciones.each_with_index do |preinscripcion,i|
+		/ 					%tr
+		/ 						%td= i
+		/ 						%td= preinscripcion.estudiante.usuario.nombre_completo
+
+		/ 		.tab-pane{:id=> "#{oferta.diplomado_id}_aprobados"}
+		/ 			%table.table.table-striped.table-hover.table-condensed.table-bordered
+		/ 				%thead
+		/ 					%th #
+		/ 					%th Nombre Completo
+		/ 				%tbody
+		/ 				- @aprobados.each_with_index do |aprobado,i|
+		/ 					%tr
+		/ 						%td= i
+		/ 						%td= aprobado.estudiante.usuario.nombre_completo
+
+		/ 		.tab-pane{:id=> "#{oferta.diplomado_id}_otros"}
+		/ 			%table.table.table-striped.table-hover.table-condensed.table-bordered
+		/ 				%thead
+		/ 					%th #
+		/ 					%th Nombre Completo
+		/ 				%tbody
+		/ 				- @otros.each_with_index do |otro,i|
+		/ 					%tr
+		/ 						%td= i
+		/ 						%td= otro.estudiante.usuario.nombre_completo
+
