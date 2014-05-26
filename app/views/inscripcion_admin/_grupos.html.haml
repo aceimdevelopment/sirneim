@@ -1,0 +1,7 @@
+%tr.success{:id => "grupo_#{grupo.id}_#{inscrito_grupo.estudiante_ci}"}
+	%td= i
+	%td= inscrito_grupo.estudiante.usuario.descripcion
+	%td
+		= link_to url_for (:action => "retirar", :id => inscrito_grupo.id), {:class => 'btn btn-danger btn-mini'} do
+			%i.icon-minus.icon-white
+			Retirar del grupo

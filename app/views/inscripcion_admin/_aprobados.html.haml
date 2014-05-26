@@ -1,0 +1,28 @@
+- @aprobados = Inscripcion.aprobados_actuales_diplomado_sin_grupo oferta.diplomado_id
+.tab-pane{:id=>"#{oferta.diplomado_id}_aprobados", :class => active}
+
+	.span6.well
+		%h3= "#{oferta.diplomado_id} : Lista de Aprobados" 
+		%table.table.table-striped.table-hover.table-condensed.table-bordered
+			%thead
+				%th #
+				%th Nombre Completo
+				%th Opciones
+			%tbody{:id => "aprobados_#{oferta.diplomado_id}"}
+			- @aprobados.each_with_index do |aprobado,i|
+				=render "aprobado", :aprobado => aprobado, :asignar => true, :i => i
+	- @aprobados = Inscripcion.aprobados_actuales_diplomado_con_grupo oferta.diplomado_id
+	- @grupos.each do |grupo|
+		- @inscritos_grupo = @aprobados.where(:grupo_id => grupo.id)
+		.span6.well.pull.pull-right
+			%h3= "#{oferta.diplomado_id} : Lista de #{grupo.descripcion}"
+			%table.table.table-striped.table-hover.table-condensed.table-bordered
+				%thead
+					%th #
+					%th Nombre Completo
+					%th Opciones
+				%tbody{:id => "preinscritos_#{oferta.diplomado_id}"}
+				- @inscritos_grupo.each_with_index do |inscrito_grupo,i|
+					=render "grupos", :inscrito_grupo => inscrito_grupo, :grupo => grupo, :i => i
+
+

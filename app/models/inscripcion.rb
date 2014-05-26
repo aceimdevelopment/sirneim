@@ -31,6 +31,10 @@ class Inscripcion < ActiveRecord::Base
 
   scope :aprobados_actuales_diplomado, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "APR", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id) }
 
+  scope :aprobados_actuales_diplomado_sin_grupo, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "APR", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id, :grupo_id => nil) }
+
+  scope :aprobados_actuales_diplomado_con_grupo, lambda { |diplomado_id| where("tipo_estado_inscripcion_id = ? AND cohorte_id = ? AND diplomado_id = ? AND grupo_id IS NOT ?", 'APR', COHORTE_ACTUAL.id, diplomado_id, nil) }
+
   scope :inscritos_actuales_diplomado, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "INS", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id) }
 
   scope :otros_actuales_diplomado, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => nil, :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id) }

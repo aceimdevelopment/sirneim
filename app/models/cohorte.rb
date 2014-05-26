@@ -9,9 +9,12 @@ class Cohorte < ActiveRecord::Base
 	validates :id, :presence => true, :uniqueness => true,  :numericality => { :greater_than => 2010, :less_than_or_equal_to => 2030 }
 
 	def descripcion
-		aux = "#{id}"
-		aux += " - #{nombre}" unless nombre.blank?
-    return aux
+
+    unless nombre.blank?
+    	return nombre
+    else
+      return "Año: #{id}"
+    end
 	end
 
   def self.actual

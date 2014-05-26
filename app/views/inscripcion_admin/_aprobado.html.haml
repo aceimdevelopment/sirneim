@@ -1,3 +1,22 @@
 %tr.success{:id => "aprobado_#{aprobado.estudiante_ci}"}
 	%td= i
 	%td= aprobado.estudiante.usuario.descripcion
+	%td
+		- if asignar	
+			= form_tag url_for(:action => "asignar"), :class => "form-inline" do
+				.input-append
+					=collection_select(:inscripcion, :tipo_forma_pago_id, TipoFormaPago.all, :id, :descripcion, {:prompt=>"Pago"}, {:class=>'span3', :required => true})
+
+					=collection_select(:inscripcion, :grupo_id, Grupo.all, :id, :descripcion, {:prompt=>"Grupo"}, {:class=>'span3', :required => true})
+					=text_field :inscripcion, :deposito1, :class => "span4", :placeholder => "# Depósito"
+					=hidden_field :inscripcion, :estudiante_ci, :value => aprobado.estudiante_ci
+					=hidden_field :inscripcion, :id, :value => aprobado.id
+
+					=submit_tag "Asignar", :class => "btn btn-primary"
+		- else
+			= link_to url_for (:action => "desaprobar", :id => aprobado.id), {:class => 'btn btn-danger btn-mini'} do
+				%i.icon-minus.icon-white
+				Desaprobar		
+		= #form_tag url_for(:action => "aprobar"), :remote => true do
+		=#hidden_field_tag :id, preinscrito.id 
+		=#submit_tag "aprobar", :class => "btn btn-mini"

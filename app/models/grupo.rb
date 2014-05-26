@@ -13,10 +13,12 @@ class Grupo < ActiveRecord::Base
   # has_many :preinscripcion
   # accepts_nested_attributes_for :preinscripcion
   def descripcion
+    aux = "Grupo: "
   	if nombre
-  		"#{id}-#{nombre}"
+  		aux += "#{id}-#{nombre}"
   	else
-  		id
+  		aux += id
   	end
+    return aux
   end
 end

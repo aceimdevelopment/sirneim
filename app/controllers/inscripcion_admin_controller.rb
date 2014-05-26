@@ -46,6 +46,11 @@ class InscripcionAdminController < ApplicationController
     @cohorte_actual = Cohorte.actual
     @diplomado_actual_id = params[:diplomado_actual_id]
 
+    @lista_actual = params[:lista_actual].nil? ? "" : params[:lista_actual]
+    @lista_actual = "#{@diplomado_actual_id}_#{@lista_actual}"
+
+    @grupos = Grupo.all
+    # @tipo_forma_pago = TipoFormaPago.all
   end
   
   def planilla_inscripcion
@@ -77,7 +82,7 @@ class InscripcionAdminController < ApplicationController
       if @inscrito.save
         info_bitacora "#{session[:administrador].usuario_ci} Aprobó Preinscrito #{@inscrito.id}"
         flash[:success] = "Estudiante Aprobado"
-        format.html { redirect_to :action => "gestionar", :diplomado_actual_id => diplomado_id}
+        format.html { redirect_to :action => "gestionar", :diplomado_actual_id => diplomado_id, :lista_actual => "preinscritos"}
         format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
         format.js
       else
@@ -89,6 +94,89 @@ class InscripcionAdminController < ApplicationController
     end
 
   end
+
+  def desaprobar
+    diplomado_id = params[:id][2]
+    @inscrito = Inscripcion.find(params[:id])
+
+    @inscrito.tipo_estado_inscripcion_id = "PRE"
+    @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => Cohorte.actual.id)
+    # if @inscripcion.save
+    #   render :parcial => "diplomados"
+    # else
+    #   render "gestionar"
+    # end
+
+    respond_to do |format|
+      if @inscrito.save
+        info_bitacora "#{session[:administrador].usuario_ci} Desaprobó Preinscrito #{@inscrito.id}"
+        flash[:alert] = "Estudiante Desaprobado"
+        format.html { redirect_to :action => "gestionar", :diplomado_actual_id => diplomado_id, :lista_actual => "preinscritos"}
+        format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
+        format.js
+      else
+        format.html { render :action => "gestionar" }
+        # format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
+        format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
+        format.js
+      end
+    end
+
+  end
+
+  def asignar
+    inscripcion = params[:inscripcion]
+    @inscrito = Inscripcion.find(inscripcion[:id])
+    @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => Cohorte.actual.id)
+
+    respond_to do |format|
+      if @inscrito.update_attributes(inscripcion)
+        flash[:success] = "Inscripción Completada y grupo asociado"
+        info_bitacora "#{session[:administrador].usuario_ci} Asigno Aprobado #{@inscrito.id}"
+
+        format.html { redirect_to :action => "gestionar", :diplomado_actual_id => @inscrito.diplomado_id, :lista_actual => "aprobados"}
+        format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
+        format.js
+      else
+        format.html { render :action => "gestionar" }
+        # format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
+        format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
+  def retirar
+    diplomado_id = params[:id][2]
+    @inscrito = Inscripcion.find(params[:id])
+
+    @inscrito.tipo_estado_inscripcion_id = "APR"
+
+    @inscrito.grupo_id = nil
+    # @inscrito.tipo_forma_pago_id = nil
+    @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => Cohorte.actual.id)
+    # if @inscripcion.save
+    #   render :parcial => "diplomados"
+    # else
+    #   render "gestionar"
+    # end
+
+    respond_to do |format|
+      if @inscrito.save
+        info_bitacora "#{session[:administrador].usuario_ci} Desaprobó Preinscrito #{@inscrito.id}"
+        flash[:alert] = "Estudiante Desaprobado"
+        format.html { redirect_to :action => "gestionar", :diplomado_actual_id => diplomado_id, :lista_actual => "aprobados"}
+        format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
+        format.js
+      else
+        format.html { render :action => "gestionar" }
+        # format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
+        format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
   # def paso1      
   #   @titulo_pagina = "Preinscripción - Admin"  
   #   @subtitulo_pagina = "Actualización de Datos Personales"
