@@ -129,6 +129,8 @@ class InscripcionAdminController < ApplicationController
     @inscrito = Inscripcion.find(inscripcion[:id])
     @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => Cohorte.actual.id)
 
+    @inscrito.tipo_estado_inscripcion_id = "INS"
+
     respond_to do |format|
       if @inscrito.update_attributes(inscripcion)
         flash[:success] = "Inscripción Completada y grupo asociado"

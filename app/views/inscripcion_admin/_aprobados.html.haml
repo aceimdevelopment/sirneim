@@ -2,7 +2,7 @@
 .tab-pane{:id=>"#{oferta.diplomado_id}_aprobados", :class => active}
 
 	.span6.well
-		%h3= "#{oferta.diplomado_id} : Lista de Aprobados" 
+		%h3 Lista de Aprobados 
 		%table.table.table-striped.table-hover.table-condensed.table-bordered
 			%thead
 				%th #
@@ -11,11 +11,11 @@
 			%tbody{:id => "aprobados_#{oferta.diplomado_id}"}
 			- @aprobados.each_with_index do |aprobado,i|
 				=render "aprobado", :aprobado => aprobado, :asignar => true, :i => i
-	- @aprobados = Inscripcion.aprobados_actuales_diplomado_con_grupo oferta.diplomado_id
+	- @aprobados = Inscripcion.inscritos_actuales_diplomado oferta.diplomado_id
 	- @grupos.each do |grupo|
 		- @inscritos_grupo = @aprobados.where(:grupo_id => grupo.id)
 		.span6.well.pull.pull-right
-			%h3= "#{oferta.diplomado_id} : Lista de #{grupo.descripcion}"
+			%h3= "Lista del #{grupo.descripcion}"
 			%table.table.table-striped.table-hover.table-condensed.table-bordered
 				%thead
 					%th #

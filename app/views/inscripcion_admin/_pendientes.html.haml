@@ -2,7 +2,7 @@
 - @aprobados = Inscripcion.aprobados_actuales_diplomado oferta.diplomado_id
 .tab-pane{:id=>"#{oferta.diplomado_id}_preinscritos", :class => active}
 	.span6.well
-		%h3= "#{oferta.diplomado_id} : Lista de Preinscritos"
+		%h3= "Lista de Preinscritos"
 		%table.table.table-striped.table-hover.table-condensed.table-bordered
 			%thead
 				%th #
@@ -14,7 +14,7 @@
 
 
 	.span6.well
-		%h3= "#{oferta.diplomado_id} : Lista de Aprobados"
+		%h3= "Lista de Aprobados"
 		%table.table.table-striped.table-hover.table-condensed.table-bordered
 			%thead
 				%th #
