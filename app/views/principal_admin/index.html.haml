@@ -1,25 +1,4 @@
 #accordionMenu.accordion
-	.accordion-group
-	  .accordion-heading
-	    %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseEstudiantes"}
-	      .nav-header
-	        Participantes
-	  #collapseEstudiantes.accordion-body.collapse
-	    .accordion-inner
-	      %ul.nav.nav-list
-					%li= link_to "Gestionar Participantes en Diplomados", :controller => "inscripcion_admin", :action => "gestionar"
-	        %li=link_to_if true, "Gestionar Participante Existente", :controller=> "admin_estudiante"
-	        %li=link_to_if true, "Inscribir Participante en Diplomado", :controller=> "inscripcion_admin", :action => "buscar"
-	        %li=link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso"
-  .accordion-group
-    .accordion-heading
-      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDocentes"}
-        .nav-header
-          Docentes
-    #collapseDocentes.accordion-body.collapse
-      .accordion-inner
-        %ul.nav.nav-list
-          %li=link_to "Listar Docentes", :controller => "docentes"
   .accordion-group
     .nav-header
       %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDiplomados"}
@@ -33,10 +12,32 @@
           %li=link_to "Gestionar Cronograma Académico", :controller => "diplomado_cohorte"
   .accordion-group
     .accordion-heading
+      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDocentes"}
+        .nav-header
+          Docentes
+    #collapseDocentes.accordion-body.collapse
+      .accordion-inner
+        %ul.nav.nav-list
+          %li=link_to "Listar Docentes", :controller => "docentes"
+          %li=link_to "Enviar Correo", "#"
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseEstudiantes"}
+        .nav-header
+          Participantes
+    #collapseEstudiantes.accordion-body.collapse
+      .accordion-inner
+        %ul.nav.nav-list
+          %li=link_to "Gestionar Participantes en Diplomados", :controller => "inscripcion_admin", :action => "gestionar"
+          %li=link_to_if session[:administrador].rol == "super", "Gestionar Participante Existente", :controller=> "admin_estudiante"
+          %li=link_to_if session[:administrador].rol == "super", "Inscribir Participante", :controller=> "inscripcion_admin", :action => "buscar"
+  .accordion-group
+    .accordion-heading
       %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseCartelera"}
         .nav-header
-          Parámetros Generales
+          Cartelera & Parámetros Generales
     #collapseCartelera.accordion-body.collapse
       .accordion-inner
         %ul.nav.nav-list
           %li=link_to "Parámetros Generales", :controller => "parametros_generales", :action=> "index"
+          %li=link_to "Gestionar Cartelera Principal", "#"
