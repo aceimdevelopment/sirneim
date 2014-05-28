@@ -16,7 +16,7 @@
 		- @inscritos_grupo = @aprobados.where(:grupo_id => grupo.id)
 		.span6.well.pull.pull-right
 			%h3= "Lista del #{grupo.nombre}"
-			%table.table.table-striped.table-hover.table-condensed.table-bordered
+			%table.table.table-striped.table-hover.table-condensed.table-bordered{:style => "width: 80%;"}
 				%thead
 					%th #
 					%th Nombre Completo
