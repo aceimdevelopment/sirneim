@@ -10,10 +10,10 @@
       .container-fluid.nav-collapse
         %ul.nav
           -if session[:administrador]
-            = drop_down "Estudiantes" do
-              %li= link_to "Gestionar Estudiantes de Diplomados", :controller => "inscripcion_admin", :action => "gestionar"
-              %li= link_to_if session[:administrador].rol == "super", "Gestionar Estudiante Existente", :controller=> "admin_estudiante"
-              %li= link_to_if session[:administrador].rol == "super", "Inscribir Estudiante", :controller=> "inscripcion_admin", :action => "buscar"
+            = drop_down "Participantes" do
+              %li= link_to "Gestionar Participantes en Diplomados", :controller => "inscripcion_admin", :action => "gestionar"
+              %li= link_to_if session[:administrador].rol == "super", "Gestionar Participante Existente", :controller=> "admin_estudiante"
+              %li= link_to_if session[:administrador].rol == "super", "Inscribir Participante en Diplomado", :controller=> "inscripcion_admin", :action => "buscar"
               /%li=#link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso"
             = drop_down "Docentes" do
               %li=link_to "Listar Docente", :controller => "docentes"
