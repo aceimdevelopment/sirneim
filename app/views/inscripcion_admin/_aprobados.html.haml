@@ -1,7 +1,7 @@
 - @aprobados = Inscripcion.aprobados_actuales_diplomado_sin_grupo oferta.diplomado_id
 .tab-pane{:id=>"#{oferta.diplomado_id}_aprobados", :class => active}
 
-	.span7.well
+	.span8.well
 		%h3 Lista de Aprobados 
 		%table.table.table-striped.table-hover.table-condensed.table-bordered
 			%thead
@@ -14,7 +14,7 @@
 	- @aprobados = Inscripcion.inscritos_actuales_diplomado oferta.diplomado_id
 	- @grupos.each do |grupo|
 		- @inscritos_grupo = @aprobados.where(:grupo_id => grupo.id)
-		.span5.well.pull.pull-right
+		.span4.well.pull.pull-right
 			%h3= "Lista del #{grupo.nombre}"
 			%table.table.table-striped.table-hover.table-condensed.table-bordered
 				%thead
