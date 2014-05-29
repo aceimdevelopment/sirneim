@@ -12,14 +12,14 @@ class Reportes
   end
 
 
-  def self.planilla_inscripcion_pagina(usuario,pdf)
+  def self.planilla_inscripcion_pagina(inscripcion,pdf)
     title_font_size = 12
     subtitle_font_size = 11
     paraph_font_size = 8
     table_font_size = 10
-    pdf.add_image_from_file 'app/assets/images/encabezado_diplomados.jpg', 55, 720, 450,nil
-    # pdf.add_image_from_file 'app/assets/images/logo_eim.jpg', 515, 710+10, 50,nil
-    # pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 45, 710, 50,nil
+    # pdf.add_image_from_file 'app/assets/images/encabezado_diplomados.jpg', 55, 720, 450,nil
+    pdf.add_image_from_file 'app/assets/images/logo_eim.jpg', 515, 710+10, 50,nil
+    pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 45, 710, 50,nil
     # #pdf.add_image_from_file Rutinas.crear_codigo_barra(historial_academico.usuario_ci), 450-10, 500+35, nil, 120
     # pdf.add_text 480-10,500+35,to_utf16("---- #{usuario.ci} ----"),11
     
@@ -54,11 +54,13 @@ class Reportes
       col.justification = :left
     }
     datos = []
-    
+    usuario = inscripcion.estudiante.usuario
+    diplomado_cohorte = inscripcion.diplomado_cohorte
+
     datos << { "nombre" => to_utf16("<b>Estudiante:</b>"), "valor" => to_utf16("<b>Nombres: </b>#{usuario.nombres}  |  <b>Apellidos:</b> #{usuario.apellidos}\n<b>CI:</b> #{usuario.ci}  |  <b>Cel:</b>#{usuario.telefono_movil}  |  <b>mail:</b>#{usuario.correo}") }
-    datos << { "nombre" => to_utf16("<b>Horario:</b>"), "valor" => to_utf16("Sábado 9:00 a 12:30 pm (4 horas académicas semanales)") }
+    datos << { "nombre" => to_utf16("<b>Horario:</b>"), "valor" => to_utf16("#{diplomado_cohorte.diplomado.horario}") }
     datos << { "nombre" => to_utf16("<b>Aula:</b>"), "valor" => to_utf16("Aula 230 del 2do. piso de Trasbordo, Av. Minerva.") }
-    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("#{usuario.inscripcion.grupo.nombre} - #{usuario.inscripcion.cohorte.nombre}") }
+    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("#{inscripcion.grupo.id} - #{diplomado_cohorte.cohorte.nombre}") }
     tabla.data.replace datos
     tabla.render_on(pdf)
     
@@ -84,12 +86,12 @@ class Reportes
     }
     datos = []
     
-    datos << { "nombre" => to_utf16("<b>Banco:</b>"), "valor" => to_utf16("Banco de Venezuela") }
-    datos << { "nombre" => to_utf16("<b>Nro. de Cuenta:</b>"), "valor" => to_utf16("Cuenta Corriente Nro. 0102-0140-3400-0442-6884") }
-    datos << { "nombre" => to_utf16("<b>A nombre de:</b>"), "valor" => to_utf16("Fundeim") }
-    datos << { "nombre" => to_utf16("<b>Forma de pago:</b>"), "valor" => to_utf16("#{usuario.inscripcion.tipo_forma_pago.descripcion}") }
+    datos << { "nombre" => to_utf16("<b>Banco:</b>"), "valor" => to_utf16("#{diplomado_cohorte.cuenta_bancaria_banco}") }
+    datos << { "nombre" => to_utf16("<b>Nro. de Cuenta:</b>"), "valor" => to_utf16("Cuenta #{diplomado_cohorte.cuenta_bancaria_tipo} Nro. #{diplomado_cohorte.cuenta_bancaria_numero}") }
+    datos << { "nombre" => to_utf16("<b>A nombre de:</b>"), "valor" => to_utf16("#{diplomado_cohorte.cuenta_bancaria_cliente}") }
+    datos << { "nombre" => to_utf16("<b>Forma de pago:</b>"), "valor" => to_utf16("#{inscripcion.tipo_forma_pago.descripcion}") }
     if usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::UNICO
-      datos << { "nombre" => to_utf16("<b>Pago:</b>"), "valor" => to_utf16("7.600 BsF. (Al momento de la inscripción)") }
+      datos << { "nombre" => to_utf16("<b>Pago:</b>"), "valor" => to_utf16("#{diplomado_cohorte.inversion} BsF. (Al momento de la inscripción)") }
       datos << { "nombre" => to_utf16("<b>Nro. de depósito:</b>"), "valor" => to_utf16("_____________________________") }
 
     elsif usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::MITAD  
@@ -151,16 +153,16 @@ class Reportes
  		pdf.text "\n", :font_size => 7
   end
 
-  def self.planilla_inscripcion(usuario=nil)
+  def self.planilla_inscripcion(inscripcion=nil)
     pdf = PDF::Writer.new(:paper => "letter")  #:orientation => :landscape, 
     t = Time.now
-    planilla_inscripcion_pagina(usuario,pdf)
+    planilla_inscripcion_pagina(inscripcion,pdf)
 		pdf.text to_utf16("----- COPIA DEL ESTUDIANTE -----"), :font_size => 9, :justification => :center
 		pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 1 de 2"), :font_size => 6, :justification => :right
 		
     pdf.new_page
     pdf.y = 756
-    planilla_inscripcion_pagina(usuario,pdf)
+    planilla_inscripcion_pagina(inscripcion,pdf)
 		pdf.text to_utf16("----- COPIA ADMINISTRACIÓN -----"), :font_size => 9, :justification => :center
 		pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 2 de 2"), :font_size => 6, :justification => :right
    
