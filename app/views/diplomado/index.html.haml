@@ -1,40 +1,43 @@
-%p
+%br
 = link_to "diplomado/nuevo", {:class => 'btn btn-primary'}do
 	%i.icon-plus.icon-white
 	Agregar Diplomado
 
-.tabbable.tabs-left
-	%ul.nav.nav-tabs
-		-@diplomados.each do |diplomado|
-			%li
-				=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
-	.tab-content
-		-@diplomados.each do |diplomado|
-			.tab-pane{:id=>"#{diplomado.id}"}
-				%b Objetivo:
-				%p= diplomado.objetivo
-				%b Destinatario:
-				%p= diplomado.destinatario
-				%p
-					%b Modalidad:
-					= diplomado.modalidad
-				%p
-					%b Duración:
-					= diplomado.duracion
-				%b Horario:
-				%p= diplomado.horario					
-				= link_to "diplomado/vista/#{diplomado.id}", {:class => 'btn btn-info'}do
-					%i.icon-pencil.icon-white
-					=diplomado.descripcion_completa
+%br
+%br
+.well.well-small
+	.tabbable.tabs-left
+		%ul.nav.nav-tabs
+			-@diplomados.each do |diplomado|
+				%li
+					=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
+		.tab-content
+			-@diplomados.each do |diplomado|
+				.tab-pane{:id=>"#{diplomado.id}"}
+					%p
+						= link_to "diplomado/vista/#{diplomado.id}", {:class => 'btn btn-info', :data => {:toggle => "tooltip"}, "title"=>"Editar temas y módulos de este diplomado"} do
+							%i.icon-pencil.icon-white
+							=diplomado.descripcion_completa
+					%b Objetivo:
+					%p= diplomado.objetivo
+					%b Destinatario:
+					%p= diplomado.destinatario
+					%p
+						%b Modalidad:
+						= diplomado.modalidad
+					%p
+						%b Duración:
+						= diplomado.duracion
+					%b Horario:
+					%p= diplomado.horario
 
-				-diplomado.modulos.each do |modulo|
-					%dl.well.dl-horizontal
-						%dt= "#{modulo.descripcion_completa}"
-						%dd
-							-modulo.temas.each do |tema|
-								%li
-									%p= tema.descripcion_completa
-%p
+					-diplomado.modulos.each do |modulo|
+						%dl.well.dl-horizontal
+							%dt= "#{modulo.descripcion_completa}"
+							%dd
+								-modulo.temas.each do |tema|
+									%li
+										%p= tema.descripcion_completa
 = link_to "diplomado/nuevo", {:class => 'btn btn-primary'}do
 	%i.icon-plus.icon-white
 	Agregar Diplomado

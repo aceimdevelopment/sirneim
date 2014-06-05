@@ -19,7 +19,7 @@
 							= link_to "Preinscritos", "##{oferta.diplomado_id}_preinscritos", "data-toggle"=> "tab"
 						- @active = (@lista_actual.eql?"#{oferta.diplomado_id}_aprobados") ? "active" : ""
 						%li{:class => @active}
-							= link_to "Aprobados", "##{oferta.diplomado_id}_aprobados", "data-toggle"=> "tab"
+							= link_to "Admitidos", "##{oferta.diplomado_id}_aprobados", "data-toggle"=> "tab"
 					.tab-content
 						- @active = (@lista_actual.eql?"#{oferta.diplomado_id}_preinscritos") ? "active" : ""
 						= render "pendientes", :oferta => oferta, :active => @active

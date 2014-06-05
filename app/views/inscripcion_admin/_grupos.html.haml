@@ -2,10 +2,9 @@
 	%td= i
 	%td= inscrito_grupo.estudiante.usuario.descripcion
 	%td
-		= link_to url_for (:action => "retirar", :id => inscrito_grupo.id), {:class => 'btn btn-danger btn-mini'} do
-			%i.icon-minus.icon-white
-			Retirar del grupo
+		= link_to url_for (:action => "retirar", :id => inscrito_grupo.id), {:class => 'btn btn-danger btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Retirar del grupo"} do
+			%i.icon-remove.icon-white
 
-		= link_to url_for ({:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscrito_grupo.id}), {:class => 'btn btn-info btn-mini'} do
+		= link_to url_for ({:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscrito_grupo.id}), {:class => 'btn btn-success btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Descargar Planilla de Inscripcion"} do
 			%i.icon-download.icon-white
-			Planilla Inscripcion
+			

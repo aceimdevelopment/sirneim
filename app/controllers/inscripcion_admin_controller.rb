@@ -23,7 +23,7 @@ class InscripcionAdminController < ApplicationController
       if not estudiante = Estudiante.where(:usuario_ci => usuario_ci).limit(1).first
         estudiante = Estudiante.new
         estudiante.usuario_ci = usuario_ci
-        flash[:success] = "Estudiante Creado" if estudiante.save!
+        flash[:success] = "Estudiante Registrado" if estudiante.save!
       end
 
     # cohorte_actual = Cohorte.actual
@@ -81,7 +81,7 @@ class InscripcionAdminController < ApplicationController
     respond_to do |format|
       if @inscrito.save
         info_bitacora "#{session[:administrador].usuario_ci} Aprobó Preinscrito #{@inscrito.id}"
-        flash[:success] = "Estudiante Aprobado"
+        flash[:success] = "Estudiante Admitido"
         format.html { redirect_to :action => "gestionar", :diplomado_actual_id => diplomado_id, :lista_actual => "preinscritos"}
         format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
         format.js
@@ -110,7 +110,7 @@ class InscripcionAdminController < ApplicationController
     respond_to do |format|
       if @inscrito.save
         info_bitacora "#{session[:administrador].usuario_ci} Desaprobó Preinscrito #{@inscrito.id}"
-        flash[:alert] = "Estudiante Desaprobado"
+        flash[:alert] = "Estudiante Rechazado"
         format.html { redirect_to :action => "gestionar", :diplomado_actual_id => diplomado_id, :lista_actual => "preinscritos"}
         format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
         format.js
