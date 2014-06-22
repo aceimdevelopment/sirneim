@@ -13,7 +13,7 @@
     %tbody
       %tr
         %td= i
-        %td= docente.usuario.nombre_completo if docente.usuario
+        %td= docente.usuario.descripcion if docente.usuario
         %td
           =# link_to 'Detalle', :action => "vista"
           = link_to 'Editar', :action => "editar", :id => docente.usuario_ci

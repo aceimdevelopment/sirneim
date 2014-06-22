@@ -1,6 +1,6 @@
 %br
 =form_tag({:action => "guardar_parametros"}) do
-  %table.tablesorter.tablefilter.likert
+  %table.table.table-striped.table-hover.table-condensed.table-bordered
     %thead
       %tr
         %th
@@ -10,22 +10,22 @@
         %th
           NO
     %tbody
+      / %tr
+      /   %td
+      /     ¿Abrir la Preinscripción?
+      /   %td
+      /     -#if @preinscripcion_general == "SI"
+      /       =#radio_button_tag "preinscripcion_general","SI",true
+      /     -#else
+      /       =#radio_button_tag "preinscripcion_general","SI",false
+      /   %td
+      /     -#if @preinscripcion_general == "NO"
+      /       =#radio_button_tag "preinscripcion_general","NO",true
+      /     -#else
+      /       =#radio_button_tag "preinscripcion_general","NO",false
       %tr
         %td
           ¿Abrir la Preinscripción?
-        %td
-          -if @preinscripcion_general == "SI"
-            =radio_button_tag "preinscripcion_general","SI",true
-          -else
-            =radio_button_tag "preinscripcion_general","SI",false
-        %td
-          -if @preinscripcion_general == "NO"
-            =radio_button_tag "preinscripcion_general","NO",true
-          -else
-            =radio_button_tag "preinscripcion_general","NO",false
-      %tr
-        %td
-          ¿Abrir la Inscripción?
         %td
           -if @inscripcion_general == "SI"
             =radio_button_tag "inscripcion_general","SI",true
@@ -38,7 +38,7 @@
             =radio_button_tag "inscripcion_general","NO",false
 
 
-  %p= submit_tag 'Guardar'
+  %p= submit_tag 'Guardar', :class => "btn btn-primary"
 
 %br/
 %br/

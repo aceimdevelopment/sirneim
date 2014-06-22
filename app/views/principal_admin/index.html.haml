@@ -19,7 +19,7 @@
       .accordion-inner
         %ul.nav.nav-list
           %li=link_to "Listar Docentes", :controller => "docentes"
-          %li=link_to "Enviar Correo", "#"
+          %li=#link_to "Enviar Correo", "#"
   .accordion-group
     .accordion-heading
       %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseEstudiantes"}
@@ -35,9 +35,9 @@
     .accordion-heading
       %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseCartelera"}
         .nav-header
-          Cartelera & Parámetros Generales
+          Parámetros Generales
     #collapseCartelera.accordion-body.collapse
       .accordion-inner
         %ul.nav.nav-list
-          %li=link_to "Parámetros Generales", :controller => "parametros_generales", :action=> "index"
-          %li=link_to "Gestionar Cartelera Principal", "#"
+          %li=link_to "Cambiar Parámetros Generales", :controller => "parametros_generales", :action=> "index"
+          %li=#link_to "Gestionar Cartelera Principal", "#"

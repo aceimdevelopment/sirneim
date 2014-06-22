@@ -88,4 +88,18 @@ class Usuario < ActiveRecord::Base
     "#{telefono_movil}, #{correo}"
   end
   
+
+  def modificar_ci nueva_ci
+      resultado = ""
+      begin
+        cedula = Integer(ci)
+        nueva_ci = Integer(nueva_ci)
+        connection = ActiveRecord::Base.connection()
+        sql = "update usuario set ci = '#{nueva_ci}' where ci = '#{cedula}';"
+        connection.execute(sql)
+      rescue Exception => e
+        resultado = e.message 
+      end
+      return resultado
+  end
 end

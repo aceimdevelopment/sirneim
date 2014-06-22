@@ -29,4 +29,8 @@ module ApplicationHelper
     view_flow.content.delete(content_key)
   end
   
+  def capitaliza_parrafo parrafo
+    parrafo.split.map(&:capitalize).join(' ')
+  end
+
 end

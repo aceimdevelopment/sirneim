@@ -31,8 +31,12 @@ class DocentesController < ApplicationController
   def editar
     @titulo = "Editar Docente"
     @accion = "actualizar"
-    @usuario = Usuario.where (:ci => params[:id]).limit(1).first
-    @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first unless @usuario.nil?
+    # @usuario = Usuario.where (:ci => params[:id]).limit(1).first
+    # @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first unless @usuario.nil?
+
+    @docente = Docente.where (:usuario_ci => params[:id]).limit(1).first
+    @usuario = @docente.usuario if @docente
+
   end
 
   # POST /docentes
@@ -85,6 +89,29 @@ class DocentesController < ApplicationController
     end
  
   end
+
+  def modificar_ci
+    id = params[:id]
+    nueva_ci  = params[:nueva_ci]
+    repetir_ci = params[:repetir_ci]
+    if (nueva_ci.eql? repetir_ci)
+      if usuario = Usuario.find(id)
+        respuesta = usuario.modificar_ci nueva_ci 
+        if (respuesta).blank?
+          flash[:success] = "Cédula modificada con éxito"
+          id = nueva_ci
+        else
+          flash[:alert] = "No se pudo modificar la cédula: #{respuesta}"
+        end
+      else
+        flash[:alert] = "Usuario no encontrado, verifique los parámetros"
+      end
+    else
+      flash[:alert] = "La cédula y su confirmación deben deben ser iguales"
+    end
+    redirect_to :action => "editar", :id => id   
+  end
+
 
   # DELETE /docentes/1
   # DELETE /docentes/1.json

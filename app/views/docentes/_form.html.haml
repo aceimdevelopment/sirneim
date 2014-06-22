@@ -18,8 +18,12 @@
         Cédula de Identidad:
       .controls
         =text_field :usuario, :ci, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium", :readonly => (@accion.eql? "actualizar")
+        = link_to "", { :role => 'button', :class => 'btn btn-mini', :data => {:toggle => 'modal'}, :onclick => "return $('#modificar_ci').modal();"} do
+          = content_tag(:i, "", :class => "icon-edit")
+          Modificar Cédula
         %span.help-block
           Ejemplo: 12345678
+
 
     .control-group
       %label.control-label
@@ -122,3 +126,22 @@
     - else
       - @submit = "Registrar"
     =submit_tag @submit, :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
+
+
+#modificar_ci.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.fade{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Modificar Cédula de Identidad
+  .modal-body
+    =form_tag "/aceim_diplomados/docentes/modificar_ci/#{@usuario.ci}", :class => "form-horizontal" do 
+      .control-group
+        %label.control-label{:for => "nueva_ci"} Cédula Nueva:
+        .controls
+          =number_field_tag :nueva_ci, nil, :autofocus => true, :required => true, :placeholder => "Nueva Cédula"
+      .control-group
+        %label.control-label{:for => "repetir_ci"} Repetir Cédula:
+        .controls
+          =number_field_tag :repetir_ci, nil, :autofocus => true, :required => true, :placeholder => "Reperir Cédula"
+      .form-actions
+        %input.btn.btn-primary{"data-disable-with" => "Por favor espere...", :name => "commit", :type => "submit", :value => "Guardar"}
+          %a.btn{"data-dismiss" => "modal", :href => ""} Cancelar 
