@@ -93,8 +93,8 @@
 									- @docentes_ct.each do |docente_ct|
 										%li
 											%p
-												%b= "#{docente_ct.docente.nombre_completo}:"
-												= docente_ct.tema.descripcion_completa
+												%b= "#{docente_ct.docente.nombre_completo if docente_ct.docente}:"
+												= docente_ct.tema.descripcion_completa if docente_ct.tema
 
 
 					.accordion-group
