@@ -7,6 +7,7 @@
   %thead
     %th #
     %th Nombre Completo
+    %th Módulo
     %th Opciones
 
   -@docentes.each_with_index do |docente,i|
@@ -14,6 +15,7 @@
       %tr
         %td= i
         %td= docente.usuario.descripcion if docente.usuario
+        %td= docente.cohorte_tema.where(:cohorte_id => Cohorte.actual).collect{|ct| "#{ct.tema.descripcion_completa} - #{ct.grupo.descripcion} | "}
         %td
           =# link_to 'Detalle', :action => "vista"
           = link_to 'Editar', :action => "editar", :id => docente.usuario_ci

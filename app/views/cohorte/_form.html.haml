@@ -1,0 +1,38 @@
+=form_for(@cohorte,:url=>{:controller => 'cohorte', :action => 'crear'}, :html => {:class => 'form-horizontal'}) do |a|
+  -if @cohorte.errors.any?
+    %ul
+      -flash[:alert] = ''
+      -@cohorte.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+  -@year = Date.today.year
+  %fieldset
+    %legend Ingrese el año y una breve descripción de la cohorte
+    .control-group
+      %label.control-label
+        Año Inicial:
+      .controls  
+        = a.number_field :id, :autofocus => true, :in => @year-2...Date.today.year+10, :class => 'span1', :required => true, :value => @year
+        %span.help-inline
+          = "Ej. #{@year}"
+
+    .control-group
+      %label.control-label
+        Descripción:
+      .controls
+        = a.text_field :nombre, :placeholder => 'Descripcion…', :class => 'input'
+        %span.help-inline
+          ="Ej. #{@year}-#{@year+1} (Carlos Raúl Villanueva)"
+    .form-actions      
+      - if session[:wizard]
+        - @atras = '/aceim_diplomados/principal_admin'
+        - @commit = 'Siguiente'
+      - else
+        - @atras = '/aceim_diplomados/cohorte'
+        - @commit = 'Registrar'
+      = link_to @atras, {:class => "btn"} do
+        %i.icon-backward
+        Atrás
+
+      = button_tag :type => 'submit', :class => 'btn btn-primary' do
+        %i.icon-forward.icon-white
+        = @commit

@@ -1,0 +1,8 @@
+%ul.pager
+	%li
+		-if action_name.eql? "paso1"
+			= link_to "cancelar", {:controller => "principal_admin"}
+		- else
+			= link_to "Atrás", @anterior
+	%li
+		= link_to "Siguiente", @siguiente  

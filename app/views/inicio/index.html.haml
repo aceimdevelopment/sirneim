@@ -63,14 +63,22 @@
 										-modulo.temas.each do |tema|
 											%li
 												%p= tema.descripcion_completa
-												- tema.cohorte_tema.each do |ct|
-													%p
-														%b Grupo:
-														= ct.grupo.descripcion
-														%b Fecha Inicial
-														= ct.fecha_inicial.to_s
-														%b Fecha Final
-														= ct.fecha_final.to_s
+												- cortes_temas = tema.cohorte_tema.where(:cohorte_id => @cohorte_actual.id)
+												- if cortes_temas.count > 0
+													- cortes_temas.each do |ct|
+														%p
+															%b Grupo:
+															= ct.grupo.id
+															%b Fecha Inicial
+															= ct.fecha_inicial.to_s
+															%b Fecha Final
+															= ct.fecha_final.to_s
+															- if ct.docente
+																%b Docente:
+																= ct.docente.usuario.nombre_completo
+
+												- else
+													%p.muted -- Fechas por definir  --
 
 
 					.accordion-group
@@ -80,31 +88,50 @@
 									Grupo Docente
 					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_docentes"}
 						.accordion-inner
+							.well.well-small
+								%ul
+									- @docentes_ct.each do |docente_ct|
+										%li
+											%p
+												%b= "#{docente_ct.docente.nombre_completo}:"
+												= docente_ct.tema.descripcion_completa
+
 
 					.accordion-group
 						.nav-header
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_inscripcion"}
 								.nav-header
-									Inscripciones
+									Preinscripcion
 					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_inscripcion"}
 						.accordion-inner
-							%b Datos de la cuenta:
-							%p 
-								%b= dc.cuenta_bancaria_banco
-							%p 
-								%b= "Cuenta #{dc.cuenta_bancaria_tipo}"
-								=  "Nro. #{dc.cuenta_bancaria_numero}"
 
-							%p= "A nombre de:#{dc.cuenta_bancaria_cliente}" 
-							%p
-								%b Inversión (pago único):
-								= "#{dc.inversion} Bs." 
-							%p
-								%b Fecha de inscripciones:
-								= dc.fecha_inscripcion.to_s
-							%p
-								%b Horario de inscripciones:
-								= dc.horario_inscripcion
-							%p	
-								%b Nota: 
-								La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido.
+							%h4 Datos de PreInscripción:
+							.well.well-small
+								%p
+									%b Fecha de preinscripciones:
+									= dc.fecha_inscripcion.to_s
+								%p
+									%b Horario de preinscripciones:
+									= dc.horario_inscripcion
+
+							%h4 Datos de la cuenta:
+							.well.well-small
+								%p
+									%b Banco:
+									= dc.cuenta_bancaria_banco
+								%p 
+									%b Tipo de Cuenta:
+									= dc.cuenta_bancaria_tipo
+								%p	
+									%b Nro.:
+									=  dc.cuenta_bancaria_numero
+
+								%p
+									%b A nombre de:
+									=dc.cuenta_bancaria_cliente
+								%p
+									%b Inversión (pago único):
+									= "#{dc.inversion} Bs." 
+								%p	
+									%b Nota:
+									La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido.

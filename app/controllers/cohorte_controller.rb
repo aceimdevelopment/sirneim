@@ -9,21 +9,26 @@ class CohorteController < ApplicationController
 	end
 
 	def nuevo
-		@cohorte = Cohorte.new
+		@cohorte = Cohorte.new 
 		@titulo = "Nueva Cohorte"
 	end
 
 	def crear
 		# cohorte = Cohorte.new(params[:cohorte])
-		@cohorte = Cohorte.new
-		@cohorte.id = params[:cohorte][:id]
+		@cohorte = Cohorte.find_or_create_by_id(params[:cohorte][:id])
+		# @cohorte.id = params[:cohorte][:id]
 		@cohorte.nombre = params[:cohorte][:nombre]
 
-	    if @cohorte.save
-	      redirect_to :action => "index"
-	    else
-	      render :action => "nuevo"
-	  	end	  	
+    if @cohorte.save
+    	if session[:wizard]
+    		session[:cohorte] = @cohorte
+    		redirect_to :controller => 'asistente_diplomado', :action => 'paso2'
+    	else
+      	redirect_to :action => 'index'
+      end
+    else
+      render :action => 'nuevo'
+  	end	  	
 	end
 
 	def editar

@@ -32,19 +32,21 @@ class DiplomadoCohorteController < ApplicationController
 	end
 
 	def crear
-		diplomados_ids = params[:diplomado_cohorte][:diplomado_id]
-		cohorte_id = params[:diplomado_cohorte][:cohorte_id]
-		diplomados_ids.each do |diplomado_id|
-			@diplomado_cohorte = DiplomadoCohorte.new
-			@diplomado_cohorte.cohorte_id = cohorte_id
-			@diplomado_cohorte.diplomado_id = diplomado_id
-			
-			unless @diplomado_cohorte.save
-	      		render :action => "nuevo"
-	  		end
-		end
-		flash[:success] = "Registro Correcto de Diplomados para esta cohorte"
-		redirect_to :action => "index"
+		# @diplomado_cohorte = DiplomadoCohorte.new(params[:diplomado_cohorte])
+		@diplomado_cohorte = DiplomadoCohorte.find_or_create_by_diplomado_id_and_cohorte_id(params[:diplomado_cohorte][:diplomado_id],params[:diplomado_cohorte][:cohorte_id])
+		@diplomado_cohorte.attributes = params[:diplomado_cohorte]
 
+		if @diplomado_cohorte.save
+			flash[:success] = "Registro Correcto de Diplomado para esta cohorte"
+
+			if session[:wizard]
+				# redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+				redirect_to :controller => 'asistente_diplomado',:action => 'paso3', :id => @diplomado_cohorte.id.to_s
+			else
+				redirect_to :action => 'index'
+			end
+		else
+			render 'nuevo'
+		end
 	end
 end

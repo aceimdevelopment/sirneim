@@ -23,8 +23,12 @@ class CohorteTemaController < ApplicationController
 
 		@cohorte_tema.docente_ci = nil if params[:cohorte_tema][:docente_ci].eql? ""
 		if @cohorte_tema.save
-			flash[:success] = "Asiganción correcta" 
-			redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			flash[:success] = "Asiganción correcta"
+			if session[:wizard]
+				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			else	
+				redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			end
 		else
 			render :action => "nuevo"
 		end
@@ -37,7 +41,12 @@ class CohorteTemaController < ApplicationController
 
 		if @cohorte_tema.update_attributes(cohorte_tema)
 			flash[:success] = "Asignación actualizada"
-			redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}", "#" => "#{cohorte_tema[:modulo_numero]}"
+
+			if session[:wizard]
+				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			else	
+				redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			end
 			# redirect_to "nuevo/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}##{cohorte_tema[:modulo_numero]}"
 		else
 			render :action => "nuevo"
