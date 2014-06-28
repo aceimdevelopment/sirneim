@@ -39,8 +39,8 @@ class ParametrosGeneralesController < ApplicationController
       periodo_actual.valor = params[:cohorte][:id] 
       periodo_actual.save
       session[:parametros][:cohorte_actual] = periodo_actual.valor
-
-      redirect_to :controller => "principal_admin"
+      url = params[:url] ? params[:url] : '/aceim_diplomados/principal_admin/index'  
+      redirect_to url
   end
 
   def cambiar_periodo_modal

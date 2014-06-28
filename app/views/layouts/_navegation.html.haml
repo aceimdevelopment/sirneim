@@ -5,40 +5,46 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
+      -cohorte_actual = Cohorte.actual  
       -if session[:administrador]
         %a.brand{:href => "/aceim_diplomados/principal_admin", :style => ""} Aceim
       .container-fluid.nav-collapse
         %ul.nav
           -if session[:administrador]
+            
+            = drop_down "Diplomados" do
+              %li= link_to "Lista de Diplomados", :controller=>"diplomado"
+              -if session[:administrador].rol == "super"
+                %li= link_to "Nueva Diplomado", :controller=>"diplomado",:action=>"nuevo"
+            
+            = drop_down "Cohortes" do
+              %li= link_to "Lista de Cohortes", :controller=>"cohorte"
+              %li
+                = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
+                  Cambiar Cohorte
+
+              -if session[:administrador].rol == "super"
+                %li= link_to "Nueva Cohorte", :controller=>"cohorte",:action=>"nuevo"
+
+        %ul.nav
+          -if session[:administrador]
+            = drop_down "Docentes" do
+              %li=link_to "Listar Docente", :controller => "docentes"
+
             = drop_down "Participantes" do
               %li= link_to "Gestionar Participantes en Diplomados", :controller => "inscripcion_admin", :action => "gestionar"
               %li= link_to_if session[:administrador].rol == "super", "Gestionar Participante Existente", :controller=> "admin_estudiante"
               %li= link_to_if session[:administrador].rol == "super", "Inscribir Participante en Diplomado", :controller=> "inscripcion_admin", :action => "buscar"
               /%li=#link_to "Control de asistencia", :controller=> "asistencia", :action=>"seleccionar_curso"
-            = drop_down "Docentes" do
-              %li=link_to "Listar Docente", :controller => "docentes"
-
-        %ul.nav
-          -if session[:administrador]
-            - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
-            = drop_down "Diplomados" do
-              %li= link_to "Lista de Diplomados", :controller=>"diplomado"
-              -if session[:administrador].rol == "super"
-                %li= link_to "Nueva Diplomado", :controller=>"diplomado",:action=>"nuevo"
-            = drop_down "Cohortes" do
-              %li= link_to "Lista de Cohortes", :controller=>"cohorte"
-              %li= link_to "Cambiar Cohorte Actual", :controller=>"parametros_generales",:action=>"cambiar_cohorte"
-              -if session[:administrador].rol == "super"
-                %li= link_to "Nueva Cohorte", :controller=>"cohorte",:action=>"nuevo"
 
         .nav.pull-right
-          - cohorte_altual = Cohorte.find ParametroGeneral.cohorte_actual
           -if session[:usuario]
-          
-            %li
-              %a
-                Cohorte Actual:
-                %b= "#{cohorte_altual.descripcion }"
+            = drop_down "Cohorte Actual: #{cohorte_actual.descripcion}" do
+              %li
+                = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
+                  Cambiar Cohorte
+
+
             = drop_down "#{session[:usuario].nombre_completo}" do
               %li= link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
               %li= link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
@@ -46,3 +52,14 @@
               = menu_item "Cerrar sesión", "/aceim_diplomados/inicio/cerrar_sesion"
           -else
             =render 'layouts/cargar_sesion' if (action_name != "registrar")
+
+
+#cambiar_cohorte.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.fade{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Modificar Cédula de Identidad
+  .modal-body
+    -@cohortes = Cohorte.all.sort_by{|x| "#{x.id}"}.reverse()
+    -@url_retorno = request.url
+    -@modal = true
+    =render 'parametros_generales/form_cohorte'
