@@ -24,7 +24,7 @@ class ModuloController < ApplicationController
 		@modulo = Modulo.where(:numero => numero, :diplomado_id => diplomado_id).first
 	end
 
-  def editar
-    
-  end
+	def editar
+		1/0
+	end
 end

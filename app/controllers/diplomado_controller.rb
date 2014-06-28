@@ -31,7 +31,13 @@ class DiplomadoController < ApplicationController
   end
 
   def editar
-    1/0
+
+    @diplomado = Diplomado.find(params[:id])
+
+    if @diplomado.update_attributes(params[:diplomado])
+      flash[:success] = "Datos actualizados correctamente"
+    end
+    redirect_to :action => 'vista', :id => @diplomado
   end
 
   def vista
