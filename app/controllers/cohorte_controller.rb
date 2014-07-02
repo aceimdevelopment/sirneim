@@ -5,7 +5,7 @@ class CohorteController < ApplicationController
 
 	def index
 		@cohortes = Cohorte.all
-		@titulo = "Listado de Cohorte"
+		@titulo = "Listado de Cohortes"
 	end
 
 	def nuevo

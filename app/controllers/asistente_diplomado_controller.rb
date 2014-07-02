@@ -81,34 +81,59 @@ class AsistenteDiplomadoController < ApplicationController
 			@cohorte_tema.cohorte_id = cohorte_id
 			@titulo = "#{action_name.capitalize}: Asignación de fechas y docentes a cada tema"
 			@grupos = @diplomado_cohorte.grupos
-
 			@atras = "/aceim_diplomados/asistente_diplomado/paso4/#{@diplomado_cohorte.diplomado_id}"
-			@titulo = "#{action_name.capitalize}: Seleccionar Diplomado"
-			@porcentaje = (4.0/PASOS)*100
-			@siguiente = "/aceim_diplomados/asistente_diplomado/paso6"
+			@porcentaje = (5.0/PASOS)*100
+			@siguiente = "/aceim_diplomados/asistente_diplomado/paso6/#{@diplomado_cohorte.id}"
 
 		else
 			flash[:alert] = "No se ha encontrado el diplomado en esta cohorte, por favor registrelo antes"
 			redirect_to :back
 		end
 
-		# @cohorte_tema = CohorteTema.new
-		# diplomado_id, cohorte_id = params[:id].split ","
-		# @cohortes_temas = CohorteTema.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id)
-		# @cohorte_tema.diplomado_id = diplomado_id
-		# @cohorte_tema.cohorte_id = cohorte_id
-		# @titulo = "#{action_name.capitalize}: Asignación de fechas y docentes a cada tema"
-		# @grupos = Grupo.all
 	end
 
-	def paso_final
+	def paso6
+		diplomado_id, cohorte_id = params[:id].split ","
+		@diplomado_cohorte = @diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id).limit(1).first
+		@atras = "/aceim_diplomados/asistente_diplomado/paso5/#{@diplomado_cohorte.id}"
+		@titulo = "#{action_name.capitalize}: Ajustes finales"
+		@porcentaje = (5.5/PASOS)*100
+		@siguiente = "/aceim_diplomados/asistente_diplomado/finalizar"		
+	end
 
-		# asignarle cohorte_actual a la cohorte seleccionada en el asistente.
-		# abrir la inscripcion.
+	def paso6_guardar
+		actualizar_cohorte = params[:actualizar_cohorte]
+		preinscripcion = params[:preinscripcion]
+
+		if actualizar_cohorte.eql? "si"
+			cohorte_actual = ParametroGeneral.find("COHORTE_ACTUAL")
+			cohorte = session[:cohorte] 
+			cohorte_actual.valor = cohorte.id
+			if cohorte_actual.save
+				flash[:success] = "Cambio de cohorte a: #{Cohorte.actual.descripcion}."
+				session[:parametros][:cohorte_actual] = cohorte_actual.valor
+			else
+				flash[:alert] = "No se pudo cambiar el período, intentelo de nuevo."
+			end
+		end
+
+		if preinscripcion.eql? "si"
+			preinscripcion_general = ParametroGeneral.find("PREINSCRIPCION_ABIERTA")
+			preinscripcion_general.valor = params[:inscripcion_general]
+			if preinscripcion_general.save
+		    	flash[:success] << "\n ¡Preinscripción abierta!"
+			else
+				flash[:alert] << "\n No se pudo abrir la Preinscripción"
+			end
+		end
+
+		redirect_to :back
+	end
+
+	def finalizar
 		session[:wizard] = nil
 		session[:cohorte] = nil
 		flash[:success] = "Planificación del diplomado completada satisfactoriamente"
 		redirect_to :controller => "principal_admin"
-		
 	end
 end

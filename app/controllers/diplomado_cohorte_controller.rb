@@ -50,7 +50,7 @@ class DiplomadoCohorteController < ApplicationController
 
 			if session[:wizard]
 				# redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
-				redirect_to :controller => 'asistente_diplomado',:action => 'paso4', :id => @diplomado_cohorte.id.to_s
+				redirect_to :controller => 'asistente_diplomado',:action => 'paso4', :id => @diplomado_cohorte.diplomado_id
 			else
 				redirect_to :action => 'index'
 			end

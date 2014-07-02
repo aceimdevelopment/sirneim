@@ -1,0 +1,22 @@
+=form_tag({:action => "guardar_parametros"}) do
+  %table.table.table-striped.table-hover.table-condensed.table-bordered
+    %thead
+      %tr
+        %th
+          Acción
+        %th
+          SI
+        %th
+          NO
+    %tbody
+
+      %tr
+        %td
+          ¿Abrir la Preinscripción?
+        %td
+          =radio_button_tag "preinscripcion_general","SI", (@preinscripcion_general == "SI")
+        %td
+          =radio_button_tag "preinscripcion_general","NO", (@preinscripcion_general == "NO")
+
+
+  %p= submit_tag 'Guardar', :class => "btn btn-primary"
