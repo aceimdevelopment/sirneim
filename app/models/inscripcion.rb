@@ -14,14 +14,17 @@ class Inscripcion < ActiveRecord::Base
     :foreign_key => ['estudiante_ci']
   
   belongs_to :tipo_forma_pago
-
-  belongs_to :grupo
   
   belongs_to :diplomado_cohorte,
     :class_name => 'DiplomadoCohorte',
     :foreign_key => ['diplomado_id','cohorte_id']
 
   belongs_to :tipo_estado_inscripcion
+
+
+  validates_uniqueness_of :estudiante_ci, :scope => [:diplomado_id, :cohorte_id], :message => "Ud. ya inscribió este diplomado en esta Cohorte", :on => :create
+
+  validates :grupo, :presence => true
 
   # scope :actuales, -> {where("cohorte_id IS ?", ParametroGeneral.cohorte_actual)}
   # belongs_to :diplomado
@@ -31,9 +34,9 @@ class Inscripcion < ActiveRecord::Base
 
   scope :aprobados_actuales_diplomado, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "APR", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id) }
 
-  scope :aprobados_actuales_diplomado_sin_grupo, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "APR", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id, :grupo_id => nil) }
+  scope :aprobados_actuales_diplomado_sin_grupo, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "APR", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id, :grupo => nil) }
 
-  scope :aprobados_actuales_diplomado_con_grupo, lambda { |diplomado_id| where("tipo_estado_inscripcion_id = ? AND cohorte_id = ? AND diplomado_id = ? AND grupo_id IS NOT ?", 'APR', COHORTE_ACTUAL.id, diplomado_id, nil) }
+  scope :aprobados_actuales_diplomado_con_grupo, lambda { |diplomado_id| where("tipo_estado_inscripcion_id = ? AND cohorte_id = ? AND diplomado_id = ? AND grupo IS NOT ?", 'APR', COHORTE_ACTUAL.id, diplomado_id, nil) }
 
   scope :inscritos_actuales_diplomado, lambda { |diplomado_id| where(:tipo_estado_inscripcion_id => "INS", :cohorte_id => COHORTE_ACTUAL.id, :diplomado_id => diplomado_id) }
 
@@ -64,8 +67,6 @@ class Inscripcion < ActiveRecord::Base
     end
   end
 
-  validates_uniqueness_of :estudiante_ci, :scope => [:diplomado_id, :cohorte_id], :message => "Ud. ya inscribió este diplomado en esta Cohorte", :on => :create
-  
   # validates_uniqueness_of :estudiante_id, :scope => :friend_id
 
 end

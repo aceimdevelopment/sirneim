@@ -10,6 +10,7 @@
 
 		- @diplomados_ofertados.each do |oferta|
 			- @activo_actual = (@diplomado_actual_id and (@diplomado_actual_id.eql? oferta.diplomado_id))
+			- grupos = oferta.grupos
 			- @active = @activo_actual ? "active" : ""
 			.tab-pane{:id=>"#{oferta.diplomado_id}", :class => @active}
 				.tabbable.tabs-left
@@ -25,4 +26,4 @@
 						= render "pendientes", :oferta => oferta, :active => @active
 
 						- @active = (@lista_actual.eql?"#{oferta.diplomado_id}_aprobados") ? "active" : ""			
-						= render "aprobados", :oferta => oferta, :active => @active
+						= render "aprobados", :oferta => oferta, :active => @active, :grupos => grupos

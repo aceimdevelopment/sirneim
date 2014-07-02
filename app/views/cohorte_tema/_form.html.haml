@@ -15,7 +15,7 @@
 			%tbody
 				-modulo.temas.each do |tema|
 					-for grupo in 1..@grupos
-						- @cohorte_tema.grupo = grupo.to_i
+						- @cohorte_tema.grupo = grupo
 						- @cohorte_tema.tema_numero = tema.numero
 						- @cohorte_tema.modulo_numero = modulo.numero
 						- unless (@cohortes_temas.include? @cohorte_tema)

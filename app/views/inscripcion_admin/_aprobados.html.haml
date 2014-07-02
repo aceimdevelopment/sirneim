@@ -11,13 +11,15 @@
 					%th Opciones
 				%tbody{:id => "aprobados_#{oferta.diplomado_id}"}
 				- @aprobados_sg.each_with_index do |aprobado,i|
-					=render "aprobado", :aprobado => aprobado, :asignar => true, :i => i
+					=render "aprobado", :aprobado => aprobado, :asignar => true, :i => i, :grupos => grupos
 	- @aprobados = Inscripcion.inscritos_actuales_diplomado oferta.diplomado_id
+	%h5
+		= "Total Admitidos: #{@aprobados.count}"
 	-if @aprobados.count > 0
-		- @grupos.each do |grupo|
-			- @inscritos_grupo = @aprobados.where(:grupo_id => grupo.id)
+		-for grupo in 1..grupos
+			- @inscritos_grupo = @aprobados.where(:grupo => grupo)
 			.well.well-small.pull.pull-right
-				%h3= "Lista del #{grupo.nombre}"
+				%h3= "Lista del grupo #{grupo}"
 				%table.table.table-striped.table-hover.table-condensed.table-bordered
 					%thead
 						%th #
@@ -26,5 +28,7 @@
 					%tbody{:id => "preinscritos_#{oferta.diplomado_id}"}
 					- @inscritos_grupo.each_with_index do |inscrito_grupo,i|
 						=render "grupos", :inscrito_grupo => inscrito_grupo, :grupo => grupo, :i => i
-
+	-else
+		.span4.well.well-small 
+			%h5.muted Aún no hay participantes asignados a grupos
 

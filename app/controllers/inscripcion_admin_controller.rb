@@ -42,14 +42,14 @@ class InscripcionAdminController < ApplicationController
 
 
   def gestionar
-    @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => Cohorte.actual.id)
     @cohorte_actual = Cohorte.actual
+    @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => @cohorte_actual.id)
     @diplomado_actual_id = params[:diplomado_actual_id]
 
     @lista_actual = params[:lista_actual].nil? ? "" : params[:lista_actual]
     @lista_actual = "#{@diplomado_actual_id}_#{@lista_actual}"
 
-    @grupos = Grupo.all
+    # @grupos = Grupo.all
     # @tipo_forma_pago = TipoFormaPago.all
   end
   
@@ -66,7 +66,7 @@ class InscripcionAdminController < ApplicationController
                          :type => "application/pdf", :disposition => "attachment"
   end  
 
-  def aprobar
+  def admitir
     diplomado_id = params[:id][2]
     @inscrito = Inscripcion.find(params[:id])
 
@@ -154,7 +154,7 @@ class InscripcionAdminController < ApplicationController
 
     @inscrito.tipo_estado_inscripcion_id = "APR"
 
-    @inscrito.grupo_id = nil
+    @inscrito.grupo = nil
     # @inscrito.tipo_forma_pago_id = nil
     @diplomados_ofertados = DiplomadoCohorte.where(:cohorte_id => Cohorte.actual.id)
     # if @inscripcion.save

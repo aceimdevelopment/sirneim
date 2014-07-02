@@ -40,9 +40,10 @@
         .nav.pull-right
           -if session[:usuario]
             = drop_down "Cohorte Actual: #{cohorte_actual.descripcion}" do
-              %li
-                = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
-                  Cambiar Cohorte
+              -if session[:administrador]
+                %li
+                  = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
+                    Cambiar Cohorte
 
 
             = drop_down "#{session[:usuario].nombre_completo}" do

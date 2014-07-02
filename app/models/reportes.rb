@@ -11,6 +11,21 @@ class Reportes
     return pdf
   end
 
+  def self.planilla_inscripcion(inscripcion=nil)
+    pdf = PDF::Writer.new(:paper => "letter")  #:orientation => :landscape, 
+    t = Time.now
+    planilla_inscripcion_pagina(inscripcion,pdf)
+        pdf.text to_utf16("----- COPIA DEL ESTUDIANTE -----"), :font_size => 9, :justification => :center
+        pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 1 de 2"), :font_size => 6, :justification => :right
+        
+    pdf.new_page
+    pdf.y = 756
+    planilla_inscripcion_pagina(inscripcion,pdf)
+        pdf.text to_utf16("----- COPIA ADMINISTRACIÓN -----"), :font_size => 9, :justification => :center
+        pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 2 de 2"), :font_size => 6, :justification => :right
+   
+    return pdf
+  end
 
   def self.planilla_inscripcion_pagina(inscripcion,pdf)
     title_font_size = 12
@@ -60,7 +75,7 @@ class Reportes
     datos << { "nombre" => to_utf16("<b>Estudiante:</b>"), "valor" => to_utf16("<b>Nombres: </b>#{usuario.nombres}  |  <b>Apellidos:</b> #{usuario.apellidos}\n<b>CI:</b> #{usuario.ci}  |  <b>Cel:</b>#{usuario.telefono_movil}  |  <b>mail:</b>#{usuario.correo}") }
     datos << { "nombre" => to_utf16("<b>Horario:</b>"), "valor" => to_utf16("#{diplomado_cohorte.diplomado.horario}") }
     datos << { "nombre" => to_utf16("<b>Aula:</b>"), "valor" => to_utf16("Aula 230 del 2do. piso de Trasbordo, Av. Minerva.") }
-    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("#{inscripcion.grupo.id} - #{diplomado_cohorte.cohorte.nombre}") }
+    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("#{inscripcion.grupo} - #{diplomado_cohorte.cohorte.nombre}") }
     tabla.data.replace datos
     tabla.render_on(pdf)
     
@@ -95,7 +110,7 @@ class Reportes
       datos << { "nombre" => to_utf16("<b>Nro. de depósito:</b>"), "valor" => to_utf16("_____________________________") }
 
     elsif usuario.inscripcion.tipo_forma_pago_id == TipoFormaPago::MITAD  
-      datos << { "nombre" => to_utf16("<b>Pago 1:</b>"), "valor" => to_utf16("3.800 BsF. (Al momento de la inscripción)") }
+      datos << { "nombre" => to_utf16("<b>Pago 1:</b>"), "valor" => to_utf16("#{(diplomado_cohorte.inversion/2)} BsF. (Al momento de la inscripción)") }
       datos << { "nombre" => to_utf16("<b>Nro de depósito:</b>"), "valor" => to_utf16("_____________________________") }
     end
     tabla.data.replace datos  
@@ -153,19 +168,5 @@ class Reportes
  		pdf.text "\n", :font_size => 7
   end
 
-  def self.planilla_inscripcion(inscripcion=nil)
-    pdf = PDF::Writer.new(:paper => "letter")  #:orientation => :landscape, 
-    t = Time.now
-    planilla_inscripcion_pagina(inscripcion,pdf)
-		pdf.text to_utf16("----- COPIA DEL ESTUDIANTE -----"), :font_size => 9, :justification => :center
-		pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 1 de 2"), :font_size => 6, :justification => :right
-		
-    pdf.new_page
-    pdf.y = 756
-    planilla_inscripcion_pagina(inscripcion,pdf)
-		pdf.text to_utf16("----- COPIA ADMINISTRACIÓN -----"), :font_size => 9, :justification => :center
-		pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 2 de 2"), :font_size => 6, :justification => :right
-   
-    return pdf
-  end
+
 end
