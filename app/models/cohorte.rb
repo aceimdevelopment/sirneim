@@ -6,8 +6,8 @@ class Cohorte < ActiveRecord::Base
   has_many :cohortes_temas
   accepts_nested_attributes_for :cohortes_temas
 
-	validates :id, :presence => true, :uniqueness => true,  :numericality => { :greater_than => 2010, :less_than_or_equal_to => 2030 }
-
+	validates :id, :presence => true, :uniqueness => true,  :numericality => { :greater_than => 2010, :less_than_or_equal_to => 2030}
+  validates :nombre, :presence => true, :uniqueness => true
 	def descripcion
 
     unless nombre.blank?

@@ -1,12 +1,24 @@
 -if @cohortes.count > 0
 	.well.well-small
-		%ul
-			-@cohortes.each do |cohorte|
-				%li
-					=cohorte.descripcion
+		%br
+		%table.table.table-striped.table-hover.table-condensed.table-bordered
+			%thead
+				%th #
+				%th Año Inicial
+				%th Descripcion
+
+			-@cohortes.each_with_index do |cohorte,i|
+				%tbody
+					%tr
+						%td= i
+						%td= cohorte.id
+						%td= cohorte.descripcion
+
 -else
 	%h2 Sin Cohortes
 
 = link_to "cohorte/nuevo", {:class => 'btn btn-primary'} do
 	%i.icon-plus.icon-white
 	Agregar Cohorte
+
+
