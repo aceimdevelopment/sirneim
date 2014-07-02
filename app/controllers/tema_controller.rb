@@ -8,19 +8,43 @@ class TemaController < ApplicationController
 		@tema.diplomado_id = diplomado_id
 		@tema.modulo_numero = modulo_numero
 		@titulo = "Registro de Nuevo Tema"
+		@accion = 'crear'
 	end
 
 	def crear
   		@tema = Tema.new(params[:tema])
+	    
 	    if @tema.save
-	    	flash[:success] = "Tema Agregado Satisfactoriamente"
-	    	redirect_to :controller => "diplomado", :action => "vista", :id => "#{@tema.diplomado.id}"
-	    else
-	    	render :action => "nuevo"
-	  	end
+	    	flash[:success] = "Tema Agregado Satisfactoriamente" 
+			if session[:wizard]
+				redirect_to :controller => 'asistente_diplomado', :action => 'paso3', :id => @tema.diplomado_id
+			else
+				redirect_to :controller => 'principal_admin'
+			end
+		else
+			@titulo = "Registro de Nuevo Tema"
+			@accion = 'crear'
+			render :action => 'nuevo'
+		end
 	end
 
 	def editar
-		1/0
+		@tema = Tema.new(params[:id])
+		@accion = 'actualizar'
+	end
+
+	def actualizar
+		@tema = Tema.find(params[:id])
+
+		if @tema.update_attributes(params[:tema])
+			flash[:success] = "Tema Actualizado Satisfactoriamente" 
+			if session[:wizard]
+				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@tema.diplomado_id}"
+			else
+				redirect_to '/aceim_diplomados/principal_admin'
+			end
+		else
+			render :action => 'nuevo'
+		end
 	end
 end

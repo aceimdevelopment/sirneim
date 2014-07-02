@@ -7,7 +7,7 @@ class Historial < ActiveRecord::Base
 
     belongs_to :cohorte_tema,
     :class_name => 'CohorteTema',
-    :foreign_key => ['cohorte_id', 'tema_id', 'modulo_id', 'diplomado_id', 'grupo_id']
+    :foreign_key => ['cohorte_id', 'tema_id', 'modulo_id', 'diplomado_id', 'grupo']
 
     validates_uniqueness_of :estudiante_ci, :scope => [:cohorte_id, :tema_id, :modulo_id, :diplomado_id, :grupo_id]
 end

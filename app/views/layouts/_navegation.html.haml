@@ -53,13 +53,13 @@
           -else
             =render 'layouts/cargar_sesion' if (action_name != "registrar")
 
-
-#cambiar_cohorte.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close.fade{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Modificar Cédula de Identidad
-  .modal-body
-    -@cohortes = Cohorte.all.sort_by{|x| "#{x.id}"}.reverse()
-    -@url_retorno = request.url
-    -@modal = true
-    =render 'parametros_generales/form_cohorte'
+-if session[:administrador]
+  #cambiar_cohorte.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-header
+      %button.close.fade{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel Modificar Cédula de Identidad
+    .modal-body
+      -@cohortes = Cohorte.all.sort_by{|x| "#{x.id}"}.reverse()
+      -@url_retorno = request.url
+      -@modal = true
+      =render 'parametros_generales/form_cohorte'

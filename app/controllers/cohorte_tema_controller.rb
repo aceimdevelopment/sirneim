@@ -2,6 +2,11 @@ class CohorteTemaController < ApplicationController
 	before_filter :filtro_logueado
 	before_filter :filtro_administrador
 
+	def crear_wizard
+		@diplomados_cohorte = DiplomadoCohorte.find(params[:id])
+		# for i => 0, @diplomados_cohorte.grupos
+	end
+
 	def index
 		@cohortes_temas = CohorteTema.all
 	end
@@ -9,11 +14,18 @@ class CohorteTemaController < ApplicationController
 	def nuevo
 		@cohorte_tema = CohorteTema.new
 		diplomado_id, cohorte_id = params[:id].split ","
-		@cohortes_temas = CohorteTema.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id)
-		@cohorte_tema.diplomado_id = diplomado_id
-		@cohorte_tema.cohorte_id = cohorte_id
-		@titulo = "Asignación de fechas y docentes a cada tema"
-		@grupos = Grupo.all
+
+		if @diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id).limit(1).first
+
+			@cohortes_temas = CohorteTema.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id)
+			@cohorte_tema.diplomado_id = diplomado_id
+			@cohorte_tema.cohorte_id = cohorte_id
+			@titulo = "Asignación de fechas y docentes a cada tema"
+			@grupos = @diplomado_cohorte.grupos
+		else
+			flash[:alert] = "No se ha encontrado el diplomado en esta cohorte, por favor registrelo antes"
+			redirect_to :back
+		end
 		# @diplomados_cohorte = DiplomadoCohorte.where("cohorte_id = ?", ParametroGeneral.cohorte_actual) 
 	end
 
@@ -25,7 +37,7 @@ class CohorteTemaController < ApplicationController
 		if @cohorte_tema.save
 			flash[:success] = "Asiganción correcta"
 			if session[:wizard]
-				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+				redirect_to "/aceim_diplomados/asistente_diplomado/paso5/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			else	
 				redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			end

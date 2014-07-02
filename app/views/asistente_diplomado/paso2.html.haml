@@ -1,2 +1,18 @@
 = render :partial => 'barra_proceso'
-= render :partial => 'diplomado_cohorte/form'
+
+= form_tag ('paso2_guardar', :class => 'form-horizontal well well-small', :html => {:method => 'post'}) do
+
+	.control-group
+		%label.control-label
+			Diplomados:
+		.controls
+			= collection_select "", :id, @diplomados, :id, :descripcion, {}, {:required => true}
+
+	.form-actions
+		= link_to '/aceim_diplomados/asistente_diplomado/paso1', {:class => "btn"} do
+			%i.icon-backward
+			Atrás
+
+		= button_tag :type => 'submit', :class => 'btn btn-primary' do
+			%i.icon-forward.icon-white
+			Siguiente

@@ -1,5 +1,5 @@
 %br
-= link_to "diplomado/nuevo", {:class => 'btn btn-primary'}do
+= link_to "diplomado/nuevo", {:class => 'btn btn-success'}do
 	%i.icon-plus.icon-white
 	Agregar Diplomado
 
@@ -8,36 +8,41 @@
 .well.well-small
 	.tabbable.tabs-left
 		%ul.nav.nav-tabs
-			-@diplomados.each do |diplomado|
-				%li
+			-@diplomados.each_with_index do |diplomado,i|
+				-active = (i.eql? 0) ? "active" : ""
+				%li{:class => active}
 					=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
 		.tab-content
-			-@diplomados.each do |diplomado|
-				.tab-pane{:id=>"#{diplomado.id}"}
-					%p
-						= link_to "diplomado/vista/#{diplomado.id}", {:class => 'btn btn-info', :data => {:toggle => "tooltip"}, "title"=>"Editar temas y módulos de este diplomado"} do
-							%i.icon-pencil.icon-white
-							=diplomado.descripcion_completa
-					%b Objetivo:
-					%p= diplomado.objetivo
-					%b Destinatario:
-					%p= diplomado.destinatario
-					%p
-						%b Modalidad:
-						= diplomado.modalidad
-					%p
-						%b Duración:
-						= diplomado.duracion
-					%b Horario:
-					%p= diplomado.horario
+			-@diplomados.each_with_index do |diplomado,i|
+				-active_pane = (i.eql? 0) ? "active" : ""
+				
+				.tab-pane.well.well-small{:id=>"#{diplomado.id}", :class => active_pane}
+					%p.pull.pull-rigth
+						= link_to "diplomado/editar/#{diplomado.id}", {:class => 'btn', :data => {:toggle => "tooltip"}, "title"=>"Editar características"} do
+							%i.icon-edit
+							= "Editar #{diplomado.descripcion_completa}"
+					.well.well-small
+						%h5{:style => "text-decoration: underline;"} Características:
+						%p
+							%b Objetivo:
+							= diplomado.objetivo
+						%p
+							%b Destinatario:
+							= diplomado.destinatario
+						%p
+							%b Modalidad:
+							= diplomado.modalidad
+						%p
+							%b Duración:
+							= diplomado.duracion
+						%p
+							%b Horario:
+							= diplomado.horario
+						- @diplomado = diplomado
 
-					-diplomado.modulos.each do |modulo|
-						%dl.well.dl-horizontal
-							%dt= "#{modulo.descripcion_completa}"
-							%dd
-								-modulo.temas.each do |tema|
-									%li
-										%p= tema.descripcion_completa
-= link_to "diplomado/nuevo", {:class => 'btn btn-primary'}do
+						= render "modulos"
+
+
+= link_to "diplomado/nuevo", {:class => 'btn btn-success'}do
 	%i.icon-plus.icon-white
 	Agregar Diplomado

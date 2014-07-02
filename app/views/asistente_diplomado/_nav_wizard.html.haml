@@ -1,8 +1,8 @@
-%ul.pager
-	%li
-		-if action_name.eql? "paso1"
-			= link_to "cancelar", {:controller => "principal_admin"}
-		- else
-			= link_to "Atrás", @anterior
-	%li
-		= link_to "Siguiente", @siguiente  
+.form-actions
+  = link_to @atras, {:class => "btn"} do
+    %i.icon-backward
+    Atrás
+
+  = link_to @siguiente, :class=> "btn btn-primary", :type => "button" do
+    %i.icon-forward.icon-white
+    Siguiente

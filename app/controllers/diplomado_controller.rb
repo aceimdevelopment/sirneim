@@ -12,10 +12,10 @@ class DiplomadoController < ApplicationController
   def nuevo
   	@diplomado = Diplomado.new
     @titulo = "Registro de Nuevo Diplomado"
+    @accion = "registrar"
   end
 
-  def crear
-
+  def registrar
     diplomado = params[:diplomado]
     diplomado["id"] = diplomado["id"].gsub(/[\t\n\r \/]/, '')
     @diplomado = Diplomado.new (diplomado)
@@ -31,13 +31,29 @@ class DiplomadoController < ApplicationController
   end
 
   def editar
+    @diplomado = Diplomado.find(params[:id])
+    @accion = "actualizar"
+    @titulo = "Editar Diplomado"
+  end
 
+  def actualizar
     @diplomado = Diplomado.find(params[:id])
 
     if @diplomado.update_attributes(params[:diplomado])
       flash[:success] = "Datos actualizados correctamente"
+      if session[:wizard]
+        redirect_to :back
+      else
+        redirect_to :action => 'index', :id => @diplomado
+      end
+    else
+      if session[:wizard]
+        redirect_to :back
+      else
+        redirect_to :action => 'editar', :id => @diplomado
+      end
     end
-    redirect_to :action => 'vista', :id => @diplomado
+
   end
 
   def vista

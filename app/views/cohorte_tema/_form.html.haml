@@ -6,16 +6,16 @@
 		%table.table.table-hover.table-condensed.table-bordered
 			%thead
 				%tr
-					%th{:style=> "width: 350px;"} Tema
-					%th Grupo
-					%th Inicio
-					%th Culminación
-					%th{:style=> "width: 100px;"} Docente
-					%th
+					%th{:style=> "width: 300px;"} Tema
+					%th{:style=> "width: 75px;"} Grupo
+					%th{:style=> "min-width: 175px;"} Inicio
+					%th{:style=> "min-width: 175px;"} Culminación
+					%th Docente
+					%th Acciones
 			%tbody
 				-modulo.temas.each do |tema|
-					-@grupos.each do |grupo|
-						- @cohorte_tema.grupo_id = grupo.id
+					-for grupo in 1..@grupos
+						- @cohorte_tema.grupo = grupo.to_i
 						- @cohorte_tema.tema_numero = tema.numero
 						- @cohorte_tema.modulo_numero = modulo.numero
 						- unless (@cohortes_temas.include? @cohorte_tema)
@@ -23,7 +23,7 @@
 							- @btn_tipo =  "btn-primary"
 							- @bg = "background-color:white;"
 						- else
-							- @cohorte_tema = @cohortes_temas.where(:grupo_id => grupo.id, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
+							- @cohorte_tema = @cohortes_temas.where(:grupo => grupo, :tema_numero => tema.numero, :modulo_numero => modulo.numero).first
 							- @accion = "actualizar"
 							- @btn_tipo = "btn-info" 
 							- @bg = "background-color:lightgreen;"
@@ -38,12 +38,12 @@
 								=a.hidden_field :cohorte_id
 								=a.hidden_field :tema_numero
 								=a.hidden_field :modulo_numero
-								=a.hidden_field :grupo_id
+								=a.hidden_field :grupo
 
 								%td
 									%b= "#{tema.descripcion_completa}"
 								%td
-									%b= "#{grupo.descripcion}"
+									%b= grupo
 
 								%td
 									= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span4'}
@@ -53,3 +53,5 @@
 									= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}
 								%td
 									=a.submit @accion.capitalize, :class => "btn btn-mini #{@btn_tipo}"
+					%tr
+						%td

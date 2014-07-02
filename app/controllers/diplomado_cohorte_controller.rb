@@ -12,11 +12,13 @@ class DiplomadoCohorteController < ApplicationController
 		@diplomado_cohorte = DiplomadoCohorte.new
 		# @diplomados_cohortes = DiplomadoCohorte.where("cohorte_id = ?", ParametroGeneral.cohorte_actual)
 		@diplomado_cohorte.cohorte_id = ParametroGeneral.cohorte_actual
+		@accion = "registrar"
 	end
 
 	def editar
 		diplomado_id, cohorte_id = params[:id].split ","
 		@diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id).limit(1).first
+		@accion = "actualizar"
 	end
 
 	def actualizar
@@ -24,14 +26,21 @@ class DiplomadoCohorteController < ApplicationController
 		@diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => dc[:diplomado_id], :cohorte_id => dc[:cohorte_id] ).first
 
 		if @diplomado_cohorte.update_attributes(dc)
-			flash[:success] = "Diplomado actualizado"
-			redirect_to :action => "index"
+			flash[:success] = "Diplomado para esta cohorte actualizado"
+			
+			if session[:wizard]
+				# redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+				redirect_to :controller => 'asistente_diplomado',:action => 'paso4', :id => @diplomado_cohorte.diplomado_id
+			else
+				redirect_to :action => 'index'
+			end
+
 		else
 			render :action => "nuevo"
 		end
 	end
 
-	def crear
+	def registrar
 		# @diplomado_cohorte = DiplomadoCohorte.new(params[:diplomado_cohorte])
 		@diplomado_cohorte = DiplomadoCohorte.find_or_create_by_diplomado_id_and_cohorte_id(params[:diplomado_cohorte][:diplomado_id],params[:diplomado_cohorte][:cohorte_id])
 		@diplomado_cohorte.attributes = params[:diplomado_cohorte]
@@ -41,7 +50,7 @@ class DiplomadoCohorteController < ApplicationController
 
 			if session[:wizard]
 				# redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
-				redirect_to :controller => 'asistente_diplomado',:action => 'paso3', :id => @diplomado_cohorte.id.to_s
+				redirect_to :controller => 'asistente_diplomado',:action => 'paso4', :id => @diplomado_cohorte.id.to_s
 			else
 				redirect_to :action => 'index'
 			end

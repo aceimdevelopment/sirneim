@@ -1,0 +1,44 @@
+.well.well-small
+	%h5
+		Módulos del diplomado:
+	-@diplomado.modulos.each do |modulo|
+		%dl.well.dl-horizontal
+			%dt= "#{modulo.descripcion_completa}"
+			%dd
+				-modulo.temas.each do |tema|
+					%li{:style =>"list-style: none;"}
+						%div
+							%p
+								= tema.numero							
+								= tema.descripcion
+								= link_to "", { :role => 'button', :class => 'btn btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Editar tema", :onclick => "return ocultar($(this), '#{tema.id.join('_')}');"} do
+									= content_tag(:i, "", :class => "icon-edit")
+
+							%div{:id => tema.id, :style => 'display: none;'}
+								
+								=form_for tema, :url => "/aceim_diplomados/tema/actualizar/#{tema.id.to_s}" do |t| 
+									.input-append
+										%span.add-on
+											= tema.numero
+										=t.text_field :descripcion, :required => true, :id => "appendedInputButton"
+										=button_tag :class=> "btn", :type => "submit" do
+											%i.icon-ok
+											
+
+
+			%dd
+				= link_to "/aceim_diplomados/tema/nuevo/#{modulo.id}", {:class => 'btn btn-success btn-mini'}do
+					%i.icon-plus.icon-white
+					Agregar Tema
+
+	
+	= link_to "/aceim_diplomados/modulo/nuevo/#{@diplomado.id}", {:class => 'btn btn-success'}do
+		%i.icon-plus.icon-white
+		Agregar Módulo
+
+:javascript
+	function ocultar(ele, tema_id) {
+		ele.parent().hide(1);
+		$("#"+tema_id).show(1);
+		return false;
+	}

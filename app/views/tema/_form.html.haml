@@ -1,0 +1,51 @@
+=form_for(@tema,:url=>{:action => @accion}, :html => {:class => 'form-horizontal well well-small'}) do |a|
+  -if @tema.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@tema.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
+  .control-group
+    %label.control-label
+      Diplomado:
+    .controls
+      =a.text_field :diplomado_id, :class => "input", :readonly => true,  :required => true
+
+  .control-group
+    %label.control-label
+      Módulo:
+    .controls
+      =a.text_field :modulo_numero, :class => "input", :readonly => true,  :required => true
+
+  .control-group
+    %label.control-label
+      Número de Identificación:
+    .controls
+      =a.number_field :numero, :in => 1...11, :include_blank => 'Seleccione...', :class => "span1", :required => true
+      =#a.select :numero, options_for_select((1..10)), {:include_blank => 'Seleccione...'}, :required => true
+      = hidden_field_tag :url_retorno, :back
+
+  .control-group
+    %label.control-label
+      Descripción:
+    .controls
+      =a.text_field :descripcion, :placeholder => "Descripcion…", :class => "input"
+
+
+  .form-actions
+    - if session[:wizard]    
+      = link_to "/aceim_diplomados/asistente_diplomado/paso3", {:class => "btn"} do
+        %i.icon-backward
+        Atrás
+    - else
+      = link_to :back, {:class => "btn"} do
+        %i.icon-backward
+        Atrás
+
+
+    =button_tag :class=> "btn btn-primary", :type => "submit" do
+      %i.icon-forward.icon-white
+      Registrar
+
+
+%p  

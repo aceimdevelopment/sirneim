@@ -1,4 +1,4 @@
-=form_for(@diplomado_cohorte,:url=>{:controller => 'diplomado_cohorte',:action => "crear"}, :html => {:class => 'form-horizontal'}) do |a|
+=form_for(@diplomado_cohorte,:url=>{:controller => 'diplomado_cohorte',:action => @accion}, :html => {:class => 'form-horizontal'}) do |a|
   -if @diplomado_cohorte.errors.any?
     %ul
       -flash[:alert] = ""
@@ -17,13 +17,22 @@
       %label.control-label
         Diplomado:
       .controls
-        =a.collection_select :diplomado_id, Diplomado.all, :id, :descripcion,{}, {:required => true}
+        -if session[:wizard]
+          =a.text_field :diplomado_id, :class => "input", :readonly => true,  :required => true
+        -else
+          =a.collection_select :diplomado_id, Diplomado.all, :id, :descripcion,{}, {:required => true}
 
     .control-group
       %label.control-label
         Fecha Preinscripción:
       .controls
         = a.date_select :fecha_inscripcion, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+
+    .control-group
+      %label.control-label
+        Cantidad de Grupos:
+      .controls
+        =a.select :grupos, options_for_select((1..10)), {:required => true, :class => 'span1'}
 
     .control-group
       %label.control-label
@@ -67,17 +76,11 @@
 
         =a.text_field :cuenta_bancaria_cliente, :class => "input", :required => true, :value => "FUNDEIM"
 
-    .form-actions      
-      - if session[:wizard]
-        - @atras = '/aceim_diplomados/asistente_diplomado/paso1'
-        - @commit = 'Siguiente'
-      - else
-        - @atras = '/aceim_diplomados/diplomado_cohorte'
-        - @commit = 'Registrar'
-      = link_to @atras, {:class => "btn"} do
-        %i.icon-backward
-        Atrás
+    .form-actions
+      - unless session[:wizard]
+        = link_to '/aceim_diplomados/diplomado_cohorte', {:class => "btn"} do
+          %i.icon-backward
+          Atrás
 
-      = button_tag :type => 'submit', :class => 'btn btn-primary' do
-        %i.icon-forward.icon-white
-        = @commit
+      = button_tag :class=> "btn btn-primary", :type => "submit" do
+        = @accion.humanize        

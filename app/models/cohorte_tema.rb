@@ -1,5 +1,5 @@
 class CohorteTema < ActiveRecord::Base
-	set_primary_keys :cohorte_id, :tema_numero, :modulo_numero, :diplomado_id, :grupo_id
+	set_primary_keys :cohorte_id, :tema_numero, :modulo_numero, :diplomado_id, :grupo
 
 	belongs_to :tema,
 	:class_name => 'Tema',
@@ -10,7 +10,6 @@ class CohorteTema < ActiveRecord::Base
     :foreign_key => ['docente_ci']
 
 	belongs_to :cohorte
-	belongs_to :grupo
 
 	has_many :historiales,
 	:foreign_key => ['numero','modulo_numero','diplomado_id']

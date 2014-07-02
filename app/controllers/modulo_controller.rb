@@ -12,11 +12,10 @@ class ModuloController < ApplicationController
 		@modulo = Modulo.new(params[:modulo])
 	    if @modulo.save
 	    	flash[:success] = "Módulo Registrado Satisfactoriamente"
-	    	redirect_to :controller => "diplomado", :action => "vista", :id => "#{@modulo.diplomado.id}"
+	    	redirect_to session[:wizard] ? "/aceim_diplomados/asistente_diplomado/paso3" : "/aceim_diplomados/diplomado"
 	    else
 	    	render :action => "nuevo"
-	  	end
-
+	    end
 	end
 
 	def vista
@@ -25,6 +24,10 @@ class ModuloController < ApplicationController
 	end
 
 	def editar
-		1/0
+		@modulo = Modulo.find params[:id]
+	end
+
+	def actualizar
+		
 	end
 end
