@@ -30,4 +30,18 @@ class ModuloController < ApplicationController
 	def actualizar
 		
 	end
+
+	def eliminar
+		@modulo = Modulo.find(params[:id])
+		@modulo.temas.each do |tema|
+			tema.destroy
+		end	
+		@modulo.destroy
+		info_bitacora "Módulo #{@modulo.id} eliminado"
+		flash[:alert] = "Modulo con sus cursos, eliminado"
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :ok }
+		end
+  end
 end

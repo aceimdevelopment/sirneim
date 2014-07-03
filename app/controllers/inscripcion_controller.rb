@@ -79,6 +79,16 @@ class InscripcionController < ApplicationController
           session[:diplomado] = nil
           flash[:success] = "Preinscripción correcta del Diplomado: #{diplomado_id} para la Cohorte: #{cohorte_actual.descripcion}"
           info_bitacora("Preinscripcion de #{@usuario.ci} Satisfactoriamente en Diplomado #{diplomado_id} para Cohorte: #{cohorte_actual.descripcion}")
+          
+        begin
+          info = "Es presente correo es para notificarle que el estudiante de #{@usuario.descripcion} completó correctamente su Preinscripción. Le invitamos a ingresar al sistema para mayor detalles"
+          EstudianteMailer.bienvenida(@usuario).deliver
+          AdministradorMailer.aviso_general("dgalue.valbuena@gmail.com","Nuevo Estudiante Preinscrito",info)
+        rescue
+          flash[:alert] = "El correo de Bienvenida no pudo ser enviado"
+        end
+        info_bitacora("Paso 2 preinscripcion realizado")
+
           redirect_to :controller => "principal"
         else
           render :action => "paso1"

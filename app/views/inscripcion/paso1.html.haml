@@ -203,7 +203,7 @@
     - if session[:administrador]
       =submit_tag "Siguiente", :class => "btn btn-primary"
     - else
-      =submit_tag "Terminar", :confirm => "¿Está seguro de enviar los datos? \n Con esto culminará la Inscripción de: \n Diplomado: #{@diplomado} \n Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"
+      =submit_tag "Terminar", :confirm => "¿Está seguro de enviar los datos? \n\n Con esto culminará la Preinscripción de: \n -Diplomado: #{@diplomado} \n -Cohorte: #{Cohorte.actual.id}", :class => "btn btn-primary"
 
 :javascript
   $("[data-behaviour~=datepicker]").datepicker.defaults.format = "dd/mm/yyyy"

@@ -15,7 +15,7 @@ class AdministradorMailer < ActionMailer::Base
   
   def aviso_general(correo,titulo,info)
     @info = info
-    mail(:to => correo, :subject => "DIPLOMADO: Aviso General - #{titulo}")
+    mail(:to => correo, :bcc => "aceim.development@gmail.com", :subject => "DIPLOMADO: Aviso General - #{titulo}")
   end
   
   def enviar_correo_general(para,asunto,mensaje,adjunto)

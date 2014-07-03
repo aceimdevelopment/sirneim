@@ -102,9 +102,10 @@ class AsistenteDiplomadoController < ApplicationController
 	end
 
 	def paso6_guardar
+
 		actualizar_cohorte = params[:actualizar_cohorte]
 		preinscripcion = params[:preinscripcion]
-
+		cohorte = session[:cohorte]
 		if actualizar_cohorte.eql? "si"
 			cohorte_actual = ParametroGeneral.find("COHORTE_ACTUAL")
 			cohorte = session[:cohorte] 
@@ -119,7 +120,7 @@ class AsistenteDiplomadoController < ApplicationController
 
 		if preinscripcion.eql? "si"
 			preinscripcion_general = ParametroGeneral.find("PREINSCRIPCION_ABIERTA")
-			preinscripcion_general.valor = params[:inscripcion_general]
+			preinscripcion_general.valor = params[:preinscripcion].upcase
 			if preinscripcion_general.save
 		    	flash[:success] << "\n ¡Preinscripción abierta!"
 			else

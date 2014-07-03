@@ -47,4 +47,17 @@ class TemaController < ApplicationController
 			render :action => 'nuevo'
 		end
 	end
+
+	def eliminar
+		@tema = Tema.find(params[:id])
+		@tema.destroy
+		info_bitacora "Tema (curso) #{@tema.id} eliminado"
+		flash[:alert] = "Curso eliminado"
+		respond_to do |format|
+			
+			format.html { redirect_to :back }
+			format.json { head :ok }
+		end
+	end
+
 end

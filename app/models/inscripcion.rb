@@ -24,7 +24,7 @@ class Inscripcion < ActiveRecord::Base
 
   validates_uniqueness_of :estudiante_ci, :scope => [:diplomado_id, :cohorte_id], :message => "Ud. ya inscribió este diplomado en esta Cohorte", :on => :create
 
-  validates :grupo, :presence => true, :on => :create
+  # validates :grupo, :presence => true, :on => :create
 
   # scope :actuales, -> {where("cohorte_id IS ?", ParametroGeneral.cohorte_actual)}
   # belongs_to :diplomado
