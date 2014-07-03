@@ -81,12 +81,12 @@ class InicioController < ApplicationController
   end
 
   def validar  
-    unless params[:usuario]
+    unless params[:user]
       redirect_to :action => "index"
       return
     end
-    login = params[:usuario][:cedula]
-    clave = params[:usuario][:clave]     
+    login = params[:user][:cedula]
+    clave = params[:user][:clave]     
     reset_session
     #if login == '20028743' || login == '20616058' || login == '20756521'
     #	redirect_to :action => "index"

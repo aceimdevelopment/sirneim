@@ -171,6 +171,10 @@ class InscripcionAdminController < ApplicationController
         format.json { render :json => @inscrito, :status => :created, :location => @inscrito }
         format.js
       else
+        flash[:alert] = "Error al intentar retirar: "
+        @inscrito.errors.full_messages.each do |msg|
+          flash[:alert] += "#{msg}\n"
+        end
         format.html { render :action => "gestionar" }
         # format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }
         format.json { render :json => @inscrito.errors, :status => :unprocessable_entity }

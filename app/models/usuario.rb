@@ -17,7 +17,7 @@ class Usuario < ActiveRecord::Base
   has_one :administrador, :foreign_key => 'usuario_ci'
   has_one :estudiante, :foreign_key => 'usuario_ci'
 
-  validates :ci, :presence => true,  
+  validates :ci, :presence => true,
                  :uniqueness => true,
                 :numericality => { :only_integer => true, 
                                    :greater_than => 1000, 
