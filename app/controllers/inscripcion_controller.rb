@@ -83,7 +83,7 @@ class InscripcionController < ApplicationController
         begin
           info = "Es presente correo es para notificarle que el estudiante de #{@usuario.descripcion} completó correctamente su Preinscripción. Le invitamos a ingresar al sistema para mayor detalles"
           EstudianteMailer.bienvenida(@usuario).deliver
-          AdministradorMailer.aviso_general("dgalue.valbuena@gmail.com","Nuevo Estudiante Preinscrito",info)
+          AdministradorMailer.aviso_general("dgalue.valbuena@gmail.com","Nuevo Estudiante Preinscrito",info).deliver
         rescue
           flash[:alert] = "El correo de Bienvenida no pudo ser enviado"
         end
@@ -125,6 +125,14 @@ class InscripcionController < ApplicationController
 
     if @inscripcion.save
       flash[:success] = "#{@usuario.descripcion}, ha sido inscrit@ satisfactoriamente en el Diplomado: #{diplomado_id}"
+      begin
+        info = "Es presente correo es para notificarle que el estudiante de #{@usuario.descripcion} completó correctamente su Preinscripción. Le invitamos a ingresar al sistema para mayor detalles"
+        EstudianteMailer.bienvenida(@usuario).deliver
+        AdministradorMailer.aviso_general("dgalue.valbuena@gmail.com","Nuevo Estudiante Preinscrito",info).deliver
+      rescue
+        flash[:alert] = "El correo de Bienvenida no pudo ser enviado"
+      end
+
       redirect_to :controller => "inscripcion_admin", :action => "buscar"
     else
       @diplomado_cohorte = DiplomadoCohorte.where(:cohorte_id => @cohorte_actual.id) 
