@@ -49,16 +49,16 @@ class CohorteTemaController < ApplicationController
 	def actualizar
 		
 		cohorte_tema = params[:cohorte_tema]
-		@cohorte_tema = CohorteTema.where(:diplomado_id => cohorte_tema[:diplomado_id], :cohorte_id => cohorte_tema[:cohorte_id], :tema_numero => cohorte_tema[:tema_numero], :modulo_numero => cohorte_tema[:modulo_numero], :grupo_id => cohorte_tema[:grupo_id]).first
+		@cohorte_tema = CohorteTema.where(:diplomado_id => cohorte_tema[:diplomado_id], :cohorte_id => cohorte_tema[:cohorte_id], :tema_numero => cohorte_tema[:tema_numero], :modulo_numero => cohorte_tema[:modulo_numero], :grupo => cohorte_tema[:grupo]).first
 
 		if @cohorte_tema.update_attributes(cohorte_tema)
 			flash[:success] = "Asignación actualizada"
-
-			if session[:wizard]
-				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
-			else	
-				redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
-			end
+			redirect_to :back
+			# if session[:wizard]
+			# 	redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			# else	
+			# 	redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			# end
 			# redirect_to "nuevo/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}##{cohorte_tema[:modulo_numero]}"
 		else
 			render :action => "nuevo"
