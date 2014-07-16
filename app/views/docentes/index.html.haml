@@ -15,7 +15,10 @@
       %tr
         %td= i
         %td= docente.usuario.descripcion if docente.usuario
-        %td= docente.cohorte_tema.where(:cohorte_id => Cohorte.actual).collect{|ct| "#{ct.tema.descripcion_completa} - #{ct.grupo.descripcion} | "}
+        %td
+          - docente.cohorte_tema.where(:cohorte_id => Cohorte.actual).each do |ct|
+            .div
+              ="#{ct.tema.descripcion_completa} - Grupo #{ct.grupo}"
         %td
           =# link_to 'Detalle', :action => "vista"
           = link_to 'Editar', :action => "editar", :id => docente.usuario_ci

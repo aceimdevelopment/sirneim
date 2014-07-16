@@ -36,7 +36,9 @@ class CohorteTemaController < ApplicationController
 		@cohorte_tema.docente_ci = nil if params[:cohorte_tema][:docente_ci].eql? ""
 		if @cohorte_tema.save
 			flash[:success] = "Asiganción correcta"
-			if session[:wizard]
+			if session[:wizard]	Grupo	Inicio	Culminación	Docente	Acciones
+1.- Principios de Escritura	1	    	    		
+2.- Adquisición de segundas lenguas	1	    	    		
 				redirect_to "/aceim_diplomados/asistente_diplomado/paso5/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			else	
 				redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"

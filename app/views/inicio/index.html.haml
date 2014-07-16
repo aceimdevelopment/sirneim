@@ -1,7 +1,7 @@
 / %h3 Información Importante:
 -#if ParametroGeneral.inscripcion_abierta
 / .well{:style=>"overflow-y: scroll;height: 200px;"}
-= #@content.html_safe
+= @content.html_safe
 
 -if ParametroGeneral.preinscripcion_abierta
 	.well.well-small
@@ -15,12 +15,14 @@
 
 .tabbable.tabs-left
 	%ul.nav.nav-tabs
-		-@diplomados.each do |dc|
-			%li
+		-@diplomados.each_with_index do |dc,i|
+			-@active = (i.eql? 0) ? "active" : ""
+			%li{:class => @active}
 				=link_to dc.diplomado.id, "##{dc.diplomado.id}", "data-toggle"=> "tab"
 	.tab-content
 		-@diplomados.each_with_index do |dc, i|
-			.tab-pane{:id=>"#{dc.diplomado.id}"}
+			-@active_pane = (i.eql? 0) ? "active" : ""
+			.tab-pane{:id=>"#{dc.diplomado.id}", :class => @active_pane}
 
 				#accordionMenu.accordion
 					.accordion-group
