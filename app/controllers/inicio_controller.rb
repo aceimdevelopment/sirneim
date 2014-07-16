@@ -7,6 +7,8 @@ class InicioController < ApplicationController
     @diplomados = DiplomadoCohorte.where (:cohorte_id => @cohorte_actual.id)
 		reg = ContenidoWeb.where(:id => 'INI_CONTENT').first
     @content = reg.contenido
+
+    # flash[:info] = @content.html_safe
     @docentes_ct = CohorteTema.where(:cohorte_id => @cohorte_actual.id).group(:docente_ci)
   end
   

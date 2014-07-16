@@ -1,7 +1,13 @@
 / %h3 Información Importante:
 -#if ParametroGeneral.inscripcion_abierta
 / .well{:style=>"overflow-y: scroll;height: 200px;"}
-= #@content.html_safe
+
+.alert.fade.in.alert-info
+	%button.close{"data-dismiss" => "alert"}
+		x
+	%p
+		= @content.html_safe if @content
+
 
 -if ParametroGeneral.preinscripcion_abierta
 	.well.well-small
