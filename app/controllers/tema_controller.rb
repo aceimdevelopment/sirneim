@@ -41,7 +41,7 @@ class TemaController < ApplicationController
 			if session[:wizard]
 				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@tema.diplomado_id}"
 			else
-				redirect_to '/aceim_diplomados/principal_admin'
+				redirect_to :back
 			end
 		else
 			render :action => 'nuevo'

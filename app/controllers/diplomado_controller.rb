@@ -7,6 +7,7 @@ class DiplomadoController < ApplicationController
   def index
     @titulo = "Diplomados"
   	@diplomados = Diplomado.all
+    @cohorte_actual = Cohorte.actual
   end
 
   def nuevo

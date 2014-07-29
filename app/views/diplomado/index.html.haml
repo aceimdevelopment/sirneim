@@ -27,9 +27,46 @@
 						%b Horario:
 						= diplomado.horario
 					- @diplomado = diplomado
-					.pull.pull-rigth
-						= link_to "diplomado/editar/#{diplomado.id}", {:class => 'btn', :data => {:toggle => "tooltip"}, "title"=>"Editar características"} do
+
+					= link_to "diplomado/editar/#{diplomado.id}", {:class => 'btn', :data => {:toggle => "tooltip"}, "title"=>"Editar características"} do
+						%i.icon-edit
+						= "Editar Características Generales"
+				.well.well-small
+					- if diplomado_cohorte = diplomado.diplomado_cohorte.where(:cohorte_id => @cohorte_actual.id).limit(1).first
+
+						%h5{:style => "text-decoration: underline;"} 
+							= "Características propias del diplomado en esta cohorte #{@cohorte_actual.id}:"
+
+						%p
+							%b Fecha de Inscripción:
+							= diplomado_cohorte.fecha_inscripcion
+						%p
+							%b Cantidad de Grupos:
+							= diplomado_cohorte.grupos
+						%p
+							%b Horario de Inscripción:
+							= diplomado_cohorte.horario_inscripcion
+						%p
+							%b Inversión:
+							= "#{diplomado_cohorte.inversion} Bs."
+						%p
+							%b Datos bancarios:
+							Cuenta 
+							= diplomado_cohorte.cuenta_bancaria_tipo
+							= "-"
+							= diplomado_cohorte.cuenta_bancaria_banco
+							= "#"
+							= diplomado_cohorte.cuenta_bancaria_numero
+							A nombre de:
+							= diplomado_cohorte.cuenta_bancaria_cliente
+
+						= link_to "/aceim_diplomados/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {:class => "btn", :data => {:toggle => "tooltip"}, "title"=>"Editar caracteristicas del diplomado en esta cohorte"} do
 							%i.icon-edit
-							= "Editar Características Generales"
+							Editar Características para esta Cohorte
+					- else
+						%h5 
+							= "Este diplomado no ha sido agregado a esta cohorte #{@cohorte_actual.id}"
+
+
 				.well.well-small
 					= render "modulos"

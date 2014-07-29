@@ -32,7 +32,7 @@ class DiplomadoCohorteController < ApplicationController
 				# redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 				redirect_to :controller => 'asistente_diplomado',:action => 'paso4', :id => @diplomado_cohorte.diplomado_id
 			else
-				redirect_to :action => 'index'
+				redirect_to :controller => 'diplomado'
 			end
 
 		else
