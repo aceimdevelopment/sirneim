@@ -54,6 +54,13 @@
       Horario:
     .controls
       = d.text_field :horario, :placeholder => "Horario…", :required => true
+
+  .control-group
+    %label.control-label
+      Normativa:
+    .controls
+      = d.text_area :normativa
+
   .form-actions
     - unless wizard
       = link_to :back, {:class => "btn"} do

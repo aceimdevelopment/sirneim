@@ -26,7 +26,8 @@
       %label.control-label
         Fecha Preinscripción:
       .controls
-        = a.date_select :fecha_inscripcion, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+        = a.text_field  :fecha_inscripcion, :class => "input", :required => true
+        =# a.date_select :fecha_inscripcion, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
 
     .control-group
       %label.control-label

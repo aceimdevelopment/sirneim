@@ -11,8 +11,9 @@
       .accordion-inner
         %ul.nav.nav-list
           %li=link_to "Gestionar Diplomados", :controller => "diplomado"
-          %li=link_to "Gestionar Cohortes", :controller => "cohorte"
-          %li=link_to "Gestionar Cronograma Académico", :controller => "diplomado_cohorte"
+          -if session[:administrador].rol == "super"
+            %li= link_to "Registrar Nuevo Diplomado", :controller=>"diplomado",:action=>"nuevo"
+
   .accordion-group
     .accordion-heading
       %a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "#collapseDocentes"}

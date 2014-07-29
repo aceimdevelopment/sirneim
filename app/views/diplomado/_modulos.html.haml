@@ -1,47 +1,46 @@
-.well.well-small
-	%h5
-		Módulos del diplomado:
-	-@diplomado.modulos.each do |modulo|
-		%dl.well.dl-horizontal
-			%dt
-				=link_to "/aceim_diplomados/modulo/eliminar/#{modulo.id}", {:class => 'btn btn-mini btn-danger', :method => :delete, :confirm => "Esta acción no podrá deshacerse. Se eliminarán todos los cursos asociados ¿está seguro?", :data => {:toggle => "tooltip"}, "title"=>"Eliminar Módulo"} do
-					%i.icon-trash
-				= "#{modulo.descripcion_completa}"	
-			%dd
-				-modulo.temas.each do |tema|
-					%li{:style =>"list-style: none;"}
-						%div
-							%p
-								= tema.numero							
-								= tema.descripcion
-								= link_to "", { :role => 'button', :class => 'btn btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Editar Curso", :onclick => "return ocultar($(this), '#{tema.id.join('_')}');"} do
-									= content_tag(:i, "", :class => "icon-edit")
+%h5{:style => "text-decoration: underline;"}
+	Módulos del diplomado:
+-@diplomado.modulos.each do |modulo|
+	%dl.well.dl-horizontal
+		%dt
+			=link_to "/aceim_diplomados/modulo/eliminar/#{modulo.id}", {:class => 'btn btn-mini btn-danger', :method => :delete, :confirm => "Esta acción no podrá deshacerse. Se eliminarán todos los cursos asociados ¿está seguro?", :data => {:toggle => "tooltip"}, "title"=>"Eliminar Módulo"} do
+				%i.icon-trash
+			= "#{modulo.descripcion_completa}"	
+		%dd
+			-modulo.temas.each do |tema|
+				%li{:style =>"list-style: none;"}
+					%div
+						%p
+							= tema.numero							
+							= tema.descripcion
+							= link_to "", { :role => 'button', :class => 'btn btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Editar Curso", :onclick => "return ocultar($(this), '#{tema.id.join('_')}');"} do
+								= content_tag(:i, "", :class => "icon-edit")
 
-								=link_to "/aceim_diplomados/tema/eliminar/#{tema.id}", {:class => 'btn btn-mini btn-danger', :method => :delete, :confirm => "Esta acción no podrá deshacerse ¿está seguro?", :data => {:toggle => "tooltip"}, "title"=>"Eliminar Curso"} do
-									%i.icon-trash
-
-
-								%div{:id => tema.id, :style => 'display: none;'}
-									
-									=form_for tema, :url => "/aceim_diplomados/tema/actualizar/#{tema.id.to_s}" do |t| 
-										.input-append
-											%span.add-on
-												= tema.numero
-											=t.text_field :descripcion, :required => true, :id => "appendedInputButton"
-											=button_tag :class=> "btn", :type => "submit" do
-												%i.icon-ok
+							=link_to "/aceim_diplomados/tema/eliminar/#{tema.id}", {:class => 'btn btn-mini btn-danger', :method => :delete, :confirm => "Esta acción no podrá deshacerse ¿está seguro?", :data => {:toggle => "tooltip"}, "title"=>"Eliminar Curso"} do
+								%i.icon-trash
 
 
+							%div{:id => tema.id, :style => 'display: none;'}
+								
+								=form_for tema, :url => "/aceim_diplomados/tema/actualizar/#{tema.id.to_s}" do |t| 
+									.input-append
+										%span.add-on
+											= tema.numero
+										=t.text_field :descripcion, :required => true, :id => "appendedInputButton"
+										=button_tag :class=> "btn", :type => "submit" do
+											%i.icon-ok
 
-			%dd
-				= link_to "/aceim_diplomados/tema/nuevo/#{modulo.id}", {:class => 'btn btn-success btn-mini'}do
-					%i.icon-plus.icon-white
-					Agregar Curso
+
+
+		%dd
+			= link_to "/aceim_diplomados/tema/nuevo/#{modulo.id}", {:class => 'btn btn-success btn-mini'}do
+				%i.icon-plus.icon-white
+				Agregar Curso
 
 	
-	= link_to "/aceim_diplomados/modulo/nuevo/#{@diplomado.id}", {:class => 'btn btn-success'}do
-		%i.icon-plus.icon-white
-		Agregar Módulo
+= link_to "/aceim_diplomados/modulo/nuevo/#{@diplomado.id}", {:class => 'btn btn-success'}do
+	%i.icon-plus.icon-white
+	Agregar Módulo
 
 :javascript
 	function ocultar(ele, tema_id) {

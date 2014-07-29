@@ -2,13 +2,6 @@
 -#if ParametroGeneral.inscripcion_abierta
 / .well{:style=>"overflow-y: scroll;height: 200px;"}
 
-.alert.fade.in.alert-info
-	%button.close{"data-dismiss" => "alert"}
-		x
-	%p
-		= @content.html_safe if @content
-
-
 -if ParametroGeneral.preinscripcion_abierta
 	.well.well-small
 		%h4.center
@@ -19,7 +12,7 @@
 		%div
 			=button_to "Registrarse", {:action => "registrar"}, :class => 'btn btn-primary btn-block btn-large center'
 
-.tabbable.tabs-left
+.tabbable.tabs-top
 	%ul.nav.nav-tabs
 		-@diplomados.each_with_index do |dc,i|
 			-@active = (i.eql? 0) ? "active" : ""
@@ -38,19 +31,44 @@
 									Características
 					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_caracteristica"}
 						.accordion-inner
-							%h3= dc.diplomado.descripcion_completa
-							%b Objetivo:
-							%p= dc.diplomado.objetivo
-							%b Destinatario:
-							%p= dc.diplomado.destinatario
-							%p
-								%b Modalidad:
-								= dc.diplomado.modalidad
-							%p
-								%b Duración:
-								= dc.diplomado.duracion
-							%b Horario:
-							%p= dc.diplomado.horario
+							%dl.well.well-small.dl-horizontal
+								%p
+									%dt Nombre:
+									%dd
+										= dc.diplomado.descripcion_completa
+								%p
+									%dt Objetivo:
+									%dd
+										= dc.diplomado.objetivo
+								%p
+									%dt Destinatario:
+									%dd
+										= dc.diplomado.destinatario
+								%p
+									%dt Destinatario:
+									%dd
+										= dc.diplomado.destinatario
+								%p	
+									%dt Modalidad:
+									%dd
+										= dc.diplomado.modalidad
+								%p
+									%dt Duración:
+									%dd
+										= dc.diplomado.duracion
+								%p
+									%dt Horario:
+									%dd 
+										= dc.diplomado.horario
+					- if dc.diplomado.normativa		
+						.accordion-group
+							.nav-header
+								%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_normativa"}
+									.nav-header
+										Normativa
+						.accordion-body.collapse{:id=>"#{dc.diplomado.id}_normativa"}
+							.accordion-inner
+								= dc.diplomado.normativa.html_safe
 					.accordion-group
 						.nav-header
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_modulos"}
@@ -104,37 +122,42 @@
 						.nav-header
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_inscripcion"}
 								.nav-header
-									Preinscripcion
+									Datos de PreInscripción
 					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_inscripcion"}
 						.accordion-inner
 
-							%h4 Datos de PreInscripción:
-							.well.well-small
+							.well.well-small.dl-horizontal
 								%p
-									%b Fecha de preinscripciones:
+									%b Fecha de preinscripción:
 									= dc.fecha_inscripcion.to_s
 								%p
-									%b Horario de preinscripciones:
+									%b Horario de preinscripción:
 									= dc.horario_inscripcion
+								%p
+									%dt Inversión:
+									%dd
+										= "#{dc.inversion} Bs." 
 
 							%h4 Datos de la cuenta:
-							.well.well-small
+							.well.well-small.dl-horizontal
 								%p
-									%b Banco:
-									= dc.cuenta_bancaria_banco
+									%dt Banco:
+									%dd
+										= dc.cuenta_bancaria_banco
 								%p 
-									%b Tipo de Cuenta:
-									= dc.cuenta_bancaria_tipo
+									%dt Tipo de Cuenta:
+									%dd
+										= dc.cuenta_bancaria_tipo
 								%p	
-									%b Nro.:
-									=  dc.cuenta_bancaria_numero
+									%dt Nro.:
+									%dd
+										= dc.cuenta_bancaria_numero
 
 								%p
-									%b A nombre de:
-									=dc.cuenta_bancaria_cliente
-								%p
-									%b Inversión (pago único):
-									= "#{dc.inversion} Bs." 
+									%dt A nombre de:
+									%dd
+										=dc.cuenta_bancaria_cliente
+							.well.well-small.dl-horizontal
 								%p	
-									%b Nota:
-									La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido.
+									%dt Nota:
+									%dd La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido.

@@ -1,48 +1,35 @@
-%br
-= link_to "diplomado/nuevo", {:class => 'btn btn-success'}do
-	%i.icon-plus.icon-white
-	Agregar Diplomado
-
-%br
-%br
-.well.well-small
-	.tabbable.tabs-left
-		%ul.nav.nav-tabs
-			-@diplomados.each_with_index do |diplomado,i|
-				-active = (i.eql? 0) ? "active" : ""
-				%li{:class => active}
-					=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
-		.tab-content
-			-@diplomados.each_with_index do |diplomado,i|
-				-active_pane = (i.eql? 0) ? "active" : ""
-				
-				.tab-pane.well.well-small{:id=>"#{diplomado.id}", :class => active_pane}
-					%p.pull.pull-rigth
+.tabbable.tabs-top
+	%ul.nav.nav-tabs
+		-@diplomados.each_with_index do |diplomado,i|
+			-active = (i.eql? 0) ? "active" : ""
+			%li{:class => active}
+				=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
+	.tab-content
+		-@diplomados.each_with_index do |diplomado,i|
+			-active_pane = (i.eql? 0) ? "active" : ""
+			
+			.tab-pane.well.well-small{:id=>"#{diplomado.id}", :class => active_pane}
+				.well.well-small
+					%h5{:style => "text-decoration: underline;"} Características Generales:
+					%p
+						%b Objetivo:
+						= diplomado.objetivo
+					%p
+						%b Destinatario:
+						= diplomado.destinatario
+					%p
+						%b Modalidad:
+						= diplomado.modalidad
+					%p
+						%b Duración:
+						= diplomado.duracion
+					%p
+						%b Horario:
+						= diplomado.horario
+					- @diplomado = diplomado
+					.pull.pull-rigth
 						= link_to "diplomado/editar/#{diplomado.id}", {:class => 'btn', :data => {:toggle => "tooltip"}, "title"=>"Editar características"} do
 							%i.icon-edit
-							= "Editar #{diplomado.descripcion_completa}"
-					.well.well-small
-						%h5{:style => "text-decoration: underline;"} Características:
-						%p
-							%b Objetivo:
-							= diplomado.objetivo
-						%p
-							%b Destinatario:
-							= diplomado.destinatario
-						%p
-							%b Modalidad:
-							= diplomado.modalidad
-						%p
-							%b Duración:
-							= diplomado.duracion
-						%p
-							%b Horario:
-							= diplomado.horario
-						- @diplomado = diplomado
-
-						= render "modulos"
-
-
-= link_to "diplomado/nuevo", {:class => 'btn btn-success'}do
-	%i.icon-plus.icon-white
-	Agregar Diplomado
+							= "Editar Características Generales"
+				.well.well-small
+					= render "modulos"

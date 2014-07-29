@@ -13,19 +13,10 @@
           -if session[:administrador]
             
             = drop_down "Diplomados" do
-              %li= link_to "Lista de Diplomados", :controller=>"diplomado"
+              %li=link_to "Gestionar Diplomados", :controller => "diplomado"
               -if session[:administrador].rol == "super"
-                %li= link_to "Nueva Diplomado", :controller=>"diplomado",:action=>"nuevo"
+                %li= link_to "Registrar Nuevo Diplomado", :controller=>"diplomado",:action=>"nuevo"
             
-            = drop_down "Cohortes" do
-              %li= link_to "Lista de Cohortes", :controller=>"cohorte"
-              %li
-                = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
-                  Cambiar Cohorte
-
-              -if session[:administrador].rol == "super"
-                %li= link_to "Nueva Cohorte", :controller=>"cohorte",:action=>"nuevo"
-
         %ul.nav
           -if session[:administrador]
             = drop_down "Docentes" do
@@ -39,11 +30,14 @@
 
         .nav.pull-right
           -if session[:usuario]
-            = drop_down "Cohorte Actual: #{cohorte_actual.descripcion}" do
-              -if session[:administrador]
-                %li
-                  = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
-                    Cambiar Cohorte
+            %li
+              = link_to "Cohorte Actual: #{cohorte_actual.descripcion}"
+            -if false
+              = drop_down "Cohorte Actual: #{cohorte_actual.descripcion}" do
+                -if session[:administrador]
+                  %li
+                    = link_to "", {:data => {:toggle => 'modal'}, :onclick => "return $('#cambiar_cohorte').modal();"} do
+                      Cambiar Cohorte
 
 
             = drop_down "#{session[:usuario].nombre_completo}" do
