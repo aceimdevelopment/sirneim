@@ -1,11 +1,11 @@
 %p
-  =link_to "Descargar esta planilla", :action => "descargar_planilla", :id => @usuario.ci
-  \|
-  = link_to url_for ({:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscrito_grupo.id}), {:class => 'btn btn-info btn-mini'} do
-      %i.icon-download.icon-white
-      Planilla Inscripcion
-  \|
-  = link_to_if((!@usuario.preinscripcion.blank? and @usuario.inscripcion.blank? and @usuario.preinscripcion.tipo_forma_pago_id.blank? and @usuario.preinscripcion.grupo_id.blank?), "habilitar para inscripcion", { :controller => "inscripcion", :action => "habilitar_inscripcion", :usuario_ci => @usuario.ci})
+  = link_to "Descargar esta planilla", :action => "descargar_planilla", :id => @usuario.ci
+/   \|
+/   =# link_to url_for ({:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscrito_grupo.id}), {:class => 'btn btn-info btn-mini'} do
+/     %i.icon-download.icon-white
+/     Planilla Inscripcion
+/   \|
+/   =# link_to_if((!@usuario.preinscripcion.blank? and @usuario.inscripcion.blank? and @usuario.preinscripcion.tipo_forma_pago_id.blank? and @usuario.preinscripcion.grupo_id.blank?), "habilitar para inscripcion", { :controller => "inscripcion", :action => "habilitar_inscripcion", :usuario_ci => @usuario.ci})
 
 
 =form_tag :action => "paso2_guardar" do |f|

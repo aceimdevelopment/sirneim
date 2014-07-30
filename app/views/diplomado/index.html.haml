@@ -63,6 +63,11 @@
 						= link_to "/aceim_diplomados/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {:class => "btn", :data => {:toggle => "tooltip"}, "title"=>"Editar caracteristicas del diplomado en esta cohorte"} do
 							%i.icon-edit
 							Editar Características para esta Cohorte
+
+						= link_to "/aceim_diplomados/cohorte_tema/nuevo/#{diplomado_cohorte.id}", {:class => "btn", :data => {:toggle => "tooltip"}, "title"=>"Asignar fechas y docentes a temas"} do
+							%i.icon-list-alt
+							Asignar Docentes y Fechas a los Cursos de esta Cohorte
+
 					- else
 						%h5 
 							= "Este diplomado no ha sido agregado a esta cohorte #{@cohorte_actual.id}"

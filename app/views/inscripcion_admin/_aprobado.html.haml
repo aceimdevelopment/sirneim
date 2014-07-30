@@ -9,7 +9,9 @@
 
 					=#collection_select(:inscripcion, :grupo, :in => 1..grupos, :grupo, {:prompt=>"Grupo"}, {:class=>'span3', :required => true})
 					=number_field_tag :inscripcion_grupo, nil, :name => "inscripcion[grupo]", :required => true, :class => 'span3', :placeholder => "Grupo", :in => 1..grupos
-					=text_field :inscripcion, :deposito1, :class => "span3", :placeholder => "# Depósito"
+					=text_field :inscripcion, :deposito1, :class => "span2", :placeholder => "# Depósito1"
+					=text_field :inscripcion, :deposito2, :class => "span2", :placeholder => "# Depósito2"
+					=text_field :inscripcion, :deposito3, :class => "span2", :placeholder => "# Depósito3"
 					=hidden_field :inscripcion, :estudiante_ci, :value => aprobado.estudiante_ci
 					=hidden_field :inscripcion, :id, :value => aprobado.id
 
