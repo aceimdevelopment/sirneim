@@ -29,7 +29,7 @@ class Usuario < ActiveRecord::Base
   validates :contrasena, :presence => true  
   validates :telefono_movil, :tlf => true	
   validates :correo, :presence => true, :email => true
-  validates :correo_alternativo, :presence => true, :email => true, :if => :hay_correo_alternativo
+  # validates :correo_alternativo, :presence => true, :email => true, :if => :hay_correo_alternativo
   validates :direccion, :presence => true
   validates :lugar_nacimiento, :presence => true
 

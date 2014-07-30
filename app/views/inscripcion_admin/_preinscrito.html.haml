@@ -16,3 +16,5 @@
 			%i.icon-ok.icon-white
 		= link_to "/aceim_diplomados/admin_estudiante/descargar_planilla_pre_diplomado_cohorte?estudiante_ci=#{preinscrito.estudiante_ci}&diplomado_id=#{preinscrito.diplomado_id}&cohorte_id=#{preinscrito.cohorte_id}", {:class => 'btn btn-success btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Descargar planilla de preinscripción"} do
 			%i.icon-download.icon-white
+		= link_to url_for (:action => "eliminar_preinscrito", :id => preinscrito.id ), {:class => 'btn btn-danger btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Rechazar participante", :confirm => "Eliminará definitivamente la inscripción. ¿Está seguro?"} do
+			%i.icon-trash

@@ -183,6 +183,13 @@ class InscripcionAdminController < ApplicationController
     end
   end
 
+  def eliminar_preinscrito
+    @preinscripcion = Inscripcion.find(params[:id])
+    @preinscripcion.destroy
+    flash[:info] = "Participante desincorporado"
+    redirect_to :controller => 'inscripcion_admin', :action => 'gestionar'
+  end
+
   # def paso1      
   #   @titulo_pagina = "Preinscripción - Admin"  
   #   @subtitulo_pagina = "Actualización de Datos Personales"
