@@ -122,21 +122,36 @@
 						.nav-header
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_inscripcion"}
 								.nav-header
-									Datos de PreInscripción
+									Matriculación
 					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_inscripcion"}
 						.accordion-inner
-
+							%h4 Preinscripción:
 							.well.well-small.dl-horizontal
 								%p
-									%b Fecha de preinscripción:
-									= dc.fecha_inscripcion.to_s
+									%dt Fecha:
+									%dd= dc.fecha_inscripcion.to_s.capitalize
 								%p
-									%b Horario de preinscripción:
-									= dc.horario_inscripcion
+									%dt Horario:
+									%dd= dc.horario_inscripcion.capitalize
+							%h4 Inscripción:
+							.well.well-small.dl-horizontal
+								%p
+									%dt Fecha:
+									%dd 16 y 17 de Octubre
+								%b
+									%dt Horario:
+									%dd 9:00am a 4:00pm
 								%p
 									%dt Inversión:
+									%dd= "#{dc.inversion} Bs." 
+								%p
+									%dt Procedimiento:
 									%dd
-										= "#{dc.inversion} Bs." 
+										Descarar la Planilla
+										Llevarla con original y copia del o los depósitos bancarios.
+								%p
+									%dt Lugar:
+									%dd Escuela de Idiomas Modernos, galpón N° 7 frente a la Facultad de Farmacia.
 
 							%h4 Datos de la cuenta:
 							.well.well-small.dl-horizontal
@@ -161,3 +176,6 @@
 								%p	
 									%dt Nota:
 									%dd La Escuela de Idiomas Modernos se reserva el derecho de postergar el inicio de clases o anular el Diplomado si el número de inscritos no llega al mínimo establecido.
+
+									%dt Correo:
+									%dd diplomado.ele.eim.ucv@gmail.com 
