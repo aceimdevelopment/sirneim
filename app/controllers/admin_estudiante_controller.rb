@@ -59,7 +59,10 @@ end
     @usuario = Usuario.where(:ci=>ci).limit(1).first
     @datos_estudiante = @usuario.datos_estudiante
     @estudiante = @usuario.estudiante
-    @titulo_pagina = "Detalle del estudiante"
+
+    @inscripciones = @usuario.estudiante.inscripciones
+
+
   end
   
   def cambiar_convenio_sel_curso

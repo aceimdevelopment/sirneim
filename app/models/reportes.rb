@@ -15,7 +15,7 @@ class Reportes
     pdf = PDF::Writer.new(:paper => "letter")  #:orientation => :landscape, 
     t = Time.now
     planilla_inscripcion_pagina(inscripcion,pdf)
-        pdf.text to_utf16("----- COPIA DEL ESTUDIANTE -----"), :font_size => 9, :justification => :center
+        pdf.text to_utf16("----- COPIA DEL PARTICIPANTE -----"), :font_size => 9, :justification => :center
         pdf.text to_utf16("#{t.strftime('%d/%m/%Y %I:%M%p')} - Página: 1 de 2"), :font_size => 6, :justification => :right
         
     pdf.new_page
@@ -72,10 +72,10 @@ class Reportes
     usuario = inscripcion.estudiante.usuario
     diplomado_cohorte = inscripcion.diplomado_cohorte
 
-    datos << { "nombre" => to_utf16("<b>Estudiante:</b>"), "valor" => to_utf16("<b>Nombres: </b>#{usuario.nombres}  |  <b>Apellidos:</b> #{usuario.apellidos}\n<b>CI:</b> #{usuario.ci}  |  <b>Cel:</b>#{usuario.telefono_movil}  |  <b>mail:</b>#{usuario.correo}") }
+    datos << { "nombre" => to_utf16("<b>Participante:</b>"), "valor" => to_utf16("<b>Nombres: </b>#{usuario.nombres}  |  <b>Apellidos:</b> #{usuario.apellidos}\n<b>CI:</b> #{usuario.ci}  |  <b>Cel:</b>#{usuario.telefono_movil}  |  <b>mail:</b>#{usuario.correo}") }
     datos << { "nombre" => to_utf16("<b>Horario:</b>"), "valor" => to_utf16("#{diplomado_cohorte.diplomado.horario}") }
     datos << { "nombre" => to_utf16("<b>Aula:</b>"), "valor" => to_utf16("Aula 230 del 2do. piso de Trasbordo, Av. Minerva.") }
-    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("#{inscripcion.grupo} - #{diplomado_cohorte.cohorte.nombre}") }
+    datos << { "nombre" => to_utf16("<b>Grupo:</b>"), "valor" => to_utf16("Grupo #{inscripcion.grupo} - #{diplomado_cohorte.cohorte.nombre}") }
     tabla.data.replace datos
     tabla.render_on(pdf)
     
@@ -162,7 +162,7 @@ class Reportes
     }
     datos = []
     datos << { "nombre" => to_utf16("<b>__________________________</b>"), "valor" => to_utf16("<b>__________________________</b>") }
-    datos << { "nombre" => to_utf16("Firma Estudiante"), "valor" => to_utf16("Firma Autorizada y Sello") }
+    datos << { "nombre" => to_utf16("Firma Participante"), "valor" => to_utf16("Firma Autorizada y Sello") }
     tabla.data.replace datos  
     tabla.render_on(pdf)
  		pdf.text "\n", :font_size => 7
