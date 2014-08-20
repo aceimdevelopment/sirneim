@@ -9,7 +9,6 @@
         %th
           NO
     %tbody
-
       %tr
         %td
           ¿Abrir la Preinscripción?
@@ -17,6 +16,14 @@
           =radio_button_tag "preinscripcion_general","SI", (@preinscripcion_general == "SI")
         %td
           =radio_button_tag "preinscripcion_general","NO", (@preinscripcion_general == "NO")
+
+      %tr
+        %td
+          ¿Abrir la Inscripción?
+        %td
+          =radio_button_tag "inscripcion_general","SI", (@inscripcion_general == "SI")
+        %td
+          =radio_button_tag "inscripcion_general","NO", (@inscripcion_general == "NO")
 
 
   %p= submit_tag 'Guardar', :class => "btn btn-primary"

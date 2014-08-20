@@ -5,6 +5,7 @@ class ParametrosGeneralesController < ApplicationController
   def index
     @titulo = "Configuraciones Generales"
     @preinscripcion_general = ParametroGeneral.find("PREINSCRIPCION_ABIERTA").valor
+    @inscripcion_general = ParametroGeneral.find("INSCRIPCION_ABIERTA").valor
   end
   
 
@@ -12,10 +13,13 @@ class ParametrosGeneralesController < ApplicationController
     preinscripcion_general = ParametroGeneral.find("PREINSCRIPCION_ABIERTA")
     preinscripcion_general.valor = params[:preinscripcion_general]
 
-    if preinscripcion_general.save
+    inscripcion_general = ParametroGeneral.find("INSCRIPCION_ABIERTA")
+    inscripcion_general.valor = params[:inscripcion_general]
+
+    if preinscripcion_general.save and inscripcion_general.save
       flash[:success] = 'Configuraciones almacenadas con éxito'
     else
-      flash[:alert] = 'No se pudo abrir la Preinscrición'
+      flash[:alert] = 'No se pudo Actualizar los parámetros generales'
     end
     redirect_to(:action=>'index')
 
