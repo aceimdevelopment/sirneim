@@ -104,21 +104,11 @@
                   %td
                     = link_to "Descargar planilla preinscripción", :action => "descargar_planilla", :id => @usuario.ci
                     |
-                    = link_to "Descargar planilla Inscripción", {:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscripcion.id}
+                    = link_to_if (inscripcion.tipo_estado_inscripcion_id.eql?'INS'), "Descargar planilla Inscripción", {:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscripcion.id}
                     |
                     = link_to_if false, "Descargar Certificado"
 
-        
 
-
-%p
-  = link_to "Descargar esta planilla", :action => "descargar_planilla", :id => @usuario.ci
-  |
-  = link_to url_for ({:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => 1}), {:class => 'btn btn-info btn-mini'} do
-    %i.icon-download.icon-white
-    Planilla Inscripcion
-/   \|
-/   =# link_to_if((!@usuario.preinscripcion.blank? and @usuario.inscripcion.blank? and @usuario.preinscripcion.tipo_forma_pago_id.blank? and @usuario.preinscripcion.grupo_id.blank?), "habilitar para inscripcion", { :controller => "inscripcion", :action => "habilitar_inscripcion", :usuario_ci => @usuario.ci})
 
 %p 
   =link_to "< Buscar otro estudiante", :action => "index"
