@@ -1,0 +1,2 @@
+class CalUsuarioController < ApplicationController
+end

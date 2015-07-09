@@ -1,0 +1,14 @@
+#banner{
+	padding-top: 20px;
+	background-color: darkslategrey;
+	font-family: verdana;
+	color:white;
+	font-size: x-large;
+	text-align: center;
+}
+
+#banner ul{
+	display: inline-flex;
+	list-style-type: none;
+}
+
