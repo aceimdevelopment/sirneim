@@ -37,13 +37,13 @@
     / Size should be 32 x 32 pixels
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'   
   %body
-    =render 'layouts/banner'
-    =render 'layouts/navegation'
+    =render 'layouts/cal_banner'
+    =render 'layouts/cal_navegation'
     %br
     .container-fluid
       .row-fluid
         .well
-          =render 'layouts/titulo'
+          = render 'layouts/titulo'
           = bootstrap_flash
           = yield
       / /row

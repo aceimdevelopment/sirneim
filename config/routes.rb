@@ -59,8 +59,10 @@ Aceim::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'inicio#index'
-   
+
+  # Ajuste para El sistema de Coordinacion de Idiomas Modernos
+  # root :to => 'inicio#index'
+  root :to => 'cal_inicio#index'
    # match 'nuevos' => 'inscripcion#paso0' 
    
   # See how all your routes lay out with "rake routes"
