@@ -2,13 +2,13 @@ class CalCalificarController < ApplicationController
 
 	def seleccionar_seccion
 		@profesor = CalProfesor.find (session[:cal_profesor].cal_usuario_ci)
-
-		@secciones = CalSeccion.where(:cal_profesor_ci => @profesor.cal_usuario_ci)
+		@titulo = "Secciones disponibles para Caficicar"
 	end
 
 	def ver_seccion
-		@seccion = Seccion.where(:id => params[:id]).first if params[:id]
-
+		id = params[:id]
+		@cal_seccion = CalSeccion.where(:numero => id[0], :cal_materia_id => id[1], :cal_semestre_id => id[2]).first
+		@titulo = @cal_seccion.descripcion
 	end
 
 	def importar_secciones

@@ -1,8 +1,4 @@
-%br
-%br
-%br
-
-%p= @seccion.id
+=link_to "regresar", :back, :class => 'btn'
 
 %table.table
 	%thead
@@ -15,15 +11,15 @@
 			%th Tercer Lapso
 			%th Definitiva
 	%tbody
-		- @seccion.estudiante_en_secciones.each_with_index do |es,i|
+		- @cal_seccion.cal_estudiantes_secciones.each_with_index do |es,i|
 			%tr
 				%td #{i}
-				%td #{es.estudiante.usuario.nombres}
-				%td #{es.tipo_estado_inscripcion.descripcion}
+				%td #{es.cal_estudiante.cal_usuario.descripcion}
+				%td #{es.cal_tipo_estado_inscripcion.descripcion}
 				%td 
-					=text_field_tag 'primera'
+					=text_field_tag 'primera', {}, {:class => 'span8'}
 				%td 
-					=text_field_tag 'segunda'
+					=text_field_tag 'segunda', {}, {:class => 'span8'}
 				%td 
-					=text_field_tag 'tercera'
-				%td 20										
+					=text_field_tag 'tercera', {}, {:class => 'span8'}
+				%td 20

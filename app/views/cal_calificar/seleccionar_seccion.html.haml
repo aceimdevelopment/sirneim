@@ -1,6 +1,2 @@
-
-Seleccione sección a Caficicar
-
-%p= @profesor.cal_usuario_ci
-- @secciones.each do |seccion|
-	%p= link_to seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true
+- @profesor.cal_secciones.each do |cal_seccion|
+	%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true

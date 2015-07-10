@@ -1,9 +1,0 @@
-%br
-%br
-%br
-
-Seleccione sección a Caficicar
-
-%p= @profesor.usuario_ci
-- @secciones.each do |seccion|
-	%p= link_to seccion.descripcion, action: 'ver_seccion', id: seccion.id, clalificar: true

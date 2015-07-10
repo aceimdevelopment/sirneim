@@ -1,5 +1,5 @@
 class CalAdministrador < ActiveRecord::Base
-	set_primary_keys :cal_usuario_ci
+	set_primary_key :cal_usuario_ci
 
 	attr_accessible :cal_usuario_ci, :cal_tipo_admin_id
 

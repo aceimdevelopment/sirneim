@@ -10,4 +10,12 @@ class CalProfesor < ActiveRecord::Base
  	belongs_to :cal_departamento,
     	:class_name => 'CalDepartamento',
     	:foreign_key => ['ci']
+
+   	has_many :cal_secciones,
+    	:class_name => 'CalSeccion',
+    	:foreign_key => 'cal_profesor_ci'    	
+
+	accepts_nested_attributes_for :cal_secciones
+
+
 end

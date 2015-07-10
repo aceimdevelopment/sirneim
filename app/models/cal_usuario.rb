@@ -26,6 +26,10 @@ class CalUsuario < ActiveRecord::Base
 		end
 	end
 
+	def descripcion
+		"(#{ci}) #{nombre_completo}"
+	end
+
 	def self.autenticar(login,clave)
     	return CalUsuario.where(:ci => login, :contrasena => clave).limit(1).first
   	end  
