@@ -1,25 +1,56 @@
 =link_to "regresar", :back, :class => 'btn'
 
-%table.table
+=#text_field_tag "casita" , {}, {:class => 'span8', :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3});"}
+
+%p#text
+
+%table.table.table-bordered.table-striped.table-condensed{:style => "text-align:left;"}
 	%thead
 		%tr
 			%th #
 			%th Alumno
-			%th Estado
-			%th Primer Lapso
-			%th Segundo Lapso
-			%th Tercer Lapso
+			%th Trimestre I
+			%th= "(#{@p1}%)"
+			%th Trimestre II
+			%th= "(#{@p2}%)"			
+			%th Trimestre III
+			%th= "(#{@p3}%)"			
 			%th Definitiva
+			%th
 	%tbody
-		- @cal_seccion.cal_estudiantes_secciones.each_with_index do |es,i|
-			%tr
-				%td #{i}
-				%td #{es.cal_estudiante.cal_usuario.descripcion}
-				%td #{es.cal_tipo_estado_inscripcion.descripcion}
-				%td 
-					=text_field_tag 'primera', {}, {:class => 'span8'}
-				%td 
-					=text_field_tag 'segunda', {}, {:class => 'span8'}
-				%td 
-					=text_field_tag 'tercera', {}, {:class => 'span8'}
-				%td 20
+		- 
+		- @estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es|  es.cal_estudiante.cal_usuario.nombres}
+		- @estudiantes_secciones.each_with_index do |es,i|
+			= form_tag(:action => "calificar") do		
+				= hidden_field_tag "id", es.id
+				%tr
+					%td #{i}
+					%td #{es.cal_estudiante.cal_usuario.descripcion}
+					%td 
+
+						=text_field_tag 'calificacion_primera', {}, {:class => 'span8', :value => es.calificacion_primera, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+					%td
+						= es.calificacion_primera*@p1/100 if es.calificacion_primera
+
+					%td 
+						=text_field_tag 'calificacion_segunda', {}, {:class => 'span8',:value => es.calificacion_segunda}
+					%td
+						= es.calificacion_primera*@p2/100 if es.calificacion_primera
+					%td
+						=text_field_tag 'calificacion_tercera', {}, {:class => 'span8', :value => es.calificacion_tercera}
+					%td
+						= es.calificacion_primera*@p3/100 if es.calificacion_primera	
+					%td 
+						%a
+							= es.calificacion_final if es.calificacion_primera
+					%td 
+						= submit_tag "Guardar", :id => "submit", :class => "btn btn-mini btn-success", :disabled => false, :disable_with => "Espere..."
+
+
+:javascript
+	function calcular(p1,p2,p3,ci){
+		var ci_i = "#"+ci+"_I";
+		valor = document.getElementById(ci+"_I").value;
+		var suma = (p1+p2+p3)*valor;
+		$("#text").text(suma);
+	}

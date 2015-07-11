@@ -7,7 +7,7 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	:cal_tipo_estado_calificacion_id, :cal_tipo_estado_inscripcion_id
 
 	belongs_to :cal_seccion,
-    	:foreign_key => [:numero, :cal_materia_id, :cal_semestre_id]
+    	:foreign_key => [:cal_numero, :cal_materia_id, :cal_semestre_id]
 
 	belongs_to :cal_estudiante,
     	:foreign_key => :cal_estudiante_ci
