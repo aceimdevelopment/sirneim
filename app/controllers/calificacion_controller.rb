@@ -1,7 +1,8 @@
 class CalificacionController < ApplicationController
   
   before_filter :filtro_logueado
-  before_filter :filtro_administrador
+  before_filter :filtro_profesor
+
 
   def index
   end

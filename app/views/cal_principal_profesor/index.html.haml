@@ -1,3 +1,4 @@
-.well
-	= link_to "Calificar", {:controller => 'cal_calificar', :action => 'seleccionar_seccion'}, :class => 'btn'
+= render :partial => 'cal_usuario/datos_modal'
 
+.well.well-small
+	= link_to "Secciones", {:controller => 'cal_calificar', :action => 'seleccionar_seccion'}, :class => 'btn'

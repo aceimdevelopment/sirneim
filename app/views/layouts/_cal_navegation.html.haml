@@ -5,13 +5,12 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      -if session[:cal_administrador]
-        %a.brand{:href => "/aceim_diplomados/cal_principal_admin", :style => ""} Aceim
+
       .container-fluid.nav-collapse
         .nav.pull-right
           -if session[:cal_usuario]
             = drop_down "#{session[:cal_usuario].nombre_completo}" do
               %li=# link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
-              %li=#link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name 
+              %li=link_to ("Actualizar Datos Personales"), {}, :onclick => "return $('#actualizar_datos').modal();", 'data_toggle' => 'modal' 
               = drop_down_divider
               = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"

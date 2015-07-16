@@ -4,7 +4,7 @@ class CalInicioController < ApplicationController
 
   def validar
     unless params[:cal_usuario]
-      flash[:danger] = "Error en login o clave."
+      flash[:error] = "Error, debe ingresar Cédula y contraseña"
       redirect_to :action => "index"
       return
     end
@@ -26,12 +26,12 @@ class CalInicioController < ApplicationController
         redirect_to :action => "un_rol", :tipo => roles.first
         return
       else
-        flash[:warning] = "Usted tiene más de un rol, debe seleccionar un rol"
+        flash[:warning] = "Tiene más de un rol, selecciona uno de ellos"
         redirect_to :action => "seleccionar_rol"
         return
       end
     end           
-    flash[:danger] = "Error en login o clave."
+    flash[:error] = "Error en Cédula o contraseña"
     redirect_to :action => "index"
   end  
   
@@ -41,13 +41,13 @@ class CalInicioController < ApplicationController
     @roles << { :tipo => "Administrador", :descripcion => "Administrador"} if cal_usuario.cal_administrador
     @roles << { :tipo => "Profesor", :descripcion => "Profesor"} if cal_usuario.cal_profesor
     @roles << { :tipo => "Estudiante", :descripcion => "Estudiante"} if cal_usuario.cal_estudiante
-
   end
   
-  def un_rol
-    flash[:success] = "Bienvenido" 
+  def un_rol 
     tipo = params[:tipo]
     cal_usuario = CalUsuario.find session[:cal_usuario]['ci']
+
+    flash[:success] = "Bienvenido #{cal_usuario.nombres}" 
     if tipo == "Administrador" && cal_usuario.cal_administrador
       session[:rol] = tipo
       session[:cal_administrador] = cal_usuario.cal_administrador
@@ -67,7 +67,9 @@ class CalInicioController < ApplicationController
   end
   
   def cerrar_sesion
+    msg = "Hasta pronto #{session[:cal_usuario].nombres}"    
     reset_session
+    flash[:success] = msg
     redirect_to :action => "index", :controller => "cal_inicio"
   end 
 

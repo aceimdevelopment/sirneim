@@ -88,5 +88,45 @@ private
       end  
     end
   end    
+
+# Funciones especiales y temporales para calificar
+
+  def cal_filtro_logueado
+    unless session[:cal_usuario]
+      reset_session
+      flash[:alert] = "Debe iniciar sesión"
+      redirect_to :action => "index", :controller => "cal_inicio"  
+      return false
+    end
+  end
+  
+  def cal_filtro_administrador
+    unless session[:cal_administrador]
+      reset_session
+      flash[:alert] = "Debe iniciar sesión como Administrador"  
+      redirect_to :action => "index", :controller => "cal_inicio"
+      return false
+    end
+  end
+
+  def cal_filtro_profesor
+    unless session[:cal_profesor]
+      reset_session
+      flash[:alert] = "Debe iniciar sesión como Profesor"  
+      redirect_to :action => "index", :controller => "cal_inicio"
+      return false
+    end
+  end
+
+  def cal_filtro_estudiante
+    unless session[:cal_estudiante]
+      reset_session
+      flash[:alert] = "Debe iniciar sesión como Profesor"  
+      redirect_to :action => "index", :controller => "cal_inicio"
+      return false
+    end
+  end
+
+
   
 end

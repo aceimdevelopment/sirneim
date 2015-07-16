@@ -1,7 +1,9 @@
 class CalPrincipalEstudianteController < ApplicationController
 
-	def index
-		
+	before_filter :cal_filtro_logueado
+	before_filter :cal_filtro_estudiante
+
+	def index		
 	end
 
 end
