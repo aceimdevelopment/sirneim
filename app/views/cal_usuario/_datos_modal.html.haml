@@ -1,0 +1,28 @@
+- @cal_usuario = session[:cal_usuario]
+
+- @debe_actulizar = @cal_usuario.correo_electronico.blank? and @cal_usuario.telefono_movil.blank? and @cal_usuario.telefono_habitacion.blank?
+
+- hide = @debe_actulizar ? "" : "hide"
+	
+.modal.fade#actualizar_datos{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> true, :class => hide}
+	.modal-dialog
+		.modal-content
+			-unless @debe_actulizar
+				.modal-header
+					<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+			-else
+				.alert.alert-info
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					%h4 IMPORTANTE:
+					Le recomendamos actualice sus datos para una mejor experiencia.
+			%h2#myModalLabel 
+				Actualizar Datos
+			.modal-body
+				= render :partial => 'cal_usuario/form'
+
+-if @debe_actulizar
+	:javascript
+		$(document).ready(function() {
+			$("#actualizar_datos").modal();
+		}); 
+

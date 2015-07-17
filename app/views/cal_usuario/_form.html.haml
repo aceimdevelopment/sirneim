@@ -1,0 +1,69 @@
+
+=form_tag :controller => 'cal_usuario', :action => 'modificar_guardar', :class => "form-horizontal" do 
+  -if @cal_usuario.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@cal_usuario.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+  =hidden_field 'controlador', controller_name
+  =hidden_field 'accion', action_name  
+  %fieldset
+    %legend Datos Personales
+
+    .control-group
+      %label.control-label
+        %b (CI) Nombre completo:
+      .controls
+        %b= @cal_usuario.descripcion
+
+    .control-group
+      %label.control-label
+        Sexo:
+      .controls
+        %label.checkbox
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "M", :required => true
+          Masculino
+          |
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", :required => true
+          Femenino
+
+    .control-group
+      %label.control-label
+        Contraseña:
+      .controls
+        =password_field :cal_usuario, :contrasena, :required => true
+
+    .control-group
+      %label.control-label
+        Confirmación:
+      .controls
+        =password_field :cal_usuario, :contrasena_confirmation, :required => true
+
+  %fieldset
+    %legend Datos de Contacto
+
+    .control-group
+      %label.control-label
+        Teléfono habitación:
+      .controls
+        =telephone_field :cal_usuario, :telefono_habitacion, :placeholder => "Teléfono de Habitación…", :required => true
+        %span.help-block
+          Ejemplo: 0212-5551122
+
+    .control-group
+      %label.control-label
+        Teléfono celular:
+      .controls
+        =telephone_field :cal_usuario, :telefono_movil, :placeholder => "Celular…", :required => true
+        %span.help-block
+          Ejemplo: 0414-2391212
+
+    .control-group
+      %label.control-label
+        Correo electrónico:
+      .controls
+        =text_field :cal_usuario, :correo_electronico, :placeholder => "Correo Electrónico…", :required => true
+        %span.help-block
+          Ejemplo: maria@gmail.com
+
+    =submit_tag 'Actualizar', :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
