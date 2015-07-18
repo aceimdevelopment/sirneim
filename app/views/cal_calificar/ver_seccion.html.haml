@@ -1,8 +1,6 @@
 .well.well-small
 	=link_to "Regresar", {:action => 'seleccionar_seccion'}, :class => 'btn'
-	-unless @cal_seccion.calificada 
-		= submit_tag "Guardar", :id => "submit", :class => "btn btn-success pull-right", :disable_with => "Espere...", :data => {:confirm => 'Una vez que guardes las calificaciones no podrás cambiar su valor, ¿Estás Seguro?'}
-	-else
+	-if @cal_seccion.calificada 
 		=link_to "Descargar notas", {:action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
 
 %p#text
@@ -13,6 +11,11 @@
 			%tr
 				%th #
 				%th Alumno
+				%th
+					- unless @cal_seccion.calificada 
+						PI
+					- else
+						Estado
 				%th Trimestre I
 				%th{:style => "border-right-style: double;border-right-color: darkgray;"}= "(#{@p1}%)"
 				%th Trimestre II
@@ -27,18 +30,23 @@
 				%tr
 					%td #{i}
 					%td #{es.cal_estudiante.cal_usuario.descripcion}
+					%td
+						- unless @cal_seccion.calificada 
+							= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true
+						- else
+							= es.cal_tipo_estado_caliticacion.descripcion
 					%td 
-						=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_primera", {}, {:class => 'span9', :required => true, :step => 0.1, :in => 0...21, :value => es.calificacion_primera, :disabled => @cal_seccion.calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+						=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_primera", {}, {:class => 'span9', :required => true, :step => 1, :in => 0...21, :value => es.calificacion_primera, :disabled => @cal_seccion.calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 					%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 						%p{:id => "#{es.cal_estudiante_ci}_calificacion_primera_text"}
 							= sprintf( "%0.01f", es.calificacion_primera*@p1/100) if es.calificacion_primera
 					%td 
-						=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {:class => 'span9', :required => true, :step => 0.1, :in => 0...21, :disabled => @cal_seccion.calificada, :value => es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+						=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {:class => 'span9', :required => true, :step => 1, :in => 0...21, :disabled => @cal_seccion.calificada, :value => es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 					%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 						%p{:id => "#{es.cal_estudiante_ci}_calificacion_segunda_text"}
 							= sprintf( "%0.01f", es.calificacion_segunda*@p1/100) if es.calificacion_segunda
 					%td
-						= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {:class => 'span9', :required => true, :step => 0.1, :in => 0...21, :value => es.calificacion_tercera, :disabled => @cal_seccion.calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+						= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {:class => 'span9', :required => true, :step => 1, :in => 0...21, :value => es.calificacion_tercera, :disabled => @cal_seccion.calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 
 					%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 						%p{:id => "#{es.cal_estudiante_ci}_calificacion_tercera_text"}

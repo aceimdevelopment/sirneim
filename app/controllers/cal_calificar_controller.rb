@@ -11,7 +11,7 @@ class CalCalificarController < ApplicationController
 	def ver_seccion
 		id = params[:id]
 		@cal_seccion = CalSeccion.where(:numero => id[0], :cal_materia_id => id[1], :cal_semestre_id => id[2]).first
-		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.nombres}
+		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
 		@titulo = "Sección: #{@cal_seccion.descripcion}"
 		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB'
 			@p1 = 25 
@@ -24,7 +24,6 @@ class CalCalificarController < ApplicationController
 	end
 
 	def calificar
-
 		id = params[:id]
 
 		@cal_seccion = CalSeccion.find(id.split(" "))
@@ -33,10 +32,15 @@ class CalCalificarController < ApplicationController
 
 		@estudiantes.each_pair do |ci,valores|
 			@cal_estudiante_seccion = @cal_seccion.cal_estudiantes_secciones.where(:cal_estudiante_ci => ci).limit(1).first
-			if valores[:calificacion_final].to_f >= 10
-				cal_tipo_estado_caliticacion_id = 'AP'
-			else 
-				cal_tipo_estado_caliticacion_id = 'RE'
+			
+			if valores['pi']
+				cal_tipo_estado_caliticacion_id = 'PI'
+			else
+				if valores[:calificacion_final].to_f >= 10
+					cal_tipo_estado_caliticacion_id = 'AP'
+				else 
+					cal_tipo_estado_caliticacion_id = 'RE'
+				end
 			end
 			valores['cal_tipo_estado_caliticacion_id'] = cal_tipo_estado_caliticacion_id
 			unless @cal_estudiante_seccion.update_attributes(valores)
