@@ -29,7 +29,7 @@
 
 				%tr
 					%td #{i}
-					%td #{es.cal_estudiante.cal_usuario.descripcion}
+					%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
 					%td
 						- unless @cal_seccion.calificada 
 							= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true

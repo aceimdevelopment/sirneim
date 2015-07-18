@@ -35,8 +35,21 @@ class CalUsuario < ActiveRecord::Base
 		end
 	end
 
+	def apellido_nombre
+		if nombres and apellidos
+			"#{apellidos}, #{nombres}"
+		else
+			""
+		end
+
+	end
+
 	def descripcion
 		"(#{ci}) #{nombre_completo}"
+	end
+
+	def descripcion_apellido
+		"(#{ci}) #{apellido_nombre}"		
 	end
 
 	def self.autenticar(login,clave)
