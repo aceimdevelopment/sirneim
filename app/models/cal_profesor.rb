@@ -5,7 +5,7 @@ class CalProfesor < ActiveRecord::Base
 
  	belongs_to :cal_usuario,
     	:class_name => 'CalUsuario',
-    	:foreign_key => ['ci']
+    	:foreign_key => ['cal_usuario_ci']
 
  	belongs_to :cal_departamento,
     	:class_name => 'CalDepartamento',

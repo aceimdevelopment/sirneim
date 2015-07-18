@@ -4,7 +4,7 @@
 
 - hide = @debe_actulizar ? "" : "hide"
 	
-.modal.fade#actualizar_datos{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> true, :class => hide}
+.modal.fade#actualizar_datos{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, :class => hide}
 	.modal-dialog
 		.modal-content
 			-unless @debe_actulizar
@@ -12,7 +12,6 @@
 					<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
 			-else
 				.alert.alert-info
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					%h4 IMPORTANTE:
 					Le recomendamos actualice sus datos para una mejor experiencia.
 			%h2#myModalLabel 

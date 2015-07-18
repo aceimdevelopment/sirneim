@@ -15,7 +15,7 @@ class CalUsuario < ActiveRecord::Base
 
 	has_one :cal_profesor,
     	:class_name => 'CalProfesor',
-    	:foreign_key => ['cal_usuario_ci']
+    	:foreign_key => 'cal_usuario_ci'
 
 
 	validates :nombres,  :presence => true

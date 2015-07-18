@@ -47,7 +47,7 @@ class CalInicioController < ApplicationController
     tipo = params[:tipo]
     cal_usuario = CalUsuario.find session[:cal_usuario]['ci']
 
-    flash[:success] = "Bienvenido #{cal_usuario.nombres}" 
+    flash[:success] = "Bienvenid@ #{cal_usuario.nombres}" 
     if tipo == "Administrador" && cal_usuario.cal_administrador
       session[:rol] = tipo
       session[:cal_administrador] = cal_usuario.cal_administrador

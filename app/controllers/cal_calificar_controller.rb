@@ -33,13 +33,13 @@ class CalCalificarController < ApplicationController
 
 		@estudiantes.each_pair do |ci,valores|
 			@cal_estudiante_seccion = @cal_seccion.cal_estudiantes_secciones.where(:cal_estudiante_ci => ci).limit(1).first
-			if valores[:calificacion_final].to_f > 10
+			if valores[:calificacion_final].to_f >= 10
 				cal_tipo_estado_caliticacion_id = 'AP'
 			else 
 				cal_tipo_estado_caliticacion_id = 'RE'
 			end
-
-			unless @cal_estudiante_seccion.update_attributes(valores, :cal_tipo_estado_caliticacion_id => cal_tipo_estado_caliticacion_id)
+			valores['cal_tipo_estado_caliticacion_id'] = cal_tipo_estado_caliticacion_id
+			unless @cal_estudiante_seccion.update_attributes(valores)
 				flash[:danger] = "No se pudo guardar la calificación."
 				break
 			end
@@ -49,7 +49,7 @@ class CalCalificarController < ApplicationController
 		@cal_seccion.calificada = true
 		calificada = @cal_seccion.save
 
-		flash[:success] = "nota guardada satisfactoriamente." if calificada
+		flash[:success] = "Calificaciones guardada satisfactoriamente." if calificada
 
 
 			# c1 = valores[:calificacion_primera].to_f
@@ -85,11 +85,25 @@ class CalCalificarController < ApplicationController
 
 	end
 
+	def descargar_notas
+		id = params[:id]
+		cal_seccion = CalSeccion.find(id)
+		pdf = DocumentosPDF.cal_notas cal_seccion
+		unless send_data pdf.render,:filename => "notas_#{cal_seccion.cal_materia_id}_#{cal_seccion.numero}.pdf",:type => "application/pdf", :disposition => "attachment"
+	    	flash[:mensaje] = "en estos momentos no se pueden descargar las notas, intentelo luego."
+	    end
+		# redirect_to :action => 'index'      
+	end
+
+
+
 	def importar_secciones
 		data = File.readlines("AlemIV.rtf") #read file into array
 		data.map! {|line| line.gsub(/world/, "ruby")} #invoke on each line gsub
 		File.open("test2.txt", "a") {|f| f.puts "Nueva Linea: #{data}"} #output data to other file
 	end
+
+
 
 
 end

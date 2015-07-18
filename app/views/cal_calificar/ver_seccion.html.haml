@@ -1,5 +1,9 @@
 .well.well-small
-	=link_to "Regresar", {:action => 'seleccionar_seccion'}, :class => 'btn' 
+	=link_to "Regresar", {:action => 'seleccionar_seccion'}, :class => 'btn'
+	-unless @cal_seccion.calificada 
+		= submit_tag "Guardar", :id => "submit", :class => "btn btn-success pull-right", :disable_with => "Espere...", :data => {:confirm => 'Una vez que guardes las calificaciones no podrás cambiar su valor, ¿Estás Seguro?'}
+	-else
+		=link_to "Descargar notas", {:action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
 
 %p#text
 = form_tag(:action => "calificar") do
@@ -46,6 +50,8 @@
 		=link_to "Regresar", {:action => 'seleccionar_seccion'}, :class => 'btn'
 		-unless @cal_seccion.calificada 
 			= submit_tag "Guardar", :id => "submit", :class => "btn btn-success pull-right", :disable_with => "Espere...", :data => {:confirm => 'Una vez que guardes las calificaciones no podrás cambiar su valor, ¿Estás Seguro?'}
+		-else
+			=link_to "Descargar notas", {:action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
 
 :javascript
 	function calcular(p1,p2,p3,ci){

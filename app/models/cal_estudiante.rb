@@ -9,7 +9,9 @@ class CalEstudiante <  ActiveRecord::Base
 
 	has_many :cal_estudiantes_secciones,
 		:class_name => 'CalEstudianteSeccion',
- 		:foreign_key => :cal_usuario_ci
+ 		:foreign_key => :cal_estudiante_ci,
+ 		:primary_key => :cal_usuario_ci
+
 	accepts_nested_attributes_for :cal_estudiantes_secciones
 
 	has_many :cal_secciones, :through => :cal_estudiantes_secciones, :source => :cal_seccion  

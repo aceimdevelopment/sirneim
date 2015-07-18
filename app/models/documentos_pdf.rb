@@ -11,6 +11,131 @@ class DocumentosPDF
     return pdf
   end
 
+
+
+
+
+  def self.cal_notas(seccion)
+    pdf = PDF::Writer.new
+    pdf.margins_cm(1.8)
+    #color de relleno para el pdf (color de las letras)
+#    pdf.fill_color(Color::RGB.new(255,255,255))
+    #imagen del encabezado
+ #   pdf.add_image_from_file 'app/assets/images/banner.jpg', 50, 685, 510, 60
+    
+    
+    pdf.add_image_from_file 'app/assets/images/logo_fhe_ucv.jpg', 465, 710, 50,nil
+    pdf.add_image_from_file 'app/assets/images/logo_eim.jpg', 515, 710+10, 50,nil
+    pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 45, 710, 50,nil
+ 
+    
+    #texto del encabezado
+    pdf.add_text 100,745,to_utf16("Universidad Central de Venezuela"),11
+    pdf.add_text 100,735,to_utf16("Facultad de Humanidades y Educación"),11
+    pdf.add_text 100,725,to_utf16("Escuela de Idiomas Modernos"),11
+    pdf.add_text 100,715,to_utf16("Coordinación Académica"),11
+
+    #texto del encabezado
+#    pdf.add_text 70,722,to_utf16("Universidad Central de Venezuela"),7
+#    pdf.add_text 70,714,to_utf16("Facultad de Humanidades y Educación"),7
+#    pdf.add_text 70,706,to_utf16("Escuela de Idiomas Modernos"),7
+#    pdf.add_text 70,698,to_utf16("Administrador de Cursos de Extensión de Idiomas Modernos"),7
+
+    #titulo
+    pdf.fill_color(Color::RGB.new(0,0,0))
+    # historial = historiales.first
+    #periodo_calificacion
+    
+    pdf.add_text_wrap 50,650,510,to_utf16("Sección: #{seccion.descripcion}"), 12,:center
+    # pdf.add_text_wrap 50,635,510,to_utf16(Seccion.horario(session)),10,:center
+    # pdf.add_text_wrap 50,621,510,to_utf16("Periodo #{ParametroGeneral.periodo_calificacion.id}"),9.5,:center
+
+    #instructor
+    pdf.add_text_wrap 50,600,510,to_utf16("Profesor: #{seccion.cal_profesor.cal_usuario.descripcion}"),10
+ 
+    estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.nombre_completo}
+    #  historiales.each { |h|
+    #    pdf.text to_utf16 "#{h.usuario.nombre_completo} - #{h.nota_final}"
+    #  }
+    pdf.text "\n"*18
+    tabla = PDF::SimpleTable.new
+    tabla.heading_font_size = 8
+    tabla.font_size = 8
+    tabla.show_lines    = :all
+    tabla.line_color = Color::RGB::Gray
+    tabla.show_headings = true
+    tabla.shade_headings = true
+    tabla.shade_heading_color = Color::RGB.new(230,238,238)
+    tabla.shade_color = Color::RGB.new(230,238,238)
+    tabla.shade_color2 = Color::RGB::White
+    tabla.shade_rows = :striped
+    tabla.orientation   = :center
+    tabla.position      = :center
+    
+    tabla.column_order = ["#", "nombre", "cedula", "nota1","nota2","nota3","final"]
+
+    tabla.columns["#"] = PDF::SimpleTable::Column.new("#") { |col|
+      col.width = 30
+      col.heading = to_utf16("<b>#</b>")
+      col.heading.justification = :center
+      col.justification = :center
+    }
+    tabla.columns["cedula"] = PDF::SimpleTable::Column.new("cedula") { |col|
+      col.width = 60
+      col.heading = to_utf16("<b>Cédula</b>")
+      col.heading.justification = :center
+      col.justification = :center
+    }
+    tabla.columns["nombre"] = PDF::SimpleTable::Column.new("nombre") { |col|
+      col.heading = "<b>Nombre</b>"
+      col.heading.justification = :left
+      col.justification = :left
+    }
+      tabla.columns["nota1"] = PDF::SimpleTable::Column.new("nota1") { |col|
+        col.width = 50
+        col.heading = to_utf16("<b>1er. Parcial</b>")
+        col.heading.justification = :center
+        col.justification = :center
+      }
+      tabla.columns["nota2"] = PDF::SimpleTable::Column.new("nota2") { |col|
+        col.width = 50
+        col.heading = to_utf16("<b>2do. Parcial</b>")
+        col.heading.justification = :center
+        col.justification = :center
+      }
+      tabla.columns["nota3"] = PDF::SimpleTable::Column.new("nota3") { |col|
+        col.width = 50
+        col.heading = to_utf16("<b>3er. Parcial</b>")
+        col.heading.justification = :center
+        col.justification = :center
+      }
+      tabla.columns["final"] = PDF::SimpleTable::Column.new("Final") { |col|
+        col.width = 40
+        col.heading = to_utf16("<b>Final</b>")
+        col.heading.justification = :center
+        col.justification = :center
+      }
+
+    data = []
+
+    estudiantes_seccion.each_with_index{|h,i|
+        data << {"#" => "#{i+1}",
+          "cedula" => to_utf16(h.cal_estudiante_ci),
+          "nombre" => to_utf16(h.cal_estudiante.cal_usuario.nombre_completo),
+          "nota1" => to_utf16(h.calificacion_primera.to_s),
+          "nota2" => to_utf16(h.calificacion_segunda.to_s),          
+          "nota3" => to_utf16(h.calificacion_tercera.to_s),
+          "final" => to_utf16(h.calificacion_final.to_s),          
+        }
+    }
+    tabla.data.replace data
+    tabla.render_on(pdf)
+    pdf.add_text 430,50,to_utf16("#{Time.now.strftime('%d/%m/%Y %I:%M%p')} - Página: 1 de 1")
+    return pdf
+  end
+
+
+
   def self.generar_planilla(cedula)
     usuario = Usuario.find cedula
     datos = DatosEstudiante.where(:estudiante_ci => cedula).first
