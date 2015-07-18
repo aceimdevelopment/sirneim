@@ -5,7 +5,7 @@ class CalCalificarController < ApplicationController
 
 	def seleccionar_seccion
 		@profesor = CalProfesor.find (session[:cal_profesor].cal_usuario_ci)
-		@titulo = "Secciones disponibles para Caficicar"
+		@titulo = "Secciones disponibles para Calificar"
 	end
 
 	def ver_seccion
@@ -13,7 +13,7 @@ class CalCalificarController < ApplicationController
 		@cal_seccion = CalSeccion.where(:numero => id[0], :cal_materia_id => id[1], :cal_semestre_id => id[2]).first
 		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
 		@titulo = "Sección: #{@cal_seccion.descripcion}"
-		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB'
+		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LIN'
 			@p1 = 25 
 			@p2 =35
 			@p3 = 40

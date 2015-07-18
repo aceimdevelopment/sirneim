@@ -7,16 +7,17 @@
 		-unless est_sec.cal_tipo_estado_caliticacion_id.eql? 'SC'
 			- aprobado = 'success' if est_sec.cal_tipo_estado_caliticacion_id.eql? 'AP'
 			%p= est_sec.cal_tipo_estado_caliticacion.descripcion
-			%table.table.table-bordered.table-striped.table-condensed
-				%thead
-					%tr
-						%th Trimestre I
-						%th Trimestre II
-						%th Trimestre III
-						%th Definitiva
-				%tbody
-					%tr{:class => aprobado}
-						%td= est_sec.calificacion_primera
-						%td= est_sec.calificacion_segunda
-						%td= est_sec.calificacion_tercera
-						%td= est_sec.calificacion_final
+			- unless est_sec.cal_tipo_estado_caliticacion_id.eql? 'PI'
+				%table.table.table-bordered.table-striped.table-condensed
+					%thead
+						%tr
+							%th Trimestre I
+							%th Trimestre II
+							%th Trimestre III
+							%th Definitiva
+					%tbody
+						%tr{:class => aprobado}
+							%td= est_sec.calificacion_primera
+							%td= est_sec.calificacion_segunda
+							%td= est_sec.calificacion_tercera
+							%td= est_sec.calificacion_final
