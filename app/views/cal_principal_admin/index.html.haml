@@ -1,1 +1,63 @@
 = render :partial => 'cal_usuario/datos_modal'
+
+.tabbable.tabs-top
+	%ul.nav.nav-tabs
+		- @departamentos.each_with_index do |dep,i|
+			-activa = (i.eql? 0) ? "active" : ""
+			%li{:class => activa}
+				= link_to dep.descripcion, "##{dep.id}", "data-toggle"=> "tab"
+
+	.tab-content
+		- @departamentos.each_with_index do |dep,i|
+			-activa = (i.eql? 0) ? "active" : ""
+			.tab-pane{:class => activa, :id => "#{dep.id}"}
+				
+				.tabbable.nav-stacked.tabs-right
+					%ul.nav.nav-tabs
+						- dep.cal_materias.each do |materia|
+							%li
+								= link_to materia.descripcion[0..35], "##{materia.id}", "data-toggle"=> "tab"
+
+					.tab-content
+						- dep.cal_materias.each do |materia|
+							.tab-pane{ :id => "#{materia.id}"}
+								%h3= materia.descripcion
+								.well.well-small
+									- materia.cal_secciones.each do |seccion|
+										- calificada = seccion.calificada
+										%h5
+
+											= "Sección #{seccion.numero}" 
+											= "/ Prof.: #{seccion.cal_profesor.cal_usuario.descripcion}" if seccion.cal_profesor
+											-if calificada
+												%span.label.label-success Calidicada 
+											- else
+												%span.label.label-info Pendiente por calificar
+
+										.well.well-small
+										- @estudiantes_secciones = seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
+
+
+										%table.table.table-bordered.table-striped.table-condensed.table-hover{:style => "text-align:left;"}
+											%thead			
+												%tr
+													%th #
+													%th Estudiante
+													%th Estado
+													%th Definitiva
+											%tbody
+												- @estudiantes_secciones.each_with_index do |es,i|
+												
+													- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
+													- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+
+													%tr{:class => tipo_calificacion}
+														%td #{i}
+														%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
+														%td
+															= es.cal_tipo_estado_calificacion.descripcion
+														%td 
+															es.calificacion_final.to_i
+
+
+

@@ -4,10 +4,12 @@
 - @secciones.each do |est_sec|
 	.well.well-small
 		%h3= est_sec.cal_seccion.descripcion if est_sec.cal_seccion
-		-unless est_sec.cal_tipo_estado_caliticacion_id.eql? 'SC'
-			- aprobado = 'success' if est_sec.cal_tipo_estado_caliticacion_id.eql? 'AP'
-			%p= est_sec.cal_tipo_estado_caliticacion.descripcion
-			- unless est_sec.cal_tipo_estado_caliticacion_id.eql? 'PI'
+		-unless est_sec.cal_tipo_estado_calificacion_id.eql? 'SC'
+			- tipo_calificacion = 'success' if est_sec.cal_tipo_estado_calificacion_id.eql? 'AP'
+			- tipo_calificacion = 'error' if (est_sec.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec.cal_tipo_estado_calificacion_id.eql? 'PI')
+			%p.alert{:class => "alert-#{tipo_calificacion}"}
+				= est_sec.cal_tipo_estado_calificacion.descripcion
+			- unless est_sec.cal_tipo_estado_calificacion_id.eql? 'PI'
 				%table.table.table-bordered.table-striped.table-condensed
 					%thead
 						%tr
@@ -16,7 +18,7 @@
 							%th Trimestre III
 							%th Definitiva
 					%tbody
-						%tr{:class => aprobado}
+						%tr{:class => tipo_calificacion}
 							%td= est_sec.calificacion_primera
 							%td= est_sec.calificacion_segunda
 							%td= est_sec.calificacion_tercera
