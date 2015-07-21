@@ -208,7 +208,7 @@ class InicioController < ApplicationController
       return
     end
     usuario = params[:usuario][:usuario]
-    clave = params[:usuario][:clave]   
+    clave = params[:usuario][:clave]
     
     if usuario == "new" && clave == "coursesa12" || usuario == "invitado" && clave == "invitado"
       redirect_to :action => "paso0", :controller => "inscripcion"

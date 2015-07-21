@@ -1,6 +1,6 @@
 class CalMateria < ActiveRecord::Base
 
-	attr_accessible :id, :descripcion, :cal_categoria_id, :cal_departamento_id
+	attr_accessible :id, :descripcion, :cal_categoria_id, :cal_departamento_id, :orden
 
 	belongs_to :cal_categoria
 

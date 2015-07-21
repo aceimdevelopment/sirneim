@@ -11,15 +11,15 @@
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "active" : ""
 			.tab-pane{:class => activa, :id => "#{dep.id}"}
-				
-				.tabbable.nav-stacked.tabs-right
+				- @materias = dep.cal_materias.sort_by{|m| m.cal_categoria.orden and m.orden } 
+				.tabbable.nav-stacked.tabs-left
 					%ul.nav.nav-tabs
-						- dep.cal_materias.each do |materia|
+						- @materias.each do |materia|
 							%li
-								= link_to materia.descripcion[0..35], "##{materia.id}", "data-toggle"=> "tab"
+								= link_to materia.descripcion[0..37], "##{materia.id}", "data-toggle"=> "tab"
 
 					.tab-content
-						- dep.cal_materias.each do |materia|
+						- @materias.each do |materia|
 							.tab-pane{ :id => "#{materia.id}"}
 								%h3= materia.descripcion
 								.well.well-small
