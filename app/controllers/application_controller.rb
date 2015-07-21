@@ -109,6 +109,16 @@ private
     end
   end
 
+  def cal_filtro_admin_profe
+    unless session[:cal_administrador] or session[:cal_profesor] 
+      reset_session
+      flash[:alert] = "Debe iniciar sesión como Profesor o Administrador"  
+      redirect_to :action => "index", :controller => "cal_inicio"
+      return false
+    end
+  end
+
+
   def cal_filtro_profesor
     unless session[:cal_profesor]
       reset_session

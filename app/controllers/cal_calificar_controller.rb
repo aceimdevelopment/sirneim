@@ -1,7 +1,8 @@
 class CalCalificarController < ApplicationController
 
 	before_filter :cal_filtro_logueado
-	before_filter :cal_filtro_profesor
+	before_filter :cal_filtro_admin_profe
+
 
 	def seleccionar_seccion
 		@profesor = CalProfesor.find (session[:cal_profesor].cal_usuario_ci)
@@ -69,7 +70,6 @@ class CalCalificarController < ApplicationController
 	    end
 		# redirect_to :action => 'index'      
 	end
-
 
 
 	def importar_secciones

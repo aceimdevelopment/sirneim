@@ -23,41 +23,28 @@
 							.tab-pane{ :id => "#{materia.id}"}
 								%h3= materia.descripcion
 								.well.well-small
-									- materia.cal_secciones.each do |seccion|
-										- calificada = seccion.calificada
-										%h5
-
-											= "Sección #{seccion.numero}" 
-											= "/ Prof.: #{seccion.cal_profesor.cal_usuario.descripcion}" if seccion.cal_profesor
-											-if calificada
-												%span.label.label-success Calidicada 
-											- else
-												%span.label.label-info Pendiente por calificar
-
-										.well.well-small
-										- @estudiantes_secciones = seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
-
-
-										%table.table.table-bordered.table-striped.table-condensed.table-hover{:style => "text-align:left;"}
-											%thead			
+									%table.table.table-bordered.table-striped.table-condensed.table-hover
+										%thead
+											%tr
+												%th Sección
+												%th Profesor
+												%th Estado
+												- if @admin and @admin.cal_tipo_admin_id <=2
+													%th Opciones
+										%tbody
+											- materia.cal_secciones.each do |seccion|
 												%tr
-													%th #
-													%th Estudiante
-													%th Estado
-													%th Definitiva
-											%tbody
-												- @estudiantes_secciones.each_with_index do |es,i|
-												
-													- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
-													- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+													%td= seccion.numero
+													%td= "#{seccion.cal_profesor.cal_usuario.descripcion}" if seccion.cal_profesor
+													%td
+														-if seccion.calificada
+															%span.label.label-success Calidicada 
+														- else
+															%span.label.label-info Pendiente por calificar
 
-													%tr{:class => tipo_calificacion}
-														%td #{i}
-														%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
+													- if @admin and @admin.cal_tipo_admin_id <=2
 														%td
-															= es.cal_tipo_estado_calificacion.descripcion
-														%td 
-															es.calificacion_final.to_i
 
-
-
+															= link_to "Cambiar Profesor calificador", :action => 'seleccionar_profesor', :id => seccion.id
+															|
+															= link_to "Ver Detalle y Calificar", :action => 'ver_seccion_admin', :id => seccion.id
