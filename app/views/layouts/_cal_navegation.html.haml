@@ -1,22 +1,17 @@
 .navbar.navbar-fluid.navbar-static-top{:role=>"navigation"}
   .navbar-inner
     .container-fluid
-      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      .container-fluid.nav-collapse
-        -if session[:cal_administrador]
-          %ul.nav
-            %li
-              %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
-            = drop_down "Usuarios" do
-              %li=link_to "Gestionar Profesores y Estudiantes", :action => "usuarios"
+      -if session[:cal_administrador]
+        %ul.nav
+          %li
+            %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
+          = drop_down "Usuarios" do
+            %li=link_to "Gestionar Profesores y Estudiantes", :action => "usuarios"
 
-        .nav.pull-right
-          -if session[:cal_usuario]
-            = drop_down "#{session[:cal_usuario].nombre_completo}" do
-              %li=# link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
-              %li=link_to ("Actualizar Datos Personales"), {}, :onclick => "return $('#actualizar_datos').modal();", 'data_toggle' => 'modal' 
-              = drop_down_divider
-              = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"
+      .nav.pull-right
+        -if session[:cal_usuario]
+          = drop_down "#{session[:cal_usuario].nombre_completo}" do
+            %li=# link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+            %li=link_to ("Actualizar Datos Personales"), {}, :onclick => "return $('#actualizar_datos').modal();", 'data_toggle' => 'modal' 
+            = drop_down_divider
+            = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"
