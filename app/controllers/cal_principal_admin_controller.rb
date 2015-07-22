@@ -3,6 +3,11 @@ class CalPrincipalAdminController < ApplicationController
 	before_filter :cal_filtro_logueado
 	before_filter :cal_filtro_administrador
 
+	def usuarios
+		@estudiantes = CalEstudiante.all
+		@profesores = CalProfesor.all
+	end
+
 	def index
 		@departamentos = CalDepartamento.all
 		@cal_usuario = session[:cal_usuario]
@@ -99,6 +104,23 @@ class CalPrincipalAdminController < ApplicationController
 		redirect_to :action => "index"
 
 	end
+
+	def resetear_contrasena
+
+		@cal_usuario = CalUsuario.where(:ci =>params[:ci]).limit(1).first
+		@cal_usuario.contrasena = @cal_usuario.ci
+
+		if @cal_usuario.save(:validate => false)
+			# AdministradorMailer.aviso_general("#{@usuario.correo}","Su Contraseña fue Reseteada II", "su contraseña fue reseteada, ahora es:#{@usuario.contrasena}. Si ud. no solicitó este servicio dirijase a nuestras oficinas a fin de aclarar la situación").deliver
+			flash[:success] = "Contraseña reseteada corréctamente"
+			redirect_to  :action=>"usuarios"
+		else
+			flash[:error] = "No se pudo resetear la contraseña#{@cal_usuario.errors.full_messages.join(' ')}"
+			redirect_to  :action=>"usuarios"
+		end
+
+	end
+
 
 
 end

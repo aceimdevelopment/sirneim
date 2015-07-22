@@ -1,27 +1,32 @@
+
 - @cal_usuario = session[:cal_usuario]
 
-- @debe_actulizar = @cal_usuario.correo_electronico.blank? and @cal_usuario.telefono_movil.blank? and @cal_usuario.telefono_habitacion.blank?
+- @debe_actulizar = true if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
 
-- hide = @debe_actulizar ? "" : "hide"
-	
-.modal.fade#actualizar_datos{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, :class => hide}
-	.modal-dialog
-		.modal-content
-			-unless @debe_actulizar
-				.modal-header
-					<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
-			-else
+- if @debe_actulizar
+	.modal.fade#actualizar_datos{'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+		.modal-dialog
+			.modal-content
 				.alert.alert-info
 					%h4 IMPORTANTE:
 					Le recomendamos actualice sus datos para una mejor experiencia.
-			%h2#myModalLabel 
-				Actualizar Datos
-			.modal-body
-				= render :partial => 'cal_usuario/form'
-
--if @debe_actulizar
+				%h2#myModalLabel 
+					Actualizar Datos
+				.modal-body
+					= render :partial => 'cal_usuario/form'
 	:javascript
 		$(document).ready(function() {
 			$("#actualizar_datos").modal();
 		}); 
+
+- else
+	.modal.fade#actualizar_datos{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+		.modal-dialog
+			.modal-content
+				.modal-header
+					<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+				%h2#myModalLabel 
+					Actualizar Datos
+				.modal-body
+					= render :partial => 'cal_usuario/form'
 

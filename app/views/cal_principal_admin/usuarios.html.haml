@@ -1,0 +1,69 @@
+.label.label-info.pull-right
+	<a id="text" style='color:white;'></a>
+	= text_field_tag 'filtro', nil ,{:onkeyup => "return filtrar()", :placeholder=>"Filtrar...", :autofocus => true}
+:javascript
+	function filtrar() {
+		var filtro = document.getElementById("filtro").value.toLowerCase();
+		var total_mach = 0
+		ids = ""
+		$("tr.filtrables").each(function(){
+			var temp = $(this).text().toLowerCase();
+			if (temp.match(filtro) == null) {
+				$(this).hide();
+			}else {
+				$(this).show();
+				total_mach += 1;
+				ids = ids + $(this).find('td').first().text() + ",";
+			}
+			
+		});
+		$("#text").text(total_mach+" coincidencias (Descargar Excel)");
+		$("#text").attr('href', "/alertas/descargas?id="+ids)
+		return false;
+		}
+
+
+
+
+.tabbable.tabs-top
+	%ul.nav.nav-tabs
+		%li.active
+			= link_to "Profesores", "#profesores", "data-toggle"=> "tab"
+		%li
+			= link_to "Estudiantes", "#estudiantes", "data-toggle"=> "tab"
+
+	.tab-content
+		.tab-pane.active#profesores
+			%h3 Profesores
+			%table.table.table-bordered.table-striped.table-condensed.table-hover
+				%thead
+					%tr
+						%th #
+						%th Descripción
+						%th Contraseña
+						%th Opciones
+				%tbody
+					- @profesores.each_with_index do |po,i|
+						%tr.filtrables
+							%td= i
+							%td= po.cal_usuario.descripcion if po.cal_usuario
+							%td= po.cal_usuario.contrasena if po.cal_usuario
+							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => po.cal_usuario_ci }
+
+
+		.tab-pane#estudiantes
+			%h3 Estudiantes
+			%table.table.table-bordered.table-striped.table-condensed.table-hover
+				%thead
+					%tr
+						%th #
+						%th Estudiante
+						%th Contraseña
+						%th Opciones
+				%tbody
+					- @estudiantes.each_with_index do |es,i|
+						%tr.filtrables
+							%td= i
+							%td= es.cal_usuario.descripcion if es.cal_usuario
+							%td= es.cal_usuario.contrasena if es.cal_usuario
+							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => es.cal_usuario_ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}
