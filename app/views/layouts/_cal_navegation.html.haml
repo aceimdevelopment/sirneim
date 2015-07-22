@@ -6,10 +6,10 @@
         %span.icon-bar
         %span.icon-bar
       .container-fluid.nav-collapse
-        %ul.nav
-          %li
-            %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
-          -if session[:cal_administrador]
+        -if session[:cal_administrador]
+          %ul.nav
+            %li
+              %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
             = drop_down "Usuarios" do
               %li=link_to "Gestionar Profesores y Estudiantes", :action => "usuarios"
 
