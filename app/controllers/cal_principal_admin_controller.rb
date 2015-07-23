@@ -4,8 +4,8 @@ class CalPrincipalAdminController < ApplicationController
 	before_filter :cal_filtro_administrador
 
 	def usuarios
-		@estudiantes = CalEstudiante.all
-		@profesores = CalProfesor.all
+		@estudiantes = CalEstudiante.all.delete_if{|es| es.cal_usuario.nil?}.sort_by{|es| es.cal_usuario.apellido_nombre}
+		@profesores = CalProfesor.all.delete_if{|po| po.cal_usuario.nil?}.sort_by{|po| po.cal_usuario.apellido_nombre }
 	end
 
 	def index
@@ -103,6 +103,11 @@ class CalPrincipalAdminController < ApplicationController
 
 		redirect_to :action => "index"
 
+	end
+
+	def detalle_usuario
+		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first
+		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
 	end
 
 	def resetear_contrasena

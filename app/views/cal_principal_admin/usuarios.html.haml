@@ -17,8 +17,6 @@
 			}
 			
 		});
-		$("#text").text(total_mach+" coincidencias (Descargar Excel)");
-		$("#text").attr('href', "/alertas/descargas?id="+ids)
 		return false;
 		}
 
@@ -46,8 +44,8 @@
 					- @profesores.each_with_index do |po,i|
 						%tr.filtrables
 							%td= i
-							%td= po.cal_usuario.descripcion if po.cal_usuario
-							%td= po.cal_usuario.contrasena if po.cal_usuario
+							%td= po.cal_usuario.descripcion_apellido if po.cal_usuario
+							%td= po.cal_usuario.contrasena if po.cal_usuario 
 							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => po.cal_usuario_ci }
 
 
@@ -64,6 +62,7 @@
 					- @estudiantes.each_with_index do |es,i|
 						%tr.filtrables
 							%td= i
-							%td= es.cal_usuario.descripcion if es.cal_usuario
+							%td= es.cal_usuario.descripcion_apellido if es.cal_usuario
 							%td= es.cal_usuario.contrasena if es.cal_usuario
+							%td= link_to "Ver Detalle", {:action => 'detalle_usuario', :ci => es.cal_usuario_ci}							
 							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => es.cal_usuario_ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}

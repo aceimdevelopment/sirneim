@@ -1,8 +1,32 @@
-= render :partial => 'cal_usuario/datos_modal'
-%h2 Asignaturas
-- @secciones.each do |est_sec|
-	.well.well-small
-		%h3= est_sec.cal_seccion.descripcion if est_sec.cal_seccion
+%h2 Datos Personales
+%ul.well.well-small
+	%li
+		%b Cédula de Identidad:
+		= @estudiante.cal_usuario_ci
+	%li
+		%b Nombre:	
+		= @estudiante.cal_usuario.nombre_completo
+	%li
+		%b Contraseña:
+		= @estudiante.cal_usuario.contrasena
+
+%h2 Datos de contacto:
+%ul.well.well-small
+	%li 
+		%b Correo Electrónico:
+		= "#{@estudiante.cal_usuario.correo_electronico}" 
+	%li 
+		%b Teléfono Móvil:
+		= "#{@estudiante.cal_usuario.telefono_movil}"
+	%li 
+		%b Teléfono Habitación:
+		= "#{@estudiante.cal_usuario.telefono_habitacion}"
+
+
+%h2 Asignaturas:
+.well.well-small
+	- @secciones.each do |est_sec|
+		%p= est_sec.cal_seccion.descripcion if est_sec.cal_seccion
 		-unless est_sec.cal_tipo_estado_calificacion_id.eql? 'SC'
 			- tipo_calificacion = 'success' if est_sec.cal_tipo_estado_calificacion_id.eql? 'AP'
 			- tipo_calificacion = 'error' if (est_sec.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec.cal_tipo_estado_calificacion_id.eql? 'PI')
