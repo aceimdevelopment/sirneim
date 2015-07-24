@@ -11,7 +11,11 @@
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "active" : ""
 			.tab-pane{:class => activa, :id => "#{dep.id}"}
-				- @materias = dep.cal_materias.sort_by{|m| m.cal_categoria.orden and m.orden } 
+
+
+
+				- @materias = dep.cal_materias
+				- @materias = @materias.sort_by{|m| m.cal_categoria.orden and m.orden } 
 				.tabbable.nav-stacked.tabs-left
 					%ul.nav.nav-tabs
 						- @materias.each do |materia|
