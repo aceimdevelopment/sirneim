@@ -2,6 +2,10 @@
 	<a id="text" style='color:white;'></a>
 	= text_field_tag 'filtro', nil ,{:onkeyup => "return filtrar()", :placeholder=>"Filtrar...", :autofocus => true}
 :javascript
+
+	$(document).ready(function() {
+	    $('#profesores').dataTable();
+	} );
 	function filtrar() {
 		var filtro = document.getElementById("filtro").value.toLowerCase();
 		var total_mach = 0
@@ -20,9 +24,6 @@
 		return false;
 		}
 
-
-
-
 .tabbable.tabs-top
 	%ul.nav.nav-tabs
 		%li.active
@@ -33,7 +34,7 @@
 	.tab-content
 		.tab-pane.active#profesores
 			%h3 Profesores
-			%table.table.table-bordered.table-striped.table-condensed.table-hover
+			%table.table.table-bordered.table-striped.table-condensed.table-hover#profesores
 				%thead
 					%tr
 						%th #
@@ -51,7 +52,7 @@
 
 		.tab-pane#estudiantes
 			%h3 Estudiantes
-			%table.table.table-bordered.table-striped.table-condensed.table-hover
+			%table.table.table-bordered.table-striped.table-condensed.table-hover#estudiantes
 				%thead
 					%tr
 						%th #

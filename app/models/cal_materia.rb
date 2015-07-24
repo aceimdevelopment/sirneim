@@ -16,4 +16,11 @@ class CalMateria < ActiveRecord::Base
 		return desc
 	end
 
+	def descripcion_reversa
+		desc = cal_departamento.descripcion if cal_departamento
+		desc += "| #{cal_categoria.descripcion}" if cal_categoria		
+		return desc
+
+		
+	end
 end

@@ -22,27 +22,54 @@
 		%b Teléfono Habitación:
 		= "#{@estudiante.cal_usuario.telefono_habitacion}"
 
+- @accion = action_name
+- @controlador = controller_name
 
-%h2 Asignaturas:
+%h2 
+	Asignaturas:
+	= link_to "Agregar Nueva Asignatura", "#", :class => 'btn btn-success', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal'
+
 .well.well-small
-	- @secciones.each do |est_sec|
-		%p= est_sec.cal_seccion.descripcion if est_sec.cal_seccion
-		-unless est_sec.cal_tipo_estado_calificacion_id.eql? 'SC'
-			- tipo_calificacion = 'success' if est_sec.cal_tipo_estado_calificacion_id.eql? 'AP'
-			- tipo_calificacion = 'error' if (est_sec.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec.cal_tipo_estado_calificacion_id.eql? 'PI')
-			%p.alert{:class => "alert-#{tipo_calificacion}"}
-				= est_sec.cal_tipo_estado_calificacion.descripcion
-			- unless est_sec.cal_tipo_estado_calificacion_id.eql? 'PI'
-				%table.table.table-bordered.table-striped.table-condensed
-					%thead
-						%tr
-							%th Trimestre I
-							%th Trimestre II
-							%th Trimestre III
-							%th Definitiva
-					%tbody
-						%tr{:class => tipo_calificacion}
-							%td= est_sec.calificacion_primera
-							%td= est_sec.calificacion_segunda
-							%td= est_sec.calificacion_tercera
-							%td= est_sec.calificacion_final
+
+	%table.table.table-bordered.table-striped.table-condensed
+		%thead
+			%tr
+				%th Asignatura
+				%th Seccion
+				%th Profesor
+				%th
+		%tbody
+			- @secciones_estudiantes.each do |est_sec|
+				%tr
+					%td= est_sec.cal_seccion.cal_materia.descripcion if est_sec.cal_seccion
+					%td= est_sec.cal_seccion.numero if est_sec.cal_seccion
+					%td= est_sec.cal_seccion.cal_profesor.cal_usuario.descripcion_apellido if (est_sec.cal_seccion.cal_profesor and est_sec.cal_seccion.cal_profesor.cal_usuario)
+					%td
+						= link_to ({:controller => 'cal_estudiante_seccion', :action => 'eliminar', :id => est_sec.id, :controlador => @controlador, :accion => @accion }, { :class => 'btn btn-danger btn-mini', :method => :delete, :data => { :confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
+							= content_tag(:i, "", :class => "icon-trash icon-white")
+
+
+				-unless est_sec.cal_tipo_estado_calificacion_id.eql? 'SC'
+					- tipo_calificacion = 'success' if est_sec.cal_tipo_estado_calificacion_id.eql? 'AP'
+					- tipo_calificacion = 'error' if (est_sec.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec.cal_tipo_estado_calificacion_id.eql? 'PI')
+					%tr
+						- if est_sec.cal_tipo_estado_calificacion_id.eql? 'PI'
+							%td= est_sec.cal_tipo_estado_calificacion.descripcion
+						%td
+							%table.table.table-condensed
+								%tbody
+									%tr{:class => tipo_calificacion}
+										%td= est_sec.calificacion_primera
+										%td= est_sec.calificacion_segunda
+										%td= est_sec.calificacion_tercera
+										%td= "Final: #{est_sec.calificacion_final.to_i}"
+
+.modal.fade#estudiante_seccion{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+	.modal-dialog
+		.modal-content
+			.modal-header
+				<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+			%h2#myModalLabel 
+				Actualizar Datos
+			.modal-body
+				= render :partial => 'cal_estudiante_seccion/form'

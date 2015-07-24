@@ -26,7 +26,7 @@ class CalSeccion < ActiveRecord::Base
 
 	def descripcion
 		descripcion = ""
-		descripcion += cal_materia.descripcion_completa if cal_materia
+		descripcion += cal_materia.descripcion if cal_materia
 		descripcion += " - #{numero}" if numero 
 		return descripcion
 	end

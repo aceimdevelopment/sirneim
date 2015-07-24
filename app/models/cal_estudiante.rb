@@ -25,4 +25,8 @@ class CalEstudiante <  ActiveRecord::Base
 	# 	estudiante_en_secciones.secciones
 	# end
 
+	def descripcion 
+		cal_usuario.descripcion
+	end
+
 end

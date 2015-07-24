@@ -107,7 +107,11 @@ class CalPrincipalAdminController < ApplicationController
 
 	def detalle_usuario
 		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first
-		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
+		@secciones_estudiantes = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
+
+		@secciones = CalSeccion.all
+
+
 	end
 
 	def resetear_contrasena
