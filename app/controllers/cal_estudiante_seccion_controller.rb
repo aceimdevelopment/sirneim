@@ -36,7 +36,7 @@ class CalEstudianteSeccionController < ApplicationController
 		else
 			flash[:error] = "El estudiante no fue encontrado en la sección especificada"
 		end
-		redirect_to :controller => params[:controlador], :action => params[:accion], :ci => 19965307
+		redirect_to :controller => params[:controlador], :action => params[:accion], :ci => ci
 	end
 
 end
