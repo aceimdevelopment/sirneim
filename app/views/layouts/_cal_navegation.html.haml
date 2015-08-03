@@ -1,7 +1,7 @@
 .navbar.navbar-fluid.navbar-static-top{:role=>"navigation"}
   .navbar-inner
     .container-fluid
-      -if session[:cal_administrador]
+      -if session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id < 3 
         %ul.nav
           %li
             %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
