@@ -20,7 +20,7 @@ class CalPrincipalAdminController < ApplicationController
 			@cal_departamento_id = 'FRA' if @admin.cal_usuario_ci.eql? "14141534"
 			@cal_departamento_id = 'ING' if @admin.cal_usuario_ci.eql? "12293163"
 			@cal_departamento_id = 'ITA' if @admin.cal_usuario_ci.eql? "1045134"
-			@cal_departamento_id = 'ITA' if @admin.cal_usuario_ci.eql? "10274406"
+			@cal_departamento_id = 'POR' if @admin.cal_usuario_ci.eql? "10274406"
 			@cal_departamento_id = 'TRA' if @admin.cal_usuario_ci.eql? "3673283"
 
 		end
