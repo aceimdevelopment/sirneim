@@ -33,7 +33,10 @@
 
 	.tab-content
 		.tab-pane.active#profesores
-			%h3 Profesores
+			%p 
+				%h3 
+					Profesores
+				=link_to 'Registrar Nuevo', {:controller => 'cal_profesor', :action => 'nuevo'}, :class => 'btn'
 			%table.table.table-bordered.table-striped.table-condensed.table-hover#profesores
 				%thead
 					%tr
