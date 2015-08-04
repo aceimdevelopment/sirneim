@@ -17,11 +17,10 @@ class CalUsuario < ActiveRecord::Base
     	:class_name => 'CalProfesor',
     	:foreign_key => 'cal_usuario_ci'
 
-
 	validates :nombres,  :presence => true
-	validates :apellidos, :presence => true  
-	validates :telefono_movil, :presence => true	
-	validates :correo_electronico, :presence => true
+	validates :apellidos, :presence => true
+	# validates :telefono_movil, :presence => true	
+	# validates :correo_electronico, :presence => true
 	validates :cal_tipo_sexo_id, :presence => true
 	validates :contrasena, :presence => true
 	validates :contrasena, :confirmation => true

@@ -1,49 +1,52 @@
 = render :partial => 'cal_usuario/datos_modal'
 
-.tabbable.tabs-left
-	%ul.nav.nav-pills
+.tabbable.tabs-top
+	%h5 Seleccione el Departamento:
+	%ul.nav
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
 			%li{:class => activa}
 				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab"
 
-	.tab-content
+	.tab-content.well.well-small
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
 			.tab-pane{:class => activa, :id => "dep_#{dep.id}"}
 
 				- @catedras = dep.cal_departamentos_categorias.sort_by{|cate| cate.orden}
-				.tabbable.tabs-left
-					%ul.nav.nav-pills
+				.tabbable.tabs-top
+					%h5 Seleccione la Cátedra:
+					%ul.nav
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria
 							-cat_activa = (j.eql? 0) ? "" : ""
 							%li{:class => cat_activa}
-								= link_to cat.descripcion, "#cat_#{cat.id}", "data-toggle"=> "tab"
+								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab"
 
-					.tab-content
+					.tab-content.well.well-small
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria						
 							-cat_activa = (j.eql? 0) ? "" : ""
-							.tab-pane{:class => cat_activa, :id => "cat_#{cat.id}"}
+							.tab-pane{:class => cat_activa, :id => "cat_#{dep.id}_#{cat.id}"}
 
-								- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id)
+								- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id).sort_by{|m| m.orden}
 								.tabbable.tabs-top
-									%ul.nav.nav-pills
+									%h5 Seleccione la Asignatura:
+									%ul.nav
 
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : ""
 											%li{:class => mat_activa}
 												= link_to mat.descripcion, "#mat_#{mat.id}", "data-toggle"=> "tab"
 
-									.tab-content
+									.tab-content.well.well-small
 
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : ""
 											.tab-pane{:class => mat_activa, :id => "mat_#{mat.id}"}
 
 
-												%h3= mat.descripcion[0..20]
+												%h3= mat.descripcion
 												.well.well-small
 													%table.table.table-bordered.table-striped.table-condensed.table-hover
 														%thead
@@ -64,12 +67,15 @@
 																		- else
 																			%span.label.label-info Pendiente por calificar
 
-																	- if @admin and @admin.cal_tipo_admin_id <=2
+																	- if @admin and @admin.cal_tipo_admin_id <3
 																		%td
 
 																			= link_to "Cambiar Profesor calificador", :action => 'seleccionar_profesor', :id => seccion.id
 																			|
 																			= link_to "Ver Detalle y Calificar", :action => 'ver_seccion_admin', :id => seccion.id
+																			-if seccion.calificada
+																				|
+																				= link_to "Habilitar para Calificar Nuevamente", :action => 'habilitar_calificar', :id => seccion.id
 
 
 

@@ -30,46 +30,7 @@
           |
           =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", :required => true
           Femenino
-
-    .control-group
-      %label.control-label
-        Contraseña:
-      .controls
-        =password_field :cal_usuario, :contrasena, :required => true
-
-    .control-group
-      %label.control-label
-        Confirmación:
-      .controls
-        =password_field :cal_usuario, :contrasena_confirmation, :required => true
-
-  %fieldset
-    %legend Datos de Contacto
-
-    .control-group
-      %label.control-label
-        Teléfono habitación:
-      .controls
-        =telephone_field :cal_usuario, :telefono_habitacion, :placeholder => "Teléfono de Habitación…", :required => true
-        %span.help-block
-          Ejemplo: 0212-5551122
-
-    .control-group
-      %label.control-label
-        Teléfono celular:
-      .controls
-        =telephone_field :cal_usuario, :telefono_movil, :placeholder => "Celular…", :required => true
-        %span.help-block
-          Ejemplo: 0414-2391212
-
-    .control-group
-      %label.control-label
-        Correo electrónico:
-      .controls
-        =text_field :cal_usuario, :correo_electronico, :placeholder => "Correo Electrónico…", :required => true
-        %span.help-block
-          Ejemplo: maria@gmail.com
-
+          
     .control-group
       %label.control-label
         Departamento:

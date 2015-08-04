@@ -134,6 +134,20 @@ class CalPrincipalAdminController < ApplicationController
 
 	end
 
+	def habilitar_calificar
+		id = params[:id]
+		@cal_seccion = CalSeccion.find(id)
+
+		@cal_seccion.calificada = false
+
+		if @cal_seccion.save
+			flash[:success] = "El Profesor #{@cal_seccion.cal_profesor.cal_usuario.nombres} ya puede calificar la seccion: #{@cal_seccion.descripcion} "
+		else
+			flash[:danger] = "No se pudo actualizar el valor"
+		end
+
+		redirect_to :action => 'index'		
+	end
 
 
 end

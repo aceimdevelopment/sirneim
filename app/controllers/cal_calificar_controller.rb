@@ -57,8 +57,11 @@ class CalCalificarController < ApplicationController
 
 		flash[:success] = "Calificaciones guardada satisfactoriamente." if calificada
 
-		redirect_to :action => "ver_seccion", :id => @cal_estudiante_seccion.cal_seccion.id
-
+		if session[:cal_administrador]
+			redirect_to :controller => 'cal_principal_admin'
+		else
+			redirect_to :action => "ver_seccion", :id => @cal_estudiante_seccion.cal_seccion.id
+		end
 	end
 
 	def descargar_notas
