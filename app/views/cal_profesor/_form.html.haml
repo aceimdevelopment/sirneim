@@ -1,0 +1,81 @@
+= form_tag ({:action => 'crear'}, :class => 'form-horizontal') do
+
+  %fieldset
+    %legend Datos de Personales
+    .control-group
+      %label.control-label
+        CI:
+      .controls
+        = text_field :cal_usuario, :ci, :class => 'text_field', :placeholder => "Cédula de Identidad…", :required => true, :autofocus => true
+
+    .control-group
+      %label.control-label
+        Nombres:
+      .controls
+        = text_field :cal_usuario, :nombres, :class => 'text_field', :placeholder => "Nombres…", :required => true
+
+    .control-group
+      %label.control-label
+        Apellidos:
+      .controls
+        = text_field :cal_usuario, :apellidos, :class => 'text_field', :placeholder => "Apellidos…", :required => true
+
+    .control-group
+      %label.control-label
+        Sexo:
+      .controls
+        %label.checkbox
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "M", :required => true
+          Masculino
+          |
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", :required => true
+          Femenino
+
+    .control-group
+      %label.control-label
+        Contraseña:
+      .controls
+        =password_field :cal_usuario, :contrasena, :required => true
+
+    .control-group
+      %label.control-label
+        Confirmación:
+      .controls
+        =password_field :cal_usuario, :contrasena_confirmation, :required => true
+
+  %fieldset
+    %legend Datos de Contacto
+
+    .control-group
+      %label.control-label
+        Teléfono habitación:
+      .controls
+        =telephone_field :cal_usuario, :telefono_habitacion, :placeholder => "Teléfono de Habitación…", :required => true
+        %span.help-block
+          Ejemplo: 0212-5551122
+
+    .control-group
+      %label.control-label
+        Teléfono celular:
+      .controls
+        =telephone_field :cal_usuario, :telefono_movil, :placeholder => "Celular…", :required => true
+        %span.help-block
+          Ejemplo: 0414-2391212
+
+    .control-group
+      %label.control-label
+        Correo electrónico:
+      .controls
+        =text_field :cal_usuario, :correo_electronico, :placeholder => "Correo Electrónico…", :required => true
+        %span.help-block
+          Ejemplo: maria@gmail.com
+
+    .control-group
+      %label.control-label
+        Departamento:
+      .controls
+        =collection_select :cal_profesor, :cal_departamento_id, CalDepartamento.all, :id, :descripcion, {:prompt => "-- Seleccione --"}, :required => true
+
+    .form-actions
+      = submit_tag 'Registrar', :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), {:controller => 'cal_principal_admin', :action =>  'usuarios'} , :class => 'btn'     
