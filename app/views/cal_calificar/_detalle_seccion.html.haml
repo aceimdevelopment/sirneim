@@ -4,10 +4,6 @@
 -else
 	- calificada = @cal_seccion.calificada 
 
-.well.well-small
-	=link_to "Regresar", {:action => 'seleccionar_seccion'}, :class => 'btn'
-	-if calificada 
-		=link_to "Descargar notas", {:action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
 
 %p#text
 
@@ -96,12 +92,8 @@
 							= text_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {:readonly => true, :disabled => calificada, :value => es.calificacion_final.to_i, :class => 'span9'}
 
 	.well.well-small
-		=link_to "Regresar", {:action => 'seleccionar_seccion'}, :class => 'btn'
 		-unless calificada 
 			= submit_tag "Guardar", :id => "submit", :class => "btn btn-success pull-right", :disable_with => "Espere...", :data => {:confirm => 'Una vez que guardes las calificaciones no podrás cambiar su valor, ¿Estás Seguro?'}
-		-else
-			=link_to "Descargar notas", {:action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
-
 :javascript
 
 	function pi(ci){
