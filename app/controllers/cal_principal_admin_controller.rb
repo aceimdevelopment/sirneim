@@ -51,6 +51,10 @@ class CalPrincipalAdminController < ApplicationController
 
 	end
 
+	def nuevo_profesor
+		
+	end
+
 	def ver_seccion_admin
 		id = params[:id]
 		@cal_seccion = CalSeccion.find(id)
