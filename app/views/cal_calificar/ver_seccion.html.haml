@@ -10,7 +10,7 @@
 = form_tag(:action => "calificar") do
 	= hidden_field_tag "id", @cal_seccion.id
 
-	- if @cal_seccion.cal_materia_id.eql? 'SEMI' or @cal_seccion.cal_materia_id.eql? 'SERCOM' 
+	- if @cal_seccion.cal_materia_id.eql? 'SEMI' or @cal_seccion.cal_materia_id.eql? 'SERCOM' or @cal_seccion.cal_materia_id.eql? 'METO' 
 
 		%table.table.table-bordered.table-striped.table-condensed.table-hover{:style => "text-align:left;"}
 			%thead
