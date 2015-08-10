@@ -1,13 +1,13 @@
 
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
-	%ul.nav.nav-tabs
+	%ul.nav.nav-pills
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
 			%li{:class => activa}
 				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab"
 
-	.tab-content.well.well-small
+	.tab-content
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
 			.tab-pane{:class => activa, :id => "dep_#{dep.id}"}
@@ -15,14 +15,14 @@
 				- @catedras = dep.cal_departamentos_categorias.sort_by{|cate| cate.orden}
 				.tabbable.tabs-top
 					%h5 Seleccione la Cátedra:
-					%ul.nav.nav-tabs
+					%ul.nav.nav-pills
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria
 							-cat_activa = (j.eql? 0) ? "" : ""
 							%li{:class => cat_activa}
 								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab"
 
-					.tab-content.well.well-small
+					.tab-content
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria						
 							-cat_activa = (j.eql? 0) ? "" : ""
@@ -31,19 +31,17 @@
 								- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id).sort_by{|m| m.orden}
 								.tabbable.tabs-top
 									%h5 Seleccione la Asignatura:
-									%ul.nav.nav-tabs
+									%ul.nav.nav-pills
 
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : ""
 											%li{:class => mat_activa}
 												= link_to mat.descripcion, "#mat_#{mat.id}", "data-toggle"=> "tab"
 
-									.tab-content.well.well-small
-
+									.tab-content
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : ""
 											.tab-pane{:class => mat_activa, :id => "mat_#{mat.id}"}
-
 
 												%h3= mat.descripcion
 												.well.well-small
