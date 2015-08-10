@@ -48,7 +48,7 @@
 					%th #
 					%th Estudiante
 					%th
-						- unless @cal_seccion.calificada 
+						- unless calificada 
 							PI
 						- else
 							Estado
@@ -68,7 +68,7 @@
 						%td #{i}
 						%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
 						%td
-							- unless @cal_seccion.calificada 
+							- unless calificada 
 								= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true, nil, {:onclick => "pi(#{es.cal_estudiante_ci})"}
 							- else
 								= es.cal_tipo_estado_calificacion.descripcion
