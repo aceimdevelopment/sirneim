@@ -1,5 +1,16 @@
 class CalUsuarioController < ApplicationController
 
+  def editar
+    @cal_usuario = session[:cal_usuario]
+    @editar = true
+
+    if params[:controlador] and params[:accion]
+      @accion = params[:accion]
+      @controlador = params[:controlador]
+    end
+
+  end
+
   def modificar_guardar
     controlador = params[:controlador]
     accion = params[:accion]
@@ -10,7 +21,7 @@ class CalUsuarioController < ApplicationController
     if @usuario.update_attributes(usr)
     	flash[:success] = "Datos guardados Satisfactoriamente"
     else
-    	flash[:error] = "No se pudo guardar los datos"
+    	flash[:error] = "No se pudo guardar los datos: #{@usuario.errors.full_messages.join' | '}"
     end
 
     redirect_to :controller => controlador, :action => accion    

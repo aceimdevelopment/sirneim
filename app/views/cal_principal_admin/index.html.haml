@@ -1,8 +1,7 @@
-= render :partial => 'cal_usuario/datos_modal'
 
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
-	%ul.nav
+	%ul.nav.nav-tabs
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
 			%li{:class => activa}
@@ -16,7 +15,7 @@
 				- @catedras = dep.cal_departamentos_categorias.sort_by{|cate| cate.orden}
 				.tabbable.tabs-top
 					%h5 Seleccione la Cátedra:
-					%ul.nav
+					%ul.nav.nav-tabs
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria
 							-cat_activa = (j.eql? 0) ? "" : ""
@@ -32,7 +31,7 @@
 								- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id).sort_by{|m| m.orden}
 								.tabbable.tabs-top
 									%h5 Seleccione la Asignatura:
-									%ul.nav
+									%ul.nav.nav-tabs
 
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : ""
@@ -76,6 +75,9 @@
 																			-if seccion.calificada
 																				|
 																				= link_to "Habilitar para Calificar Nuevamente", :action => 'habilitar_calificar', :id => seccion.id
+- @cal_usuario = session[:cal_usuario]
 
+-if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
 
+	= render :partial => 'cal_usuario/datos_modal'
 
