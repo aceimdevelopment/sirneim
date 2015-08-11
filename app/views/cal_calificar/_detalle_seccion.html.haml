@@ -81,7 +81,7 @@
 							=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {:class => 'span9', :required => true, :step => 0.1, :in => 0...21, :disabled => calificada, :value => es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 						%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 							%p{:id => "#{es.cal_estudiante_ci}_calificacion_segunda_text"}
-								= sprintf( "%0.01f", es.calificacion_segunda*@p1/100) if es.calificacion_segunda
+								= sprintf( "%0.01f", es.calificacion_segunda*@p2/100) if es.calificacion_segunda
 						%td
 							= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {:class => 'span9', :required => true, :step => 0.1, :in => 0...21, :value => es.calificacion_tercera, :disabled => calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 
