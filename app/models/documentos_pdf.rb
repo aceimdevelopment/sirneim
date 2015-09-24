@@ -118,7 +118,7 @@ class DocumentosPDF
     estudiantes_seccion.each_with_index do |h,i|
       data << {"#" => "#{i+1}",
         "cedula" => to_utf16(h.cal_estudiante_ci),
-        "nombre" => to_utf16(h.cal_estudiante.cal_usuario.nombre_completo),
+        "nombre" => to_utf16(h.cal_estudiante.cal_usuario.descripcion_apellido),
         "nota1" => to_utf16(h.calificacion_primera.to_s),
         "nota2" => to_utf16(h.calificacion_segunda.to_s),
         "nota3" => to_utf16(h.calificacion_tercera.to_s),

@@ -6,7 +6,7 @@ class CalPrincipalEstudianteController < ApplicationController
 	def index
 		@estudiante = session[:cal_usuario].cal_estudiante
 
-		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)
+		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci).order("cal_materia_id ASC")
 	end
 
 end
