@@ -57,7 +57,7 @@
 															- mat.cal_secciones.each do |seccion|
 																%tr
 																	%td= seccion.numero
-																	%td= "#{seccion.cal_profesor.cal_usuario.descripcion}" if seccion.cal_profesor
+																	%td= "#{seccion.descripcion_profesor_asignado}"
 																	%td
 																		-if seccion.calificada
 																			%span.label.label-success Calidicada 

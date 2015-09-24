@@ -25,6 +25,13 @@ class CalProfesor < ActiveRecord::Base
         "#{cal_usuario.descripcion_apellido} - #{cal_departamento.descripcion if cal_departamento}"        
     end
 
+    def descripcion_usuario
+        if cal_usuario
+            return cal_usuario.descripcion
+        else
+            "Profesor Sin descripcion"
+        end
+    end
 
 
 end

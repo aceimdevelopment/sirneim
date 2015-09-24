@@ -1,5 +1,5 @@
 %h4
-	= @cal_seccion.cal_profesor.descripcion 
+	= "Profesor: #{@cal_seccion.descripcion_profesor_asignado}" 
 
 .well.well-small
 	=link_to "Regresar", {:action => 'index'}, :class => 'btn'

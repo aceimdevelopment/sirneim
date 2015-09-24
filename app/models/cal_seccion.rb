@@ -40,4 +40,11 @@ class CalSeccion < ActiveRecord::Base
 		return descripcion
 	end
 
+	def descripcion_profesor_asignado
+		if cal_profesor
+			cal_profesor.descripcion_usuario
+		else
+			"No asignado"
+		end
+	end
 end
