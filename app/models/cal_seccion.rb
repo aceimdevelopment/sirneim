@@ -24,6 +24,7 @@ class CalSeccion < ActiveRecord::Base
 	# has_and_belongs_to_many :estudiantes, :join_table => "estudiante_en_seccion", :foreign_key => [:seccion_id, :materia_id, :categoria_id, :departamento_id, :semestre_id]
 	# accepts_nested_attributes_for :estudiantes
 
+
 	def descripcion
 		descripcion = ""
 		descripcion += cal_materia.descripcion if cal_materia

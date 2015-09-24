@@ -23,7 +23,7 @@
 					- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
 
 					%tr{:class => tipo_calificacion}
-						%td #{i}
+						%td #{i+1}
 						%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
 						%td
 							= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {:disabled => calificada, :value => es.calificacion_final.to_i, :class => 'span9', :required => true, :step => 0.1, :in => 0...21}
