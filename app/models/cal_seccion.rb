@@ -19,7 +19,7 @@ class CalSeccion < ActiveRecord::Base
 
 	has_many :cal_estudiantes, :through => :cal_estudiantes_secciones, :source => :cal_estudiante  
 
-	validates_uniqueness_of [:numero, :cal_materia_id, :cal_semestre_id]
+	# validates_uniqueness_of :numero, :cal_materia_id, :cal_semestre_id
 
   	# has_many :categorias, :through => :tipo_curso, :source => :tipo_categoria
 

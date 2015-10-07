@@ -11,7 +11,7 @@ class CalPrincipalAdminController < ApplicationController
 	end
 
 	def nueva_seccion_admin_guardar
-
+		
 		@cal_materia_id = params[:cal_materia][:id]
 
 		@cal_materia = CalMateria.find @cal_materia_id
@@ -20,7 +20,7 @@ class CalPrincipalAdminController < ApplicationController
 		if @seccion.save
 			flash[:success] = "Seccion agregada con éxito"
 		else
-			flash[:error] = "No se pudo agregar la nueva sección. Por favor revise el número de la sección e intentelo de nuevo."
+			flash[:error] = "No se pudo agregar la nueva sección. Por favor verifique: #{@seccion.errors.full_messages.join(' ')}"
 		end
 		redirect_to :back, :anchor => 'mat_ALEMI'
 
