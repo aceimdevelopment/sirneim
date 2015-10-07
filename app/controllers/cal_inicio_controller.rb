@@ -23,9 +23,11 @@ class CalInicioController < ApplicationController
         redirect_to :action => "index" 
         return
       elsif roles.size == 1
+        cal_cargar_parametros_generales
         redirect_to :action => "un_rol", :tipo => roles.first
         return
       else
+        cal_cargar_parametros_generales
         flash[:warning] = "Tiene más de un rol, selecciona uno de ellos"
         redirect_to :action => "seleccionar_rol"
         return

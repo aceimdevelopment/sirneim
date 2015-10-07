@@ -1,4 +1,6 @@
-
+%h3 
+	Semestre Altual: 
+	%b= "#{@cal_semestre_actual.id}"
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
 	%ul.nav.nav-pills
@@ -32,9 +34,8 @@
 								.tabbable.tabs-top
 									%h5 Seleccione la Asignatura:
 									%ul.nav.nav-pills
-
 										- @materias.each_with_index do |mat,k|
-											-mat_activa = (k.eql? 0) ? "" : ""
+											-mat_activa = (k.eql? 0) ? "" : "" 
 											%li{:class => mat_activa}
 												= link_to mat.descripcion, "#mat_#{mat.id}", "data-toggle"=> "tab"
 
@@ -43,7 +44,6 @@
 											-mat_activa = (k.eql? 0) ? "" : ""
 											.tab-pane{:class => mat_activa, :id => "mat_#{mat.id}"}
 
-												%h3= mat.descripcion
 												.well.well-small
 													%table.table.table-bordered.table-striped.table-condensed.table-hover
 														%thead
@@ -54,7 +54,7 @@
 																- if @admin and @admin.cal_tipo_admin_id <=2
 																	%th Opciones
 														%tbody
-															- mat.cal_secciones.each do |seccion|
+															- mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id).each do |seccion|
 																%tr
 																	%td= seccion.numero
 																	%td= "#{seccion.descripcion_profesor_asignado}"
@@ -73,9 +73,23 @@
 																			-if seccion.calificada
 																				|
 																				= link_to "Habilitar para Calificar Nuevamente", :action => 'habilitar_calificar', :id => seccion.id
+													%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nueva Sección'}
+
+														= form_tag 'cal_principal_admin/nueva_seccion_admin_guardar', {:class => 'form-horizontal', :id => "nueva_seccion_#{mat.id}"} do 
+															= hidden_field_tag "[cal_materia]id", mat.id
+															= text_field_tag "[cal_seccion]numero" , nil, {:autofocus => true, :placeholder => 'número'}
+															= hidden_field_tag "[cal_seccion]cal_semestre_id", mat.cal_secciones.first.cal_semestre_id
+
+															= submit_tag 'Agregar', :class => 'btn btn-primary'
+
 - @cal_usuario = session[:cal_usuario]
 
 -if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
 
 	= render :partial => 'cal_usuario/datos_modal'
 
+:javascript
+
+	$(document).ready(function() {
+		$('.tooltip-btn').tooltip();
+	});

@@ -9,6 +9,7 @@
             %li=link_to "Gestionar Profesores y Estudiantes", :action => "usuarios"
 
       .nav.pull-right
+
         -if session[:cal_usuario]
           = drop_down "#{session[:cal_usuario].nombre_completo}" do
             %li=# link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
@@ -19,3 +20,4 @@
                 
             = drop_down_divider
             = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"
+        %li= link_to "Semestre Altual: #{@cal_semestre_actual.id}", nil

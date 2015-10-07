@@ -3,12 +3,42 @@ class CalPrincipalAdminController < ApplicationController
 	before_filter :cal_filtro_logueado
 	before_filter :cal_filtro_administrador
 
+	def nueva_seccion_admin
+		@seccion = CalSeccion.new
+		@seccion.cal_semestre_id = '2014-02A'
+		@seccion.cal_materia_id = params[:id]
+
+	end
+
+	def nueva_seccion_admin_guardar
+
+		@cal_materia_id = params[:cal_materia][:id]
+
+		@cal_materia = CalMateria.find @cal_materia_id
+
+		@seccion = @cal_materia.cal_secciones.new(params[:cal_seccion])
+		if @seccion.save
+			flash[:success] = "Seccion agregada con éxito"
+		else
+			flash[:error] = "No se pudo agregar la nueva sección. Por favor revise el número de la sección e intentelo de nuevo."
+		end
+		redirect_to :back, :anchor => 'mat_ALEMI'
+
+	end
+
+	def configuracion_general
+		
+	end
+
+
 	def usuarios
 		@estudiantes = CalEstudiante.all.delete_if{|es| es.cal_usuario.nil?}.sort_by{|es| es.cal_usuario.apellido_nombre}
 		@profesores = CalProfesor.all.delete_if{|po| po.cal_usuario.nil?}.sort_by{|po| po.cal_usuario.apellido_nombre }
 	end
 
 	def index
+		cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
+		@cal_semestre_actual = CalSemestre.where(:id => cal_semestre_actual_id).limit(1).first
 		@departamentos = CalDepartamento.all
 		@cal_usuario = session[:cal_usuario]
 		@admin = session[:cal_administrador]

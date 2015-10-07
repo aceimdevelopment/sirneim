@@ -35,6 +35,14 @@ private
       session[:parametros][registro.id.downcase.to_sym] = registro.valor.strip
     }
   end
+
+  def cal_cargar_parametros_generales   
+    session[:cal_parametros] = {}
+    CalParametroGeneral.all.each{|registro|
+      session[:cal_parametros][registro.id.downcase.to_sym] = registro.valor.strip
+    }
+  end
+
   
   def filtro_inscripcion_abierta
     if session[:parametros][:inscripcion_abierta] != "SI"                    
