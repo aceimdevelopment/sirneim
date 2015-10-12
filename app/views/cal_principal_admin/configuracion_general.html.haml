@@ -1,0 +1,21 @@
+%h2 Configuraciones Generales 
+%h3 Período:
+%ul 
+	%li= link_to 'Agregar Nuevo Período', {:controller => 'cal_semestre', :action => 'nuevo'}, :class => 'btn'
+	%br
+	%li
+		.input-append
+
+			= text_field_tag 'Periodo', "Período Actual: #{@periodo_actual.id}", {:class => 'span', :id => 'appendedInputButton', :readonly => true, :disabled => true}
+			= link_to "Cambiar", "#", :class => 'btn btn-success', :onclick => "return $('#cambiar_periodo_actual').modal();", 'data_toggle' => 'modal'
+
+.modal.hide.fade#cambiar_periodo_actual{:tabindex => "-1", :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+	.modal-header
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		%h3 Cambiar Periodo Actual
+	=form_tag({:controller => 'cal_semestre', :action => 'cambiar_periodo_actual'}) do
+		.modal-body
+			= collection_select :cal_semestre, :id, @cal_periodos, :id, :id
+		.modal-footer
+			<a href="#" class="btn">Cerrar</a>
+			=submit_tag "Guardar", :class => 'btn btn-primary'

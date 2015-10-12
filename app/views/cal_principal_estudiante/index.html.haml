@@ -1,3 +1,13 @@
+
+= link_to "Horario #{@periodo_actual.id}", ""
+
+
+%h3 Historial Academico
+- @periodos.each do |periodo|
+	= link_to periodo.id, periodo.id
+
+
+
 %h2 Asignaturas
 - @secciones.each do |est_sec|
 	.well.well-small

@@ -1,0 +1,24 @@
+=form_tag ({:controller => 'cal_semestre', :action => 'registrar'}, :class => "form-horizontal")  do 
+
+  -if @cal_semestre.errors.any?
+    %ul
+      -flash[:alert] = ""
+      -@cal_semestre.errors.full_messages.each do |msg|
+        -flash[:alert] += "#{msg}\n"
+
+  .control-group
+    %label.control-label
+      Identificador:
+    .controls
+      =text_field :cal_semestre, :id, :placeholder => "Identificador…", :required => true, :autofocus => true
+  .control-group
+    %label.control-label
+      Fecha de Inicio:
+    .controls
+      =date_select :cal_semestre, :fecha_inicio, {}, {:class => 'span1'}
+  .control-group
+    %label.control-label
+      Fecha de Culminación:
+    .controls
+      =date_select :cal_semestre, :fecha_culminacion, {},{:class => 'span1'}
+  =submit_tag 'Guardar', :class => "btn btn-primary"

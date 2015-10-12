@@ -27,7 +27,9 @@ class CalPrincipalAdminController < ApplicationController
 	end
 
 	def configuracion_general
-		
+		@periodo_actual = CalParametroGeneral.cal_semestre_actual
+
+		@cal_periodos = CalSemestre.all
 	end
 
 

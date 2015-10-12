@@ -1,5 +1,8 @@
 class CalUsuarioController < ApplicationController
 
+  before_filter :cal_filtro_logueado
+  before_filter :cal_filtro_administrador
+
   def editar
     @cal_usuario = session[:cal_usuario]
     @editar = true

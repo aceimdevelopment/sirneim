@@ -7,6 +7,8 @@
             %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
           = drop_down "Usuarios" do
             %li=link_to "Gestionar Profesores y Estudiantes", :action => "usuarios"
+          %li
+            = link_to "Configuración General", {:controller => 'cal_principal_admin', :action => 'configuracion_general'} 
 
       .nav.pull-right
 
@@ -21,4 +23,4 @@
             = drop_down_divider
             = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"
         -if @cal_semestre_actual
-          %li= link_to "Semestre Altual: #{@cal_semestre_actual.id}", nil
+          %li= link_to "Período Académico: #{@cal_semestre_actual.id}", nil
