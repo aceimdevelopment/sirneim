@@ -15,7 +15,7 @@ class CalPrincipalEstudianteController < ApplicationController
 
 
 		@cal_estudiantes_secciones = @estudiante.cal_estudiantes_secciones 
-		@reprobadas = cal_estudiantes_secciones.where('cal_semestre_id = ? AND calificacion_final < ?',@periodo_anterior.id, 10).count
+		@reprobadas = @cal_estudiantes_secciones.where('cal_semestre_id = ? AND calificacion_final < ?',@periodo_anterior.id, 10).count
 
 		@annos = []
 		@secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| @annos << x.anno if x.anno > 0}
