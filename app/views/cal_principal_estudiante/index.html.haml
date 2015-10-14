@@ -1,36 +1,51 @@
+%h3
+	= link_to "Horario #{@periodo_actual.id}", ""
 
-= link_to "Horario #{@periodo_actual.id}", ""
+%h3 Historial Academico:
+.accordion#acordion1
+	.accordion-group
+		.accordion-heading
+			= link_to "Horario #{@periodo_actual.id}", "#collapse#{@periodo_actual.id}" , {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#acordion1"}
+		.accordion-body.collapse.in{:id => "collapse#{@periodo_actual.id}"}
+			.accordion-inner
+				%ul
+					- @archivos.each do |archivo|
+						%li= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
+				%p= @reprobadas
 
 
-%h3 Historial Academico
-- @periodos.each do |periodo|
-	= link_to periodo.id, periodo.id
+	- @periodos.each do |periodo|
+		- @secciones_periodo = @secciones.where(:cal_semestre_id => periodo.id)
+		- if true 
+			.accordion-group
+				.accordion-heading
+					= link_to "Período Académico #{periodo.id}", "#collapse#{periodo.id}", {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "accordion1"}
+				.accordion-body.collapse.in{:id => "collapse#{periodo.id}"}
+					.accordion-inner
+						%table.table.table-bordered.table-striped.table-condensed
+							%thead
+								%tr
+									%th Asignatura
+									%th Sección
+									%th Trimestre I
+									%th Trimestre II
+									%th Trimestre III
+									%th Definitiva
+							- @secciones_periodo.each do |est_sec_per|
+								- tipo_calificacion = ''
+								- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
+								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI') 	
+
+								%tbody
+									%tr{:class => tipo_calificacion}
+										%td= est_sec_per.cal_seccion.cal_materia.descripcion
+										%td= est_sec_per.cal_seccion.numero
+										%td= est_sec_per.calificacion_primera
+										%td= est_sec_per.calificacion_segunda
+										%td= est_sec_per.calificacion_tercera
+										%td= est_sec_per.calificacion_final
 
 
-
-%h2 Asignaturas
-- @secciones.each do |est_sec|
-	.well.well-small
-		%h3= est_sec.cal_seccion.descripcion if est_sec.cal_seccion
-		-unless est_sec.cal_tipo_estado_calificacion_id.eql? 'SC'
-			- tipo_calificacion = 'success' if est_sec.cal_tipo_estado_calificacion_id.eql? 'AP'
-			- tipo_calificacion = 'error' if (est_sec.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec.cal_tipo_estado_calificacion_id.eql? 'PI')
-			%p.alert{:class => "alert-#{tipo_calificacion}"}
-				= est_sec.cal_tipo_estado_calificacion.descripcion
-			- unless est_sec.cal_tipo_estado_calificacion_id.eql? 'PI'
-				%table.table.table-bordered.table-striped.table-condensed
-					%thead
-						%tr
-							%th Trimestre I
-							%th Trimestre II
-							%th Trimestre III
-							%th Definitiva
-					%tbody
-						%tr{:class => tipo_calificacion}
-							%td= est_sec.calificacion_primera
-							%td= est_sec.calificacion_segunda
-							%td= est_sec.calificacion_tercera
-							%td= est_sec.calificacion_final
 
 - @cal_usuario = session[:cal_usuario]
 
@@ -38,4 +53,10 @@
 
 	= render :partial => 'cal_usuario/datos_modal'
 
-							
+:javascript
+
+	$(document).ready(function() {
+		$(".collapse").collapse();
+	});
+	
+

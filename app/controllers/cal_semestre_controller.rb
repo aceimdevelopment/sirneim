@@ -8,7 +8,14 @@ class CalSemestreController < ApplicationController
   end
 
   def registrar
-
+    if params[:set_periodo_actual]
+      periodo_actual = CalParametroGeneral.find("SEMESTRE_ACTUAL")
+      periodo_anterior = CalParametroGeneral.find("SEMESTRE_ANTERIOR")
+      periodo_anterior.valor = periodo_actual.valor
+      periodo_actual.valor = params[:cal_semestre][:id]
+      periodo_actual.save
+      periodo_anterior.save
+    end
     @cal_semestre = CalSemestre.new(params[:cal_semestre])
 
     if @cal_semestre.save
@@ -23,8 +30,10 @@ class CalSemestreController < ApplicationController
   def cambiar_periodo_actual
 
       periodo_actual = CalParametroGeneral.find("SEMESTRE_ACTUAL")
+      periodo_anterior = CalParametroGeneral.find("SEMESTRE_ANTERIOR")
+      periodo_anterior.valor = params[:cal_semestre_anterior][:id]
       periodo_actual.valor = params[:cal_semestre][:id]
-      if periodo_actual.save
+      if periodo_actual.save and periodo_anterior.save 
         session[:cal_parametros][:semestre_actual] = periodo_actual.valor
         flash[:success] = "Se realizó el cambio de periodo actual a #{periodo_actual.valor}"
       else

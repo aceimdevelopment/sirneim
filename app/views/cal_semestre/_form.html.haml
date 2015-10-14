@@ -21,4 +21,12 @@
       Fecha de Culminación:
     .controls
       =date_select :cal_semestre, :fecha_culminacion, {},{:class => 'span1'}
+
+  .control-group
+    %label.control-label
+      Desea que éste período sea el actual?:
+    .controls
+      =check_box_tag :set_periodo_actual
+
+
   =submit_tag 'Guardar', :class => "btn btn-primary"

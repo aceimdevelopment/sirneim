@@ -13,9 +13,7 @@ class CalPrincipalAdminController < ApplicationController
 	def nueva_seccion_admin_guardar
 		
 		@cal_materia_id = params[:cal_materia][:id]
-
 		@cal_materia = CalMateria.find @cal_materia_id
-
 		@seccion = @cal_materia.cal_secciones.new(params[:cal_seccion])
 		if @seccion.save
 			flash[:success] = "Seccion agregada con éxito"
@@ -28,7 +26,7 @@ class CalPrincipalAdminController < ApplicationController
 
 	def configuracion_general
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual
-
+		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
 		@cal_periodos = CalSemestre.all
 	end
 

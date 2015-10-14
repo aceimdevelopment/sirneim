@@ -22,5 +22,6 @@
                 
             = drop_down_divider
             = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"
-        -if @cal_semestre_actual
-          %li= link_to "Período Académico: #{@cal_semestre_actual.id}", nil
+        -if session[:cal_parametros] and session[:cal_parametros][:semestre_actual]
+          %li= link_to "Período Académico: #{session[:cal_parametros][:semestre_actual]}", nil
+
