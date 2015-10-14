@@ -42,6 +42,10 @@
 					%tr
 						%th #
 						%th Descripción
+						%th Departamento
+						%th Correo
+						%th Móvil
+						%th Habitación
 						%th Contraseña
 						%th Opciones
 				%tbody
@@ -49,6 +53,10 @@
 						%tr.filtrables
 							%td= i
 							%td= po.cal_usuario.descripcion_apellido if po.cal_usuario
+							%td= po.cal_departamento.descripcion
+							%td= po.cal_usuario.correo_electronico if po.cal_usuario
+							%td= po.cal_usuario.telefono_movil if po.cal_usuario
+							%td= po.cal_usuario.telefono_habitacion if po.cal_usuario
 							%td= po.cal_usuario.contrasena if po.cal_usuario 
 							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => po.cal_usuario_ci }
 
@@ -60,6 +68,9 @@
 					%tr
 						%th #
 						%th Estudiante
+						%th Correo
+						%th Móvil
+						%th Habitación
 						%th Contraseña
 						%th Opciones
 				%tbody
@@ -67,6 +78,9 @@
 						%tr.filtrables
 							%td= i
 							%td= es.cal_usuario.descripcion_apellido if es.cal_usuario
+							%td= es.cal_usuario.correo_electronico if es.cal_usuario
+							%td= es.cal_usuario.telefono_movil if es.cal_usuario
+							%td= es.cal_usuario.telefono_habitacion if es.cal_usuario
 							%td= es.cal_usuario.contrasena if es.cal_usuario
 							%td= link_to "Ver Detalle", {:action => 'detalle_usuario', :ci => es.cal_usuario_ci}							
 							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => es.cal_usuario_ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}

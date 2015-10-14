@@ -26,6 +26,15 @@ class CalUsuario < ActiveRecord::Base
 	validates :contrasena, :confirmation => true
 
 
+	def descripcion_contacto
+		contacto = ""
+		contacto += "Correo: #{correo_electronico.to_s}" if correo_electronico
+		contacto += "| Movil: #{telefono_movil.to_s}" if telefono_movil
+		contacto += "| Habitación: #{telefono_habitacion.to_s}" if telefono_habitacion
+		contacto = "Sin Información" if contacto.blank?
+		return contacto
+	end
+
 	def nombre_completo
 		if nombres and apellidos
 			"#{nombres}, #{apellidos}"
