@@ -55,7 +55,7 @@ module Aceim
     #  :user_name            => 'andresviviani3',
     #  :password             => 'aceimaceim',
       # :user_name            => 'sergio.rivas',
-     :password             => 'junio2015',
+     :password             => 'julio2015',
       # :password             => 'aqsw123',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
