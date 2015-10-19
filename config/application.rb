@@ -51,7 +51,7 @@ module Aceim
       # :address              => "strix.ciens.ucv.ve",
     #  :port                 => 587,
     #  :domain               => 'ciens.ucv.ve',
-     :user_name            => 'sirneim',
+     :user_name            => 'sirneim@gmail.com',
     #  :user_name            => 'andresviviani3',
     #  :password             => 'aceimaceim',
       # :user_name            => 'sergio.rivas',
