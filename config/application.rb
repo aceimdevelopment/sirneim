@@ -49,17 +49,16 @@ module Aceim
     config.action_mailer.smtp_settings = {
      :address              => "smtp.gmail.com",
       # :address              => "strix.ciens.ucv.ve",
-    #  :port                 => 587,
-    #  :domain               => 'ciens.ucv.ve',
-     :user_name            => 'sirneim@gmail.com',
+     :port                 => 587,
+     :domain               => 'gmail.com',
+     :user_name            => 'sirneim',
     #  :user_name            => 'andresviviani3',
     #  :password             => 'aceimaceim',
       # :user_name            => 'sergio.rivas',
      :password             => 'julio2015',
       # :password             => 'aqsw123',
       :authentication       => 'plain',
-      :enable_starttls_auto => true  }
-    
+      :enable_starttls_auto => true  }    
   end
 end
 

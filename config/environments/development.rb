@@ -25,18 +25,20 @@ Aceim::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
-  # Expands the lines which load the assets
-=begin
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => 'baci.lindsaar.net',
-    :user_name            => 'danielousky@gmail.com',
-    :password             => 'd15573230',
-    :authentication       => 'plain',
-    :enable_starttls_auto => true  }
-=end
-
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+     :address              => "smtp.gmail.com",
+      # :address              => "strix.ciens.ucv.ve",
+     :port                 => 587,
+     :domain               => 'gmail.com',
+     :user_name            => 'sirneim',
+    #  :user_name            => 'andresviviani3',
+    #  :password             => 'aceimaceim',
+      # :user_name            => 'sergio.rivas',
+     :password             => 'julio2015',
+      # :password             => 'aqsw123',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
 end
 
 =begin                            

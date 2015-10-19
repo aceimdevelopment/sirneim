@@ -20,6 +20,21 @@ Aceim::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+     :address              => "smtp.gmail.com",
+      # :address              => "strix.ciens.ucv.ve",
+     :port                 => 587,
+     :domain               => 'gmail.com',
+     :user_name            => 'sirneim',
+    #  :user_name            => 'andresviviani3',
+    #  :password             => 'aceimaceim',
+      # :user_name            => 'sergio.rivas',
+     :password             => 'julio2015',
+      # :password             => 'aqsw123',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
