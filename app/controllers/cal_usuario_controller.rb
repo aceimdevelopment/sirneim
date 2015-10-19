@@ -30,4 +30,23 @@ class CalUsuarioController < ApplicationController
     redirect_to :controller => controlador, :action => accion    
   end
 
+  def olvido_clave_enviar
+    1/0
+    cedula = params[:usuario][:ci]
+    usuario = Usuario.where(:ci => cedula).limit(0).first
+    if usuario
+      EstudianteMailer.olvido_clave(usuario).deliver  
+      info_bitacora "El usuario #{usuario.descripcion} olvido su clave y la pidio recuperar"
+      flash[:mensaje] = "Se ha enviado la clave al correo: #{usuario.correo}"
+      redirect_to :action => :index
+    else
+      flash[:mensaje] = "Usuario no registrado"
+      redirect_to :action => :olvido_clave
+    end
+    
+
+
+
+  end
+
 end

@@ -47,16 +47,16 @@ module Aceim
     config.active_record.pluralize_table_names = false    
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-    #  :address              => "smtp.gmail.com",
-      :address              => "strix.ciens.ucv.ve",
+     :address              => "smtp.gmail.com",
+      # :address              => "strix.ciens.ucv.ve",
     #  :port                 => 587,
     #  :domain               => 'ciens.ucv.ve',
-    #  :user_name            => 'fundeimucv',
+     :user_name            => 'sirneim',
     #  :user_name            => 'andresviviani3',
     #  :password             => 'aceimaceim',
-      :user_name            => 'sergio.rivas',
-    #  :password             => 'aqsw123',
-      :password             => 'aqsw123',
+      # :user_name            => 'sergio.rivas',
+     :password             => 'junio2015',
+      # :password             => 'aqsw123',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
     
