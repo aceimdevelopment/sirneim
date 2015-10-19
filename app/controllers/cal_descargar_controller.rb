@@ -33,11 +33,18 @@ class CalDescargarController < ApplicationController
 		@archivos = []
 
 		@annos.each{|ano| @archivos << idiomas+ano.to_s}
-
+		
 		if @archivos.include? params[:id]
+			archivo = params[:id]
 
-			anno = (params[:id].split"-")[2]
-			send_file "#{Rails.root}/attachments/horarios/#{anno}/#{params[:id]}.pdf", :type => "application/pdf", :x_sendfile => true, :disposition => "attachment"
+			idioma1,idioma2,anno = (params[:id].split"-")
+
+			if idioma2.eql? 'ING' or idioma2.eql? 'FRA'
+
+				archivo = idioma2+"-"+idioma1+"-"+anno
+			end
+
+			send_file "#{Rails.root}/attachments/horarios/#{anno}/#{archivo}.pdf", :type => "application/pdf", :x_sendfile => true, :disposition => "attachment"
 		else
     		flash[:error] = "Disculpe Ud. no cuenta con los privilegios para acceder al archivo solicitado"				
 			redirect_to :controller => 'cal_principal_estudiante'

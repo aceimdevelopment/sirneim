@@ -32,18 +32,28 @@
 :javascript
 
 	function ver_select(val){
+
+		$("#idioma2 option[value='']").remove();
+		$("#idioma2 option[value=ALE]").remove();
+		$("#idioma2 option[value=FRA]").remove();		
+		$("#idioma2 option[value=ING]").remove();
+		$("#idioma2 option[value=ITA]").remove();
+		$("#idioma2 option[value=POR]").remove();
+
+		$("#idioma2").append('<option value="">Por favor seleccione</option>');
+		$("#idioma2").append('<option value="ALE">Alemán</option>');
+		$("#idioma2").append('<option value="FRA">Fancés</option>');
+		$("#idioma2").append('<option value="ING">Inglés</option>');
+		$("#idioma2").append('<option value="ITA">Italiano</option>');
+		$("#idioma2").append('<option value="POR">Portugués</option>');
+
 		$("#idioma2 option[value="+val+"]").remove();
 		$('#idioma2').show();
 
 		if (val == ''){
 		$('#idioma2').hide();
 		$('#actualizar_btn').hide();
+
 		
 		}
-
-		if (val == 'ING'){
-			$("#idioma2").append('<option value="FRA">Fancés</option>');
-						
-		}
-
 	}

@@ -14,8 +14,10 @@ class CalPrincipalEstudianteController < ApplicationController
 		@secciones_aux = @estudiante.cal_secciones.where(:cal_semestre_id => @periodo_anterior.id)
 
 		if @estudiante.idioma1_id.nil? or @estudiante.idioma2_id.nil?		 
-			@idiomas1 = CalDepartamento.where('id = ? || id = ?', 'ING', 'FRA').order('id DESC')
-			@idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'ING' or i.id.eql? 'EG' or i.id.eql? 'TRA'; }
+			# @idiomas1 = CalDepartamento.where('id = ? || id = ?', 'ING', 'FRA').order('id DESC')
+			# @idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'ING' or i.id.eql? 'EG' or i.id.eql? 'TRA'; }
+			@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
+			@idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }			
 		else
 
 			idiomas = "#{@estudiante.idioma1_id}-#{@estudiante.idioma2_id}-"
