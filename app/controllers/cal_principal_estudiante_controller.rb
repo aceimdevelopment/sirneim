@@ -3,19 +3,6 @@ class CalPrincipalEstudianteController < ApplicationController
 	before_filter :cal_filtro_logueado
 	before_filter :cal_filtro_estudiante
 
-	def actualizar_idiomas
-		@estudiante = CalEstudiante.where(:cal_usuario_ci => session[:cal_usuario].ci).limit(1).first
-
-		if @estudiante.update_attributes(params[:cal_estudiante])
-			flash[:success] = "Datos guardados Satisfactoriamente"
-		else
-			flash[:error] = "No se pudo guardar los datos: #{@estudiante.errors.full_messages.join' | '}"
-		end		
-		
-		redirect_to :action => 'index'	
-
-	end
-
 	def index
 		@estudiante = CalEstudiante.where(:cal_usuario_ci => session[:cal_usuario].ci).limit(1).first
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual

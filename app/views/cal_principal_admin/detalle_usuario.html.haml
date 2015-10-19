@@ -29,10 +29,22 @@
 
 %h2 
 	Asignaturas:
-	= link_to "Agregar Nueva Asignatura", "#", :class => 'btn btn-success', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal'
+
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar a una sección'}		
+		= link_to ("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' }) do
+			= content_tag(:i, "", :class => "icon-plus icon-white")
 
 .well.well-small
+	
+	%b Idiomas:
+	= "#{@estudiante.combo_idiomas}"
 
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
+		= link_to ("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
+			= content_tag(:i, "", :class => "icon-edit icon-white")
+
+
+.well.well-small
 	%table.table.table-bordered.table-striped.table-condensed
 		%thead
 			%tr
@@ -75,3 +87,11 @@
 				Actualizar Datos
 			.modal-body
 				= render :partial => 'cal_estudiante_seccion/form'
+
+= render :partial => 'cal_estudiante/actualizar_idiomas'
+
+:javascript
+
+	$(document).ready(function() {
+		$('.tooltip-btn').tooltip();
+	});

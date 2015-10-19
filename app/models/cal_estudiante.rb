@@ -34,6 +34,16 @@ class CalEstudiante <  ActiveRecord::Base
 	# 	estudiante_en_secciones.secciones
 	# end
 
+	def combo_idiomas
+		aux = ""
+		aux += "#{idioma1.descripcion}" if idioma1
+		aux += " - #{idioma2.descripcion}" if idioma2
+
+		aux = "Sin Idiomas Registrados" if aux.eql? ""
+
+		return aux 
+	end
+
 	def descripcion 
 		cal_usuario.descripcion
 	end

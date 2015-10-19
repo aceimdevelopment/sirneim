@@ -1,5 +1,7 @@
 class CalEstudianteSeccionController < ApplicationController
 
+	before_filter :cal_filtro_logueado
+	
 	def nuevo
 		@accion = params[:accion]
 		@controlador = params[:controlador]
