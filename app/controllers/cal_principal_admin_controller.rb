@@ -5,7 +5,7 @@ class CalPrincipalAdminController < ApplicationController
 
 	def nueva_seccion_admin
 		@seccion = CalSeccion.new
-		@seccion.cal_semestre_id = '2014-02A'
+		@seccion.cal_semestre_id = cal_parametros[:semestre_actual]
 		@seccion.cal_materia_id = params[:id]
 
 	end

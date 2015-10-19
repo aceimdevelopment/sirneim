@@ -1,11 +1,20 @@
 class CalEstudiante <  ActiveRecord::Base
 	set_primary_key :cal_usuario_ci
 
-	attr_accessible :cal_usuario_ci
+	attr_accessible :cal_usuario_ci, :idioma1_id, :idioma2_id, :plan
 
  	belongs_to :cal_usuario,
     	:class_name => 'CalUsuario',
     	:foreign_key => ['cal_usuario_ci']
+
+
+ 	belongs_to :idioma1,
+    	:class_name => 'CalDepartamento',
+    	:foreign_key => ['idioma1_id']
+
+ 	belongs_to :idioma2,
+    	:class_name => 'CalDepartamento',
+    	:foreign_key => ['idioma2_id']
 
 	has_many :cal_estudiantes_secciones,
 		:class_name => 'CalEstudianteSeccion',

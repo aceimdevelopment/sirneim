@@ -81,7 +81,7 @@
 
 															= grouped_collection_select :cal_seccion, :cal_profesor_ci, @departamentos, :cal_profesores, :descripcion, :id, :descripcion, {:prompt => "Profesor"}, { :class => 'selects2', :style => 'width:30%'}
 
-															= hidden_field_tag "[cal_seccion]cal_semestre_id", mat.cal_secciones.first.cal_semestre_id
+															= hidden_field_tag "[cal_seccion]cal_semestre_id", @cal_semestre_actual.id
 
 															= submit_tag 'Agregar', :class => 'btn btn-primary'
 
