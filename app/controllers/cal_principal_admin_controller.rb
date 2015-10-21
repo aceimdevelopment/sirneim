@@ -144,8 +144,8 @@ class CalPrincipalAdminController < ApplicationController
 		@secciones_estudiantes = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
 
 		@secciones = CalSeccion.all
-		@idiomas1 = CalDepartamento.where('id = ? || id = ?', 'ING', 'FRA').order('id DESC')
-		@idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'ING' or i.id.eql? 'EG' or i.id.eql? 'TRA'; }
+		@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
+		@idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
 
 	end
 

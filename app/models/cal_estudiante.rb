@@ -48,4 +48,54 @@ class CalEstudiante <  ActiveRecord::Base
 		cal_usuario.descripcion
 	end
 
+	def archivos_disponibles_para_descarga
+		secciones_aux = cal_secciones.where(:cal_semestre_id => CalParametroGeneral.cal_semestre_anterior_id)
+		ni_ingles_ni_frances = false
+
+		unless (idioma1_id.eql? 'ING' or idioma1_id.eql? 'FRA') and (idioma2_id.eql? 'ING' or idioma2_id.eql? 'FRA')
+
+			idiomas = "ING-#{idioma1_id}-"
+			idiomas_2 = "ING-#{idioma2_id}-"
+			idiomas_3 = "FRA-#{idioma1_id}-"
+			idiomas_4 = "FRA-#{idioma2_id}-"
+			ni_ingles_ni_frances = true	
+
+		else 
+			
+			idiomas = "#{idioma1_id}-#{idioma2_id}-"
+		end
+
+		reprobadas = 0
+		
+		cal_estudiantes_secciones.each do |est_sec|
+			
+			if est_sec.calificacion_final < 10
+				reparacion = cal_estudiantes_secciones.where(:cal_materia_id => est_sec.cal_materia_id, :cal_numero => 'R').first
+				if reparacion
+					reprobadas +=1 if reparacion.calificacion_final < 10
+				else
+					reprobadas +=1
+				end
+			end
+		end			
+
+		annos = []
+		secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
+
+		annos << annos.last+1 if (reprobadas < 2 and annos.max<5)
+
+		archivos = []
+
+		annos.each{|ano| archivos << idiomas+ano.to_s}
+
+		if ni_ingles_ni_frances
+			annos.each{|ano| archivos << idiomas_2+ano.to_s}
+			annos.each{|ano| archivos << idiomas_3+ano.to_s}
+			annos.each{|ano| archivos << idiomas_4+ano.to_s}
+		end
+
+		return archivos
+		
+	end
+
 end

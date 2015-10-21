@@ -14,6 +14,7 @@
 			.modal-body
 
 		=form_tag ({:controller => 'cal_estudiante', :action => 'actualizar_idiomas'}, :class => "form-horizontal")  do 
+			= hidden_field_tag :ci, @estudiante.cal_usuario_ci  
 			= collection_select :cal_estudiante, :idioma1_id, @idiomas1, :id, :descripcion, {:prompt => true}, { :class => 'input', :onchange => "ver_select(this.value)", :required => true }
 
 

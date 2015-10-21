@@ -1,12 +1,12 @@
 class CalEstudianteController < ApplicationController
 	before_filter :cal_filtro_logueado
 
-
 	def actualizar_idiomas
-		@estudiante = CalEstudiante.where(:cal_usuario_ci => session[:cal_usuario].ci).limit(1).first
+		
+		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first
 
 		if @estudiante.update_attributes(params[:cal_estudiante])
-			flash[:success] = "Datos guardados Satisfactoriamente"
+			flash[:success] = "Datos guardados satisfactoriamente"
 		else
 			flash[:error] = "No se pudo guardar los datos: #{@estudiante.errors.full_messages.join' | '}"
 		end		
