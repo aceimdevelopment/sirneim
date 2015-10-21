@@ -50,9 +50,10 @@ class CalEstudiante <  ActiveRecord::Base
 
 	def archivos_disponibles_para_descarga
 		secciones_aux = cal_secciones.where(:cal_semestre_id => CalParametroGeneral.cal_semestre_anterior_id)
+		# Selecciono los posibles idiomas
 		ni_ingles_ni_frances = false
 
-		unless (idioma1_id.eql? 'ING' or idioma1_id.eql? 'FRA') and (idioma2_id.eql? 'ING' or idioma2_id.eql? 'FRA')
+		unless (idioma1_id.eql? 'ING' or idioma1_id.eql? 'FRA') or (idioma2_id.eql? 'ING' or idioma2_id.eql? 'FRA')
 
 			idiomas = "ING-#{idioma1_id}-"
 			idiomas_2 = "ING-#{idioma2_id}-"
@@ -65,7 +66,14 @@ class CalEstudiante <  ActiveRecord::Base
 			idiomas = "#{idioma1_id}-#{idioma2_id}-"
 		end
 
+		# Selecciono los posibles niveles
+
 		reprobadas = 0
+
+		annos = []
+
+		joins_seccion_materia = secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia)
+		secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
 		
 		cal_estudiantes_secciones.each do |est_sec|
 			
@@ -75,14 +83,39 @@ class CalEstudiante <  ActiveRecord::Base
 					reprobadas +=1 if reparacion.calificacion_final < 10
 				else
 					reprobadas +=1
-				end
+				end 
 			end
-		end			
+			break if reprobadas > 1			
+		end
 
-		annos = []
-		secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
+		if annos.count.eql? 1
+			if reprobadas.eql? 0 
+				annos.first = annos.first+1 if annos.first < 5 
+			elsif reprobadas.eql? 1
+				annos << annos.first+1 if annos.first < 5
+			end
+		else
+
+			aux = secciones_aux.where('calificacion_final < ? ', 10)
+			menor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.min).all
+			annos.delete annos.min if menor_anno.count.eql? 0
+			
+			mayor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.max).all.count
+			if mayor_anno.eql? 0
+				total_materias = CalMaterias.where(:anno => anno.max).count
+				if total_materias.eql? secciones_aux.joins(:cal_materia).where('cal_seccion.anno = ?', annos.min).all.count
+					if annos.max<5
+						annos << annos.max+1
+						annos.delete annos.max
+					end
+				end
+
+			end
+		end 
 
 		annos << annos.last+1 if (reprobadas < 2 and annos.max<5)
+
+		# Compilo los archivos en relacion idiomas niveles
 
 		archivos = []
 

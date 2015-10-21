@@ -11,10 +11,6 @@ class CalPrincipalEstudianteController < ApplicationController
 		@periodos = CalSemestre.all.delete_if{|p| p.id.eql? @periodo_actual.id}
 		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC").group(:cal_materia_id)
 
-		@secciones_aux = @estudiante.cal_secciones.where(:cal_semestre_id => @periodo_anterior.id)
-
-		@cal_estudiantes_secciones = @estudiante.cal_estudiantes_secciones 
-
 		if @estudiante.idioma1_id.nil? or @estudiante.idioma2_id.nil?		 
 			# @idiomas1 = CalDepartamento.where('id = ? || id = ?', 'ING', 'FRA').order('id DESC')
 			# @idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'ING' or i.id.eql? 'EG' or i.id.eql? 'TRA'; }

@@ -4,11 +4,6 @@ class CalDescargarController < ApplicationController
 	def horario
 
 		@estudiante = CalEstudiante.where(:cal_usuario_ci => session[:cal_usuario].ci).limit(1).first
-		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
-
-		@secciones_aux = @estudiante.cal_secciones.where(:cal_semestre_id => @periodo_anterior.id)
-
-		@cal_estudiantes_secciones = @estudiante.cal_estudiantes_secciones 
 
 		@archivos = @estudiante.archivos_disponibles_para_descarga 
 		

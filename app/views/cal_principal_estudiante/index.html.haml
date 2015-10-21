@@ -46,7 +46,9 @@
 
 									%tbody
 										%tr{:class => tipo_calificacion}
-											%td= est_sec_per.cal_seccion.cal_materia.anno
+											- aux = est_sec_per.cal_seccion.cal_materia.anno
+											- aux = "--" if aux.eql? 0
+											%td= aux
 											%td= est_sec_per.cal_seccion.cal_materia.descripcion
 											%td= est_sec_per.cal_seccion.numero
 											%td= est_sec_per.calificacion_primera
