@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'composite_primary_keys'
 gem 'pdf-writer'
-
+gem 'spreadsheet'
 gem 'select2-rails'
 #gem 'rmagick'
 #gem 'barby'

@@ -1,28 +1,27 @@
-.label.label-info.pull-right
-	<a id="text" style='color:white;'></a>
-	= text_field_tag 'filtro', nil ,{:onkeyup => "return filtrar()", :placeholder=>"Filtrar...", :autofocus => true}
+
 :javascript
 
 	$(document).ready(function() {
 	    $('#profesores').dataTable();
 	} );
-	function filtrar() {
-		var filtro = document.getElementById("filtro").value.toLowerCase();
+
+	function filtrar(tabla) {
+		var filtro = document.getElementById("filtro_"+tabla).value.toLowerCase();
 		var total_mach = 0
 		ids = ""
-		$("tr.filtrables").each(function(){
+		$("#"+tabla+" tr.filtrables").each(function(){
 			var temp = $(this).text().toLowerCase();
 			if (temp.match(filtro) == null) {
 				$(this).hide();
 			}else {
 				$(this).show();
 				total_mach += 1;
-				ids = ids + $(this).find('td').first().text() + ",";
+				ids = ids + $(this).find('td.ci').first().text() + ",";
 			}
 			
 		});
-		$("#text").text(total_mach+" coincidencias (Descargar Excel)");
-		$("#text").attr('href', "/alertas/descargas?id="+ids)		
+		$("#text_"+tabla).text(total_mach+" coincidencias (Descargar Excel)");
+		$("#text_"+tabla).attr('href', "/aceim_diplomados/cal_descargar/listados?id="+ids+"&tipo="+tabla)		
 		return false;
 		}
 
@@ -35,14 +34,18 @@
 
 	.tab-content
 		.tab-pane.active#profesores
-			%p 
-				%h3 
-					Profesores
-				=link_to 'Registrar Nuevo', {:controller => 'cal_profesor', :action => 'nuevo'}, :class => 'btn'
+				
+			=link_to 'Registrar Nuevo Profesor', {:controller => 'cal_profesor', :action => 'nuevo'}, :class => 'btn'
+			
+			.label.label-info.pull-right
+				<a id="text_profesores" style='color:white;'></a>
+				= text_field_tag 'filtro_profesores', nil ,{:onkeyup => "return filtrar('profesores')", :placeholder=>"Filtrar...", :autofocus => true}
+
 			%table.table.table-bordered.table-striped.table-condensed.table-hover#profesores
 				%thead
 					%tr
 						%th #
+						%th CI
 						%th Descripción
 						%th Departamento
 						%th Correo
@@ -54,7 +57,8 @@
 					- @profesores.each_with_index do |po,i|
 						%tr.filtrables
 							%td= i
-							%td= po.cal_usuario.descripcion_apellido if po.cal_usuario
+							%td.ci= po.cal_usuario.ci
+							%td= po.cal_usuario.apellido_nombre if po.cal_usuario
 							%td= po.cal_departamento.descripcion
 							%td= po.cal_usuario.correo_electronico if po.cal_usuario
 							%td= po.cal_usuario.telefono_movil if po.cal_usuario
@@ -64,11 +68,19 @@
 
 
 		.tab-pane#estudiantes
-			%h3 Estudiantes
+
+			=link_to 'Registrar Nuevo Estudiante', {:controller => 'cal_estudiante', :action => 'nuevo'}, :class => 'btn'
+
+
+			.label.label-info.pull-right
+				<a id="text_estudiantes" style='color:white;'></a>
+				= text_field_tag 'filtro_estudiantes', nil ,{:onkeyup => "return filtrar('estudiantes')", :placeholder=>"Filtrar...", :autofocus => true}
+
 			%table.table.table-bordered.table-striped.table-condensed.table-hover#estudiantes
 				%thead
 					%tr
 						%th #
+						%th CI
 						%th Estudiante
 						%th Correo
 						%th Móvil
@@ -79,7 +91,8 @@
 					- @estudiantes.each_with_index do |es,i|
 						%tr.filtrables
 							%td= i
-							%td= es.cal_usuario.descripcion_apellido if es.cal_usuario
+							%td.ci= es.cal_usuario.ci
+							%td= es.cal_usuario.apellido_nombre if es.cal_usuario
 							%td= es.cal_usuario.correo_electronico if es.cal_usuario
 							%td= es.cal_usuario.telefono_movil if es.cal_usuario
 							%td= es.cal_usuario.telefono_habitacion if es.cal_usuario
