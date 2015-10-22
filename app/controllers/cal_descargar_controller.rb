@@ -21,8 +21,9 @@ class CalDescargarController < ApplicationController
 		usuarios = CalUsuario.where(:ci => ids.split(","))
 		usuarios.each { |us| puts us.descripcion }
 		file_name = CalArchivo.listado_excel(tipo,usuarios) 
-		send_file file_name, :type => "application/vnd.ms-excel", :filename => "reporte_#{tipo}.xls", :stream => false
-		File.delete(file_name)
+		# send_file file_name, :type => "application/vnd.ms-excel", :filename => "reporte_#{tipo}.xls", :stream => false
+		send_file file_name, :type => "application/vnd.ms-excel", :x_sendfile => true, :stream => false, :filename => "#{Rails.root}/attachments/reporte_#{tipo}",:disposition => "attachment"
+		# File.delete(file_name)
 	end
 
 
