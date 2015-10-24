@@ -76,13 +76,13 @@ class CalEstudiante <  ActiveRecord::Base
 		secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
 
 		
-		cal_estudiantes_secciones.each do |est_sec|
+		cal_estudiantes_secciones.delete_if{|es| es.cal_numero.eql? 'R'}.each do |est_sec|
 			
 			if est_sec.calificacion_final < 10
 				reparacion = cal_estudiantes_secciones.where('cal_estudiante_ci = ? and cal_materia_id = ? and cal_numero = ?', cal_usuario_ci, est_sec.cal_materia_id, 'R').first
 
 				if reparacion
-					reprobadas + reprobadas + 1 if reparacion.calificacion_final < 10
+					reprobadas = reprobadas + 1 if reparacion.calificacion_final < 10
 				else
 					reprobadas = reprobadas + 1
 				end 
@@ -93,11 +93,8 @@ class CalEstudiante <  ActiveRecord::Base
 		if annos.count.eql? 1
 			if reprobadas.eql? 0 
 				annos[0] = annos[0]+1 if annos.first < 5 
-
-				puts "ESTOYYY AQUIIIIII#{reprobadas}"
 			else
 				annos << annos.first+1 if annos.first < 5
-				puts "sino ESTOYYY AQUIIIIII#{reprobadas}"
 			end
 		else
 
@@ -133,7 +130,7 @@ class CalEstudiante <  ActiveRecord::Base
 			annos.each{|ano| archivos << idiomas_4+ano.to_s}
 		end
 
-		puts "AÑÑÑÑÑOOOOOOOOOOSSSSS antes del retorno: #{annos}"
+		# puts "AÑÑÑÑÑOOOOOOOOOOSSSSS antes del retorno: #{annos}"
 
 		return archivos
 		
