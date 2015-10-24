@@ -107,17 +107,17 @@ class CalEstudiante <  ActiveRecord::Base
 			
 			mayor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.max).all.count
 			if mayor_anno.eql? 0
-				total_materias = CalMaterias.where(:anno => anno.max).count
-				if total_materias.eql? secciones_aux.joins(:cal_materia).where('cal_seccion.anno = ?', annos.min).all.count
+				total_materias = CalMateria.where(:anno => annos.max).count
+				if total_materias.eql? secciones_aux.joins(:cal_materia).where('cal_materia.anno = ?', annos.max).all.count
 					if annos.max<5
 						annos << annos.max+1
-						annos.delete annos.max
+						# annos.delete annos.max
 					end
 				end
 
 			end
 			
-			annos << annos.last+1 if (reprobadas.eql? 1 and annos.max<5)
+			annos << annos.last+1 if (reprobadas < 2 and annos.max<5)
 
 		end
 
