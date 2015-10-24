@@ -9,7 +9,7 @@ class CalPrincipalEstudianteController < ApplicationController
 		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
 
 		@periodos = CalSemestre.all.delete_if{|p| p.id.eql? @periodo_actual.id}
-		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC").group(:cal_materia_id)
+		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC")#.group(:cal_materia_id)
 
 		if @estudiante.idioma1_id.nil? or @estudiante.idioma2_id.nil?		 
 			# @idiomas1 = CalDepartamento.where('id = ? || id = ?', 'ING', 'FRA').order('id DESC')

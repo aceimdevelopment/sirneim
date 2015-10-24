@@ -74,25 +74,30 @@ class CalEstudiante <  ActiveRecord::Base
 
 		joins_seccion_materia = secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia)
 		secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
+
 		
 		cal_estudiantes_secciones.each do |est_sec|
 			
 			if est_sec.calificacion_final < 10
-				reparacion = cal_estudiantes_secciones.where(:cal_materia_id => est_sec.cal_materia_id, :cal_numero => 'R').first
+				reparacion = cal_estudiantes_secciones.where('cal_estudiante_ci = ? and cal_materia_id = ? and cal_numero = ?', cal_usuario_ci, est_sec.cal_materia_id, 'R').first
+
 				if reparacion
-					reprobadas +=1 if reparacion.calificacion_final < 10
+					reprobadas + reprobadas + 1 if reparacion.calificacion_final < 10
 				else
-					reprobadas +=1
+					reprobadas = reprobadas + 1
 				end 
 			end
-			break if reprobadas > 1			
+			# break if reprobadas > 1	
 		end
 
 		if annos.count.eql? 1
 			if reprobadas.eql? 0 
 				annos[0] = annos[0]+1 if annos.first < 5 
-			elsif reprobadas.eql? 1
+
+				puts "ESTOYYY AQUIIIIII#{reprobadas}"
+			else
 				annos << annos.first+1 if annos.first < 5
+				puts "sino ESTOYYY AQUIIIIII#{reprobadas}"
 			end
 		else
 
@@ -111,9 +116,10 @@ class CalEstudiante <  ActiveRecord::Base
 				end
 
 			end
-		end 
+			
+			annos << annos.last+1 if (reprobadas.eql? 1 and annos.max<5)
 
-		annos << annos.last+1 if (reprobadas < 2 and annos.max<5)
+		end
 
 		# Compilo los archivos en relacion idiomas niveles
 
@@ -126,6 +132,8 @@ class CalEstudiante <  ActiveRecord::Base
 			annos.each{|ano| archivos << idiomas_3+ano.to_s}
 			annos.each{|ano| archivos << idiomas_4+ano.to_s}
 		end
+
+		puts "AÑÑÑÑÑOOOOOOOOOOSSSSS antes del retorno: #{annos}"
 
 		return archivos
 		
