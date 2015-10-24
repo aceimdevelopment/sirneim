@@ -38,10 +38,8 @@ class CalDescargarController < ApplicationController
 
 			idioma1,idioma2,anno = (params[:id].split"-")
 
-			if idioma2.eql? 'ING' or idioma2.eql? 'FRA'
-
-				archivo = idioma2+"-"+idioma1+"-"+anno
-			end
+			archivo = idioma2+"-"+idioma1+"-"+anno if (idioma2.eql? 'ING' or (idioma2.eql? 'FRA' and not idioma1.eql? 'ING'))
+			archivo = 'ING-FRA-'+anno if (idioma2.eql? 'ING' and idioma1.eql? 'FRA')
 
 			send_file "#{Rails.root}/attachments/horarios/#{anno}/#{archivo}.pdf", :type => "application/pdf", :x_sendfile => true, :disposition => "attachment"
 		else

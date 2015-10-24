@@ -15,7 +15,7 @@ class CalEstudianteController < ApplicationController
 		if session[:cal_estudiante]
 			redirect_to :controller => 'cal_principal_estudiante', :action => 'index'
 		elsif session[:cal_administrador]
-			redirect_to :controller => 'cal_principal_admin', :action => 'detalle_usuario', :ci => '19965307'
+			redirect_to :controller => 'cal_principal_admin', :action => 'detalle_usuario', :ci => params[:ci]
 		else
 			redirect_to :action => 'index'			
 		end
