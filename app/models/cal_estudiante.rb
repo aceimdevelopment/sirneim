@@ -90,7 +90,7 @@ class CalEstudiante <  ActiveRecord::Base
 
 		if annos.count.eql? 1
 			if reprobadas.eql? 0 
-				annos.first = annos.first+1 if annos.first < 5 
+				annos[0] = annos[0]+1 if annos.first < 5 
 			elsif reprobadas.eql? 1
 				annos << annos.first+1 if annos.first < 5
 			end
