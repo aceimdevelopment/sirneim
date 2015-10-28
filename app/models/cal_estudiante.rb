@@ -1,7 +1,7 @@
 class CalEstudiante <  ActiveRecord::Base
 	set_primary_key :cal_usuario_ci
 
-	attr_accessible :cal_usuario_ci, :idioma1_id, :idioma2_id, :plan
+	attr_accessible :cal_usuario_ci, :idioma1_id, :idioma2_id, :plan, :cal_tipo_estado_inscripcion_id
 
  	belongs_to :cal_usuario,
     	:class_name => 'CalUsuario',
@@ -15,6 +15,12 @@ class CalEstudiante <  ActiveRecord::Base
  	belongs_to :idioma2,
     	:class_name => 'CalDepartamento',
     	:foreign_key => ['idioma2_id']
+
+    has_one :cita_horaria,
+    	:class_name => 'CitaHoraria',
+    	:foreign_key => :estudiante_ci,
+    	:primary_key => :cal_usuario_ci
+	accepts_nested_attributes_for :cita_horaria
 
 	has_many :cal_estudiantes_secciones,
 		:class_name => 'CalEstudianteSeccion',
@@ -50,90 +56,112 @@ class CalEstudiante <  ActiveRecord::Base
 
 	def archivos_disponibles_para_descarga
 		secciones_aux = cal_secciones.where(:cal_semestre_id => CalParametroGeneral.cal_semestre_anterior_id)
-		# Selecciono los posibles idiomas
-		ni_ingles_ni_frances = false
-
-		unless (idioma1_id.eql? 'ING' or idioma1_id.eql? 'FRA') or (idioma2_id.eql? 'ING' or idioma2_id.eql? 'FRA')
-
-			idiomas = "ING-#{idioma1_id}-"
-			idiomas_2 = "ING-#{idioma2_id}-"
-			idiomas_3 = "FRA-#{idioma1_id}-"
-			idiomas_4 = "FRA-#{idioma2_id}-"
-			ni_ingles_ni_frances = true	
-
-		else 
-			
-			idiomas = "#{idioma1_id}-#{idioma2_id}-"
-		end
-
-		# Selecciono los posibles niveles
-
-		reprobadas = 0
-
-		annos = []
-
-		joins_seccion_materia = secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia)
-		secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
-
-		
-		cal_estudiantes_secciones.delete_if{|es| es.cal_numero.eql? 'R'}.each do |est_sec|
-			
-			if est_sec.calificacion_final < 10
-				reparacion = cal_estudiantes_secciones.where('cal_estudiante_ci = ? and cal_materia_id = ? and cal_numero = ?', cal_usuario_ci, est_sec.cal_materia_id, 'R').first
-
-				if reparacion
-					reprobadas = reprobadas + 1 if reparacion.calificacion_final < 10
-				else
-					reprobadas = reprobadas + 1
-				end 
-			end
-			# break if reprobadas > 1	
-		end
-
-		if annos.count.eql? 1
-			if reprobadas.eql? 0 
-				annos[0] = annos[0]+1 if annos.first < 5 
-			else
-				annos << annos.first+1 if annos.first < 5
-			end
-		else
-
-			aux = secciones_aux.where('calificacion_final < ? ', 10)
-			menor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.min).all
-			annos.delete annos.min if menor_anno.count.eql? 0
-			
-			mayor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.max).all.count
-			if mayor_anno.eql? 0
-				total_materias = CalMateria.where(:anno => annos.max).count
-				if total_materias.eql? secciones_aux.joins(:cal_materia).where('cal_materia.anno = ?', annos.max).all.count
-					if annos.max<5
-						annos << annos.max+1
-						# annos.delete annos.max
-					end
-				end
-
-			end
-			
-			annos << annos.last+1 if (reprobadas < 2 and annos.max<5)
-
-		end
-
-		# Compilo los archivos en relacion idiomas niveles
 
 		archivos = []
+		annos = []
+		if secciones_aux.all.count > 0
 
-		annos.each{|ano| archivos << idiomas+ano.to_s}
+			# Selecciono los posibles niveles
 
-		if ni_ingles_ni_frances
-			annos.each{|ano| archivos << idiomas_2+ano.to_s}
-			annos.each{|ano| archivos << idiomas_3+ano.to_s}
-			annos.each{|ano| archivos << idiomas_4+ano.to_s}
+			reprobadas = 0
+
+			joins_seccion_materia = secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia)
+			secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
+
+			cal_estudiantes_secciones.delete_if{|es| es.cal_numero.eql? 'R'}.each do |est_sec|
+				
+				if est_sec.calificacion_final < 10
+					reparacion = cal_estudiantes_secciones.where('cal_estudiante_ci = ? and cal_materia_id = ? and cal_numero = ?', cal_usuario_ci, est_sec.cal_materia_id, 'R').first
+
+					if reparacion
+						reprobadas = reprobadas + 1 if reparacion.calificacion_final < 10
+					else
+						reprobadas = reprobadas + 1
+					end 
+				end
+				# break if reprobadas > 1	
+			end
+			begin
+				
+				if annos.count.eql? 1
+					if reprobadas.eql? 0 
+						annos[0] = annos[0]+1 if annos.first < 5 
+					else
+						annos << annos.first+1 if annos.first < 5
+					end
+				else
+
+					aux = secciones_aux.where('calificacion_final < ? ', 10)
+					menor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.min).all
+					annos.delete annos.min if menor_anno.count.eql? 0
+					
+					mayor_anno = aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).where(' cal_materia.anno = ?', annos.max).all.count
+					if mayor_anno.eql? 0
+						total_materias = CalMateria.where(:anno => annos.max).count
+						if total_materias.eql? secciones_aux.joins(:cal_materia).where('cal_materia.anno = ?', annos.max).all.count
+							if annos.max<5
+								annos << annos.max+1
+								# annos.delete annos.max
+							end
+						end
+
+					end
+					
+					annos << annos.last+1 if (reprobadas < 2 and annos.max<5)
+
+				end
+
+			rescue Exception => e
+				annos << 1 << 2 << 3 << 4 << 5
+			end
+
+		else
+
+			if cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
+				annos << 1
+			else
+				annos << 1 << 2 << 3 << 4 << 5
+			end
 		end
 
+		# Selecciono los posibles idiomas
+
+		if idioma1_id.nil? and idioma2_id.nil?
+			annos.each do |anno|
+				archivos << "FRA-ALE-#{anno}"
+				archivos << "FRA-ITA-#{anno}"
+				archivos << "FRA-POR-#{anno}"
+				archivos << "ING-ALE-#{anno}"
+				archivos << "ING-FRA-#{anno}"
+				archivos << "ING-ITA-#{anno}"
+				archivos << "ING-POR-#{anno}"
+			end
+		else 
+			ni_ingles_ni_frances = false
+
+			unless (idioma1_id.eql? 'ING' or idioma1_id.eql? 'FRA') or (idioma2_id.eql? 'ING' or idioma2_id.eql? 'FRA')
+
+				idiomas = "ING-#{idioma1_id}-"
+				idiomas_2 = "ING-#{idioma2_id}-"
+				idiomas_3 = "FRA-#{idioma1_id}-"
+				idiomas_4 = "FRA-#{idioma2_id}-"
+				ni_ingles_ni_frances = true
+			else
+				idiomas = "#{idioma1_id}-#{idioma2_id}-"
+			end
+
+			# Compilo los archivos en relacion idiomas niveles
+
+			annos.each{|ano| archivos << idiomas+ano.to_s}
+
+			if ni_ingles_ni_frances
+				annos.each{|ano| archivos << idiomas_2+ano.to_s}
+				annos.each{|ano| archivos << idiomas_3+ano.to_s}
+				annos.each{|ano| archivos << idiomas_4+ano.to_s}
+			end
+		end
 		# puts "AÑÑÑÑÑOOOOOOOOOOSSSSS antes del retorno: #{annos}"
 
 		return archivos
-		
-	end
-
-end
+	end # Fin de funcion archivos_disponibles_para_descarga
+end # Fin clase 

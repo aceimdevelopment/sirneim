@@ -1,64 +1,68 @@
 - @cal_usuario = session[:cal_usuario]
 
 -if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
-
 	= render :partial => 'cal_usuario/datos_modal'
 
-
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
+	= render :partial => 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
 
-	= render :partial => 'cal_estudiante/actualizar_idiomas'
-- else
-	%h3 Historial Academico:
-	.accordion#acordion1
-		.accordion-group
-			.accordion-heading
-				= link_to "Horario #{@periodo_actual.id}", "#collapse#{@periodo_actual.id}" , {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#acordion1"}
-			.accordion-body.collapse.in{:id => "collapse#{@periodo_actual.id}"}
-				.accordion-inner
-					%ul
+
+-if @estudiante.cita_horaria
+	%h3 Cita Horaria:
+	.well.well-small
+		%p
+			%b Fecha:
+			=(I18n.localize(@estudiante.cita_horaria.fecha, :format => "%A, %d de %B de %Y")).capitalize()
+			= "-"
+			%b Hora:
+			= @estudiante.cita_horaria.hora
+
+%h3 Historial Academico:
+.accordion#acordion1
+	.accordion-group
+		.accordion-heading
+			= link_to "Horario #{@periodo_actual.id}", "#collapse#{@periodo_actual.id}" , {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#acordion1"}
+		.accordion-body.collapse.in{:id => "collapse#{@periodo_actual.id}"}
+			.accordion-inner
+				%ul
+					- if @archivos				
 						- @archivos.each do |archivo|
 							%li= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
 
+	- @periodos.each do |periodo|
+		- @secciones_periodo = @secciones.where(:cal_semestre_id => periodo.id)
+		- if @secciones_periodo.count > 0
+			.accordion-group
+				.accordion-heading
+					= link_to "Período Académico #{periodo.id}", "#collapse#{periodo.id}", {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "accordion1"}
+				.accordion-body.collapse.in{:id => "collapse#{periodo.id}"}
+					.accordion-inner
+						%table.table.table-bordered.table-striped.table-condensed
+							%thead
+								%tr
+									%th Año
+									%th Asignatura
+									%th Sección
+									%th Trimestre I
+									%th Trimestre II
+									%th Trimestre III
+									%th Definitiva
+							- @secciones_periodo.each do |est_sec_per|
+								- tipo_calificacion = ''
+								- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
+								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI') 	
 
-		- @periodos.each do |periodo|
-			- @secciones_periodo = @secciones.where(:cal_semestre_id => periodo.id)
-			- if true 
-				.accordion-group
-					.accordion-heading
-						= link_to "Período Académico #{periodo.id}", "#collapse#{periodo.id}", {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "accordion1"}
-					.accordion-body.collapse.in{:id => "collapse#{periodo.id}"}
-						.accordion-inner
-							%table.table.table-bordered.table-striped.table-condensed
-								%thead
-									%tr
-										%th Año
-										%th Asignatura
-										%th Sección
-										%th Trimestre I
-										%th Trimestre II
-										%th Trimestre III
-										%th Definitiva
-								- @secciones_periodo.each do |est_sec_per|
-									- tipo_calificacion = ''
-									- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
-									- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI') 	
-
-									%tbody
-										%tr{:class => tipo_calificacion}
-											- aux = est_sec_per.cal_seccion.cal_materia.anno
-											- aux = "--" if aux.eql? 0
-											%td= aux
-											%td= est_sec_per.cal_seccion.cal_materia.descripcion
-											%td= est_sec_per.cal_seccion.numero
-											%td= est_sec_per.calificacion_primera
-											%td= est_sec_per.calificacion_segunda
-											%td= est_sec_per.calificacion_tercera
-											%td= est_sec_per.calificacion_final
-
-
-
-
+								%tbody
+									%tr{:class => tipo_calificacion}
+										- aux = est_sec_per.cal_seccion.cal_materia.anno
+										- aux = "--" if aux.eql? 0
+										%td= aux
+										%td= est_sec_per.cal_seccion.cal_materia.descripcion
+										%td= est_sec_per.cal_seccion.numero
+										%td= est_sec_per.calificacion_primera
+										%td= est_sec_per.calificacion_segunda
+										%td= est_sec_per.calificacion_tercera
+										%td= est_sec_per.calificacion_final
 
 :javascript
 
