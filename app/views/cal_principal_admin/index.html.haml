@@ -1,6 +1,20 @@
-%h3 
-	Período Académico: 
-	%b= "#{@cal_semestre_actual.id}"
+%p
+	%h3 
+		Período Académico: 
+		= "#{@cal_semestre_actual.id}"
+
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Clonar Secciones del Período Anterior'}
+		= link_to "", {:href => 'cal_seccion/clonar_secciones_anteriores', :class => 'btn btn-success'},{:role => 'button'} do
+			= content_tag(:i, "", :class => "icon-retweet icon-white") 
+			= content_tag(:i, "", :class => "icon-list icon-white") 
+
+
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Todas las Secciones del Período Actual'}
+		= link_to "", {:href => 'cal_seccion/eliminar_todas_secciones_actual', :class => 'btn btn-danger', 'data_confirm' => "Se perderan los estudiantes inscritos en las secciones, ¿Está seguro de esta acción?"},{:role => 'button'} do
+			= content_tag(:i, "", :class => "icon-trash icon-white") 
+			= content_tag(:i, "", :class => "icon-list icon-white")
+
+
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
 	%ul.nav.nav-pills
@@ -73,6 +87,11 @@
 																			-if seccion.calificada
 																				|
 																				= link_to "Habilitar para Calificar Nuevamente", :action => 'habilitar_calificar', :id => seccion.id
+																			|
+																			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Seccion'}
+																				= link_to "", {:href => "cal_seccion/eliminar?id=#{seccion.id}", :class => 'btn btn-danger btn-mini', 'data_confirm' => "Se perderan los estudiantes inscritos en la sección, ¿Está seguro de esta acción?"},{:role => 'button'} do
+																					= content_tag(:i, "", :class => "icon-trash icon-white") 
+
 													%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nueva Sección'}
 
 														= form_tag 'cal_principal_admin/nueva_seccion_admin_guardar', {:class => 'form-horizontal', :id => "nueva_seccion_#{mat.id}"} do 

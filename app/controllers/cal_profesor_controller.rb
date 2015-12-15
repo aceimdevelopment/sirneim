@@ -1,5 +1,8 @@
 class CalProfesorController < ApplicationController
 
+	before_filter :cal_filtro_logueado
+	before_filter :cal_filtro_administrador
+
 	def nuevo
 		# @cal_profesor = CalProfesor.new
 	end

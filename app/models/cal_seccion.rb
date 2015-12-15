@@ -13,7 +13,7 @@ class CalSeccion < ActiveRecord::Base
 	has_many :cal_estudiantes_secciones,
 		:class_name => 'CalEstudianteSeccion',
  		:foreign_key => [:cal_numero, :cal_materia_id, :cal_semestre_id],
- 		:primary_key => [:numero, :cal_materia_id, :cal_semestre_id]
+ 		:primary_key => [:cal_numero, :cal_materia_id, :cal_semestre_id]
 
 	accepts_nested_attributes_for :cal_estudiantes_secciones
 

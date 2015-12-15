@@ -6,7 +6,6 @@
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
 	= render :partial => 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
 
-
 -if @estudiante.cita_horaria
 	%h3 Cita Horaria:
 	.well.well-small
