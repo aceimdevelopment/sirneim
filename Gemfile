@@ -23,6 +23,10 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'composite_primary_keys'
 gem 'pdf-writer'
+
+gem 'pdf-reader', "~> 1.1.0"
+
+gem 'pdf-reader-html'
 gem 'spreadsheet'
 gem 'select2-rails'
 #gem 'rmagick'

@@ -182,4 +182,160 @@ class CalPrincipalAdminController < ApplicationController
 	end
 
 
-end
+	def reader_pdf
+		require 'rubygems'
+		require 'pdf-reader'
+		require 'open-uri'
+		require 'pdf/reader/html'
+		cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
+		# @reader = PDF::Reader.new('/home/daniel/Descargas/CTT I Alem.pdf')
+		# @reader = PDF::Reader.new('/home/daniel/Descargas/Alem I(1).pdf')
+
+		data = params[:archivo][:datafile].tempfile
+
+		@reader = PDF::Reader.new(data)
+		# @reader = PDF::Reader.new('/home/daniel/Descargas/Alem IV.pdf')
+
+		@estudiantes_encontrados = []
+		@cedulas_no_encontradas = []
+		@secciones = []
+
+ 		@reader.pages.each_with_index do |pagina,i|
+			if i > 0 # descarto la primera pagina
+				# busco la asignatura y seccion
+				asignatura = 0
+				@nombre_asignatura = ""
+				@codigo_asignatura = ""
+				@numero_seccion = ""
+				estudiantes = false
+				caso1 = false
+				@numeros_cedulas = []
+
+				pagina.to_s.each_line do |linea|
+					if @codigo_asignatura or @nombre_asignatura.blank? or @numero_seccion.blank?
+
+						if asignatura.eql? 2
+							@codigo_asignatura = linea.strip
+							asignatura =0
+						end
+
+						if asignatura.eql? 1
+							@nombre_asignatura = linea.strip
+							asignatura +=1
+						end
+
+						asignatura +=1 if linea.include? "INSCRITOS POR ASIGNATURAS"
+						@numero_seccion = (linea.split" ")[1] if (linea.include? "SECCION") or (linea.include? "SECCIÓN")
+					end
+
+					if estudiantes
+						tokens = linea.split(" ")
+						tokens.each do |token|
+							if token.to_i > 900000
+								caso1 = true
+
+
+								@numeros_cedulas << token.to_i
+							end
+
+						end
+
+						if (not caso1) and !tokens.nil? and (tokens.count > 0)
+							nombrecedula = tokens.last
+							cedula = ""
+							inter = false
+							nombrecedula.each_char do |ca| 
+								if ca.to_i > 0 or inter
+									cedula += ca.to_s
+									inter = true
+								end
+							end
+							@numeros_cedulas << cedula.to_i if cedula.to_i > 900000
+							caso1 = false
+						end
+
+					end
+					estudiantes = true if linea.include? "Periodo Academico"
+
+					# @estudiantes_encontrados = CalEstudiante.where(:cal_usuario_ci => @numeros_cedulas) 
+
+				end # pagina.each_line
+
+				@secciones << @numero_seccion
+
+				@cal_materia = CalMateria.where(:id_upsi => @codigo_asignatura).limit(1).first
+
+				@numeros_cedulas.each do |cedula|
+					aux = CalEstudiante.where(:cal_usuario_ci => cedula).limit(1)
+					if aux.count > 0
+						@cal_estudiante_seccion = CalEstudianteSeccion.new
+						@cal_estudiante_seccion.cal_estudiante_ci = cedula
+						@cal_estudiante_seccion.cal_materia_id = @cal_materia.id if @cal_materia 
+						@cal_estudiante_seccion.cal_semestre_id = cal_semestre_actual_id
+						@cal_estudiante_seccion.cal_numero = @numero_seccion
+						@estudiantes_encontrados << @cal_estudiante_seccion
+					else
+						@cedulas_no_encontradas << cedula
+					end
+				end
+
+
+
+			end # if pagina > 1
+
+		end # @reader.pages.each
+
+	end # fin reader_pdf
+
+	def importar_secciones_paso2
+		@estudiantes_seccion = params[:estudiantes_seccion]
+		errores = correctos = 0
+
+		@estudiantes_seccion.each do |es|
+			ci,numero,materia,semestre = es.split(" ")
+			estudiante_seccion = CalEstudianteSeccion.new
+
+			estudiante_seccion.cal_estudiante_ci = ci
+			estudiante_seccion.cal_materia_id = materia
+			estudiante_seccion.cal_semestre_id = semestre
+			estudiante_seccion.cal_numero = numero
+
+			if	estudiante_seccion.save
+				correctos += 1
+			else
+				errores += 1
+			end
+		end
+
+		flash[:info] = "Se incorporaron correctamente #{correctos} estudiantes. / "
+
+		flash[:info] += "Se registraron #{errores} errores al intentar guardar."
+
+		redirect_to :action => "importar_secciones_paso1"		
+	end
+
+	def importar_secciones_paso1
+		
+	end
+
+	def subir_archivo
+	# DataFile.save_file(params[:archivo])
+
+	archivo = params[:archivo]
+
+	file_name = archivo['datafile'].original_filename  if  (archivo['datafile'] !='')    
+
+	file = archivo['datafile'].read
+
+	root = "#{Rails.root}/attachments/importados/"
+
+	File.open(root + file_name, "wb")  do |f|  
+		flash[:info] += "El Archivo ha sido guardado con éxito." if f.write(file)
+	end
+
+	redirect_to :action => "reader_pdf"
+
+
+	end
+
+end # fin cacasee

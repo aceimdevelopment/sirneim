@@ -16,4 +16,6 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	belongs_to :cal_tipo_estado_calificacion
 	belongs_to :cal_tipo_estado_inscripcion
 
+	# validates :id, :presence => true, :uniqueness => true	
+
 end
