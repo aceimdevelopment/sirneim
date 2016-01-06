@@ -1,2 +1,3 @@
-- @profesor.cal_secciones.each do |cal_seccion|
+- @cal_secciones = @profesor.cal_secciones.where(:cal_semestre_id => @periodo_actual.id)
+- @cal_secciones.each do |cal_seccion|
 	%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true
