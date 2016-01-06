@@ -5,28 +5,26 @@
 
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
 	= render :partial => 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
+-if false
+	-if @estudiante.cita_horaria
+		%h3 Cita Horaria:
+		.well.well-small
+			%p
+				%b Fecha:
+				=(I18n.localize(@estudiante.cita_horaria.fecha, :format => "%A, %d de %B de %Y")).capitalize()
+				= "-"
+				%b Hora:
+				= @estudiante.cita_horaria.hora
 
--if @estudiante.cita_horaria
-	%h3 Cita Horaria:
-	.well.well-small
+	- if @archivos
 		%p
-			%b Fecha:
-			=(I18n.localize(@estudiante.cita_horaria.fecha, :format => "%A, %d de %B de %Y")).capitalize()
-			= "-"
-			%b Hora:
-			= @estudiante.cita_horaria.hora
+			%h3= "Horario #{@periodo_actual.id}:"
+			.well.well-small
+				- @archivos.each do |archivo|
+					%p= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
 
 %h3 Historial Academico:
 .accordion#acordion1
-	.accordion-group
-		.accordion-heading
-			= link_to "Horario #{@periodo_actual.id}", "#collapse#{@periodo_actual.id}" , {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#acordion1"}
-		.accordion-body.collapse.in{:id => "collapse#{@periodo_actual.id}"}
-			.accordion-inner
-				%ul
-					- if @archivos				
-						- @archivos.each do |archivo|
-							%li= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
 
 	- @periodos.each do |periodo|
 		- @secciones_periodo = @secciones.where(:cal_semestre_id => periodo.id)
