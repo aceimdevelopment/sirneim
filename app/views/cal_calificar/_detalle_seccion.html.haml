@@ -5,7 +5,7 @@
 	- calificada = @cal_seccion.calificada 
 
 %p#text
-
+= @estudiantes_secciones.count
 = form_tag(:controller => 'cal_calificar', :action => "calificar") do
 	= hidden_field_tag "id", @cal_seccion.id
 
