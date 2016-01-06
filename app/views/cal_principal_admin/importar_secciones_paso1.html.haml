@@ -6,4 +6,4 @@
 		%label Seleccione el archivo a Importar (recuerde el formato es Pdf):
 		= file_field 'archivo', 'datafile', {:required => true, :class => 'btn', :accept => 'application/pdf'}
 
-		= submit_tag "Cargar", {:class => 'btn btn-success'}
+		= submit_tag "Cargar", {:class => 'btn btn-success', :disable_with => "Cargando..."}

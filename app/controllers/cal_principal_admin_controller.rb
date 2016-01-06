@@ -197,6 +197,7 @@ class CalPrincipalAdminController < ApplicationController
 		# @reader = PDF::Reader.new('/home/daniel/Descargas/Alem IV.pdf')
 
 		@estudiantes_encontrados = []
+		@estudiantes_no_encontrados = []		
 		@cedulas_no_encontradas = []
 		@secciones = []
 
@@ -229,13 +230,25 @@ class CalPrincipalAdminController < ApplicationController
 					end
 
 					if estudiantes
+						encontrado = false
 						tokens = linea.split(" ")
 						tokens.each do |token|
+
 							if token.to_i > 900000
 								caso1 = true
 
-
-								@numeros_cedulas << token.to_i
+								aux_est = CalEstudiante.where(:cal_usuario_ci => token.to_i).limit(1)
+								
+								if aux_est.count > 0
+									@numeros_cedulas << token.to_i
+									encontrado = true
+								else
+									@estudiantes_no_encontrados << "otro"+linea 
+									@cedulas_no_encontradas << token.to_i
+								end								 
+								
+							# else
+							# 	@estudiantes_no_encontrados << linea #aux_cedula+" "+token.to_i if not encontrado and not aux_cedula.nil?
 							end
 
 						end
@@ -243,15 +256,31 @@ class CalPrincipalAdminController < ApplicationController
 						if (not caso1) and !tokens.nil? and (tokens.count > 0)
 							nombrecedula = tokens.last
 							cedula = ""
+							nombre = ""
 							inter = false
 							nombrecedula.each_char do |ca| 
 								if ca.to_i > 0 or inter
 									cedula += ca.to_s
 									inter = true
+								else
+									nombre += ca.to_s
 								end
 							end
-							@numeros_cedulas << cedula.to_i if cedula.to_i > 900000
-							caso1 = false
+
+							if cedula.to_i > 900000
+								aux_est = CalEstudiante.where(:cal_usuario_ci => cedula.to_i).limit(1)
+
+								if aux_est.count > 0
+									@numeros_cedulas << cedula.to_i
+									encontrado = true
+								else
+									@estudiantes_no_encontrados << "(#{cedula}) "+linea.delete(cedula)
+									@cedulas_no_encontradas << cedula.to_i
+								end
+								caso1 = false
+
+							end
+
 						end
 
 					end
