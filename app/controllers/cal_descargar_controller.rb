@@ -2,6 +2,13 @@ class CalDescargarController < ApplicationController
 	before_filter :cal_filtro_logueado
 
 
+	def programaciones
+		id = params[:id]
+		periodo = params[:cal_semestre_id]
+
+		send_file "#{Rails.root}/attachments/programaciones/#{periodo}/PROG_#{id}_#{periodo}.pdf", :type => "application/pdf", :x_sendfile => true, :disposition => "attachment"		
+	end
+
 
   def descargas
 

@@ -23,6 +23,13 @@
 				- @archivos.each do |archivo|
 					%p= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
 
+- if @programaciones.count > 0
+	%h3 Programaciones (Pdf):
+	%ul
+		- @programaciones.each do |programacion|
+			%li
+				=link_to "Programación #{programacion.descripcion} - #{@periodo_actual.id}", {:controller => 'cal_descargar',:action => 'programaciones', :id => programacion.id, :cal_semestre_id => @periodo_actual.id} 
+
 %h3 Historial Academico:
 .accordion#acordion1
 

@@ -328,6 +328,8 @@ class CalPrincipalAdminController < ApplicationController
 			estudiante_seccion.cal_materia_id = materia
 			estudiante_seccion.cal_semestre_id = semestre
 			estudiante_seccion.cal_numero = numero
+			estudiante_seccion.cal_tipo_estado_calificacion_id = 'SC'
+			estudiante_seccion.cal_tipo_estado_inscripcion_id = 'INS'
 
 			if	estudiante_seccion.save
 				correctos += 1

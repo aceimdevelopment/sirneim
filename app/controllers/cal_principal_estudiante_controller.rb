@@ -15,16 +15,25 @@ class CalPrincipalEstudianteController < ApplicationController
 		if @estudiante.idioma1_id.nil? or @estudiante.idioma2_id.nil?		 
 			@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
 			@idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }			
+			@programaciones = CalDepartamento.all
+
+		else
+			@programaciones = CalDepartamento.where(:id => [ "#{@estudiante.idioma1_id}" ,"#{@estudiante.idioma2_id}" ,'EG','TRA'])
+
 		end
 
 		@archivos = @estudiante.archivos_disponibles_para_descarga 
 
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# OJO: TEMPORALMENTE ESTOS MENSAJES SERAN OCULTADOS
 
-		if @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
-      		flash[:info] = "Como aún no has seleccionado formalmente tu combinación de idiomas, te mostramos todas las combinaciones posibles para que te hagas una idea de como puede ser tu horario. Luego de realizar tu inscripción en la EIM debes indicarnos tu combinación de idiomas para actualizar tu información."
-      	elsif @estudiante.cal_tipo_estado_inscripcion_id.eql? 'REINC'
-      		flash[:info] =  "Como SIRNEIM es una plataforma nueva no tiene tu información previa, por eso te mostramos todos los horarios de tu combinación de idiomas.  Una vez que realices tu inscripción en la EIM y se migre esa información a la plataforma ya podrás ver solo los horarios que te corresponde"
-      	end
+		# if @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
+		# 	flash[:info] = "Como aún no has seleccionado formalmente tu combinación de idiomas, te mostramos todas las combinaciones posibles para que te hagas una idea de como puede ser tu horario. Luego de realizar tu inscripción en la EIM debes indicarnos tu combinación de idiomas para actualizar tu información."
+		# elsif @estudiante.cal_tipo_estado_inscripcion_id.eql? 'REINC'
+		# 	flash[:info] =  "Como SIRNEIM es una plataforma nueva no tiene tu información previa, por eso te mostramos todos los horarios de tu combinación de idiomas.  Una vez que realices tu inscripción en la EIM y se migre esa información a la plataforma ya podrás ver solo los horarios que te corresponde"
+		# end
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
 
 
 		# @total_materias_anno_base = CalMateria.where(:anno => @annos.first).count
