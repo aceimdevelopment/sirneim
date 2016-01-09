@@ -6,7 +6,7 @@
           %li
             %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
           = drop_down "Usuarios" do
-            %li=link_to "Gestionar Profesores y Estudiantes", :action => "usuarios"
+            %li=link_to "Gestionar Profesores y Estudiantes", {:controller => 'cal_principal_admin', :action => 'usuarios'}
           %li
             = link_to "Configuración General", {:controller => 'cal_principal_admin', :action => 'configuracion_general'} 
 

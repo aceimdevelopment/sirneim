@@ -1,0 +1,70 @@
+%h3 Historial Academico:
+- if session[:cal_administrador]
+	%h5
+		Agregar Asignatura:
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar a una sección'}		
+			= link_to ("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' }) do
+				= content_tag(:i, "", :class => "icon-plus icon-white")
+
+
+	.modal.fade#estudiante_seccion{ :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+		.modal-dialog
+			.modal-content
+				.modal-header
+					<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+				%h2#myModalLabel 
+					Agregar Sección
+				.modal-body
+					= render :partial => 'cal_estudiante_seccion/form'
+
+.accordion#acordion1
+
+	- @periodos.each do |periodo|
+		- @secciones_periodo = @secciones.where(:cal_semestre_id => periodo.id)
+		- if @secciones_periodo.count > 0
+			.accordion-group
+				.accordion-heading
+					= link_to "Período Académico #{periodo.id}", "#collapse#{periodo.id}", {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "accordion1"}
+				.accordion-body.collapse.in{:id => "collapse#{periodo.id}"}
+					.accordion-inner
+						%table.table.table-bordered.table-striped.table-condensed
+							%thead
+								%tr
+									%th Año
+									%th Asignatura
+									%th Sección
+									%th Trimestre I
+									%th Trimestre II
+									%th Trimestre III
+									%th Definitiva
+									- if session[:cal_administrador]
+										%th= 'Profesor'
+										%th Opciones
+							- @secciones_periodo.each do |est_sec_per|
+								- tipo_calificacion = ''
+								- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
+								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI') 	
+
+								%tbody
+									%tr{:class => tipo_calificacion}
+										- aux = est_sec_per.cal_seccion.cal_materia.anno
+										- aux = "--" if aux.eql? 0
+										%td= aux
+										%td= est_sec_per.cal_seccion.cal_materia.descripcion
+										%td= est_sec_per.cal_seccion.numero
+										%td= est_sec_per.calificacion_primera
+										%td= est_sec_per.calificacion_segunda
+										%td= est_sec_per.calificacion_tercera
+										%td= est_sec_per.calificacion_final
+										- if session[:cal_administrador]
+											%td= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
+											%td
+												= link_to ({:controller => 'cal_estudiante_seccion', :action => 'eliminar', :id => est_sec_per.id, :controlador => @controlador, :accion => @accion }, { :class => 'btn btn-danger btn-mini', :method => :delete, :data => { :confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
+													= content_tag(:i, "", :class => "icon-trash icon-white")
+
+:javascript
+
+	$(document).ready(function() {
+		$(".collapse").collapse();
+	});
+	

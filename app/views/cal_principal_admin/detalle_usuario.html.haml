@@ -1,6 +1,6 @@
 =link_to "Regresar", {:action => 'usuarios'}, {:class => 'btn'}
 
-%h2 Datos Personales
+%h3 Datos Personales
 %ul.well.well-small
 	%li
 		%b Cédula de Identidad:
@@ -12,7 +12,7 @@
 		%b Contraseña:
 		= @estudiante.cal_usuario.contrasena
 
-%h2 Datos de contacto:
+%h3 Datos de contacto:
 %ul.well.well-small
 	%li 
 		%b Correo Electrónico:
@@ -27,66 +27,16 @@
 - @accion = action_name
 - @controlador = controller_name
 
-%h2 
-	Asignaturas:
-
-	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar a una sección'}		
-		= link_to ("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' }) do
-			= content_tag(:i, "", :class => "icon-plus icon-white")
-
+%h3 Combinación de Idiomas:
 .well.well-small
-	
-	%b Idiomas:
 	= "#{@estudiante.combo_idiomas}"
 
 	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
 		= link_to ("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
 			= content_tag(:i, "", :class => "icon-edit icon-white")
 
+= render :partial => 'cal_estudiante/historial_academico'
 
-.well.well-small
-	%table.table.table-bordered.table-striped.table-condensed
-		%thead
-			%tr
-				%th Asignatura
-				%th Seccion
-				%th Profesor
-				%th
-		%tbody
-			- @secciones_estudiantes.each do |est_sec|
-				%tr
-					%td= est_sec.cal_seccion.cal_materia.descripcion if est_sec.cal_seccion
-					%td= est_sec.cal_seccion.numero if est_sec.cal_seccion
-					%td= est_sec.cal_seccion.cal_profesor.cal_usuario.descripcion_apellido if (est_sec.cal_seccion.cal_profesor and est_sec.cal_seccion.cal_profesor.cal_usuario)
-					%td
-						= link_to ({:controller => 'cal_estudiante_seccion', :action => 'eliminar', :id => est_sec.id, :controlador => @controlador, :accion => @accion }, { :class => 'btn btn-danger btn-mini', :method => :delete, :data => { :confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
-							= content_tag(:i, "", :class => "icon-trash icon-white")
-
-
-				-unless est_sec.cal_tipo_estado_calificacion_id.eql? 'SC'
-					- tipo_calificacion = 'success' if est_sec.cal_tipo_estado_calificacion_id.eql? 'AP'
-					- tipo_calificacion = 'error' if (est_sec.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec.cal_tipo_estado_calificacion_id.eql? 'PI')
-					%tr
-						- if est_sec.cal_tipo_estado_calificacion_id.eql? 'PI'
-							%td= est_sec.cal_tipo_estado_calificacion.descripcion
-						%td
-							%table.table.table-condensed
-								%tbody
-									%tr{:class => tipo_calificacion}
-										%td= est_sec.calificacion_primera
-										%td= est_sec.calificacion_segunda
-										%td= est_sec.calificacion_tercera
-										%td= "Final: #{est_sec.calificacion_final.to_i}"
-
-.modal.fade#estudiante_seccion{ :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
-	.modal-dialog
-		.modal-content
-			.modal-header
-				<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
-			%h2#myModalLabel 
-				Agregar Sección
-			.modal-body
-				= render :partial => 'cal_estudiante_seccion/form'
 
 = render :partial => 'cal_estudiante/actualizar_idiomas'
 
