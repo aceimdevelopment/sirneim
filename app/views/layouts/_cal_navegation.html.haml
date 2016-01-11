@@ -10,6 +10,9 @@
           %li
             = link_to "Configuración General", {:controller => 'cal_principal_admin', :action => 'configuracion_general'} 
 
+          %li
+            = link_to "Asignaturas", {:controller => 'cal_materia', :action => 'index'} 
+
       .nav.pull-right
 
         -if session[:cal_usuario]
