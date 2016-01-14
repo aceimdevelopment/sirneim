@@ -10,26 +10,30 @@ class CalDescargarController < ApplicationController
 	end
 
 
-  def descargas
+  # def descargas
 
-    ids = params[:id]
-    alertas = Alerta.where(:id => ids.split(","))
-    file_name = Pdf.descargar_alertas_excel(alertas)
-    send_file file_name, :type => "application/vnd.ms-excel", :filename => "reporte_alertas.xls", :stream => false
+  #   ids = params[:id]
+  #   alertas = Alerta.where(:id => ids.split(","))
+  #   file_name = Pdf.descargar_alertas_excel(alertas)
+  #   send_file file_name, :type => "application/vnd.ms-excel", :filename => "reporte_alertas.xls", :stream => false
 
-    File.delete(file_name)
+  #   File.delete(file_name)
+  # end
+
+  def listado_seccion
+  	seccion_id = params[:id]
+		file_name = CalArchivo.listado_seccion_excel(seccion_id)
+		send_file file_name, :type => "application/vnd.ms-excel", :x_sendfile => true, :stream => false, :filename => "reporte_seccion.xls",:disposition => "attachment"
   end
-
-
 
 	def listados
 		tipo = params[:tipo]
 		ids = params[:id]
-		usuarios = CalUsuario.where(:ci => ids.split(","))
-		usuarios.each { |us| puts us.descripcion }
+		usuarios = CalUsuario.order("apellidos ASC, nombres ASC").where(:ci => ids.split(","))
+		# usuarios.each { |us| puts us.descripcion }
 		file_name = CalArchivo.listado_excel(tipo,usuarios) 
 		# send_file file_name, :type => "application/vnd.ms-excel", :filename => "reporte_#{tipo}.xls", :stream => false
-		send_file file_name, :type => "application/vnd.ms-excel", :x_sendfile => true, :stream => false, :filename => "#{Rails.root}/attachments/reporte_#{tipo}",:disposition => "attachment"
+		send_file file_name, :type => "application/vnd.ms-excel", :x_sendfile => true, :stream => false, :filename => "reporte_#{tipo}.xls",:disposition => "attachment"
 		# File.delete(file_name)
 	end
 

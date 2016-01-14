@@ -1,3 +1,5 @@
+=link_to "Descargar listado (Excel)", {:controller => 'cal_descargar', :action => 'listado_seccion', :id => @cal_seccion.id}, :class => "btn btn-success pull-righ"
+
 
 -if session[:cal_administrador]
 	- calificada = false
@@ -52,7 +54,7 @@
 						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
 
 						%tr{:class => tipo_calificacion}
-							%td #{i}
+							%td #{i+1}
 							%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
 							- unless calificada
 								%td
@@ -88,7 +90,7 @@
 						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
 
 						%tr{:class => tipo_calificacion}
-							%td #{i}
+							%td #{i+1}
 							%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
 							%td
 								- unless calificada 

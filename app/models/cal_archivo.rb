@@ -5,19 +5,54 @@ class CalArchivo
 		require 'spreadsheet'
 
 		@book = Spreadsheet::Workbook.new
-		@sheet = @book.create_worksheet :name => "reporte #{tipo}"
+		@sheet = @book.create_worksheet :name => "Reporte #{tipo}"
 
-		data = %w{NOMBRES CORREO MOVIL CI}
+		@sheet.column(0).width = 10
+		@sheet.column(1).width = 40
+		@sheet.column(2).width = 30
+		@sheet.column(3).width = 15
+
+		data = %w{CI NOMBRES CORREO MOVIL}
 		@sheet.row(0).concat data
 
 		data = []
 		usuarios.each_with_index do |usuario,i|
-			aux = { "MOVIL" => usuario.telefono_movil,"NOMBRE" => usuario.apellido_nombre, "CI" => usuario.ci, "CORREO" => usuario.correo_electronico}
-			@sheet.row(i+1).concat aux.values
+			# aux = { "CI" => usuario.ci, "NOMBRES" => usuario.apellido_nombre, "CORREO" => usuario.correo_electronico, "MOVIL" => usuario.telefono_movil}
+			@sheet.row(i+1).concat  [usuario.ci, usuario.apellido_nombre, usuario.correo_electronico, usuario.telefono_movil]
 		end
 
-		file_name = "Reporte_#{tipo}_#{DateTime.now.strftime('%d_%m_%Y_%H_%M')}.xls"
+		file_name = "reporte_#{tipo}.xls"
 		return file_name if @book.write file_name
 	end
+
+	def self.listado_seccion_excel(seccion_id)
+		require 'spreadsheet'
+
+		seccion = CalSeccion.find seccion_id
+
+		@book = Spreadsheet::Workbook.new
+		@sheet = @book.create_worksheet :name => "Seccion #{seccion.id}"
+
+		estudiantes = seccion.cal_estudiantes
+
+		@sheet.column(0).width = estudiantes.collect{|e| e.cal_usuario_ci.length if e.cal_usuario_ci}.max+2;
+		@sheet.column(1).width = estudiantes.collect{|e| e.cal_usuario.apellido_nombre.length if e.cal_usuario.apellido_nombre}.max+2;
+		@sheet.column(2).width = estudiantes.collect{|e| e.cal_usuario.correo_electronico.length if e.cal_usuario.correo_electronico}.max+2;
+		@sheet.column(3).width = 15
+
+		@sheet.row(0).concat ["Profesor: #{seccion.cal_profesor.cal_usuario.apellido_nombre}"]
+		@sheet.row(1).concat ["Sección: #{seccion.descripcion}"]
+		@sheet.row(2).concat %w{CI NOMBRES CORREO MOVIL}
+
+		data = []
+		estudiantes.each_with_index do |est,i|
+			usuario = est.cal_usuario
+			@sheet.row(i+3).concat  [usuario.ci, usuario.apellido_nombre, usuario.correo_electronico, usuario.telefono_movil]
+		end
+
+		file_name = "reporte_seccion.xls"
+		return file_name if @book.write file_name
+	end
+
 
 end
