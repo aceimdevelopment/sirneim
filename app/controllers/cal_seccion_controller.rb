@@ -67,4 +67,48 @@ class CalSeccionController < ApplicationController
 		end
 		redirect_to :back
 	end
+
+	def seleccionar_profesor_secundario
+		@cal_profesores = CalProfesor.all.sort_by{|profe| profe.cal_usuario.apellidos}
+		@titulo = "Cambio de profesor de sección"
+		@cal_seccion = CalSeccion.find(params[:id])		
+	end
+
+	def agregar_profesor_secundario
+		# numero, cal_materia_id, cal_semestre_id = params[:id].split(" ")
+		# params[:numero => numero]
+
+		@cal_seccion = CalSeccion.find params[:id].split(" ")
+
+		unless @cal_seccion.nil?
+			if @cal_seccion.cal_secciones_profesores_secundarios.create(:cal_profesor_ci => params[:cal_profesor_ci])
+				flash[:success] = "Profesor Secundario agregado a la Asignatura: #{@cal_seccion.descripcion}"
+			else
+				flash[:error] = "No se pudo agregar la Asignatura"
+				render :action => 'seleccionar_profesor_secundario'
+			end
+
+		else
+			flash[:error] = "Sección no encontrada"
+			render :action => 'seleccionar_profesor_secundario'
+		end
+
+		redirect_to :controller => "cal_principal_admin"
+
+	end
+
+	def desasignar_profesor_secundario
+		numero, cal_materia_id, cal_semestre_id = params[:id].split(",")
+		cal_profesor_ci = params[:cal_profesor_ci]
+
+		@cal_seccion_profesor_secundario = CalSeccionProfesorSecundario.find([numero,cal_materia_id,cal_semestre_id,cal_profesor_ci])
+
+		unless @cal_seccion_profesor_secundario.nil?
+			flash[:info] =  @cal_seccion_profesor_secundario.delete ? "Profesor Desasignado satisfactoriamente." : "No se pudo desasignar al profesor"
+		else
+			flash[:error] = "Profesor No Encontrado, por favor revisar su solicitud."
+		end
+
+		redirect_to :controller => "cal_principal_admin"
+	end
 end

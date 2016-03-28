@@ -17,6 +17,15 @@ class CalProfesor < ActiveRecord::Base
 
 	accepts_nested_attributes_for :cal_secciones
 
+    has_many :cal_profesor_secciones_secundarias,
+        :class_name => 'CalSeccionProfesorSecundario',
+        :foreign_key => :cal_profesor_ci
+
+    accepts_nested_attributes_for :cal_profesor_secciones_secundarias
+
+    has_many :cal_secciones_secundarias, :through => :cal_profesor_secciones_secundarias, :source => :cal_seccion
+
+
     def descripcion
         "#{cal_usuario.descripcion} - #{cal_departamento.descripcion if cal_departamento}"
     end

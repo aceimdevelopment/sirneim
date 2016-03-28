@@ -18,7 +18,17 @@ class CalSeccion < ActiveRecord::Base
  		:primary_key => [:numero, :cal_materia_id, :cal_semestre_id]
 	accepts_nested_attributes_for :cal_estudiantes_secciones
 
-	has_many :cal_estudiantes, :through => :cal_estudiantes_secciones, :source => :cal_estudiante  
+	has_many :cal_estudiantes, :through => :cal_estudiantes_secciones, :source => :cal_estudiante
+
+
+	has_many :cal_secciones_profesores_secundarios,
+		:class_name => 'CalSeccionProfesorSecundario',
+ 		:foreign_key => [:numero, :cal_materia_id, :cal_semestre_id],
+ 		:primary_key => [:numero, :cal_materia_id, :cal_semestre_id]
+
+	accepts_nested_attributes_for :cal_secciones_profesores_secundarios
+
+	has_many :cal_profesores, :through => :cal_secciones_profesores_secundarios, :source => :cal_profesor
 
 	# validates_uniqueness_of :numero, :cal_materia_id, :cal_semestre_id
 

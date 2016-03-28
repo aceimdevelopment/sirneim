@@ -6,8 +6,10 @@ class CalCalificarController < ApplicationController
 
 	def seleccionar_seccion
 		@profesor = CalProfesor.find (session[:cal_profesor].cal_usuario_ci)
-		@titulo = "Secciones disponibles para Calificar"
+		@titulo = "Secciones disponibles"
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual
+		@cal_secciones = @profesor.cal_secciones.where(:cal_semestre_id => @periodo_actual.id)
+		@cal_secciones_secundarias = @profesor.cal_secciones_secundarias.where(:cal_semestre_id => @periodo_actual.id)
 	end
 
 	def ver_seccion

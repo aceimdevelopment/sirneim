@@ -1,3 +1,16 @@
-- @cal_secciones = @profesor.cal_secciones.where(:cal_semestre_id => @periodo_actual.id)
+
+%h3 Para Calificar
+
 - @cal_secciones.each do |cal_seccion|
-	%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true
+	%p
+		= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true
+
+		- if cal_seccion.calificada
+			%span.label.label-success Calidicada 
+		- else
+			%span.label.label-info Pendiente por calificar
+
+%h3 Para Participar
+
+- @cal_secciones_secundarias.each do |cal_seccion|
+	%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => false
