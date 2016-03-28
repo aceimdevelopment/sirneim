@@ -10,7 +10,8 @@
 		- else
 			%span.label.label-info Pendiente por calificar
 
-%h3 Para Participar
+-if @cal_secciones_secundarias and @cal_secciones_secundarias.all.count > 0
+	%h3 Para Participar
 
-- @cal_secciones_secundarias.each do |cal_seccion|
-	%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => false
+	- @cal_secciones_secundarias.each do |cal_seccion|
+		%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :secundaria => true

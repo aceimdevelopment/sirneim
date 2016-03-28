@@ -1,13 +1,16 @@
 =link_to "Descargar listado (Excel)", {:controller => 'cal_descargar', :action => 'listado_seccion', :id => @cal_seccion.id}, :class => "btn btn-success pull-righ"
 
 
--if session[:cal_administrador]
-	- calificada = false
--else
-	- calificada = @cal_seccion.calificada 
+- calificada = @cal_seccion.calificada
+
+- calificada = false if session[:cal_administrador]
+
+- calificada = true if @secundaria
+	 
 
 %p#text
-= @estudiantes_secciones.count
+%h5
+	= "Total de Estudiantes: #{@estudiantes_secciones.count}"
 = form_tag(:controller => 'cal_calificar', :action => "calificar") do
 	= hidden_field_tag "id", @cal_seccion.id
 

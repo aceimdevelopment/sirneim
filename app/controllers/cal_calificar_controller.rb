@@ -25,6 +25,8 @@ class CalCalificarController < ApplicationController
 			@p1 = @p2 =30
 			@p3 = 40
 		end
+
+		@secundaria = true if params[:secundaria]
 	end
 
 	def calificar
