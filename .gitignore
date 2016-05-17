@@ -10,3 +10,5 @@ codigos_barra/
 .sublime-project
 .sublime-workspace
 .DS_Store
+Gemfile
+Gemfile.lock
