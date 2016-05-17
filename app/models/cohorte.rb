@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Cohorte < ActiveRecord::Base
 
   has_many :diplomados_cohortes

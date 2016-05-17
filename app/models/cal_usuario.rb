@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalUsuario < ActiveRecord::Base
 
 	set_primary_keys :ci

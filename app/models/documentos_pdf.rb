@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class DocumentosPDF
 
   def self.to_utf16(valor)

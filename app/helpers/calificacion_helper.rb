@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module CalificacionHelper
   def colocar_tabla(usuarios,historiales,editar)
     form_tag "guardar_notas" do

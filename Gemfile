@@ -22,7 +22,8 @@ gem 'json'
 gem 'jquery-rails' 
 gem 'haml'
 gem 'composite_primary_keys'
-gem 'pdf-writer'
+# gem 'pdf-writer'
+gem 'pdf-writer', :git => 'git://github.com/metaskills/pdf-writer.git'
 
 gem 'pdf-reader', "~> 1.1.0"
 

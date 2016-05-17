@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class AdminAulaController < ApplicationController
   before_filter :filtro_logueado
   before_filter :filtro_administrador

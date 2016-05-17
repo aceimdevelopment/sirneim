@@ -27,7 +27,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		%h3 Recuperar Contraseña
 
-	=form_tag ({:action => 'olvido_clave_enviar'}, :class => "form-horizontal")  do 
+	=form_tag :url => {:action => 'olvido_clave_enviar'}, :class => "form-horizontal"  do 
 		.modal-body
 			.control-group
 				%label.control-label

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Modulo < ActiveRecord::Base
 	set_primary_keys :numero, :diplomado_id
 
