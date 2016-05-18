@@ -1,4 +1,4 @@
-=form_tag ({:controller => 'cal_usuario', :action => 'modificar_guardar'}, :class => "form-horizontal")  do 
+=form_tag :url => {:controller => 'cal_usuario', :action => 'modificar_guardar'}, :class => "form-horizontal"  do 
 
   -if @cal_usuario.errors.any?
     %ul
