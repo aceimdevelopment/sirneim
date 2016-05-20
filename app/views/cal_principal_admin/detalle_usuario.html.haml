@@ -32,7 +32,7 @@
 	= "#{@estudiante.combo_idiomas}"
 
 	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
-		= link_to ("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
+		= link_to("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
 			= content_tag(:i, "", :class => "icon-edit icon-white")
 
 = render :partial => 'cal_estudiante/historial_academico'
