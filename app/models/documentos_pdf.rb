@@ -92,7 +92,7 @@ class DocumentosPDF
       }
       tabla.columns["nota2"] = PDF::SimpleTable::Column.new("nota2") { |col|
         col.width = 50
-        col.heading = to_utf16("<b>(#{p1}%)</b>")
+        col.heading = to_utf16("<b>(#{p2}%)</b>")
         col.heading.justification = :center
         col.justification = :center
       }
