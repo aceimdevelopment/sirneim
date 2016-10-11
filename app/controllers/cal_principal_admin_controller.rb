@@ -48,7 +48,7 @@ class CalPrincipalAdminController < ApplicationController
 		if @admin and @admin.cal_tipo_admin_id.eql? 3
 
 			@cal_departamento_id = 'ALE' if @admin.cal_usuario_ci.eql? "14755681"
-			@cal_departamento_id = 'EG' if @admin.cal_usuario_ci.eql? "3940410"
+			@cal_departamento_id = 'EG' if @admin.cal_usuario_ci.eql? "8965636"
 			@cal_departamento_id = 'FRA' if @admin.cal_usuario_ci.eql? "14141534"
 			@cal_departamento_id = 'ING' if @admin.cal_usuario_ci.eql? "12293163"
 			@cal_departamento_id = 'ITA' if @admin.cal_usuario_ci.eql? "1045134"
