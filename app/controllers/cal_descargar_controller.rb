@@ -37,6 +37,11 @@ class CalDescargarController < ApplicationController
 		# File.delete(file_name)
 	end
 
+	def archivo
+		tipo = params[:tipo] ? params[:tipo] : "pdf"
+		send_file "#{Rails.root}/attachments/#{params[:id]}", :type => "application/#{tipo}", :x_sendfile => true, :disposition => "attachment"
+
+	end
 
 	def horario
 
