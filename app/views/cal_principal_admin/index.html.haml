@@ -73,7 +73,7 @@
 																%th Profesor Tutor (Calificador)
 																%th Profesores Secundarios
 																%th Estado
-																- if @admin and @admin.cal_tipo_admin_id <=2
+																- if @admin and @admin.cal_tipo_admin_id <3
 																	%th Opciones Generales
 														%tbody
 															- mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id).each do |seccion|
