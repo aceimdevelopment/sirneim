@@ -48,11 +48,22 @@ class CalPrincipalAdminController < ApplicationController
 		if @admin and @admin.cal_tipo_admin_id.eql? 3
 
 			@cal_departamento_id = 'ALE' if @admin.cal_usuario_ci.eql? "14755681"
+
 			@cal_departamento_id = 'EG' if @admin.cal_usuario_ci.eql? "8965636"
+			@cal_departamento_id = 'EG' if @admin.cal_usuario_ci.eql? "12054218"
+			@cal_departamento_id = 'EG' if @admin.cal_usuario_ci.eql? "3607466"
+
 			@cal_departamento_id = 'FRA' if @admin.cal_usuario_ci.eql? "14141534"
+			@cal_departamento_id = 'FRA' if @admin.cal_usuario_ci.eql? "14141534"
+
 			@cal_departamento_id = 'ING' if @admin.cal_usuario_ci.eql? "12293163"
+			@cal_departamento_id = 'ING' if @admin.cal_usuario_ci.eql? "6311731"
+			@cal_departamento_id = 'ING' if @admin.cal_usuario_ci.eql? "10350508"
+
 			@cal_departamento_id = 'ITA' if @admin.cal_usuario_ci.eql? "1045134"
+
 			@cal_departamento_id = 'POR' if @admin.cal_usuario_ci.eql? "10274406"
+
 			@cal_departamento_id = 'TRA' if @admin.cal_usuario_ci.eql? "3673283"
 
 		end
@@ -89,6 +100,7 @@ class CalPrincipalAdminController < ApplicationController
 
 	def ver_seccion_admin
 		id = params[:id]
+		@admin = session[:cal_administrador]
 		@cal_seccion = CalSeccion.find(id)
 		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
 		@titulo = "Sección: #{@cal_seccion.descripcion}"
@@ -182,6 +194,7 @@ class CalPrincipalAdminController < ApplicationController
 		@cal_seccion = CalSeccion.find(id)
 
 		@cal_seccion.calificada = false
+		@cal_seccion.cal_estudiantes_secciones.each{|es| es.cal_tipo_estado_calificacion_id = 'SC'; es.save}
 
 		if @cal_seccion.save
 			flash[:success] = "El Profesor #{@cal_seccion.cal_profesor.cal_usuario.nombres} ya puede calificar la seccion: #{@cal_seccion.descripcion} "

@@ -39,6 +39,25 @@ class CalSeccion < ActiveRecord::Base
 	# has_and_belongs_to_many :estudiantes, :join_table => "estudiante_en_seccion", :foreign_key => [:seccion_id, :materia_id, :categoria_id, :departamento_id, :semestre_id]
 	# accepts_nested_attributes_for :estudiantes
 
+	def total_estudiantes
+		cal_estudiantes_secciones.count
+	end
+
+	def total_aprobados
+		cal_estudiantes_secciones.where(:cal_tipo_estado_calificacion_id => 'AP').count
+	end
+
+	def total_reprobados
+		cal_estudiantes_secciones.where(:cal_tipo_estado_calificacion_id => 'RE').count
+	end
+
+	def total_perdidos
+		cal_estudiantes_secciones.where(:cal_tipo_estado_calificacion_id => 'PI').count
+	end
+
+	def total_sin_calificar
+		cal_estudiantes_secciones.where(:cal_tipo_estado_calificacion_id => 'SC').count
+	end
 
 	def descripcion
 		descripcion = ""

@@ -5,8 +5,18 @@
 	%p
 		= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true
 
-		- if cal_seccion.calificada
-			%span.label.label-success Calidicada 
+
+		-if cal_seccion.calificada
+			%span.label.label-success Calidicada
+			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Aprobados'}
+				%span.label
+					= cal_seccion.total_aprobados
+			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Reprobados'}
+				%span.label
+					= cal_seccion.total_reprobados
+			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Perdidas Por Inasistencias'}
+				%span.label
+					= cal_seccion.total_perdidos
 		- else
 			%span.label.label-info Pendiente por calificar
 
@@ -15,3 +25,8 @@
 
 	- @cal_secciones_secundarias.each do |cal_seccion|
 		%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :secundaria => true
+:javascript
+
+	$(document).ready(function() {
+		$('.tooltip-btn').tooltip();
+	});		

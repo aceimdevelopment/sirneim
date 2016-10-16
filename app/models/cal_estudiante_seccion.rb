@@ -16,6 +16,10 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	belongs_to :cal_tipo_estado_calificacion
 	belongs_to :cal_tipo_estado_inscripcion
 
+	def pi?
+		cal_tipo_estado_calificacion_id.eql? 'PI'
+	end
+
 	# validates :id, :presence => true, :uniqueness => true	
 
 end

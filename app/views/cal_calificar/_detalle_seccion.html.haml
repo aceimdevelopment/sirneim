@@ -3,7 +3,9 @@
 
 - calificada = @cal_seccion.calificada
 
-- calificada = false if session[:cal_administrador]
+- calificada = false if @admin
+
+- calificada = true if (@admin and @admin.cal_tipo_admin_id.eql? 3)
 
 - calificada = true if @secundaria
 	 
@@ -102,30 +104,31 @@
 							%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
 							%td
 								- unless calificada 
-									= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true, nil, {:onclick => "pi(#{es.cal_estudiante_ci})"}
+									= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true, es.pi?, {:onclick => "pi(#{es.cal_estudiante_ci})"}
 								- else
 									= es.cal_tipo_estado_calificacion.descripcion
 							%td 
-								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_primera", {}, {:class => 'span9', :required => @es_semestre1, :step => 0.1, :in => 0...21, :value => es.calificacion_primera, :disabled => calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_primera", {}, {:class => 'span9', :required => @es_semestre1, :step => 0.1, :in => 0...21, :value => es.calificacion_primera, :disabled => (calificada or es.pi?), :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 							%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 								%p{:id => "#{es.cal_estudiante_ci}_calificacion_primera_text"}
 									= sprintf( "%0.01f", es.calificacion_primera*@p1/100) if es.calificacion_primera
 							%td 
-								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {:class => 'span9', :required => @es_semestre2, :step => 0.1, :in => 0...21, :disabled => calificada, :value => es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {:class => 'span9', :required => @es_semestre2, :step => 0.1, :in => 0...21, :disabled => (calificada or es.pi?), :value => es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 							%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 								%p{:id => "#{es.cal_estudiante_ci}_calificacion_segunda_text"}
 									= sprintf( "%0.01f", es.calificacion_segunda*@p2/100) if es.calificacion_segunda
 							%td
-								= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {:class => 'span9', :required => @es_semestre3, :step => 0.1, :in => 0...21, :value => es.calificacion_tercera, :disabled => calificada, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+								= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {:class => 'span9', :required => @es_semestre3, :step => 0.1, :in => 0...21, :value => es.calificacion_tercera, :disabled => (calificada or es.pi?), :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 
 							%td{:style => "border-right-style: double;border-right-color: darkgray;"}
 								%p{:id => "#{es.cal_estudiante_ci}_calificacion_tercera_text"}
 									= sprintf( "%0.01f", es.calificacion_tercera*@p3/100) if es.calificacion_tercera
 							%td
-								= text_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {:readonly => true, :disabled => calificada, :value => es.calificacion_final.to_i, :class => 'span9'}
+								- valor = es.pi? ? es.cal_tipo_estado_calificacion.descripcion : es.calificacion_final.to_i
+								= text_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {:readonly => true, :disabled => calificada, :value => valor , :class => 'span9'}
 
-		.well.well-small
-			-unless calificada 
+		-unless calificada 
+			.well.well-small
 				= submit_tag "Guardar", :id => "submit", :class => "btn btn-success pull-right", :disable_with => "Espere...", :data => {:confirm => 'Una vez que guardes las calificaciones no podrás cambiar su valor, ¿Estás Seguro?'}
 :javascript
 
