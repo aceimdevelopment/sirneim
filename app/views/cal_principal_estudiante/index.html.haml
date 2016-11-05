@@ -5,7 +5,7 @@
 
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
 	= render :partial => 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
--if false
+-if true
 	-if @estudiante.cita_horaria
 		%h3 Cita Horaria:
 		.well.well-small
@@ -16,21 +16,23 @@
 				%b Hora:
 				= @estudiante.cita_horaria.hora
 
-	- if @archivos
+	- if false #@archivos
 		%p
 			%h3= "Horario #{@periodo_actual.id}:"
 			.well.well-small
 				- @archivos.each do |archivo|
 					%p= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
-%h3 Exámenes de Reparación y Suficiencia Octubre 2016 
-%ul
-	%li
-		= link_to "Lunes 17 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "01_RepSuf_Lun_17Oct2016.pdf"
-	%li
-		= link_to "Martes 18 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "02_RepSuf_Mar_18Oct2016.pdf"
-	%li
-		= link_to "Miércoles 19 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "03_RepSuf_Mier_19 Oct2016.pdf"				
-- if false #@programaciones.count > 0
+
+- if false
+	%h3 Exámenes de Reparación y Suficiencia Octubre 2016 
+	%ul
+		%li
+			= link_to "Lunes 17 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "01_RepSuf_Lun_17Oct2016.pdf"
+		%li
+			= link_to "Martes 18 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "02_RepSuf_Mar_18Oct2016.pdf"
+		%li
+			= link_to "Miércoles 19 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "03_RepSuf_Mier_19 Oct2016.pdf"
+- if false #@programaciones and @programaciones.count > 0
 	%h3 Programaciones (Pdf):
 	%ul
 		- @programaciones.each do |programacion|
