@@ -16,7 +16,7 @@
 				%b Hora:
 				= @estudiante.cita_horaria.hora
 
-	- if false #@archivos
+	- if @archivos
 		%p
 			%h3= "Horario #{@periodo_actual.id}:"
 			.well.well-small
