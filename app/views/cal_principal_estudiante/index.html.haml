@@ -1,3 +1,7 @@
+.well.well-small
+
+	= link_to "FECHAS DEL CRONOGRAMA DOCENTE 2016-2017", :controller => "cal_descargar", :action => "archivo", :id => "FECHAS_CRONOGRAMA_DOCENTE_2016-2017.pdf"
+
 - @cal_usuario = session[:cal_usuario]
 
 -if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
