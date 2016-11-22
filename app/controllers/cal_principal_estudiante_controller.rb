@@ -18,11 +18,11 @@ class CalPrincipalEstudianteController < ApplicationController
 			@programaciones = CalDepartamento.all
 
 		else
-			@programaciones = CalDepartamento.where(:id => [ "#{@estudiante.idioma1_id}" ,"#{@estudiante.idioma2_id}" ,'EG','TRA'])
+			@programaciones = CalDepartamento.where(:id => [ "#{@estudiante.idioma1_id}" ,"#{@estudiante.idioma2_id}"]) #,'EG','TRA'
 
 		end
 
-		@archivos = @estudiante.archivos_disponibles_para_descarga 
+		#@archivos = @estudiante.archivos_disponibles_para_descarga 
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # OJO: TEMPORALMENTE ESTOS MENSAJES SERAN OCULTADOS

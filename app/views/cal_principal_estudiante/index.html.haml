@@ -9,7 +9,7 @@
 
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
 	= render :partial => 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
--if true
+-if false
 	-if @estudiante.cita_horaria
 		%h3 Cita Horaria:
 		.well.well-small
@@ -36,7 +36,7 @@
 			= link_to "Martes 18 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "02_RepSuf_Mar_18Oct2016.pdf"
 		%li
 			= link_to "Miércoles 19 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "03_RepSuf_Mier_19 Oct2016.pdf"
-- if false #@programaciones and @programaciones.count > 0
+- if @programaciones and @programaciones.count > 0
 	%h3 Programaciones (Pdf):
 	%ul
 		- @programaciones.each do |programacion|
