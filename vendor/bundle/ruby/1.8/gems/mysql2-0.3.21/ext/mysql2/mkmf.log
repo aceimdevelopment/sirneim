@@ -1,0 +1,155 @@
+have_header: checking for ruby/thread.h... -------------------- no
+
+"gcc -E -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:25: error: ruby/thread.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <ruby/thread.h>
+/* end */
+
+--------------------
+
+have_func: checking for rb_thread_blocking_region()... -------------------- no
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function 't':
+conftest.c:3: error: 'rb_thread_blocking_region' undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_thread_blocking_region; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+/tmp/ccVgISWc.o: In function `t':
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/mysql2-0.3.21/ext/mysql2/conftest.c:3: undefined reference to `rb_thread_blocking_region'
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_thread_blocking_region(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_wait_for_single_fd()... -------------------- no
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function 't':
+conftest.c:3: error: 'rb_wait_for_single_fd' undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_wait_for_single_fd; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+/tmp/ccxiDW8g.o: In function `t':
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/mysql2-0.3.21/ext/mysql2/conftest.c:3: undefined reference to `rb_wait_for_single_fd'
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_wait_for_single_fd(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_hash_dup()... -------------------- no
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function 't':
+conftest.c:3: error: 'rb_hash_dup' undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_hash_dup; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+/tmp/ccEfLkEq.o: In function `t':
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/mysql2-0.3.21/ext/mysql2/conftest.c:3: undefined reference to `rb_hash_dup'
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_hash_dup(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_intern3()... -------------------- no
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function 't':
+conftest.c:3: error: 'rb_intern3' undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_intern3; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I.    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static  -lrt -ldl -lcrypt -lm   -lc"
+/tmp/ccQKQGXt.o: In function `t':
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/mysql2-0.3.21/ext/mysql2/conftest.c:3: undefined reference to `rb_intern3'
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_intern3(); return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for mysql.h... -------------------- yes
+
+"gcc -E -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I. -I/usr/include/mysql    -g -O2  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <mysql.h>
+/* end */
+
+--------------------
+
+have_header: checking for errmsg.h... -------------------- yes
+
+"gcc -E -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I. -I/usr/include/mysql    -g -O2  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <errmsg.h>
+/* end */
+
+--------------------
+
+have_header: checking for mysqld_error.h... -------------------- yes
+
+"gcc -E -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I. -I/usr/include/mysql    -g -O2  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <mysqld_error.h>
+/* end */
+
+--------------------
+
+"gcc -o conftest -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I. -I/usr/include/mysql    -g -O2  -fPIC   conftest.c  -L. -L/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -Wl,-R/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib -L.  -rdynamic -Wl,-export-dynamic    -rdynamic -L/usr/lib/mysql -lmysqlclient_r  -lruby-static  -Wall -funroll-loops -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: int main() {return 0;}
+/* end */
+

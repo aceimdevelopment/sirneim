@@ -1,0 +1,19 @@
+/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/bin/ruby extconf.rb 
+checking for SIZEOF_OFF_T in ruby.h... yes
+checking for SIZEOF_SIZE_T in ruby.h... no
+checking size of size_t in sys/types.h... 8
+checking for SIZEOF_LONG in ruby.h... yes
+checking for rb_str_set_len() in ruby.h... yes
+checking for rb_hash_clear() in ruby.h... no
+checking for gmtime_r() in time.h... yes
+creating Makefile
+
+make
+gcc -I. -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I. -DSIZEOF_SIZE_T=8 -DHAVE_RB_STR_SET_LEN -DHAVE_GMTIME_R    -fPIC -g -O2  -fPIC   -c httpdate.c
+gcc -I. -I. -I/home/aceimdiplomados/.rvm/rubies/ruby-1.8.7-p358/lib/ruby/1.8/x86_64-linux -I. -DSIZEOF_SIZE_T=8 -DHAVE_RB_STR_SET_LEN -DHAVE_GMTIME_R    -fPIC -g -O2  -fPIC   -c unicorn_http.c
+unicorn_http.rl:459: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'hp_type'
+unicorn_http.rl: In function 'data_get':
+unicorn_http.rl:469: error: expected expression before 'struct'
+unicorn_http.rl: In function 'HttpParser_alloc':
+unicorn_http.rl:579: error: expected expression before 'struct'
+make: *** [unicorn_http.o] Error 1

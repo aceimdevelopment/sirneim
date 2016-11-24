@@ -1,0 +1,7 @@
+# pack-refs with: peeled 
+27f910017a5b99e4b05dfc341a90500462a1a38d refs/tags/1.2.3
+^7f5bc6c9ce69c26574bbfde36ebdb9ecf06709d0
+7f5bc6c9ce69c26574bbfde36ebdb9ecf06709d0 refs/heads/master
+8c43ad05dac631d8286b653b856dd86aad5c28b7 refs/heads/git-svn@169
+37a61ec255e9bb26c6079159320d2bd72f22ae74 refs/heads/git-svn@152
+790d4231aada5a46e246109add503689d70d8f7f refs/heads/git-svn@117

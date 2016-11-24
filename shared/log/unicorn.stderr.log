@@ -1,0 +1,1009 @@
+I, [2016-11-22T12:48:44.766240 #24361]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `<main>'
+I, [2016-11-22T13:36:01.155666 #26323]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `<main>'
+I, [2016-11-22T13:50:51.645644 #27032]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `<main>'
+I, [2016-11-22T13:52:03.523252 #27068]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `<main>'
+I, [2016-11-22T13:52:55.658963 #27099]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `<main>'
+I, [2016-11-22T13:57:42.515613 #27357]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@aceim_diplomados/bin/unicorn:23:in `<main>'
+I, [2016-11-23T21:51:47.563486 #15758]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `<main>'
+I, [2016-11-23T21:52:36.708500 #15974]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `<main>'
+I, [2016-11-23T21:58:51.223438 #16078]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `<main>'
+I, [2016-11-23T22:04:18.631089 #16573]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `<main>'
+I, [2016-11-23T22:05:51.929916 #16612]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': cannot load such file -- openssl (LoadError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/bcrypt-ruby-3.0.1/lib/bcrypt.rb:6:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activemodel-3.1.0/lib/active_model/secure_password.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2160:in `block in <module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `class_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:2140:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/base.rb:31:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:2:in `<module:ActiveRecord>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:1:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activerecord-3.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:14:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/composite_primary_keys-4.1.2/lib/composite_primary_keys.rb:55:in `<top (required)>'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /home/aceimdiplomados/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/application.rb:7:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `require'
+	from /home/aceimdiplomados/aceim_diplomados/config/environment.rb:2:in `<top (required)>'
+	from config.ru:4:in `require'
+	from config.ru:4:in `block in <main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `instance_eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/rack-1.3.10/lib/rack/builder.rb:51:in `initialize'
+	from config.ru:1:in `new'
+	from config.ru:1:in `<main>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `eval'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn.rb:56:in `block in builder'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `call'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:752:in `build_app!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/lib/unicorn/http_server.rb:129:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/gems/unicorn-5.2.0/bin/unicorn:126:in `<top (required)>'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.9.1/bin/unicorn:23:in `<main>'
+I, [2016-11-23T22:49:33.180529 #22086]  INFO -- : listening on addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock fd=5
+I, [2016-11-23T22:49:33.180949 #22086]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cal_calificar_controller.rb:10: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cohorte_tema_controller.rb:34: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/diplomado_controller.rb:22: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:37: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:45: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:9: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:28: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:76: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/tipo_estado_inscripcion_controller.rb:16: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/usuario_controller.rb:13: warning: don't put space before argument parentheses
+I, [2016-11-23T22:49:48.336138 #22086]  INFO -- : worker=0 spawning...
+I, [2016-11-23T22:49:48.380234 #22086]  INFO -- : worker=1 spawning...
+I, [2016-11-23T22:49:48.381001 #22093]  INFO -- : worker=0 spawned pid=22093
+I, [2016-11-23T22:49:48.381274 #22093]  INFO -- : worker=0 ready
+I, [2016-11-23T22:49:48.414647 #22086]  INFO -- : master process ready
+I, [2016-11-23T22:49:48.415390 #22094]  INFO -- : worker=1 spawned pid=22094
+I, [2016-11-23T22:49:48.415679 #22094]  INFO -- : worker=1 ready
+E, [2016-11-23T22:51:35.110194 #22208] ERROR -- : adding listener failed addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (in use)
+E, [2016-11-23T22:51:35.110355 #22208] ERROR -- : retrying in 0.5 seconds (4 tries left)
+E, [2016-11-23T22:51:35.611516 #22208] ERROR -- : adding listener failed addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (in use)
+E, [2016-11-23T22:51:35.611623 #22208] ERROR -- : retrying in 0.5 seconds (3 tries left)
+E, [2016-11-23T22:51:36.112678 #22208] ERROR -- : adding listener failed addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (in use)
+E, [2016-11-23T22:51:36.112750 #22208] ERROR -- : retrying in 0.5 seconds (2 tries left)
+E, [2016-11-23T22:51:36.613779 #22208] ERROR -- : adding listener failed addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (in use)
+E, [2016-11-23T22:51:36.613862 #22208] ERROR -- : retrying in 0.5 seconds (1 tries left)
+E, [2016-11-23T22:51:37.114896 #22208] ERROR -- : adding listener failed addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (in use)
+E, [2016-11-23T22:51:37.114981 #22208] ERROR -- : retrying in 0.5 seconds (0 tries left)
+E, [2016-11-23T22:51:37.616072 #22208] ERROR -- : adding listener failed addr=/home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (in use)
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:137:in `initialize': Address already in use - /home/aceimdiplomados/aceim_diplomados/shared/sockets/unicorn.sock (Errno::EADDRINUSE)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:137:in `new'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:137:in `bind_listen'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:222:in `listen'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `inherit_listeners!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `each'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `inherit_listeners!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:121:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-23T22:56:14.925560 #22323]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:186:in `pid=': Already running on PID:22086 (or pid=/home/aceimdiplomados/aceim_diplomados/shared/pids/unicorn.pid is stale) (ArgumentError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:131:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-23T23:04:57.667668 #25011]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:186:in `pid=': Already running on PID:22086 (or pid=/home/aceimdiplomados/aceim_diplomados/shared/pids/unicorn.pid is stale) (ArgumentError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:131:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-23T23:06:39.691740 #25112]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:186:in `pid=': Already running on PID:22086 (or pid=/home/aceimdiplomados/aceim_diplomados/shared/pids/unicorn.pid is stale) (ArgumentError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:131:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-23T23:07:32.415391 #25129]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:186:in `pid=': Already running on PID:22086 (or pid=/home/aceimdiplomados/aceim_diplomados/shared/pids/unicorn.pid is stale) (ArgumentError)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:131:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-23T23:11:47.219467 #25199]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+I, [2016-11-23T23:11:47.219888 #25199]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cal_calificar_controller.rb:10: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cohorte_tema_controller.rb:34: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/diplomado_controller.rb:22: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:37: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:45: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:9: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:28: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:76: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/tipo_estado_inscripcion_controller.rb:16: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/usuario_controller.rb:13: warning: don't put space before argument parentheses
+I, [2016-11-23T23:12:02.337303 #25199]  INFO -- : worker=0 spawning...
+I, [2016-11-23T23:12:02.381420 #25199]  INFO -- : worker=1 spawning...
+I, [2016-11-23T23:12:02.384103 #25205]  INFO -- : worker=0 ready
+I, [2016-11-23T23:12:02.415869 #25199]  INFO -- : worker=2 spawning...
+I, [2016-11-23T23:12:02.418470 #25206]  INFO -- : worker=1 ready
+I, [2016-11-23T23:12:02.450433 #25199]  INFO -- : master process ready
+I, [2016-11-23T23:12:02.453191 #25207]  INFO -- : worker=2 ready
+cache: [GET /aceim_diplomados] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, invalid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, invalid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, invalid, store
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [POST /aceim_diplomados/cal_inicio/validar] invalidate, pass
+cache: [GET /aceim_diplomados/cal_inicio/seleccionar_rol] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/cal_inicio/un_rol?tipo=Administrador] miss
+cache: [GET /aceim_diplomados/cal_principal_admin] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/assets/glyphicons-halflings-white.png] stale, valid, store
+cache: [GET /aceim_diplomados/cal_inicio/validar] miss
+E, [2016-11-23T23:17:54.917646 #26779] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-23T23:17:54.917803 #26779] ERROR -- : retrying in 0.5 seconds (4 tries left)
+E, [2016-11-23T23:17:55.418588 #26779] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-23T23:17:55.418698 #26779] ERROR -- : retrying in 0.5 seconds (3 tries left)
+E, [2016-11-23T23:17:55.919414 #26779] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-23T23:17:55.919482 #26779] ERROR -- : retrying in 0.5 seconds (2 tries left)
+E, [2016-11-23T23:17:56.420194 #26779] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-23T23:17:56.420262 #26779] ERROR -- : retrying in 0.5 seconds (1 tries left)
+E, [2016-11-23T23:17:56.920988 #26779] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-23T23:17:56.921055 #26779] ERROR -- : retrying in 0.5 seconds (0 tries left)
+E, [2016-11-23T23:17:57.421742 #26779] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:144:in `initialize': Address already in use - bind(2) (Errno::EADDRINUSE)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:144:in `new'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:144:in `bind_listen'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:222:in `listen'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `inherit_listeners!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `each'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `inherit_listeners!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:121:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-23T23:20:38.148170 #26935]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+I, [2016-11-23T23:20:38.148594 #26935]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cal_calificar_controller.rb:10: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cohorte_tema_controller.rb:34: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/diplomado_controller.rb:22: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:37: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:45: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:9: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:28: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:76: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/tipo_estado_inscripcion_controller.rb:16: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/usuario_controller.rb:13: warning: don't put space before argument parentheses
+I, [2016-11-23T23:20:53.240813 #26935]  INFO -- : worker=0 spawning...
+I, [2016-11-23T23:20:53.285603 #26935]  INFO -- : worker=1 spawning...
+I, [2016-11-23T23:20:53.287726 #26942]  INFO -- : worker=0 ready
+I, [2016-11-23T23:20:53.320403 #26935]  INFO -- : worker=2 spawning...
+I, [2016-11-23T23:20:53.322523 #26943]  INFO -- : worker=1 ready
+I, [2016-11-23T23:20:53.355214 #26935]  INFO -- : master process ready
+I, [2016-11-23T23:20:53.362156 #26944]  INFO -- : worker=2 ready
+cache: [GET /aceim_diplomados/cal_principal_admin] miss
+cache: [GET /aceim_diplomados/] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+I, [2016-11-23T23:28:20.901150 #28308]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+I, [2016-11-23T23:28:20.901574 #28308]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cal_calificar_controller.rb:10: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cohorte_tema_controller.rb:34: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/diplomado_controller.rb:22: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:37: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:45: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:9: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:28: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:76: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/tipo_estado_inscripcion_controller.rb:16: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/usuario_controller.rb:13: warning: don't put space before argument parentheses
+I, [2016-11-23T23:28:35.960945 #28308]  INFO -- : worker=0 spawning...
+I, [2016-11-23T23:28:36.005210 #28308]  INFO -- : worker=1 spawning...
+I, [2016-11-23T23:28:36.008506 #28314]  INFO -- : worker=0 ready
+I, [2016-11-23T23:28:36.039822 #28308]  INFO -- : worker=2 spawning...
+I, [2016-11-23T23:28:36.043089 #28315]  INFO -- : worker=1 ready
+I, [2016-11-23T23:28:36.074316 #28308]  INFO -- : master process ready
+I, [2016-11-23T23:28:36.082872 #28316]  INFO -- : worker=2 ready
+cache: [GET /aceim_diplomados/] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [POST /aceim_diplomados/cal_inicio/validar] invalidate, pass
+cache: [GET /aceim_diplomados/cal_inicio/seleccionar_rol] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/cal_inicio/un_rol?tipo=Administrador] miss
+cache: [GET /aceim_diplomados/cal_principal_admin] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/assets/glyphicons-halflings-white.png] stale, valid, store
+cache: [GET /aceim_diplomados/cal_principal_admin/usuarios] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+/home/aceimdiplomados/aceim_diplomados/app/views/cal_estudiante_seccion/_form.html.haml:2: warning: multiple values for a block parameter (0 for 1)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/haml-4.0.7/lib/haml/helpers/action_view_mods.rb:118
+cache: [GET /aceim_diplomados/cal_principal_admin/detalle_usuario?ci=25987038] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/assets/glyphicons-halflings-white.png] stale, valid, store
+cache: [GET /aceim_diplomados/cal_principal_admin/usuarios] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+/home/aceimdiplomados/aceim_diplomados/app/views/cal_estudiante_seccion/_form.html.haml:2: warning: multiple values for a block parameter (0 for 1)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/haml-4.0.7/lib/haml/helpers/action_view_mods.rb:118
+cache: [GET /aceim_diplomados/cal_principal_admin/detalle_usuario?ci=27007068] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_admin.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/assets/glyphicons-halflings-white.png] stale, valid, store
+cache: [GET /aceim_diplomados] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+E, [2016-11-23T23:59:59.955820 #28308] ERROR -- : worker=1 PID:28315 timeout (31s > 30s), killing
+E, [2016-11-23T23:59:59.977739 #28308] ERROR -- : reaped #<Process::Status: pid=28315,signaled(SIGKILL=9)> worker=1
+I, [2016-11-23T23:59:59.978007 #28308]  INFO -- : worker=1 spawning...
+I, [2016-11-24T00:00:00.054849 #29160]  INFO -- : worker=1 ready
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [POST /aceim_diplomados/cal_inicio/validar] invalidate, pass
+cache: [GET /aceim_diplomados/cal_inicio/un_rol?tipo=Estudiante] miss
+cache: [GET /aceim_diplomados/cal_principal_estudiante] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_principal_estudiante.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_estudiante.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/cal_principal_estudiante] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_principal_estudiante.js] miss
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_principal_estudiante.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/cal_principal_estudiante] miss
+cache: [GET /aceim_diplomados/cal_inicio/cerrar_sesion] miss
+cache: [GET /aceim_diplomados/] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+cache: [GET /aceim_diplomados/cal_principal_estudiante] miss
+cache: [GET /aceim_diplomados/] miss
+cache: [GET /aceim_diplomados/assets/application.css] stale, valid, store
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/application.js] stale, valid, store
+cache: [GET /aceim_diplomados/assets/bootstrap] stale, valid, store
+cache: [GET /aceim_diplomados/assets/compass/css3] miss
+cache: [GET /aceim_diplomados/assets/base] miss
+cache: [GET /aceim_diplomados/assets/cal_inicio.js] miss
+cache: [GET /aceim_diplomados/assets/encabezado_bg.gif] stale, valid, store
+E, [2016-11-24T00:24:04.561706 #30634] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-24T00:24:04.561951 #30634] ERROR -- : retrying in 0.5 seconds (4 tries left)
+E, [2016-11-24T00:24:05.062754 #30634] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-24T00:24:05.062870 #30634] ERROR -- : retrying in 0.5 seconds (3 tries left)
+E, [2016-11-24T00:24:05.563599 #30634] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-24T00:24:05.563672 #30634] ERROR -- : retrying in 0.5 seconds (2 tries left)
+E, [2016-11-24T00:24:06.064373 #30634] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-24T00:24:06.064443 #30634] ERROR -- : retrying in 0.5 seconds (1 tries left)
+E, [2016-11-24T00:24:06.565158 #30634] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+E, [2016-11-24T00:24:06.565225 #30634] ERROR -- : retrying in 0.5 seconds (0 tries left)
+E, [2016-11-24T00:24:07.065965 #30634] ERROR -- : adding listener failed addr=0.0.0.0:5001 (in use)
+/home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:144:in `initialize': Address already in use - bind(2) (Errno::EADDRINUSE)
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:144:in `new'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/socket_helper.rb:144:in `bind_listen'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:222:in `listen'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `inherit_listeners!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `each'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:733:in `inherit_listeners!'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:121:in `start'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/gems/unicorn-4.1.1/bin/unicorn:121
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23:in `load'
+	from /home/aceimdiplomados/aceim_diplomados/vendor/bundle/ruby/1.8/bin/unicorn:23
+I, [2016-11-24T00:25:56.824446 #31295]  INFO -- : listening on addr=0.0.0.0:5001 fd=5
+I, [2016-11-24T00:25:56.824871 #31295]  INFO -- : Refreshing Gem list
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cal_calificar_controller.rb:10: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/cohorte_tema_controller.rb:34: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/diplomado_controller.rb:22: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:37: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/docentes_controller.rb:45: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:9: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:28: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/inicio_controller.rb:76: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/tipo_estado_inscripcion_controller.rb:16: warning: don't put space before argument parentheses
+/home/aceimdiplomados/aceim_diplomados/app/controllers/usuario_controller.rb:13: warning: don't put space before argument parentheses
+I, [2016-11-24T00:26:11.883864 #31295]  INFO -- : worker=0 spawning...
+I, [2016-11-24T00:26:11.928136 #31295]  INFO -- : worker=1 spawning...
+I, [2016-11-24T00:26:11.931408 #31301]  INFO -- : worker=0 ready
+I, [2016-11-24T00:26:11.962660 #31295]  INFO -- : worker=2 spawning...
+I, [2016-11-24T00:26:11.965924 #31302]  INFO -- : worker=1 ready
+I, [2016-11-24T00:26:11.997290 #31295]  INFO -- : master process ready
+I, [2016-11-24T00:26:12.005975 #31303]  INFO -- : worker=2 ready
