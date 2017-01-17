@@ -35,9 +35,9 @@ class CalArchivo
 
 		estudiantes = seccion.cal_estudiantes
 
-		@sheet.column(0).width = estudiantes.collect{|e| e.cal_usuario_ci.length if e.cal_usuario_ci}.max+2;
-		@sheet.column(1).width = estudiantes.collect{|e| e.cal_usuario.apellido_nombre.length if e.cal_usuario.apellido_nombre}.max+2;
-		@sheet.column(2).width = estudiantes.collect{|e| e.cal_usuario.correo_electronico.length if e.cal_usuario.correo_electronico}.max+2;
+		@sheet.column(0).width = 15 #estudiantes.collect{|e| e.cal_usuario_ci.length if e.cal_usuario_ci}.max+2;
+		@sheet.column(1).width = 30	#estudiantes.collect{|e| e.cal_usuario.apellido_nombre.length if e.cal_usuario.apellido_nombre}.max+2;
+		@sheet.column(2).width = 30 #estudiantes.collect{|e| e.cal_usuario.correo_electronico.length if e.cal_usuario.correo_electronico}.max+2;
 		@sheet.column(3).width = 15
 
 		@sheet.row(0).concat ["Profesor: #{seccion.cal_profesor.cal_usuario.apellido_nombre}"]
