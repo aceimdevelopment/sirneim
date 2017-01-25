@@ -33,7 +33,9 @@ class CalArchivo
 		@book = Spreadsheet::Workbook.new
 		@sheet = @book.create_worksheet :name => "Seccion #{seccion.id}"
 
-		estudiantes = seccion.cal_estudiantes
+		estudiantes = seccion.cal_estudiantes.sort_by{|e| e.cal_usuario.apellidos}
+
+		# cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
 
 		@sheet.column(0).width = 15 #estudiantes.collect{|e| e.cal_usuario_ci.length if e.cal_usuario_ci}.max+2;
 		@sheet.column(1).width = 30	#estudiantes.collect{|e| e.cal_usuario.apellido_nombre.length if e.cal_usuario.apellido_nombre}.max+2;
