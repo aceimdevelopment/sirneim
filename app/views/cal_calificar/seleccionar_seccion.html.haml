@@ -3,7 +3,7 @@
 
 - @cal_secciones.each do |cal_seccion|
 	%p
-		= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :clalificar => true
+		= link_to cal_seccion.descripcion, action: 'ver_seccion', id: cal_seccion.id, clalificar: true
 
 
 		-if cal_seccion.calificada
@@ -24,7 +24,7 @@
 	%h3 Para Participar
 
 	- @cal_secciones_secundarias.each do |cal_seccion|
-		%p= link_to cal_seccion.descripcion, :action => 'ver_seccion', :id =>  cal_seccion.id, :secundaria => true
+		%p= link_to cal_seccion.descripcion, action: 'ver_seccion', id: cal_seccion.id, secundaria: true
 :javascript
 
 	$(document).ready(function() {

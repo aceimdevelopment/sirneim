@@ -1,11 +1,11 @@
-=form_tag({:action => "cambiar_instructor_guardar"}, :class => "formulario titulo") do
+=form_tag({action: "cambiar_instructor_guardar"}, class: "formulario titulo") do
   =@seccion.descripcion
   %table.tablesorter.likert
     %thead
       %tr
-        %th{:width => "150px"}
+        %th{width: "150px"}
           Instructor Actual
-        %th{:width => "150px"}
+        %th{width: "150px"}
           Nuevo Instructor
     %tbody
       %tr

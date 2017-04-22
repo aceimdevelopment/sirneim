@@ -1,11 +1,11 @@
-=form_tag(url_for(:action => "enviar_correo", :controller => :estado_inscripcion),{:class => "formulario titulo", :id => "formu",:multipart=> true}) do
+=form_tag(url_for(action: "enviar_correo", controller: :estado_inscripcion),{class: "formulario titulo", id: "formu",:multipart=> true}) do
   Título
   %br/
-  =text_field :correo, :titulo, :autofocus => "true"
+  =text_field :correo, :titulo, autofocus: "true"
   %br/
   Contenido
   %br/
-  =text_area :correo, :contenido, :size => "60x20"
+  =text_area :correo, :contenido, size: "60x20"
   %br/
   Adjuntar un archivo
   %br/
@@ -19,13 +19,13 @@
     %table.tablesorter.tablefilter.liker
       %thead
         %tr
-          %th{:width => "30%"}
+          %th{width: "30%"}
             Instructor
-          %th{:width => "30%"}
+          %th{width: "30%"}
             Correo
-          %th{:width => "30%"}
+          %th{width: "30%"}
             Domina
-          %th{:width => "10%"}
+          %th{width: "10%"}
             Opciones
       %tbody
         -@instructor.each do |i|
@@ -46,5 +46,5 @@
   
   
   =hidden_field_tag :correo_para_instructores, "true"
-  =submit_tag "Enviar", :id => "submit_correo"# :confirm => "validar()"
+  =submit_tag "Enviar", id: "submit_correo"# :confirm => "validar()"
   

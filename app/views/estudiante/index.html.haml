@@ -1,13 +1,13 @@
 / .titulo
 /   %h3
 /     -unless @estudiante.preinscrito?
-/       =link_to "Preinscribirse", :action => "paso1"
+/       =link_to "Preinscribirse", action: "paso1"
 /     -else   
-/       =link_to "Emitir comprobante", :action => "index"
+/       =link_to "Emitir comprobante", action: "index"
 /   %div Preinscribirse en curso de Octubre - Diciembre 2011
 / .titulo
 /   %h3
-/     =link_to "Cursos Realizados", :action=> "cursos"
+/     =link_to "Cursos Realizados", action: "cursos"
 /   %div Consulta el listado de tus Cursos Realizados
  
 .tabbable.tabs-left
@@ -19,7 +19,7 @@
 		%li 
 			=link_to "Sin Grupo", "#sin_grupo", "data-toggle"=> "tab"
 	.tab-content
-		.tab-pane{:id=>"grupo_a"}
+		.tab-pane{id:"grupo_a"}
 			%table.table.table-striped.table-hover.table-condensed.table-bordered
 				%thead
 					%th #
@@ -29,7 +29,7 @@
 					%tr
 						%td= i
 						%td= inscripcion.estudiante.usuario.nombre_completo
-		.tab-pane{:id=>"grupo_b"}
+		.tab-pane{id:"grupo_b"}
 			%table.table.table-striped.table-hover.table-condensed.table-bordered
 				%thead
 					%th #
@@ -40,7 +40,7 @@
 						%td= i
 						%td= inscripcion.estudiante.usuario.nombre_completo
 
-		.tab-pane{:id=>"sin_grupo"}
+		.tab-pane{id:"sin_grupo"}
 			%table.table.table-striped.table-hover.table-condensed.table-bordered
 				%thead
 					%th #

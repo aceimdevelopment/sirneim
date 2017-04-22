@@ -1,5 +1,5 @@
 %br/
-=link_to "Ver correos", :action => "ver_correos"
+=link_to "Ver correos", action: "ver_correos"
 %br/
 %table.tablesorter.tablefilter
   %thead
@@ -21,11 +21,11 @@
         %td #{en.estado}
         %td #{en.observaciones}
         %td
-          =link_to 'Eliminar', {:action => "eliminar", :id => en.id}, :confirm => 'Está seguro de eliminar al estudiante?'
+          =link_to 'Eliminar', {action: "eliminar", id: en.id}, :confirm => 'Está seguro de eliminar al estudiante?'
           %br/
           %br/
-          =link_to 'Inscribir', {:action => "inscribir", :id => en.usuario_ci, :idioma => en.tipo_curso.id}
-= button_to 'Agregar estudiante', :action => "new"
+          =link_to 'Inscribir', {action: "inscribir", id: en.usuario_ci, :idioma => en.tipo_curso.id}
+= button_to 'Agregar estudiante', action: "new"
 %br/
-=link_to "Ver correos", :action => "ver_correos"
+=link_to "Ver correos", action: "ver_correos"
 %br/

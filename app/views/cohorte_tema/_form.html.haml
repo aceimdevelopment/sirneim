@@ -2,14 +2,14 @@
 .well.well-small
 	-@cohorte_tema.diplomado.modulos.each do |modulo|
 		%b= "#{modulo.descripcion_completa}"
-		.div{:id=>modulo.numero}
+		.div{id:modulo.numero}
 		%table.table.table-hover.table-condensed.table-bordered
 			%thead
 				%tr
-					%th{:style=> "width: 300px;"} Tema
-					%th{:style=> "width: 75px;"} Grupo
-					%th{:style=> "min-width: 175px;"} Inicio
-					%th{:style=> "min-width: 175px;"} Culminación
+					%th{style: "width: 300px;"} Tema
+					%th{style: "width: 75px;"} Grupo
+					%th{style: "min-width: 175px;"} Inicio
+					%th{style: "min-width: 175px;"} Culminación
 					%th Docente
 					%th Acciones
 			%tbody
@@ -27,8 +27,8 @@
 							- @accion = "actualizar"
 							- @btn_tipo = "btn-info" 
 							- @bg = "background-color:lightgreen;"
-						%tr{:style => @bg}
-							=form_for(@cohorte_tema,:url=>{:controller => 'cohorte_tema', :action => @accion}) do |a|
+						%tr{style: @bg}
+							=form_for(@cohorte_tema,url:{controller: 'cohorte_tema', action: @accion}) do |a|
 								-if @cohorte_tema.errors.any?
 									%ul
 										-flash[:alert] = ""
@@ -46,12 +46,12 @@
 									%b= grupo
 
 								%td
-									= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span4'}
+									= a.date_select :fecha_inicial, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {required: true, class: 'span4'}
 								%td
-									= a.date_select :fecha_final, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span4	'}
+									= a.date_select :fecha_final, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {required: true, class: 'span4	'}
 								%td 
 									= a.collection_select :docente_ci, Docente.all, :usuario_ci, :nombre_completo, {:prompt => 'Docente'}
 								%td
-									=a.submit @accion.capitalize, :class => "btn btn-mini #{@btn_tipo}"
+									=a.submit @accion.capitalize, class: "btn btn-mini #{@btn_tipo}"
 					%tr
 						%td

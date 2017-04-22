@@ -2,15 +2,15 @@
 	%ul.nav.nav-tabs
 		-@diplomados.each_with_index do |diplomado,i|
 			-active = (i.eql? 0) ? "active" : ""
-			%li{:class => active}
+			%li{class: active}
 				=link_to diplomado.id, "##{diplomado.id}", "data-toggle"=> "tab"
 	.tab-content
 		-@diplomados.each_with_index do |diplomado,i|
 			-active_pane = (i.eql? 0) ? "active" : ""
 			
-			.tab-pane.well.well-small{:id=>"#{diplomado.id}", :class => active_pane}
+			.tab-pane.well.well-small{id:"#{diplomado.id}", class: active_pane}
 				.well.well-small
-					%h5{:style => "text-decoration: underline;"} Características Generales:
+					%h5{style: "text-decoration: underline;"} Características Generales:
 					%p
 						%b Objetivo:
 						= diplomado.objetivo
@@ -28,13 +28,13 @@
 						= diplomado.horario
 					- @diplomado = diplomado
 
-					= link_to "diplomado/editar/#{diplomado.id}", {:class => 'btn', :data => {:toggle => "tooltip"}, "title"=>"Editar características"} do
+					= link_to "diplomado/editar/#{diplomado.id}", {class: 'btn', :data => {:toggle => "tooltip"}, "title"=>"Editar características"} do
 						%i.icon-edit
 						= "Editar Características Generales"
 				.well.well-small
 					- if diplomado_cohorte = diplomado.diplomado_cohorte.where(:cohorte_id => @cohorte_actual.id).limit(1).first
 
-						%h5{:style => "text-decoration: underline;"} 
+						%h5{style: "text-decoration: underline;"} 
 							= "Características propias del diplomado en esta cohorte #{@cohorte_actual.id}:"
 
 						%p
@@ -60,11 +60,11 @@
 							A nombre de:
 							= diplomado_cohorte.cuenta_bancaria_cliente
 
-						= link_to "/aceim_diplomados/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {:class => "btn", :data => {:toggle => "tooltip"}, "title"=>"Editar caracteristicas del diplomado en esta cohorte"} do
+						= link_to "/aceim_diplomados/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {class: "btn", :data => {:toggle => "tooltip"}, "title"=>"Editar caracteristicas del diplomado en esta cohorte"} do
 							%i.icon-edit
 							Editar Características para esta Cohorte
 
-						= link_to "/aceim_diplomados/cohorte_tema/nuevo/#{diplomado_cohorte.id}", {:class => "btn", :data => {:toggle => "tooltip"}, "title"=>"Asignar fechas y docentes a temas"} do
+						= link_to "/aceim_diplomados/cohorte_tema/nuevo/#{diplomado_cohorte.id}", {class: "btn", :data => {:toggle => "tooltip"}, "title"=>"Asignar fechas y docentes a temas"} do
 							%i.icon-list-alt
 							Asignar Docentes y Fechas a los Cursos de esta Cohorte
 

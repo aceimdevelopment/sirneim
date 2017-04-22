@@ -1,4 +1,4 @@
-=form_for(@cal_materia,:url=>{:controller => 'cal_materia', :action => 'crear'}, :html => {:class => 'form-horizontal well well-small'}) do |a|
+=form_for(@cal_materia,url:{controller: 'cal_materia', action: 'crear'}, :html => {class: 'form-horizontal well well-small'}) do |a|
   -if @cal_materia.errors.any?
     %ul
       -flash[:alert] = ''
@@ -9,19 +9,19 @@
     %label.control-label
       Departamento:
     .controls  
-      = a.collection_select :cal_departamento_id, @departamentos, :id, :descripcion, {:prompt => true}, {:required => true, :class => 'input'}
+      = a.collection_select :cal_departamento_id, @departamentos, :id, :descripcion, {:prompt => true}, {required: true, class: 'input'}
 
   .control-group
     %label.control-label
       Cátedra:
     .controls  
-      = a.collection_select :cal_categoria_id, @catedras, :id, :descripcion, {:prompt => true}, {:required => true, :class => 'input'}
+      = a.collection_select :cal_categoria_id, @catedras, :id, :descripcion, {:prompt => true}, {required: true, class: 'input'}
 
   .control-group
     %label.control-label
       Identificador:
     .controls
-      = a.text_field :id, :placeholder => 'Identidicador…', :size => 10, :required => true, :class => 'input'
+      = a.text_field :id, placeholder: 'Identidicador…', size: 10, required: true, class: 'input'
       %span.help-inline
         ="Ej. WEB2 (Máximo 10 caracteres)"
 
@@ -29,7 +29,7 @@
     %label.control-label
       Descripción:
     .controls
-      = a.text_field :descripcion, {:placeholder => 'Descripción…', :class => 'input', :required => true}
+      = a.text_field :descripcion, {placeholder: 'Descripción…', class: 'input', required: true}
       %span.help-inline
         ="Ej. Herramientas web 2.0 para la enseñanza de lenguas extranjeras"
 
@@ -37,7 +37,7 @@
     %label.control-label
       Año:
     .controls
-      = a.number_field :anno, :in => 0...5, :class => 'input', :required => true
+      = a.number_field :anno, :in => 0...5, class: 'input', required: true
       %span.help-inline
         ="Año de la asignatura"
 
@@ -45,7 +45,7 @@
     %label.control-label
       Orden:
     .controls
-      = a.number_field :orden, :in => 1...12, :class => 'input', :required => true
+      = a.number_field :orden, :in => 1...12, class: 'input', required: true
       %span.help-inline
         ="Orden de la asignatura"
 
@@ -53,11 +53,11 @@
     %label.control-label
       Uxxi:
     .controls
-      = a.text_field :id_upsi, {:placeholder => 'Código Uxxi…', :class => 'input', :required => true}
+      = a.text_field :id_upsi, {placeholder: 'Código Uxxi…', class: 'input', required: true}
       %span.help-inline
         ="Código Uxxi"
 
   .form-actions      
-    = link_to 'Atrás', 'index', :class => "btn"
+    = link_to 'Atrás', 'index', class: "btn"
 
-    = button_tag 'Registrar', :class => 'btn btn-primary'
+    = button_tag 'Registrar', class: 'btn btn-primary'

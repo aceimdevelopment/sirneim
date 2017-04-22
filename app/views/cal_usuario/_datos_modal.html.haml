@@ -10,7 +10,7 @@
 			.modal-body
 				- @cal_usuario = session[:cal_usuario]
 
-				= render :partial => 'cal_usuario/form'
+				= render partial: 'cal_usuario/form'
 	:javascript
 		$(document).ready(function() {
 			$("#actualizar_datos").modal({keyboard: false});

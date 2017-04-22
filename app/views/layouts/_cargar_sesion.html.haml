@@ -1,7 +1,7 @@
 
-=form_tag({:action => "validar"}, :class => "form-inline small", :style=> "margin:10px 0") do
-	=link_to "¿Olvidó su clave?", {:action => "olvido_clave"}, :class=> "btn btn-mini"
-	=text_field :user, :cedula, :size => 10, :autofocus => "true", :placeholder => "Cédula", :class => "input input-small"
+=form_tag({action: "validar"}, class: "form-inline small", style: "margin:10px 0") do
+	=link_to "¿Olvidó su clave?", {action: "olvido_clave"}, class: "btn btn-mini"
+	=text_field :user, :cedula, size: 10, autofocus: "true", placeholder: "Cédula", class: "input input-small"
 	.input-append  
-		=password_field :user, :clave, :placeholder => "Contraseña", :class => "input input-small span2", :id => "appendedInputButtons"
-		=submit_tag "Ingresar", :class => 'btn'
+		=password_field :user, :clave, placeholder: "Contraseña", class: "input input-small span2", id: "appendedInputButtons"
+		=submit_tag "Ingresar", class: 'btn'

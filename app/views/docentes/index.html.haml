@@ -1,6 +1,6 @@
 
 %br
-= link_to 'Nuevo Docente', {:action => "nuevo"}, :class => "btn btn-primary"
+= link_to 'Nuevo Docente', {action: "nuevo"}, class: "btn btn-primary"
 %br
 %br
 %table.table.table-striped.table-hover.table-condensed.table-bordered
@@ -20,9 +20,9 @@
             .div
               ="#{ct.tema.descripcion_completa} - Grupo #{ct.grupo}"
         %td
-          =# link_to 'Detalle', :action => "vista"
-          = link_to 'Editar', :action => "editar", :id => docente.usuario_ci
-          =# link_to 'Eliminar', :action => "eliminar", :id => docente.usuario_ci, :confirm => 'Are you sure?', :method => :delete
+          =# link_to 'Detalle', action: "vista"
+          = link_to 'Editar', action: "editar", id: docente.usuario_ci
+          =# link_to 'Eliminar', action: "eliminar", id: docente.usuario_ci, :confirm => 'Are you sure?', :method => :delete
 %br
 
-= link_to 'Nuevo Docente', {:action => "nuevo"}, :class => "btn btn-primary"
+= link_to 'Nuevo Docente', {action: "nuevo"}, class: "btn btn-primary"

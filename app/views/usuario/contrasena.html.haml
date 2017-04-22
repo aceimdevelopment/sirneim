@@ -1,4 +1,4 @@
-=form_for(@usuario,:url=>{:action => "contrasena_guardar"}) do |f|
+=form_for(@usuario,url:{action: "contrasena_guardar"}) do |f|
   -if @usuario.errors.any?
     %p
       %div#error-explanation
@@ -21,7 +21,7 @@
       %label
         Contraseña
         %span.req *
-      =f.password_field :contrasena, :autofocus => "true"      
+      =f.password_field :contrasena, autofocus: "true"      
     %p
       %label 
         Confirmación
@@ -31,4 +31,4 @@
   %br/
   =f.submit "Modificar"
   |
-  =link_to "<Atrás", :controller=>"#{@controlador}", :action=>"#{@accion}"
+  =link_to "<Atrás", controller:"#{@controlador}", action:"#{@accion}"

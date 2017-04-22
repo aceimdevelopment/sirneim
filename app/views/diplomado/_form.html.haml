@@ -1,5 +1,5 @@
 - wizard = session[:wizard].blank? ? false : true
-=form_for(@diplomado,:url=>{:controller => 'diplomado',:action => @accion}, :html => {:class => 'form-horizontal well well-small'}) do |d|
+=form_for(@diplomado,url:{controller: 'diplomado',action: @accion}, :html => {class: 'form-horizontal well well-small'}) do |d|
   -if @diplomado.errors.any?
     %ul
       -flash[:alert] = ""
@@ -11,7 +11,7 @@
       Identificación:
     .controls
       -if @accion.eql? 'crear'      
-        = d.text_field :id, :autofocus => (not wizard), :placeholder => "Identificación…", :required => true
+        = d.text_field :id, autofocus: (not wizard), placeholder: "Identificación…", required: true
         %span.help-inline
           Recuerde NO usar caracteres especiales (%/$#) como parte de la Identificación. Estos serán suprimidos.
       -else
@@ -23,37 +23,37 @@
     %label.control-label
       Descripción:
     .controls
-      = d.text_area :descripcion, :placeholder => "Descripción…", :rows => "4"
+      = d.text_area :descripcion, placeholder: "Descripción…", :rows => "4"
 
   .control-group
     %label.control-label
       Objetivo:
     .controls
-      = d.text_area :objetivo, :placeholder => "Objetivo…", :required => true, :rows => "4"
+      = d.text_area :objetivo, placeholder: "Objetivo…", required: true, :rows => "4"
 
   .control-group
     %label.control-label
       Destinatarios:
     .controls
-      = d.text_area :destinatario, :placeholder => "Destinatario…", :required => true, :rows => "4"
+      = d.text_area :destinatario, placeholder: "Destinatario…", required: true, :rows => "4"
 
   .control-group
     %label.control-label
       Modalidad:
     .controls
-      = d.text_field :modalidad, :placeholder => "Modalidad…", :required => true
+      = d.text_field :modalidad, placeholder: "Modalidad…", required: true
 
   .control-group
     %label.control-label
       Duración:
     .controls
-      = d.text_field :duracion, :placeholder => "Duración…", :required => true
+      = d.text_field :duracion, placeholder: "Duración…", required: true
 
   .control-group
     %label.control-label
       Horario:
     .controls
-      = d.text_field :horario, :placeholder => "Horario…", :required => true
+      = d.text_field :horario, placeholder: "Horario…", required: true
 
   .control-group
     %label.control-label
@@ -63,9 +63,9 @@
 
   .form-actions
     - unless wizard
-      = link_to :back, {:class => "btn"} do
+      = link_to :back, {class: "btn"} do
         %i.icon-backward
         Atrás
 
-    = button_tag :class=> "btn btn-primary", :type => "submit" do
+    = button_tag class: "btn btn-primary", :type => "submit" do
       = @accion.humanize

@@ -1,5 +1,5 @@
 -@accion = "registrar_guardar" if @accion.blank? 
-=form_tag @accion, :class => "form-horizontal" do 
+=form_tag @accion, class: "form-horizontal" do 
   -if @usuario.errors.any?
     %ul
       -flash[:alert] = ""
@@ -12,7 +12,7 @@
       %label.control-label
         Cédula de Identidad:  
       .controls  
-        =text_field :usuario, :ci, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium"
+        =text_field :usuario, :ci, autofocus: "true", placeholder: "Identificación…", required: true, class: "input-medium"
         %span.help-block
           Ejemplo: 12345678
 
@@ -20,7 +20,7 @@
       %label.control-label
         Nombres:
       .controls
-        =text_field :usuario, :nombres, :placeholder => "Nombre…", :required => true
+        =text_field :usuario, :nombres, placeholder: "Nombre…", required: true
         %span.help-block
           Ejemplo: María
 
@@ -28,7 +28,7 @@
       %label.control-label
         Apellidos:
       .controls
-        =text_field :usuario, :apellidos, :placeholder => "Apellido…", :required => true
+        =text_field :usuario, :apellidos, placeholder: "Apellido…", required: true
         %span.help-block
           Ejemplo: Torres
 
@@ -36,7 +36,7 @@
       %label.control-label
         Lugar de nacimiento:
       .controls
-        =text_field :usuario, :lugar_nacimiento, :placeholder => "Lugar de Nacimiento…", :required => true
+        =text_field :usuario, :lugar_nacimiento, placeholder: "Lugar de Nacimiento…", required: true
         %span.help-block
           Ejemplo: Caracas
 
@@ -44,17 +44,17 @@
       %label.control-label
         Fecha de nacimiento:
       .controls
-        =date_select :usuario, :fecha_nacimiento, :placeholder => "Fecha de Nacimiento…", :required => true
+        =date_select :usuario, :fecha_nacimiento, placeholder: "Fecha de Nacimiento…", required: true
 
     .control-group
       %label.control-label
         Sexo:
       .controls
         %label.checkbox
-          =radio_button :usuario, :tipo_sexo_id, "M", :required => true
+          =radio_button :usuario, :tipo_sexo_id, "M", required: true
           Masculino
           |
-          =radio_button :usuario, :tipo_sexo_id, "F", :required => true
+          =radio_button :usuario, :tipo_sexo_id, "F", required: true
           Femenino
 
 
@@ -65,7 +65,7 @@
       %label.control-label
         Teléfono habitación
       .controls
-        =telephone_field :usuario, :telefono_habitacion, :placeholder => "Teléfono de Habitación…"
+        =telephone_field :usuario, :telefono_habitacion, placeholder: "Teléfono de Habitación…"
         %span.help-block
           Ejemplo: 0212-5551122
 
@@ -73,7 +73,7 @@
       %label.control-label
         Teléfono celular
       .controls
-        =telephone_field :usuario, :telefono_movil, :placeholder => "Celular…", :required => true
+        =telephone_field :usuario, :telefono_movil, placeholder: "Celular…", required: true
         %span.help-block
           Ejemplo: 0414-2391212
 
@@ -81,7 +81,7 @@
       %label.control-label
         Correo electrónico
       .controls
-        =text_field :usuario, :correo, :placeholder => "Correo Electrónico…", :required => true
+        =text_field :usuario, :correo, placeholder: "Correo Electrónico…", required: true
         %span.help-block
           Ejemplo: maria@gmail.com
 
@@ -89,7 +89,7 @@
       %label.control-label
         Correo electrónico (alternativo)
       .controls
-        =text_field :usuario, :correo_alternativo, :placeholder => "Correo Alternativo…", :required => true
+        =text_field :usuario, :correo_alternativo, placeholder: "Correo Alternativo…", required: true
         %span.help-block
           Ejemplo: maria2@gmail.com
     - if controller_name.eql? "inicio"
@@ -97,7 +97,7 @@
         %label.control-label
           Cuenta twitter
         .controls
-          =text_field :estudiante, :cuenta_twitter, :placeholder => "Twitter…"
+          =text_field :estudiante, :cuenta_twitter, placeholder: "Twitter…"
           %span.help-block
             Ejemplo: @maria2
 
@@ -105,12 +105,12 @@
       %label.control-label
         Dirección de domicilio
       .controls
-        =text_area :usuario, :direccion, :size => "60x4", :placeholder => "Domicilio…", :required => true
+        =text_area :usuario, :direccion, size: "60x4", placeholder: "Domicilio…", required: true
         %span.help-block
           Ejemplo: Avenida A, con calle B. Los Naranjos.
     - unless @accion.blank?
       - @submit = "Siguiente"
     - else
       - @submit = "Registrar"
-    =submit_tag @submit, :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
+    =submit_tag @submit, class: "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
 %br/    

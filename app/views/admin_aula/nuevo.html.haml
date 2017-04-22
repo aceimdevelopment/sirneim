@@ -1,4 +1,4 @@
-=form_for(@aula,:url=>{:action => "nuevo_guardar"}) do |a|
+=form_for(@aula,url:{action: "nuevo_guardar"}) do |a|
   -if @aula.errors.any?
     %div#error_explanation
       %ul
@@ -19,7 +19,7 @@
       %label
         Número del Aula
         %span.req *
-      =a.text_field :id, :autofocus => "true"  
+      =a.text_field :id, autofocus: "true"  
       Ejemplo: 404    
     %p
       %label 
@@ -34,4 +34,4 @@
     =a.submit "Registrar"
 %br/
 %br/
-=link_to "<Atrás", :action => "index"
+=link_to "<Atrás", action: "index"

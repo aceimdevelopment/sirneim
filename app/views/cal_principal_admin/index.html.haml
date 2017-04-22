@@ -5,21 +5,21 @@
 
 	- if @admin.cal_tipo_admin_id < 2
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Importar Secciones y Estudiantes desde un archivo PDF'}
-			= link_to "", {:href => 'cal_principal_admin/importar_secciones_paso1', :class => 'btn btn-info'},{:role => 'button'} do
-				= content_tag(:i, "", :class => "icon-file icon-white")
-				= content_tag(:i, "", :class => "icon-arrow-right icon-white")
-				= content_tag(:i, "", :class => "icon-list icon-white") 
+			= link_to "", {:href => 'cal_principal_admin/importar_secciones_paso1', class: 'btn btn-info'},{role: 'button'} do
+				= content_tag(:i, "", class: "icon-file icon-white")
+				= content_tag(:i, "", class: "icon-arrow-right icon-white")
+				= content_tag(:i, "", class: "icon-list icon-white") 
 
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Clonar Secciones del Período Anterior'}
-			= link_to "", {:href => 'cal_seccion/clonar_secciones_anteriores', :class => 'btn btn-success'},{:role => 'button'} do
-				= content_tag(:i, "", :class => "icon-retweet icon-white") 
-				= content_tag(:i, "", :class => "icon-list icon-white") 
+			= link_to "", {:href => 'cal_seccion/clonar_secciones_anteriores', class: 'btn btn-success'},{role: 'button'} do
+				= content_tag(:i, "", class: "icon-retweet icon-white") 
+				= content_tag(:i, "", class: "icon-list icon-white") 
 
 
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Todas las Secciones del Período Actual'}
-			= link_to "", {:href => 'cal_seccion/eliminar_todas_secciones_actual', :class => 'btn btn-danger', 'data_confirm' => "Se perderan los estudiantes inscritos en las secciones, ¿Está seguro de esta acción?"},{:role => 'button'} do
-				= content_tag(:i, "", :class => "icon-trash icon-white") 
-				= content_tag(:i, "", :class => "icon-list icon-white")
+			= link_to "", {:href => 'cal_seccion/eliminar_todas_secciones_actual', class: 'btn btn-danger', 'data_confirm' => "Se perderan los estudiantes inscritos en las secciones, ¿Está seguro de esta acción?"},{role: 'button'} do
+				= content_tag(:i, "", class: "icon-trash icon-white") 
+				= content_tag(:i, "", class: "icon-list icon-white")
 
 
 .tabbable.tabs-top
@@ -27,13 +27,13 @@
 	%ul.nav.nav-pills
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
-			%li{:class => activa}
+			%li{class: activa}
 				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab"
 
 	.tab-content
 		- @departamentos.each_with_index do |dep,i|
 			-activa = (i.eql? 0) ? "" : ""
-			.tab-pane{:class => activa, :id => "dep_#{dep.id}"}
+			.tab-pane{class: activa, id: "dep_#{dep.id}"}
 
 				- @catedras = dep.cal_departamentos_categorias.sort_by{|cate| cate.orden}
 				.tabbable.tabs-top
@@ -42,14 +42,14 @@
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria
 							-cat_activa = (j.eql? 0) ? "" : ""
-							%li{:class => cat_activa}
+							%li{class: cat_activa}
 								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab"
 
 					.tab-content
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria						
 							-cat_activa = (j.eql? 0) ? "" : ""
-							.tab-pane{:class => cat_activa, :id => "cat_#{dep.id}_#{cat.id}"}
+							.tab-pane{class: cat_activa, id: "cat_#{dep.id}_#{cat.id}"}
 
 								- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id).sort_by{|m| m.orden}
 								.tabbable.tabs-top
@@ -57,13 +57,13 @@
 									%ul.nav.nav-pills
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : "" 
-											%li{:class => mat_activa}
+											%li{class: mat_activa}
 												= link_to mat.descripcion, "#mat_#{mat.id}", "data-toggle"=> "tab"
 
 									.tab-content
 										- @materias.each_with_index do |mat,k|
 											-mat_activa = (k.eql? 0) ? "" : ""
-											.tab-pane{:class => mat_activa, :id => "mat_#{mat.id}"}
+											.tab-pane{class: mat_activa, id: "mat_#{mat.id}"}
 
 												.well.well-small
 													%table.table.table-bordered.table-striped.table-condensed.table-hover
@@ -82,24 +82,24 @@
 																	%td
 																		= "#{seccion.descripcion_profesor_asignado}"
 																		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Actualizar Tutor-Calificador'}
-																			= link_to "", {:href => "cal_principal_admin/seleccionar_profesor?id=#{seccion.id}", :class => 'btn btn-info btn-mini'},{:role => 'button'} do
-																				= content_tag(:i, "", :class => "icon-pencil icon-white")
-																				= content_tag(:i, "", :class => "icon-user icon-white")
+																			= link_to "", {:href => "cal_principal_admin/seleccionar_profesor?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
+																				= content_tag(:i, "", class: "icon-pencil icon-white")
+																				= content_tag(:i, "", class: "icon-user icon-white")
 																	%td
 																		-seccion.cal_profesores.each do |p|
 																			%p
 																				= p.descripcion
 
 																				%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Desasignar Este Profesor'}
-																					= link_to "", {:href => "cal_seccion/desasignar_profesor_secundario?id=#{seccion.id}&cal_profesor_ci=#{p.cal_usuario_ci}", :class => 'btn btn-danger btn-mini', 'data_confirm' => "¿Está seguro de esta acción?"},{:role => 'button'} do
-																						= content_tag(:i, "", :class => "icon-minus icon-white")
-																						= content_tag(:i, "", :class => "icon-user icon-white")
+																					= link_to "", {:href => "cal_seccion/desasignar_profesor_secundario?id=#{seccion.id}&cal_profesor_ci=#{p.cal_usuario_ci}", class: 'btn btn-danger btn-mini', 'data_confirm' => "¿Está seguro de esta acción?"},{role: 'button'} do
+																						= content_tag(:i, "", class: "icon-minus icon-white")
+																						= content_tag(:i, "", class: "icon-user icon-white")
  
 																		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Profesor Secundario'}
-																			= link_to "", {:href => "cal_seccion/seleccionar_profesor_secundario?id=#{seccion.id}", :class => 'btn btn-success btn-mini'},{:role => 'button'} do
-																				= content_tag(:i, "", :class => "icon-plus icon-white")
+																			= link_to "", {:href => "cal_seccion/seleccionar_profesor_secundario?id=#{seccion.id}", class: 'btn btn-success btn-mini'},{role: 'button'} do
+																				= content_tag(:i, "", class: "icon-plus icon-white")
 
-																				= content_tag(:i, "", :class => "icon-user icon-white")
+																				= content_tag(:i, "", class: "icon-user icon-white")
 
 																	%td
 																		-if seccion.calificada
@@ -121,40 +121,40 @@
 																	- if @admin and @admin.cal_tipo_admin_id <4
 																		%td
 																			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Ver Detalle y Calificar'}
-																				= link_to "", {:href => "cal_principal_admin/ver_seccion_admin?id=#{seccion.id}", :class => 'btn btn-info btn-mini'},{:role => 'button'} do
-																					= content_tag(:i, "", :class => "icon-eye-open icon-white")
-																					= content_tag(:i, "", :class => "icon-list icon-white")
-																					= content_tag(:i, "", :class => " icon-check icon-white")
+																				= link_to "", {:href => "cal_principal_admin/ver_seccion_admin?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
+																					= content_tag(:i, "", class: "icon-eye-open icon-white")
+																					= content_tag(:i, "", class: "icon-list icon-white")
+																					= content_tag(:i, "", class: " icon-check icon-white")
 																			-if @admin and @admin.cal_tipo_admin_id <3
 																				-if seccion.calificada
 																					%td
 																						%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=> 'Habilitar para Calificar Nuevamente'}
-																							= link_to "", {:href => "cal_principal_admin/habilitar_calificar?id=#{seccion.id}", :class => 'btn btn-info btn-mini'},{:role => 'button'} do
-																								= content_tag(:i, "", :class => "icon-off icon-white")
-																								= content_tag(:i, "", :class => "icon-list icon-white")
+																							= link_to "", {:href => "cal_principal_admin/habilitar_calificar?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
+																								= content_tag(:i, "", class: "icon-off icon-white")
+																								= content_tag(:i, "", class: "icon-list icon-white")
 
 																				%td
 																					%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Seccion'}
-																						= link_to "", {:href => "cal_seccion/eliminar?id=#{seccion.id}", :class => 'btn btn-danger btn-mini', 'data_confirm' => "Se perderan los estudiantes inscritos en la sección, ¿Está seguro de esta acción?"},{:role => 'button'} do
-																							= content_tag(:i, "", :class => "icon-trash icon-white") 
+																						= link_to "", {:href => "cal_seccion/eliminar?id=#{seccion.id}", class: 'btn btn-danger btn-mini', 'data_confirm' => "Se perderan los estudiantes inscritos en la sección, ¿Está seguro de esta acción?"},{role: 'button'} do
+																							= content_tag(:i, "", class: "icon-trash icon-white") 
 
 													%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nueva Sección'}
 
-														= form_tag 'cal_principal_admin/nueva_seccion_admin_guardar', {:class => 'form-horizontal', :id => "nueva_seccion_#{mat.id}"} do 
+														= form_tag 'cal_principal_admin/nueva_seccion_admin_guardar', {class: 'form-horizontal', id: "nueva_seccion_#{mat.id}"} do 
 															= hidden_field_tag "[cal_materia]id", mat.id
-															= text_field_tag "[cal_seccion]numero" , nil, {:autofocus => true, :placeholder => 'Identificador de la Sección...'}
+															= text_field_tag "[cal_seccion]numero" , nil, {autofocus: true, placeholder: 'Identificador de la Sección...'}
 
-															= grouped_collection_select :cal_seccion, :cal_profesor_ci, @departamentos, :cal_profesores, :descripcion, :id, :descripcion, {:prompt => "Profesor"}, { :class => 'selects2', :style => 'width:30%'}
+															= grouped_collection_select :cal_seccion, :cal_profesor_ci, @departamentos, :cal_profesores, :descripcion, :id, :descripcion, {:prompt => "Profesor"}, { class: 'selects2', style: 'width:30%'}
 
 															= hidden_field_tag "[cal_seccion]cal_semestre_id", @cal_semestre_actual.id
 
-															= submit_tag 'Agregar', :class => 'btn btn-primary'
+															= submit_tag 'Agregar', class: 'btn btn-primary'
 
 - @cal_usuario = session[:cal_usuario]
 
 -if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
 
-	= render :partial => 'cal_usuario/datos_modal'
+	= render partial: 'cal_usuario/datos_modal'
 
 :javascript
 

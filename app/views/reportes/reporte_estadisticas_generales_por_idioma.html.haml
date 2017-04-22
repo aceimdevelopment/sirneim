@@ -1,26 +1,26 @@
-=link_to "Generar PDF", :action => "ver_pdf_estudiantes"
+=link_to "Generar PDF", action: "ver_pdf_estudiantes"
 |
-=link_to "Generar Excel",:action => "ver_excel_estadisticas_generales", :idioma_id => @historiales.first.idioma_id, :tipo_categoria_id => @historiales.first.tipo_categoria_id
+=link_to "Generar Excel",action: "ver_excel_estadisticas_generales", idioma_id: @historiales.first.idioma_id, tipo_categoria_id: @historiales.first.tipo_categoria_id
 %br/
 %br/
 %table.tablesorter.tablefilter.likert
   %thead
     %tr
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Nivel
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Horario
-      %th{:width => "8%"}
+      %th{width: "8%"}
         Total
-      %th{:width => "9%"}
+      %th{width: "9%"}
         Aprobados
-      %th{:width => "10%"}
+      %th{width: "10%"}
         Reprobados
-      %th{:width => "10%"}
+      %th{width: "10%"}
         Perdida por Inasistecia
-      %th{:width => "9%"}
+      %th{width: "9%"}
         Sin Calificar
-      %th{:width => "24%"}
+      %th{width: "24%"}
         Alumnos Estimados / Recomendación
 
   %tbody
@@ -76,6 +76,6 @@
           -else
             ="---"
 
-=link_to "Generar PDF", :action => "ver_pdf_estudiantes"
+=link_to "Generar PDF", action: "ver_pdf_estudiantes"
 |
-=link_to "Generar Excel",:action => "ver_excel_estadisticas_generales", :idioma_id => @historiales.first.idioma_id, :tipo_categoria_id => @historiales.first.tipo_categoria_id 
+=link_to "Generar Excel",action: "ver_excel_estadisticas_generales", idioma_id: @historiales.first.idioma_id, tipo_categoria_id: @historiales.first.tipo_categoria_id 

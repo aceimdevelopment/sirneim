@@ -1,7 +1,7 @@
 / Ingrese los datos a continuación:
 Confirmación de Datos
 
-=form_tag :action => "paso2_guardar" do 
+=form_tag action: "paso2_guardar" do 
   -if @usuario.errors.any? || @inscripcion.errors.any?
     %p
       %div#error-explanation

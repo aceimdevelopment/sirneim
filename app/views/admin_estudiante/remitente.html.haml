@@ -1,4 +1,4 @@
-=form_tag({:action => "generar_constancia_estudio", :tipo_curso=>@p[:tipo_curso]}, :class => "formulario titulo") do
+=form_tag({action: "generar_constancia_estudio", tipo_curso:@p[:tipo_curso]}, class: "formulario titulo") do
   Remitente: 
   =text_field_tag :remitente
   %br/

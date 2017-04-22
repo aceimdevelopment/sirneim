@@ -99,19 +99,19 @@ describe NavbarHelper, :type => :helper do
     end
     it "should pass any other options through to the link_to method" do
       self.stub!("uri_state").and_return(:active)
-      menu_item("Log out", "/users/sign_out", :class => "home_link", :method => :delete).should eql('<li class="active"><a href="/users/sign_out" class="home_link" data-method="delete" rel="nofollow">Log out</a></li>')
+      menu_item("Log out", "/users/sign_out", class:  "home_link", :method => :delete).should eql('<li class="active"><a href="/users/sign_out" class="home_link" data-method="delete" rel="nofollow">Log out</a></li>')
     end
     it "should pass a block but no name if a block is present" do
       self.stub!("current_page?").and_return(false)
-      menu_item("/"){content_tag("i", "", :class => "icon-home") + " Home"}.should eql('<li><a href="/"><i class="icon-home"></i> Home</a></li>')
+      menu_item("/"){content_tag("i", "", class:  "icon-home") + " Home"}.should eql('<li><a href="/"><i class="icon-home"></i> Home</a></li>')
     end
     it "should work with just a block" do
       self.stub!("current_page?").and_return(false)
-      menu_item{ content_tag("i", "", :class => "icon-home") + " Home" }.should eql('<li><a href="#"><i class="icon-home"></i> Home</a></li>')
+      menu_item{ content_tag("i", "", class:  "icon-home") + " Home" }.should eql('<li><a href="#"><i class="icon-home"></i> Home</a></li>')
     end
     it "should return the link with class 'active' if on current page with a block" do
       self.stub!("uri_state").and_return(:active)
-      menu_item("/"){ content_tag("i", "", :class => "icon-home") + " Home" }.should eql('<li class="active"><a href="/"><i class="icon-home"></i> Home</a></li>')
+      menu_item("/"){ content_tag("i", "", class:  "icon-home") + " Home" }.should eql('<li class="active"><a href="/"><i class="icon-home"></i> Home</a></li>')
     end
   end
 
@@ -149,7 +149,7 @@ describe NavbarHelper, :type => :helper do
     end
 
     it "should be able to cope with arbitrary options being passed to the p tag" do
-      menu_text("I am classy!", :class => "classy", :id => "classy_text").should eql("<p class=\"classy navbar-text\" id=\"classy_text\">I am classy!</p>")
+      menu_text("I am classy!", class:  "classy", :id => "classy_text").should eql("<p class=\"classy navbar-text\" id=\"classy_text\">I am classy!</p>")
     end
 
     it "should be able to cope with a block too" do

@@ -1,4 +1,4 @@
-%p{:style => "color:red"}
+%p{style: "color:red"}
   =@alerta
 %h3
   Se procederá a Eliminar definitivamente la sección:
@@ -14,5 +14,5 @@
       %br/
 %br/
 %br/
-=link_to "Eliminar", :action=>"eliminar_seccion", :seccion => @seccion
+=link_to "Eliminar", action:"eliminar_seccion", :seccion => @seccion
 =link_to_function "Cancelar","aceim.cerrar_modal()"

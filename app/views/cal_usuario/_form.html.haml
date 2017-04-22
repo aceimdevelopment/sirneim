@@ -1,4 +1,4 @@
-=form_tag :controller => 'cal_usuario', :action => 'modificar_guardar'  do 
+=form_tag controller: 'cal_usuario', action: 'modificar_guardar'  do 
 
   -if @cal_usuario.errors.any?
     %ul
@@ -20,12 +20,12 @@
         %label.control-label
           Nombres:
         .controls
-          =text_field :cal_usuario, :nombres, :placeholder => "Nombres…", :required => true
+          =text_field :cal_usuario, :nombres, placeholder: "Nombres…", required: true
       .control-group
         %label.control-label
           Apellidos:
         .controls
-          =text_field :cal_usuario, :apellidos, :placeholder => "Apellidos…", :required => true
+          =text_field :cal_usuario, :apellidos, placeholder: "Apellidos…", required: true
     - else    
       .control-group
         %label.control-label
@@ -38,23 +38,23 @@
         Sexo:
       .controls
         %label.checkbox
-          =radio_button :cal_usuario, :cal_tipo_sexo_id, "M", :required => true
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "M", required: true
           Masculino
           |
-          =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", :required => true
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", required: true
           Femenino
 
     .control-group
       %label.control-label
         Contraseña:
       .controls
-        =password_field :cal_usuario, :contrasena, :required => true
+        =password_field :cal_usuario, :contrasena, required: true
 
     .control-group
       %label.control-label
         Confirmación:
       .controls
-        =password_field :cal_usuario, :contrasena_confirmation, :required => true
+        =password_field :cal_usuario, :contrasena_confirmation, required: true
 
   %fieldset
     %legend Datos de Contacto
@@ -63,18 +63,18 @@
       %label.control-label
         Teléfono habitación:
       .controls
-        =telephone_field :cal_usuario, :telefono_habitacion, :placeholder => "Teléfono de Habitación…", :required => true
+        =telephone_field :cal_usuario, :telefono_habitacion, placeholder: "Teléfono de Habitación…", required: true
 
     .control-group
       %label.control-label
         Teléfono celular:
       .controls
-        =telephone_field :cal_usuario, :telefono_movil, :placeholder => "Celular…", :required => true
+        =telephone_field :cal_usuario, :telefono_movil, placeholder: "Celular…", required: true
 
     .control-group
       %label.control-label
         Correo electrónico:
       .controls
-        =text_field :cal_usuario, :correo_electronico, :placeholder => "Correo Electrónico…", :required => true
+        =text_field :cal_usuario, :correo_electronico, placeholder: "Correo Electrónico…", required: true
 
-    =submit_tag 'Actualizar', :class => "btn btn-primary"
+    =submit_tag 'Actualizar', class: "btn btn-primary"

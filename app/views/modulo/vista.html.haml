@@ -10,6 +10,6 @@
 			=tema.descripcion_completa
 %p
 	
-	=link_to "<Atrás", :controller => "diplomado", :action => "index"
+	=link_to "<Atrás", controller: "diplomado", action: "index"
 	|
-	=link_to "Agregar Tema>", :controller => "tema", :action => "nuevo", :id => "#{@modulo.id}"
+	=link_to "Agregar Tema>", controller: "tema", action: "nuevo", id: "#{@modulo.id}"

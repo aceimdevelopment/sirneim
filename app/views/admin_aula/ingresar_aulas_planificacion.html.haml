@@ -3,7 +3,7 @@ Filtrar Contenido:
 =text_field_tag "filtro"
 %br/
 Filtro por Ubicación: 
-=collection_select :ubicacion, :id, @ubicaciones, :desc, :descripcion_corta, {:prompt => "-- Todas --"}
+=collection_select :ubicacion, :id, @ubicaciones, :desc, :descripcion_corta, {prompt: "-- Todas --"}
 %br/
 -i=-1
 %br
@@ -11,7 +11,7 @@ Filtro por Ubicación:
   %table.tablesorter.tablefilter.likert
     %thead
       %tr
-        %th{:width => "15%"}
+        %th{width: "15%"}
           Código
         %th
           Ubicación

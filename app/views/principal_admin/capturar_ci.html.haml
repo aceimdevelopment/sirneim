@@ -1,7 +1,7 @@
-=form_tag({:action => "confirmacion_rapida"}, :class => "formulario titulo") do
+=form_tag({action: "confirmacion_rapida"}, class: "formulario titulo") do
   =label_tag "Cédula de Identidad"
   %br/
-  =text_field  :historial, :usuario_ci, :autofocus => "true"
+  =text_field  :historial, :usuario_ci, autofocus: "true"
   %br/
   %br/
   =submit_tag "Buscar"

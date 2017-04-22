@@ -1,8 +1,8 @@
 -if @consulta.size > 0
   %p
-    =link_to "Generar PDF", :action => :generar_listado_alumnos_por_edificio_pdf, :id => @id, :idiomas => @idioma, :dias => @dias
+    =link_to "Generar PDF", action: :generar_listado_alumnos_por_edificio_pdf, id: @id, :idiomas => @idioma, :dias => @dias
     |
-    =link_to "Generar Excel", :action => :generar_listado_alumnos_por_edificio_excel, :id => @id, :idiomas => @idioma, :dias => @dias
+    =link_to "Generar Excel", action: :generar_listado_alumnos_por_edificio_excel, id: @id, :idiomas => @idioma, :dias => @dias
   %br
   %table.tablesorter
     %thead

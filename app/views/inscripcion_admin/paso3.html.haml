@@ -27,8 +27,8 @@
         =@historial.seccion.aula
 %br/
 %p
-  =link_to "< Ir a inscribir otro estudiante", :action => "paso0"
+  =link_to "< Ir a inscribir otro estudiante", action: "paso0"
 %p
-  =link_to "< Ir a gestionar este estudiante", :action => "validar", :controller => "admin_estudiante", :usuario => {:ci => @historial.usuario_ci}
+  =link_to "< Ir a gestionar este estudiante", action: "validar", controller: "admin_estudiante", :usuario => {:ci => @historial.usuario_ci}
 %br/
     

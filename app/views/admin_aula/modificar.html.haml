@@ -1,4 +1,4 @@
-=form_for(@aula,:url=>{:action => "modificar_guardar"}) do |a|
+=form_for(@aula,url:{action: "modificar_guardar"}) do |a|
   -if @aula.errors.any?
     %div#error_explanation
       %ul
@@ -24,7 +24,7 @@
       %label 
         Descripción
         %span.req *
-      =a.text_field :descripcion, :autofocus => "true"
+      =a.text_field :descripcion, autofocus: "true"
       Ejemplo: Escuela Básico - Aula 404
       
     %p

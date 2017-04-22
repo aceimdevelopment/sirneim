@@ -3,15 +3,15 @@
 %table.tablesorter.liker
   %thead
     %tr
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Id
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Costo
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Descuento
-      %th{:width => "45%"}
+      %th{width: "45%"}
         Descripcion
-      %th{:width => "10%"}
+      %th{width: "10%"}
         Descripcion
   %tbody
     -@precios.each do |h|
@@ -21,13 +21,13 @@
         -estilo = "background-color: #4682B4"
 
       %tr
-        %td{:style => "#{estilo}"}
+        %td{style: "#{estilo}"}
           =h.id
-        %td{:style => "#{estilo}"}
+        %td{style: "#{estilo}"}
           =h.monto
-        %td{:style => "#{estilo}"}
+        %td{style: "#{estilo}"}
           =100-((h.monto*100)/@precio_base.monto)
-        %td{:style => "#{estilo}"}
+        %td{style: "#{estilo}"}
           =h.descripcion
-        %td{:style => "#{estilo}"}
-          =link_to_modal "Actualizar",{:action => "modificar",:title =>"Modificar Monto",:width=>600, :params => {:id => "#{h.id}"}}
+        %td{style: "#{estilo}"}
+          =link_to_modal "Actualizar",{action: "modificar",title:"Modificar Monto",width:600, params: {id: "#{h.id}"}}

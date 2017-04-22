@@ -8,7 +8,7 @@
 %div.titulo
   Filtrar Contenido:
   =text_field_tag "filtro_particular"
-  =#link_to "Generar PDF", :action=>"ver_pdf_secciones", :filtrar => @filtro, :filtrar2 => @filtro2, :filtrar3 => @filtro3
+  =#link_to "Generar PDF", action:"ver_pdf_secciones", :filtrar => @filtro, :filtrar2 => @filtro2, :filtrar3 => @filtro3
   -if session[:administrador].rol == "VISOR"
     =link_to_function "Generar PDF","aceim.recolectar('ver_pdf_secciones_2','filtrar4')"
   -else
@@ -25,28 +25,28 @@
   Filtro por Horario: 
   =collection_select :horario, :id, @horarios, :to_s, :to_s, {:prompt => "-- Todos --", :selected => @filtro3}
   %br/
-  %div{:style=>"color:red"}
+  %div{style:"color:red"}
     
     Secciones Cerradas
   %table.tablesorter.tablefilter.likert
     %thead
       %tr
-        %th{:width => "5%"}
+        %th{width: "5%"}
           INS
-        %th{:width => "10%"}
+        %th{width: "10%"}
           Idioma
-        %th{:width => "15%"}
+        %th{width: "15%"}
           Nivel
-        %th{:width => "5%"}
+        %th{width: "5%"}
           Sec
-        %th{:width => "20%"}
+        %th{width: "20%"}
           Horario
-        %th{:width => "15%"}
+        %th{width: "15%"}
           Aula
-        %th{:width => "20%"}
+        %th{width: "20%"}
           Instructor
         -if (session[:administrador].usuario_ci == "10264009") || (session[:administrador].usuario_ci == "14519813") || (session[:administrador].usuario_ci == "13736933") || (session[:administrador].usuario_ci == "15573230") || (session[:administrador].usuario_ci == "19220025") || (session[:administrador].usuario_ci == "19395140")
-          %th{:width => "5%"}
+          %th{width: "5%"}
             Opcion
 
     %tbody
@@ -56,19 +56,19 @@
         -else
           -estilo = "color: red"
         %tr
-          %td{:style => "#{estilo}"} 
-            .oculto-param{ :style => "display:none;"}
+          %td{style: "#{estilo}"} 
+            .oculto-param{ style: "display:none;"}
               =s.id
             =s.inscritos
-          %td{:style => "#{estilo}"}
+          %td{style: "#{estilo}"}
             ="#{s.idioma.descripcion} (#{s.tipo_categoria.descripcion})"
-          %td{:style => "#{estilo}"}
+          %td{style: "#{estilo}"}
             =s.tipo_nivel.descripcion
-          %td{:style => "#{estilo}"}
-            =link_to s.seccion_numero, :action=>"nivel4", :seccion => s
-          %td{:style => "#{estilo}"}
+          %td{style: "#{estilo}"}
+            =link_to s.seccion_numero, action:"nivel4", :seccion => s
+          %td{style: "#{estilo}"}
             =s.horario
-          %td{:style => "#{estilo}"}
+          %td{style: "#{estilo}"}
             -hor = s.horario_seccion
             -hor = hor.sort_by{|x| x.dia.orden}
 
@@ -80,11 +80,11 @@
                   ="-- NO ASIGNADA --"
               -else
                 -if hs.aula_id
-                  =link_to_modal "#{hs.dia_aula}",{:action => "cambiar_aula",:title =>"Modificar Aula",:width=>920, :params => {:seccion_horario => hs, :controlador => controller_name, :accion => action_name}}
+                  =link_to_modal "#{hs.dia_aula}",{action: "cambiar_aula",title:"Modificar Aula",width:920, params: {:seccion_horario => hs, :controlador => controller_name, :accion => action_name}}
                 -else
-                  =link_to_modal "-- NO ASIGNADA --",{:action => "cambiar_aula",:title =>"Modificar Aula",:width=>920, :params => {:seccion_horario => hs, :controlador => controller_name, :accion => action_name}}
+                  =link_to_modal "-- NO ASIGNADA --",{action: "cambiar_aula",title:"Modificar Aula",width:920, params: {:seccion_horario => hs, :controlador => controller_name, :accion => action_name}}
               %br/
-          %td{:style => "#{estilo}"}
+          %td{style: "#{estilo}"}
             -if session[:administrador].rol == "VISOR"
               -if s.instructor
                 =s.instructor.descripcion
@@ -92,16 +92,16 @@
                 ="-- NO ASIGNADO --"
             -else
               -if s.instructor
-                =link_to_modal s.instructor.descripcion,{:action => "cambiar_instructor",:title =>"Modificar Instructor",:width=>700, :params => {:seccion => s, :controlador => controller_name, :accion => action_name}}
+                =link_to_modal s.instructor.descripcion,{action: "cambiar_instructor",title:"Modificar Instructor",width:700, params: {:seccion => s, :controlador => controller_name, :accion => action_name}}
               -else
-                =link_to_modal "-- NO ASIGNADO --",{:action => "cambiar_instructor",:title =>"Modificar Instructor",:width=>700, :params => {:seccion => s, :controlador => controller_name, :accion => action_name}}
+                =link_to_modal "-- NO ASIGNADO --",{action: "cambiar_instructor",title:"Modificar Instructor",width:700, params: {:seccion => s, :controlador => controller_name, :accion => action_name}}
           -if (session[:administrador].usuario_ci == "10264009") || (session[:administrador].usuario_ci == "14519813") || (session[:administrador].usuario_ci == "13736933") || (session[:administrador].usuario_ci == "15573230") || (session[:administrador].usuario_ci == "19220025") || (session[:administrador].usuario_ci == "19395140")
-            %td{:style => "#{estilo}"}
-              =link_to_modal "Eliminar", {:action => "confirmar_eliminar",:title =>"Eliminar Sección",:width=>700, :params => {:seccion => s, :controlador => controller_name, :accion => action_name}}
+            %td{style: "#{estilo}"}
+              =link_to_modal "Eliminar", {action: "confirmar_eliminar",title:"Eliminar Sección",width:700, params: {:seccion => s, :controlador => controller_name, :accion => action_name}}
 
 %p
   Total Inscritos: #{total_ins}
 %p
   =link_to_function "Generar PDF","aceim.recolectar()"
-  =#link_to "Generar PDF", :action=>"ver_pdf_secciones", :filtrar => @filtro, :filtrar2 => @filtro2, :filtrar3 => @filtro3
+  =#link_to "Generar PDF", action:"ver_pdf_secciones", :filtrar => @filtro, :filtrar2 => @filtro2, :filtrar3 => @filtro3
   

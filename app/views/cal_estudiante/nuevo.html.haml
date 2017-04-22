@@ -3,5 +3,5 @@
 .page-header
   %h1 Nuevo Estudiante
 
-= link_to t('.atras', :default => t("helpers.links.atras")), {:controller => 'cal_principal_admin', :action =>  'usuarios'} , :class => 'btn'
-= render :partial => 'form'
+= link_to t('.atras', default: t("helpers.links.atras")), {controller: 'cal_principal_admin', action:  'usuarios'} , class: 'btn'
+= render partial: 'form'

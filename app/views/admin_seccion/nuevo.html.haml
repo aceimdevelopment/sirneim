@@ -1,4 +1,4 @@
-=form_for(@seccion,:url=>{:action => "nuevo_guardar"}) do |s|
+=form_for(@seccion,url:{action: "nuevo_guardar"}) do |s|
   -if @seccion.errors.any?
     %div#error_explanation
       %ul
@@ -18,10 +18,10 @@
       -else
         =@idioma.descripcion
 
-      =s.hidden_field :periodo, :value => @periodo
-      =s.hidden_field :idioma, :value => @idioma_id
-      =s.hidden_field :categoria, :value => @categoria_id
-      =s.hidden_field :idioma_cat, :value => @idioma_cat
+      =s.hidden_field :periodo, value: @periodo
+      =s.hidden_field :idioma, value: @idioma_id
+      =s.hidden_field :categoria, value: @categoria_id
+      =s.hidden_field :idioma_cat, value: @idioma_cat
 
 
     %p
@@ -33,13 +33,13 @@
     %p
       %label
         Horario
-      =select("horario","id", @horarios.collect{|h| [h["total"], h["dias"]]}, :include_blank => "Seleccione...", :class => 'mostrar_ubicacion_segun_horario ubicacion' )
+      =select("horario","id", @horarios.collect{|h| [h["total"], h["dias"]]}, :include_blank => "Seleccione...", class: 'mostrar_ubicacion_segun_horario ubicacion' )
      
     %p
       %label
         Ubicación
         #ubicacion
-          =select("ubicacion", "ubicacion_id", [], :include_blank => "Seleccione...", :class => 'mostrar_ubicacion_segun_horario ubicacion')
+          =select("ubicacion", "ubicacion_id", [], :include_blank => "Seleccione...", class: 'mostrar_ubicacion_segun_horario ubicacion')
 
 
     %p
@@ -74,11 +74,11 @@
   %table.tablesorter.likert
     %thead
       %tr
-        %th{:width => "17%"}
+        %th{width: "17%"}
           Nivel
 
         -@horarios.each do |h|
-          %th{:width => "13%"}
+          %th{width: "13%"}
             =h["total"]
 
         %th
@@ -108,7 +108,7 @@
 
             -bloque = BloqueHorario.where(:tipo_dia_id1 => dia1, :tipo_dia_id2 => dia2, :tipo_hora_id => hora).first
 
-            -total = Seccion.where(:periodo_id => @periodo, :idioma_id => @idioma_id, :tipo_categoria_id => @categoria, :tipo_nivel_id => n.id, :bloque_horario_id => bloque.id).count
+            -total = Seccion.where(periodo_id: @periodo, idioma_id: @idioma_id, tipo_categoria_id: @categoria, tipo_nivel_id: n.id, :bloque_horario_id => bloque.id).count
 
             -total_secciones = total_secciones + total
 
@@ -117,7 +117,7 @@
             -else
               -estilo = "color: red"
 
-            %td{:style => "#{estilo}"} 
+            %td{style: "#{estilo}"} 
             
               -if (total == 1)
                 =total.to_s + " sección"
@@ -130,7 +130,7 @@
           -else
             -estilo = "color: red"
 
-          %td{:style => "#{estilo}"} 
+          %td{style: "#{estilo}"} 
             =total_secciones
           
 %br/
@@ -152,7 +152,7 @@ Filtrar Contenido:
 %table.tablesorter.tablefilter.likert
   %thead
     %tr
-      %th{:width => "25%"}
+      %th{width: "25%"}
         Idioma
       %th
         Nivel
@@ -179,9 +179,9 @@ Filtrar Contenido:
         %td
           -sec.horario_seccion.each do |hs|
             -if hs.aula_id
-              =link_to_modal "#{hs.dia_aula}",{:action => "cambiar_aula", :controller => "estado_inscripcion",:title =>"Modificar Aula",:width=>920, :params => {:seccion_horario => hs, :periodo => @periodo, :idioma => @idioma_cat, :categoria => @categoria_id, :controlador => controller_name, :accion => action_name}}
+              =link_to_modal "#{hs.dia_aula}",{action: "cambiar_aula", controller: "estado_inscripcion",title:"Modificar Aula",width:920, params: {:seccion_horario => hs, :periodo => @periodo, :idioma => @idioma_cat, :categoria => @categoria_id, :controlador => controller_name, :accion => action_name}}
             -else
-              =link_to_modal "-- NO ASIGNADA --",{:action => "cambiar_aula",:title =>"Modificar Aula",:width=>920, :params => {:seccion_horario => hs, :periodo => @periodo, :idioma => @idioma_cat, :categoria => @categoria_id, :controlador => controller_name, :accion => action_name}}
+              =link_to_modal "-- NO ASIGNADA --",{action: "cambiar_aula",title:"Modificar Aula",width:920, params: {:seccion_horario => hs, :periodo => @periodo, :idioma => @idioma_cat, :categoria => @categoria_id, :controlador => controller_name, :accion => action_name}}
             %br/
 
 

@@ -1,6 +1,6 @@
 / %h3 Información Importante:
 -#if ParametroGeneral.inscripcion_abierta
-/ .well{:style=>"overflow-y: scroll;height: 200px;"}
+/ .well{style:"overflow-y: scroll;height: 200px;"}
 
 -if ParametroGeneral.preinscripcion_abierta
 	.well.well-small
@@ -10,18 +10,18 @@
 				= link_to "Ingresar en su Cuenta", "#usuario_cedula"
 				o registrarse
 		%div
-			=button_to "Registrarse", {:action => "registrar"}, :class => 'btn btn-primary btn-block btn-large center'
+			=button_to "Registrarse", {action: "registrar"}, class: 'btn btn-primary btn-block btn-large center'
 
 .tabbable.tabs-top
 	%ul.nav.nav-tabs
 		-@diplomados.each_with_index do |dc,i|
 			-@active = (i.eql? 0) ? "active" : ""
-			%li{:class => @active}
+			%li{class: @active}
 				=link_to dc.diplomado.id, "##{dc.diplomado.id}", "data-toggle"=> "tab"
 	.tab-content
 		-@diplomados.each_with_index do |dc, i|
 			-@active_pane = (i.eql? 0) ? "active" : ""
-			.tab-pane{:id=>"#{dc.diplomado.id}", :class => @active_pane}
+			.tab-pane{id:"#{dc.diplomado.id}", class: @active_pane}
 
 				#accordionMenu.accordion
 					.accordion-group
@@ -29,7 +29,7 @@
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_caracteristica"}
 								.nav-header
 									Características
-					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_caracteristica"}
+					.accordion-body.collapse{id:"#{dc.diplomado.id}_caracteristica"}
 						.accordion-inner
 							%dl.well.well-small.dl-horizontal
 								%p
@@ -66,7 +66,7 @@
 								%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_normativa"}
 									.nav-header
 										Normativa
-						.accordion-body.collapse{:id=>"#{dc.diplomado.id}_normativa"}
+						.accordion-body.collapse{id:"#{dc.diplomado.id}_normativa"}
 							.accordion-inner
 								= dc.diplomado.normativa.html_safe
 					.accordion-group
@@ -74,7 +74,7 @@
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_modulos"}
 								.nav-header
 									Módulos
-					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_modulos"}
+					.accordion-body.collapse{id:"#{dc.diplomado.id}_modulos"}
 						.accordion-inner
 
 							-dc.diplomado.modulos.each do |modulo|
@@ -107,7 +107,7 @@
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_docentes"}
 								.nav-header
 									Grupo Docente
-					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_docentes"}
+					.accordion-body.collapse{id:"#{dc.diplomado.id}_docentes"}
 						.accordion-inner
 							.well.well-small
 								%ul
@@ -123,7 +123,7 @@
 							%a.accordion-toggle{"data-parent" => "#accordionMenu", "data-toggle" => "collapse", :href => "##{dc.diplomado.id}_inscripcion"}
 								.nav-header
 									Matriculación
-					.accordion-body.collapse{:id=>"#{dc.diplomado.id}_inscripcion"}
+					.accordion-body.collapse{id:"#{dc.diplomado.id}_inscripcion"}
 						.accordion-inner
 							%h4 Preinscripción:
 							.well.well-small.dl-horizontal

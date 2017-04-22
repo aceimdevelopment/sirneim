@@ -1,4 +1,4 @@
-=form_for(@usuario,:url=>{:action => "nuevo_guardar"}) do |f|
+=form_for(@usuario,url:{action: "nuevo_guardar"}) do |f|
   -if @usuario.errors.any?
     %p
       %div#error-explanation
@@ -20,7 +20,7 @@
       %label 
         Nombres
         %span.req *
-      =f.text_field :nombres, :autofocus => "true" 
+      =f.text_field :nombres, autofocus: "true" 
     %p
       %label
         Apellidos
@@ -57,7 +57,7 @@
     %p
       %label
         Dirección de Habitación
-      =f.text_area :direccion, :size => "60x4"
+      =f.text_area :direccion, size: "60x4"
       Ejemplo: La Candelaria. Edificio A, Piso 1, Apto 11.
   %p 
     %span.req *  
@@ -66,4 +66,4 @@
     =f.submit "Registrar"
 %br/
 %br/
-=link_to "<Atrás", :action => "index"
+=link_to "<Atrás", action: "index"

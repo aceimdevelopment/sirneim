@@ -1,28 +1,28 @@
-%tr.success{:id => "aprobado_#{aprobado.estudiante_ci}"}
+%tr.success{id: "aprobado_#{aprobado.estudiante_ci}"}
 	%td= i
 	%td= aprobado.estudiante.usuario.descripcion
 	%td
 		- if asignar	
-			= form_tag url_for(:action => "asignar"), {:class => "form-inline", :style =>"margin-bottom:0;"} do
+			= form_tag url_for(action: "asignar"), {class: "form-inline", style:"margin-bottom:0;"} do
 				.input-append
-					=collection_select(:inscripcion, :tipo_forma_pago_id, TipoFormaPago.all, :id, :descripcion, {:prompt=>"Pago"}, {:class=>'span3', :required => true})
+					=collection_select(:inscripcion, :tipo_forma_pago_id, TipoFormaPago.all, :id, :descripcion, {:prompt=>"Pago"}, {class:'span3', required: true})
 
-					=#collection_select(:inscripcion, :grupo, :in => 1..grupos, :grupo, {:prompt=>"Grupo"}, {:class=>'span3', :required => true})
-					=number_field_tag :inscripcion_grupo, nil, :name => "inscripcion[grupo]", :required => true, :class => 'span3', :placeholder => "Grupo", :in => 1..grupos
-					=text_field :inscripcion, :deposito1, :class => "span2", :placeholder => "# Depósito1"
-					=text_field :inscripcion, :deposito2, :class => "span2", :placeholder => "# Depósito2"
-					=text_field :inscripcion, :deposito3, :class => "span2", :placeholder => "# Depósito3"
-					=hidden_field :inscripcion, :estudiante_ci, :value => aprobado.estudiante_ci
-					=hidden_field :inscripcion, :id, :value => aprobado.id
+					=#collection_select(:inscripcion, :grupo, :in => 1..grupos, :grupo, {:prompt=>"Grupo"}, {class:'span3', required: true})
+					=number_field_tag :inscripcion_grupo, nil, :name => "inscripcion[grupo]", required: true, class: 'span3', placeholder: "Grupo", :in => 1..grupos
+					=text_field :inscripcion, :deposito1, class: "span2", placeholder: "# Depósito1"
+					=text_field :inscripcion, :deposito2, class: "span2", placeholder: "# Depósito2"
+					=text_field :inscripcion, :deposito3, class: "span2", placeholder: "# Depósito3"
+					=hidden_field :inscripcion, :estudiante_ci, value: aprobado.estudiante_ci
+					=hidden_field :inscripcion, :id, value: aprobado.id
 
-					=button_tag (:type => "submit", :class => "btn btn-success", :data => {:toggle => "tooltip"}, "title"=>"Inscribir e incluir al grupo") do
+					=button_tag (:type => "submit", class: "btn btn-success", :data => {:toggle => "tooltip"}, "title"=>"Inscribir e incluir al grupo") do
 						%i.icon-chevron-right.icon-white
 
 		- else
-			= link_to url_for (:action => "desaprobar", :id => aprobado.id), {:class => 'btn btn-danger btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Rechazar participante"} do
+			= link_to url_for (action: "desaprobar", id: aprobado.id), {class: 'btn btn-danger btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Rechazar participante"} do
 				%i.icon-remove.icon-white
-			= link_to "/aceim_diplomados/admin_estudiante/descargar_planilla_pre_diplomado_cohorte?estudiante_ci=#{aprobado.estudiante_ci}&diplomado_id=#{aprobado.diplomado_id}&cohorte_id=#{aprobado.cohorte_id}", {:class => 'btn btn-success btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Descargar planilla de preinscripción"} do
+			= link_to "/aceim_diplomados/admin_estudiante/descargar_planilla_pre_diplomado_cohorte?estudiante_ci=#{aprobado.estudiante_ci}&diplomado_id=#{aprobado.diplomado_id}&cohorte_id=#{aprobado.cohorte_id}", {class: 'btn btn-success btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Descargar planilla de preinscripción"} do
 				%i.icon-download.icon-white
-		= #form_tag url_for(:action => "aprobar"), :remote => true do
+		= #form_tag url_for(action: "aprobar"), :remote => true do
 		=#hidden_field_tag :id, preinscrito.id 
-		=#submit_tag "aprobar", :class => "btn btn-mini"
+		=#submit_tag "aprobar", class: "btn btn-mini"

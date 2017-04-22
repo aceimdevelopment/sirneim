@@ -1,4 +1,4 @@
-=link_to "Generar PDF", :action => "ver_pdf_estudiantes"
+=link_to "Generar PDF", action: "ver_pdf_estudiantes"
 %br
 %table.tablesorter.tablefilter.likert
   %thead
@@ -21,7 +21,7 @@
           =h.cantidad
 
 
-=link_to "Generar PDF", :action => "ver_pdf_estudiantes"
+=link_to "Generar PDF", action: "ver_pdf_estudiantes"
 %br
 %br
-=link_to "<Atrás", :action => "reporte_alumnos_por_idioma_detalle1", :idioma => params[:idioma], :categoria => params[:categoria]
+=link_to "<Atrás", action: "reporte_alumnos_por_idioma_detalle1", :idioma => params[:idioma], :categoria => params[:categoria]

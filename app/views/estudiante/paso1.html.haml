@@ -1,5 +1,5 @@
 %br/
-=form_for(@usuario,:url=>{:action => "paso1_actualizar_datos"}, :class => "formulario titulo" ) do |f|
+=form_for(@usuario,url:{action: "paso1_actualizar_datos"}, class: "formulario titulo" ) do |f|
 
   -if @usuario.errors.any?
     %div#error_explanation
@@ -25,7 +25,7 @@
         Contraseña
         %span.req *
       %div
-        =f.password_field :contrasena, :class=>"field text medium"
+        =f.password_field :contrasena, class:"field text medium"
       %p.instruccion Ingrese su contraseña
       
     %li
@@ -33,7 +33,7 @@
         Confirmación
         %span.req *
       %div
-        =f.password_field :contrasena_confirmation, :class=>"field text medium"
+        =f.password_field :contrasena_confirmation, class:"field text medium"
       %p.instruccion Reescriba su contraseña
       %br/
       
@@ -46,7 +46,7 @@
         Cédula de Identidad
       %div
         %b
-          =f.label @usuario.ci, :class=>"field"
+          =f.label @usuario.ci, class:"field"
         =f.hidden_field :ci
 
     %li
@@ -54,7 +54,7 @@
         Nombres
         %span.req *
       %div
-        =f.text_field :nombres, :class=>"field text large"
+        =f.text_field :nombres, class:"field text large"
       %p.instruccion Ingrese su(s) Nombre(s)
 
     %li
@@ -62,7 +62,7 @@
         Apellidos
         %span.req *
       %div
-        =f.text_field :apellidos, :class=>"field text large"
+        =f.text_field :apellidos, class:"field text large"
       %p.instruccion Ingrese su(s) Apellido(s)
       
     %li
@@ -80,7 +80,7 @@
         Correo Electrónico  
         %span.req *
       %div
-        =f.text_field :correo, :class=>"field text large"
+        =f.text_field :correo, class:"field text large"
       %p.instruccion Ingrese su Correo Electrónico
       %a.ej ej.: pedroperez@gmail.com
     
@@ -89,7 +89,7 @@
         Teléfono Móvil
         %span.req *
       %div
-        =f.text_field :telefono_movil, :class=>"field text medium"
+        =f.text_field :telefono_movil, class:"field text medium"
       %p.instruccion Ingrese su Teléfono Móvil
       %a.ej ej.: 04125554433
 
@@ -97,7 +97,7 @@
       %label.desc
         Teléfono de Habitación
       %div
-        =f.text_field :telefono_habitacion, :class=>"field text medium"
+        =f.text_field :telefono_habitacion, class:"field text medium"
       %p.instruccion Ingrese su Teléfono de Habitación
       %a.ej ej.: 02125554433
 
@@ -105,17 +105,17 @@
       %label.desc
         Dirección de Habitación
       %div
-        =f.text_area :direccion, :class=>"field textarea medium"
+        =f.text_area :direccion, class:"field textarea medium"
 
     %li
       %label.desc
         Fecha de Nacimiento
       %div
-        =f.text_field :fecha_nacimiento, :class=>"field text medium", :id=>"campofecha"
+        =f.text_field :fecha_nacimiento, class:"field text medium", id:"campofecha"
       %a.ej ej.: 28/02/1982
       
            
   %div
-    =f.submit "Siguiente", :class=>"btTxt"
+    =f.submit "Siguiente", class:"btTxt"
 %br/    
-=link_to "Regresar", :action=>"index"
+=link_to "Regresar", action:"index"

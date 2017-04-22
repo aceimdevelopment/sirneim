@@ -58,19 +58,19 @@
             %td 
               -if pre.tipo_forma_pago_id == TipoFormaPago::UNICO
                 Pago único:
-                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep1,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"1", usuario_ci:usuario.ci}}
               -else
                 Pago 1:
-                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep1,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"1", usuario_ci:usuario.ci}}
                 %br/
                 Pago 2:
-                =link_to_modal dep2,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"2", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep2,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"2", usuario_ci:usuario.ci}}
                 %br/
                 Pago 3:
-                =link_to_modal dep3,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"3", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep3,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"3", usuario_ci:usuario.ci}}
                 %br/
               %td
-                =link_to 'Retirar', {:action => 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}
+                =link_to 'Retirar', {action: 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}
   #tabs-2
     Inscritos    
     %table.tablesorter.tablefilter.likert
@@ -108,16 +108,16 @@
             %td 
               -if pre.tipo_forma_pago_id == TipoFormaPago::UNICO
                 Pago único:
-                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep1,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"1", usuario_ci:usuario.ci}}
               -else
                 Pago 1:
-                =link_to_modal dep1,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"1", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep1,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"1", usuario_ci:usuario.ci}}
                 %br/
                 Pago 2:
-                =link_to_modal dep2,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"2", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep2,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"2", usuario_ci:usuario.ci}}
                 %br/
                 Pago 3:
-                =link_to_modal dep3,{:action => "cargar_deposito",:title =>"Cargar depósito",:width=>600, :params=>{:tipo=>"3", :usuario_ci=>usuario.ci}}
+                =link_to_modal dep3,{action: "cargar_deposito",title:"Cargar depósito",width:600, params:{:tipo=>"3", usuario_ci:usuario.ci}}
                 %br/
               %td
-                =link_to 'Retirar', {:action => 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}
+                =link_to 'Retirar', {action: 'delete', :ci => usuario.ci}, :data => {:confirm => '¿Estás seguro de retirar a esta persona?'}

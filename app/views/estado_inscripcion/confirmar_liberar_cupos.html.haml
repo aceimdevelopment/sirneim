@@ -1,4 +1,4 @@
-%p{:style => "color:red"}
+%p{style: "color:red"}
   =@alerta
 %h3
   Se procederá a liberar cupos de la sección:
@@ -14,5 +14,5 @@
       %br/
 %br/
 %br/
-=link_to "Liberar", :action=>"liberar_cupos", :seccion => @seccion, :accion => @accion, :controlador => @controlador
+=link_to "Liberar", action:"liberar_cupos", :seccion => @seccion, :accion => @accion, :controlador => @controlador
 =link_to_function "Cancelar","aceim.cerrar_modal()"

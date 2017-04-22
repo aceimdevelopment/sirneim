@@ -1,6 +1,6 @@
 - @preinscritos = Inscripcion.preinscritos_actuales_diplomado oferta.diplomado_id
 - @aprobados = Inscripcion.aprobados_actuales_diplomado oferta.diplomado_id
-.tab-pane{:id=>"#{oferta.diplomado_id}_preinscritos", :class => active}
+.tab-pane{id:"#{oferta.diplomado_id}_preinscritos", class: active}
 	.well.well-small
 		%h3= "Lista de Preinscritos"
 		%table.table.table-striped.table-hover.table-condensed.table-bordered
@@ -8,7 +8,7 @@
 				%th #
 				%th Nombre Completo
 				%th Opciones
-			%tbody{:id => "preinscritos_#{oferta.diplomado_id}"}
+			%tbody{id: "preinscritos_#{oferta.diplomado_id}"}
 			- @preinscritos.each_with_index do |preinscrito,i|
 				=render "preinscrito", :preinscrito => preinscrito, :i => i
 
@@ -20,6 +20,6 @@
 				%th #
 				%th Nombre Completo
 				%th Opciones
-			%tbody{:id => "aprobados_#{oferta.diplomado_id}"}
+			%tbody{id: "aprobados_#{oferta.diplomado_id}"}
 			- @aprobados.each_with_index do |aprobado,i|
 				=render "aprobado", :aprobado => aprobado, :asignar => false, :i => i

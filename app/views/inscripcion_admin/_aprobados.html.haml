@@ -1,5 +1,5 @@
 - @aprobados_sg = Inscripcion.aprobados_actuales_diplomado_sin_grupo oferta.diplomado_id
-.tab-pane{:id=>"#{oferta.diplomado_id}_aprobados", :class => active}
+.tab-pane{id:"#{oferta.diplomado_id}_aprobados", class: active}
 
 	-if @aprobados_sg.count > 0
 		.well.well-small
@@ -7,9 +7,9 @@
 			%table.table.table-striped.table-hover.table-condensed.table-bordered
 				%thead
 					%th #
-					%th{:style => "width:40%;"} Nombre Completo
+					%th{style: "width:40%;"} Nombre Completo
 					%th Opciones
-				%tbody{:id => "aprobados_#{oferta.diplomado_id}"}
+				%tbody{id: "aprobados_#{oferta.diplomado_id}"}
 				- @aprobados_sg.each_with_index do |aprobado,i|
 					=render "aprobado", :aprobado => aprobado, :asignar => true, :i => i, :grupos => grupos
 	- @aprobados = Inscripcion.inscritos_actuales_diplomado oferta.diplomado_id
@@ -25,7 +25,7 @@
 						%th #
 						%th Nombre Completo
 						%th Opciones
-					%tbody{:id => "preinscritos_#{oferta.diplomado_id}"}
+					%tbody{id: "preinscritos_#{oferta.diplomado_id}"}
 					- @inscritos_grupo.each_with_index do |inscrito_grupo,i|
 						=render "grupos", :inscrito_grupo => inscrito_grupo, :grupo => grupo, :i => i
 	-else

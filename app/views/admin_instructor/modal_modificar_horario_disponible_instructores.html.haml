@@ -1,11 +1,11 @@
-=form_tag(:action => "cambiar_instructor_guardar") do
+=form_tag(action: "cambiar_instructor_guardar") do
   -i = @cant_horarios
   %table.tablesorter.tablefilter.likert
     %thead
       %tr
-        %th{:width => "20%"}
+        %th{width: "20%"}
           Instructor
-        %th{:width => "10%"}
+        %th{width: "10%"}
           Idioma
         -@bloques_horarios.each do |bh|     
           %th

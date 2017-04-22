@@ -3,7 +3,7 @@
 		- @diplomados_ofertados.each_with_index do |oferta,i|
 			- @active =  (i.eql? 0) ? "active" : ""
 			- @activo_actual = (@diplomado_actual_id and (@diplomado_actual_id.eql? oferta.diplomado_id))
-			%li{:class => @active}
+			%li{class: @active}
 				=link_to "#{oferta.diplomado.descripcion}", "##{oferta.diplomado_id}", "data-toggle"=> "tab"
 	.tab-content
 
@@ -12,15 +12,15 @@
 			- grupos = oferta.grupos
 			- #@active = "active"
 			-@active_pane = (j.eql? 0) ? "active" : ""
-			.tab-pane{:id=>"#{oferta.diplomado_id}", :class => @active_pane}
+			.tab-pane{id:"#{oferta.diplomado_id}", class: @active_pane}
 				.tabbable.tabs-left
 					%ul.nav.nav-tabs
 						-# @active = (@lista_actual.eql?"#{oferta.diplomado_id}_preinscritos") ? "active" : ""
 						-# @active = (i.eql? 0) ? "active" : ""
-						%li{:class => "active"}
+						%li{class: "active"}
 							= link_to "Preinscritos", "##{oferta.diplomado_id}_preinscritos", "data-toggle"=> "tab"
 						- @active = (@lista_actual.eql?"#{oferta.diplomado_id}_aprobados") ? "active" : ""
-						%li{:class => @active}
+						%li{class: @active}
 							= link_to "Admitidos", "##{oferta.diplomado_id}_aprobados", "data-toggle"=> "tab"
 					.tab-content
 						= render "pendientes", :oferta => oferta, :active => "active"

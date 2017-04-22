@@ -1,14 +1,14 @@
 .well.well-small
 
-	= link_to "FECHAS DEL CRONOGRAMA DOCENTE 2016-2017", :controller => "cal_descargar", :action => "archivo", :id => "FECHAS_CRONOGRAMA_DOCENTE_2016-2017.pdf"
+	= link_to "FECHAS DEL CRONOGRAMA DOCENTE 2016-2017", controller: "cal_descargar", action: "archivo", id: "FECHAS_CRONOGRAMA_DOCENTE_2016-2017.pdf"
 
 - @cal_usuario = session[:cal_usuario]
 
 -if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
-	= render :partial => 'cal_usuario/datos_modal'
+	= render partial: 'cal_usuario/datos_modal'
 
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
-	= render :partial => 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
+	= render partial: 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
 -if false
 	-if @estudiante.cita_horaria
 		%h3 Cita Horaria:
@@ -25,23 +25,23 @@
 			%h3= "Horario #{@periodo_actual.id}:"
 			.well.well-small
 				- @archivos.each do |archivo|
-					%p= link_to archivo, :controller => 'cal_descargar', :action => 'horario', :id => archivo
+					%p= link_to archivo, controller: 'cal_descargar', action: 'horario', id: archivo
 
 - if false
 	%h3 Exámenes de Reparación y Suficiencia Octubre 2016 
 	%ul
 		%li
-			= link_to "Lunes 17 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "01_RepSuf_Lun_17Oct2016.pdf"
+			= link_to "Lunes 17 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "01_RepSuf_Lun_17Oct2016.pdf"
 		%li
-			= link_to "Martes 18 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "02_RepSuf_Mar_18Oct2016.pdf"
+			= link_to "Martes 18 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "02_RepSuf_Mar_18Oct2016.pdf"
 		%li
-			= link_to "Miércoles 19 Octubre 2016", :controller => 'cal_descargar', :action => 'archivo', :id => "03_RepSuf_Mier_19 Oct2016.pdf"
+			= link_to "Miércoles 19 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "03_RepSuf_Mier_19 Oct2016.pdf"
 - if @programaciones and @programaciones.count > 0
 	%h3 Programaciones (Pdf):
 	%ul
 		- @programaciones.each do |programacion|
 			%li
-				=link_to "Programación #{programacion.descripcion} - #{@periodo_actual.id}", {:controller => 'cal_descargar',:action => 'programaciones', :id => programacion.id, :cal_semestre_id => @periodo_actual.id} 
+				=link_to "Programación #{programacion.descripcion} - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: programacion.id, :cal_semestre_id => @periodo_actual.id} 
 
 
-= render :partial => 'cal_estudiante/historial_academico'
+= render partial: 'cal_estudiante/historial_academico'

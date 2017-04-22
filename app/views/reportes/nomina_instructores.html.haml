@@ -1,7 +1,7 @@
 %p
-  = link_to "Generar PDF",:action => :nomina_instructores_pdf
+  = link_to "Generar PDF",action: :nomina_instructores_pdf
   |
-  = link_to "Generar Excel",:action => :nomina_instructores_excel
+  = link_to "Generar Excel",action: :nomina_instructores_excel
 %table.tablesorter
   %thead
     %tr
@@ -15,6 +15,6 @@
         %td= i.secciones_que_dicta(session[:parametros][:periodo_actual]).size
         %td= i.horario_secciones_que_dicta(session[:parametros][:periodo_actual]).join(" // ")
 %p
-  = link_to "Generar PDF",:action => :nomina_instructores_pdf
+  = link_to "Generar PDF",action: :nomina_instructores_pdf
   |
-  = link_to "Generar Excel",:action => :nomina_instructores_excel
+  = link_to "Generar Excel",action: :nomina_instructores_excel

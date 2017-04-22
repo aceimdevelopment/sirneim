@@ -1,11 +1,11 @@
-=form_tag({:action => "cambiar_instructor_guardar"}, :class => "formulario titulo") do
+=form_tag({action: "cambiar_instructor_guardar"}, class: "formulario titulo") do
   =hidden_field_tag :seccion_completa, params[:seccion]
   %table.tablesorter.likert
     %thead
       %tr
-        %th{:width => "150px"}
+        %th{width: "150px"}
           Curso
-        %th{:width => "150px"}
+        %th{width: "150px"}
           Instructor
     %tbody
       %tr
@@ -16,4 +16,4 @@
   =submit_tag "Cambiar"
   %br/
   %br/
-  =link_to "<Atrás", :action=>"ver_secciones", :controller=>"estado_inscripcion"
+  =link_to "<Atrás", action:"ver_secciones", controller:"estado_inscripcion"

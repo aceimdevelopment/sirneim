@@ -1,4 +1,4 @@
-=form_for(@precio_planilla,:url=>{:action => "guardar_monto_planilla", :controller => "convenio"}) do |a|
+=form_for(@precio_planilla,url:{action: "guardar_monto_planilla", controller: "convenio"}) do |a|
   -if @precio_planilla.errors.any?
     %div#error_explanation
       %ul
@@ -17,7 +17,7 @@
       %label 
         Monto
         %span.req *
-      =a.text_field :valor, :autofocus => "true"
+      =a.text_field :valor, autofocus: "true"
 			
   %p 
     %span.req *  

@@ -1,4 +1,4 @@
-=form_for(@diplomado_cohorte,:url=>{:controller => 'diplomado_cohorte',:action => @accion}, :html => {:class => 'form-horizontal'}) do |a|
+=form_for(@diplomado_cohorte,url:{controller: 'diplomado_cohorte',action: @accion}, :html => {class: 'form-horizontal'}) do |a|
   -if @diplomado_cohorte.errors.any?
     %ul
       -flash[:alert] = ""
@@ -11,36 +11,36 @@
       %label.control-label
         Cohorte:
       .controls  
-        =a.text_field :cohorte_id, :class => "input", :readonly => true,  :required => true
+        =a.text_field :cohorte_id, class: "input", :readonly => true,  required: true
 
     .control-group
       %label.control-label
         Diplomado:
       .controls
         -if session[:wizard] or (action_name.eql? "editar")
-          =a.text_field :diplomado_id, :class => "input", :readonly => true,  :required => true
+          =a.text_field :diplomado_id, class: "input", :readonly => true,  required: true
         -else
-          =a.collection_select :diplomado_id, Diplomado.all, :id, :descripcion,{}, {:required => true}
+          =a.collection_select :diplomado_id, Diplomado.all, :id, :descripcion,{}, {required: true}
 
     .control-group
       %label.control-label
         Fecha Preinscripción:
       .controls
-        = a.text_field  :fecha_inscripcion, :class => "input", :required => true
-        =# a.date_select :fecha_inscripcion, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {:required => true, :class => 'span1'}
+        = a.text_field  :fecha_inscripcion, class: "input", required: true
+        =# a.date_select :fecha_inscripcion, {:order => [:day, :month, :year], :start_year => Date.current.year-1 }, {required: true, class: 'span1'}
 
     .control-group
       %label.control-label
         Cantidad de Grupos:
       .controls
-        =a.number_field :grupos, :class => "input span8", :in => 1...10, :required => true, :class => 'span1'
-        =#a.select :grupos, options_for_select((1..10)), {:required => true, :class => 'span1'}
+        =a.number_field :grupos, class: "input span8", :in => 1...10, required: true, class: 'span1'
+        =#a.select :grupos, options_for_select((1..10)), {required: true, class: 'span1'}
 
     .control-group
       %label.control-label
         Horario de Preinscripción:
       .controls
-        =a.text_field :horario_inscripcion, :class => "input", :required => true, :placeholder => "Sábados de 8:30 am a 12:30 pm"
+        =a.text_field :horario_inscripcion, class: "input", required: true, placeholder: "Sábados de 8:30 am a 12:30 pm"
 
     .control-group
       %label.control-label
@@ -49,7 +49,7 @@
         .input-prepend.input-append
           %span.add-on
             Bs.:
-          =a.number_field :inversion, :class => "input span8", :id => "appendedPrependedInput", :required => true
+          =a.number_field :inversion, class: "input span8", id: "appendedPrependedInput", required: true
           %span.add-on
             ,oo          
 
@@ -57,32 +57,32 @@
       %label.control-label
         Banco:
       .controls
-        =a.text_field :cuenta_bancaria_banco, :class => "input", :required => true, :value => "Banco de Venezuela"
+        =a.text_field :cuenta_bancaria_banco, class: "input", required: true, value: "Banco de Venezuela"
 
     .control-group
       %label.control-label
         Tipo de Cuenta:
       .controls
-        =a.select :cuenta_bancaria_tipo, ["Ahorro", "Corriente"], {:required => true, :class => 'span2'}
+        =a.select :cuenta_bancaria_tipo, ["Ahorro", "Corriente"], {required: true, class: 'span2'}
 
     .control-group
       %label.control-label
         Número de Cuenta:
       .controls
-        =a.text_field :cuenta_bancaria_numero, :class => "input", :required => true, :value => "0102-0140-3400-0442-6884"
+        =a.text_field :cuenta_bancaria_numero, class: "input", required: true, value: "0102-0140-3400-0442-6884"
 
     .control-group
       %label.control-label
         A nombre de:
       .controls
 
-        =a.text_field :cuenta_bancaria_cliente, :class => "input", :required => true, :value => "FUNDEIM"
+        =a.text_field :cuenta_bancaria_cliente, class: "input", required: true, value: "FUNDEIM"
 
     .form-actions
       - unless session[:wizard]
-        = link_to :back, {:class => "btn"} do
+        = link_to :back, {class: "btn"} do
           %i.icon-backward
           Atrás
 
-      = button_tag :class=> "btn btn-primary", :type => "submit" do
+      = button_tag class: "btn btn-primary", :type => "submit" do
         = @accion.humanize        

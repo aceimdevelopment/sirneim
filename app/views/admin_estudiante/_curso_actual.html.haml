@@ -1,23 +1,23 @@
 %table.tablesorter.liker
   %thead
     %tr
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Idioma
-      %th{:width => "13%"}
+      %th{width: "13%"}
         Nivel
-      %th{:width => "5%"}
+      %th{width: "5%"}
         Sección
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Aula
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Horarios
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Instructor
-      %th{:width => "10%"}
+      %th{width: "10%"}
         Convenio
-      %th{:width => "12%"}
+      %th{width: "12%"}
         Estado
-      %th{:width => "30%"}
+      %th{width: "30%"}
         Opciones
   %tbody
     -@historial_actual.each do |h|
@@ -49,17 +49,17 @@
 
           -if h.tipo_estado_inscripcion_id=="PRE"
             
-            =link_to_modal "Confirmar",{:action => "confirmar_inscripcion",:title =>"Confirmar Inscripcion",:width=>600, :params=>{:idioma_id=>"#{h.idioma_id}", :tipo_categoria_id=>"#{h.tipo_categoria_id}", :usuario_ci=>"#{h.usuario_ci}"}}
+            =link_to_modal "Confirmar",{action: "confirmar_inscripcion",title:"Confirmar Inscripcion",width:600, params:{idioma_id:"#{h.idioma_id}", tipo_categoria_id:"#{h.tipo_categoria_id}", usuario_ci:"#{h.usuario_ci}"}}
           -else
             Confirmar
           %br/
-          =link_to_modal "Modificar_seccion",{:action => "cambiar_seccion",:title =>"Modificar Seccion",:width=>600, :params=>{:idioma_id=>"#{h.idioma_id}", :tipo_categoria_id=>"#{h.tipo_categoria_id}", :usuario_ci=>"#{h.usuario_ci}"}}
+          =link_to_modal "Modificar_seccion",{action: "cambiar_seccion",title:"Modificar Seccion",width:600, params:{idioma_id:"#{h.idioma_id}", tipo_categoria_id:"#{h.tipo_categoria_id}", usuario_ci:"#{h.usuario_ci}"}}
           %br/
-          =link_to_modal "Eliminar",{:action => "confirmar_eliminar",:title =>"Confirmar Eliminación",:width=>500, :params=>{:idioma_id=>"#{h.idioma_id}", :tipo_categoria_id=>"#{h.tipo_categoria_id}", :usuario_ci=>"#{h.usuario_ci}"}}
+          =link_to_modal "Eliminar",{action: "confirmar_eliminar",title:"Confirmar Eliminación",width:500, params:{idioma_id:"#{h.idioma_id}", tipo_categoria_id:"#{h.tipo_categoria_id}", usuario_ci:"#{h.usuario_ci}"}}
           %br/
-          =link_to "Planilla", :action => "planilla_inscripcion", :controller => "inscripcion_admin", :historial => h.id.to_s
+          =link_to "Planilla", action: "planilla_inscripcion", controller: "inscripcion_admin", historial: h.id.to_s
           %br/
-          = link_to_modal "Generar_constancia_estudio", {:action => "remitente",:title =>"Generar Constancia de Estudio",:width=>600, :params=>{:tipo_curso => h.tipo_curso}}
+          = link_to_modal "Generar_constancia_estudio", {action: "remitente",title:"Generar Constancia de Estudio",width:600, params:{tipo_curso: h.tipo_curso}}
           %br/
-          = link_to_modal "Congelar",{:action => "confirmar_congelar_curso",:title =>"Confirmar Eliminación",:width=>500, :params=>{:idioma_id=>"#{h.idioma_id}", :tipo_categoria_id=>"#{h.tipo_categoria_id}", :usuario_ci=>"#{h.usuario_ci}"}}
+          = link_to_modal "Congelar",{action: "confirmar_congelar_curso",title:"Confirmar Eliminación",width:500, params:{idioma_id:"#{h.idioma_id}", tipo_categoria_id:"#{h.tipo_categoria_id}", usuario_ci:"#{h.usuario_ci}"}}
           

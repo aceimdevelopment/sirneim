@@ -1,5 +1,5 @@
 %p
-	=link_to "nuevo", :action => "nuevo"
+	=link_to "nuevo", action: "nuevo"
 %br
 %table.table.table-striped.table-hover.table-condensed.table-bordered
 	%thead
@@ -11,4 +11,4 @@
 			%tr
 				%td= estado.id
 				%td= estado.nombre
-				%td= link_to "editar", :action=> "editar", :id => estado.id
+				%td= link_to "editar", action: "editar", id: estado.id

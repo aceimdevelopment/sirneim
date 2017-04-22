@@ -19,7 +19,7 @@
       -unless t.descripcion=="null"
         %tr
           %td
-            =link_to t.descripcion, :action=>"nivel2", :id => t.id
+            =link_to t.descripcion, action:"nivel2", id: t.id
           %td
             =t.preinscritos
           %td
@@ -46,6 +46,6 @@
           =total_ins/total_sec
 
 
-=link_to "<Atrás", :action=>"index"
+=link_to "<Atrás", action:"index"
 |
-=link_to "Estado por #{@otro}", :action => "nivel1", :id=>@otro
+=link_to "Estado por #{@otro}", action: "nivel1", id:@otro

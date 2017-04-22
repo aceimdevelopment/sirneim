@@ -1,5 +1,5 @@
 %br/
-=form_for(@historial,:url=>{:action => "paso2_seleccionar_curso"}, :class => "formulario titulo" ) do |f|
+=form_for(@historial,url:{action: "paso2_seleccionar_curso"}, class: "formulario titulo" ) do |f|
   %div.titulo
     %h2 Seleccionar Horario: Paso 2 de 3
     %div Preinscripción Curso de Extensión de Idiomas Modernos
@@ -20,10 +20,10 @@
             %td 
               =@horario
   %div
-    =f.submit "Siguiente", :class=>"btTxt"
+    =f.submit "Siguiente", class:"btTxt"
 
 %br/
-=link_to "Inicio", :action=>"index" 
+=link_to "Inicio", action:"index" 
 |
-=link_to "Regresar", :action=>"paso1"
+=link_to "Regresar", action:"paso1"
           

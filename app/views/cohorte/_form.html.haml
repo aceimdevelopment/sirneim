@@ -1,4 +1,4 @@
-=form_for(@cohorte,:url=>{:controller => 'cohorte', :action => 'crear'}, :html => {:class => 'form-horizontal well well-small'}) do |a|
+=form_for(@cohorte,url:{controller: 'cohorte', action: 'crear'}, :html => {class: 'form-horizontal well well-small'}) do |a|
   -if @cohorte.errors.any?
     %ul
       -flash[:alert] = ''
@@ -9,7 +9,7 @@
     %label.control-label
       Año Inicial:
     .controls  
-      = a.number_field :id, :autofocus => true, :in => @year-2...Date.today.year+10, :class => 'span2', :required => true, :value => @year
+      = a.number_field :id, autofocus: true, :in => @year-2...Date.today.year+10, class: 'span2', required: true, value: @year
       %span.help-inline
         = "Ej. #{@year}"
 
@@ -17,7 +17,7 @@
     %label.control-label
       Descripción:
     .controls
-      = a.text_field :nombre, :placeholder => 'Descripcion…', :class => 'input'
+      = a.text_field :nombre, placeholder: 'Descripcion…', class: 'input'
       %span.help-inline
         ="Ej. #{@year}-#{@year+1} (Carlos Raúl Villanueva)"
   .form-actions      
@@ -27,10 +27,10 @@
     - else
       - @atras = '/aceim_diplomados/cohorte'
       - @commit = 'Registrar'
-    = link_to @atras, {:class => "btn"} do
+    = link_to @atras, {class: "btn"} do
       %i.icon-backward
       Atrás
 
-    = button_tag :type => 'submit', :class => 'btn btn-primary' do
+    = button_tag :type => 'submit', class: 'btn btn-primary' do
       %i.icon-forward.icon-white
       = @commit

@@ -5,22 +5,22 @@
   %table.tablesorter
     %thead
       %tr
-        %th{:width => "15%",:style=> "text-align:center"}
+        %th{width: "15%",style: "text-align:center"}
           Aula
-        %th{:width => "17%",:style=> "text-align:center"}
+        %th{width: "17%",style: "text-align:center"}
           LUNES
-        %th{:width => "17%",:style=> "text-align:center"}
+        %th{width: "17%",style: "text-align:center"}
           MIÉRCOLES
-        %th{:width => "17%",:style=> "text-align:center"}
+        %th{width: "17%",style: "text-align:center"}
           MARTES
-        %th{:width => "17%",:style=> "text-align:center"}
+        %th{width: "17%",style: "text-align:center"}
           JUEVES
     %tbody
       -@aulas_disponibles.each do |ad|
         -cant = 1
         -cont = cont + 1
         %tr  
-          %td{:rowspan =>"3", :style=> "vertical-align:middle;text-align:center"}
+          %td{rowspan:"3", style: "vertical-align:middle;text-align:center"}
             =ad.id
             %br
             =ad.descripcion
@@ -31,7 +31,7 @@
               -else
                 -estilo = "background-color: #A9F5A9"
 
-              %td{:style => "#{estilo}"} 
+              %td{style: "#{estilo}"} 
                 -if(x.asignada == 0)
                   =check_box_tag "horario_aula_disponible[][#{x.aula_id}][#{x.tipo_dia_id}][#{x.tipo_hora_id}]", 1
                   =x.tipo_hora.descripcion_hora2
@@ -40,7 +40,7 @@
                   =x.tipo_hora.descripcion_hora2
               -cant = cant + 1
             -else
-              %td{:style => "background-color: #A0C0F0"} 
+              %td{style: "background-color: #A0C0F0"} 
                 -if(x.asignada == 0)
                   =check_box_tag "horario_aula_disponible[][#{x.aula_id}][#{x.tipo_dia_id}][#{x.tipo_hora_id}]", 1
                   =x.tipo_hora.descripcion_hora2
@@ -54,15 +54,15 @@
         -if cont < tam
           %thead
             %tr
-              %th{:width => "15%",:style=> "text-align:center"}
+              %th{width: "15%",style: "text-align:center"}
                 Aula
-              %th{:width => "17%",:style=> "text-align:center"}
+              %th{width: "17%",style: "text-align:center"}
                 LUNES
-              %th{:width => "17%",:style=> "text-align:center"}
+              %th{width: "17%",style: "text-align:center"}
                 MIÉRCOLES
-              %th{:width => "17%",:style=> "text-align:center"}
+              %th{width: "17%",style: "text-align:center"}
                 MARTES
-              %th{:width => "17%",:style=> "text-align:center"}
+              %th{width: "17%",style: "text-align:center"}
                 JUEVES
 
         

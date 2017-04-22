@@ -1,11 +1,11 @@
-=form_tag({:action => "cambiar_aula_guardar"}, :class => "formulario titulo") do
+=form_tag({action: "cambiar_aula_guardar"}, class: "formulario titulo") do
   =@seccion_horario.seccion.descripcion
   %table.tablesorter.likert
     %thead
       %tr
-        %th{:width => "150px"}
+        %th{width: "150px"}
           Aula Actual
-        %th{:width => "150px"}
+        %th{width: "150px"}
           Nueva Aula
     %tbody
       %tr

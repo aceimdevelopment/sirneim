@@ -1,4 +1,4 @@
-.navbar.navbar-fluid.navbar-static-top{:role=>"navigation"}
+.navbar.navbar-fluid.navbar-static-top{role:"navigation"}
   .navbar-inner
     .container-fluid
       -if session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id < 3 
@@ -6,22 +6,22 @@
           %li
             %a.brand{:href => "/aceim_diplomados/cal_principal_admin"} Inicio
           = drop_down "Usuarios" do
-            %li=link_to "Gestionar Profesores y Estudiantes", {:controller => 'cal_principal_admin', :action => 'usuarios'}
+            %li=link_to "Gestionar Profesores y Estudiantes", {controller: 'cal_principal_admin', action: 'usuarios'}
           %li
-            = link_to "Configuración General", {:controller => 'cal_principal_admin', :action => 'configuracion_general'} 
+            = link_to "Configuración General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
 
           %li
-            = link_to "Asignaturas", {:controller => 'cal_materia', :action => 'index'} 
+            = link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
 
       .nav.pull-right
 
         -if session[:cal_usuario]
           = drop_down "#{session[:cal_usuario].nombre_completo}" do
-            %li=# link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+            %li=# link_to "Cambiar Contraseña", controller:"usuario", action:"contrasena", :controlador=>controller_name, :accion=>action_name 
 
 
             %li
-              = link_to "Actualizar Datos Personales", {:controller => 'cal_usuario', :action => 'editar', :controlador => controller_name, :accion => action_name}
+              = link_to "Actualizar Datos Personales", {controller: 'cal_usuario', action: 'editar', :controlador => controller_name, :accion => action_name}
                 
             = drop_down_divider
             = menu_item "Cerrar sesión", "/aceim_diplomados/cal_inicio/cerrar_sesion"

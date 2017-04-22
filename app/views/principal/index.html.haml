@@ -1,10 +1,10 @@
 / -if session[:parametros][:inscripcion_abierta] == "SI" && !@preinscrito 
 /   -if session[:parametros][:inscripcion_modo_ninos]=="NO" || session[:tipo_curso].tipo_categoria_id == "NI"
 /     %h3
-/       =link_to "Confirmar Inscripción", :action => "paso1", :controller => "inscripcion"
+/       =link_to "Confirmar Inscripción", action: "paso1", controller: "inscripcion"
 /     %div.titulo Preinscribirse en el periodo #{session[:parametros][:periodo_inscripcion]}
 / %h3
-/   =link_to "Consultar Historial de Cursos", :action => "cursos", :controller => "estudiante"
+/   =link_to "Consultar Historial de Cursos", action: "cursos", controller: "estudiante"
 / %div.titulo Consulta el listado de tus Cursos Realizados
 
 %h6
@@ -30,7 +30,7 @@
 
 				%td
 					-if ParametroGeneral.inscripcion_abierta and inscripcion and inscripcion.tipo_estado_inscripcion_id.eql? "APR"
-						= link_to "Descargar planilla Inscripción", {:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscripcion.id}
+						= link_to "Descargar planilla Inscripción", {controller: "inscripcion", action: "planilla_inscripcion", :inscripcion_id => inscripcion.id}
 
 					-elsif ParametroGeneral.preinscripcion_abierta
-						%td= link_to "Preinscribir #{oferta.diplomado.id}", {:action => "paso0", :controller => "inscripcion", :diplomado => oferta.diplomado_id}, :class => "btn btn-primary btn-mini"
+						%td= link_to "Preinscribir #{oferta.diplomado.id}", {action: "paso0", controller: "inscripcion", :diplomado => oferta.diplomado_id}, class: "btn btn-primary btn-mini"

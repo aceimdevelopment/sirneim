@@ -18,7 +18,7 @@
   -else
     NO ASIGNADO
   
-=link_to "Generar PDF", :action => "ver_pdf_estudiantes", :seccion => params[:seccion]
+=link_to "Generar PDF", action: "ver_pdf_estudiantes", :seccion => params[:seccion]
 %br
 Filtrar Contenido:
 =text_field_tag "filtro"
@@ -58,5 +58,5 @@ Filtrar Contenido:
               ="PI"
             -else
               =HistorialAcademico.colocar_nota(nota)
-=link_to "Generar PDF", :action => "ver_pdf_estudiantes", :seccion => params[:seccion]
-=link_to "<Atrás", :action => "ver_secciones"
+=link_to "Generar PDF", action: "ver_pdf_estudiantes", :seccion => params[:seccion]
+=link_to "<Atrás", action: "ver_secciones"

@@ -102,14 +102,14 @@
                       %span.label.label-inverse
                         = #inscripcion.calificacion.blank? ? "Sin Calificar" : inscripcion.calificacion  
                   %td
-                    = link_to "Descargar planilla preinscripción", :action => "descargar_planilla", :id => @usuario.ci
+                    = link_to "Descargar planilla preinscripción", action: "descargar_planilla", id: @usuario.ci
                     |
-                    = link_to_if (inscripcion.tipo_estado_inscripcion_id.eql?'INS'), "Descargar planilla Inscripción", {:controller => "inscripcion", :action => "planilla_inscripcion", :inscripcion_id => inscripcion.id}
+                    = link_to_if (inscripcion.tipo_estado_inscripcion_id.eql?'INS'), "Descargar planilla Inscripción", {controller: "inscripcion", action: "planilla_inscripcion", :inscripcion_id => inscripcion.id}
                     |
                     = link_to_if false, "Descargar Certificado"
 
 
 
 %p 
-  =link_to "< Buscar otro estudiante", :action => "index"
+  =link_to "< Buscar otro estudiante", action: "index"
 %br/

@@ -1,4 +1,4 @@
-=form_tag({:action => "guardar_parametros"}) do
+=form_tag({action: "guardar_parametros"}) do
   %table.table.table-striped.table-hover.table-condensed.table-bordered
     %thead
       %tr
@@ -26,4 +26,4 @@
           =radio_button_tag "inscripcion_general","NO", (@inscripcion_general == "NO")
 
 
-  %p= submit_tag 'Guardar', :class => "btn btn-primary"
+  %p= submit_tag 'Guardar', class: "btn btn-primary"

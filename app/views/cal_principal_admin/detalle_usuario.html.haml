@@ -1,4 +1,4 @@
-=link_to "Regresar", {:action => 'usuarios'}, {:class => 'btn'}
+=link_to "Regresar", {action: 'usuarios'}, {class: 'btn'}
 
 %h3 Datos Personales
 %ul.well.well-small
@@ -32,13 +32,13 @@
 	= "#{@estudiante.combo_idiomas}"
 
 	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
-		= link_to("#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
-			= content_tag(:i, "", :class => "icon-edit icon-white")
+		= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
+			= content_tag(:i, "", class: "icon-edit icon-white")
 
-= render :partial => 'cal_estudiante/historial_academico'
+= render partial: 'cal_estudiante/historial_academico'
 
 
-= render :partial => 'cal_estudiante/actualizar_idiomas'
+= render partial: 'cal_estudiante/actualizar_idiomas'
 
 :javascript
 

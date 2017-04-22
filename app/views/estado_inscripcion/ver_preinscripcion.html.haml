@@ -11,22 +11,22 @@ Preinscritos
 %table.tablesorter.tablefilter.likert
   %thead
     %tr
-      %th{:width => "5%"}
+      %th{width: "5%"}
         Cédula
-      %th{:width => "10%"}
+      %th{width: "10%"}
         Nombre
-      %th{:width => "15%"}
+      %th{width: "15%"}
         Telefono móvil
-      %th{:width => "5%"}
+      %th{width: "5%"}
         Correo
   %tbody
     -@preinscritos.each do |pre|
       -usuario = pre.usuario
       %tr
         %td 
-          =link_to usuario.ci, :action => "validar", :controller => "admin_estudiante", "usuario[ci]" => usuario.ci    
+          =link_to usuario.ci, action: "validar", controller: "admin_estudiante", "usuario[ci]" => usuario.ci    
         %td 
-          =link_to usuario.nombre_completo, :action => "validar", :controller => "admin_estudiante", "usuario[ci]" => usuario.ci    
+          =link_to usuario.nombre_completo, action: "validar", controller: "admin_estudiante", "usuario[ci]" => usuario.ci    
         %td #{usuario.telefono_movil}
         %td #{usuario.correo}
        

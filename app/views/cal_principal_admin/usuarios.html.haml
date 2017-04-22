@@ -35,11 +35,11 @@
 	.tab-content
 		.tab-pane.active#profesores
 				
-			=link_to 'Registrar Nuevo Profesor', {:controller => 'cal_profesor', :action => 'nuevo'}, :class => 'btn'
+			=link_to 'Registrar Nuevo Profesor', {controller: 'cal_profesor', action: 'nuevo'}, class: 'btn'
 			
 			.label.label-info.pull-right
 				<a id="text_profesores" style='color:white;'></a>
-				= text_field_tag 'filtro_profesores', nil ,{:onkeyup => "return filtrar('profesores')", :placeholder=>"Filtrar...", :autofocus => true}
+				= text_field_tag 'filtro_profesores', nil ,{:onkeyup => "return filtrar('profesores')", placeholder:"Filtrar...", autofocus: true}
 
 			%table.table.table-bordered.table-striped.table-condensed.table-hover#profesores
 				%thead
@@ -64,17 +64,17 @@
 							%td= po.cal_usuario.telefono_movil if po.cal_usuario
 							%td= po.cal_usuario.telefono_habitacion if po.cal_usuario
 							%td= po.cal_usuario.contrasena if po.cal_usuario 
-							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => po.cal_usuario_ci }
+							%td= link_to "Resetear Contraseña", {action: 'resetear_contrasena', :ci => po.cal_usuario_ci }
 
 
 		.tab-pane#estudiantes
 
-			=link_to 'Registrar Nuevo Estudiante', {:controller => 'cal_estudiante', :action => 'nuevo'}, :class => 'btn'
+			=link_to 'Registrar Nuevo Estudiante', {controller: 'cal_estudiante', action: 'nuevo'}, class: 'btn'
 
 
 			.label.label-info.pull-right
 				<a id="text_estudiantes" style='color:white;'></a>
-				= text_field_tag 'filtro_estudiantes', nil ,{:onkeyup => "return filtrar('estudiantes')", :placeholder=>"Filtrar...", :autofocus => true}
+				= text_field_tag 'filtro_estudiantes', nil ,{:onkeyup => "return filtrar('estudiantes')", placeholder:"Filtrar...", autofocus: true}
 
 			%table.table.table-bordered.table-striped.table-condensed.table-hover#estudiantes
 				%thead
@@ -97,5 +97,5 @@
 							%td= es.cal_usuario.telefono_movil if es.cal_usuario
 							%td= es.cal_usuario.telefono_habitacion if es.cal_usuario
 							%td= es.cal_usuario.contrasena if es.cal_usuario
-							%td= link_to "Ver Detalle", {:action => 'detalle_usuario', :ci => es.cal_usuario_ci}							
-							%td= link_to "Resetear Contraseña", {:action => 'resetear_contrasena', :ci => es.cal_usuario_ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}
+							%td= link_to "Ver Detalle", {action: 'detalle_usuario', :ci => es.cal_usuario_ci}							
+							%td= link_to "Resetear Contraseña", {action: 'resetear_contrasena', :ci => es.cal_usuario_ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}

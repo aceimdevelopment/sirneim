@@ -25,7 +25,7 @@
               -estilo = "background-color: #F3F781"
             -else
               -estilo = "background-color: #A9F5A9" 
-          %td{:style => "#{estilo}"} 
+          %td{style: "#{estilo}"} 
             =check_box_tag "horarios_instructor[#{bh.id}]", 1
 
   %p= submit_tag 'Guardar'
@@ -45,9 +45,9 @@ Filtro por Idioma:
 %table.tablesorter.tablefilter.likert
   %thead
     %tr
-      %th{:width => "20%"}
+      %th{width: "20%"}
         Instructor
-      %th{:width => "10%"}
+      %th{width: "10%"}
         Idioma
       -@bloques_horarios.each do |bh|     
         %th
@@ -72,7 +72,7 @@ Filtro por Idioma:
         -else
           -estilo = "background-color: #A9F5A9" 
           
-      %td{:style => "#{estilo}"} 
+      %td{style: "#{estilo}"} 
         -if id.disponible == 1
           =check_box_tag "horarios_instructor_vista[#{id.bloque_horario_id}]", 1, true
         -else
@@ -80,4 +80,4 @@ Filtro por Idioma:
       -if i == 0
         -i = @cant_horarios
         %td
-          =link_to_modal "Modificar",:action => "modal_modificar_horario_disponible_instructores",:title =>"Modificar Horarios Instructor",:width=>700, :params => {:controlador => controller_name, :accion => action_name, :ci => id.instructor_ci, :idioma => id.idioma_id}
+          =link_to_modal "Modificar",action: "modal_modificar_horario_disponible_instructores",title:"Modificar Horarios Instructor",width:700, params: {:controlador => controller_name, :accion => action_name, :ci => id.instructor_ci, :idioma => id.idioma_id}

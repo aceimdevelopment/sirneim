@@ -3,11 +3,11 @@
 	%h5
 		Agregar Asignatura:
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar a una sección'}		
-			= link_to "#", { :class => 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' } do
-				= content_tag(:i, "", :class => "icon-plus icon-white")
+			= link_to "#", { class: 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' } do
+				= content_tag(:i, "", class: "icon-plus icon-white")
 
 
-	.modal.fade#estudiante_seccion{ :role => "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+	.modal.fade#estudiante_seccion{ role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
 		.modal-dialog
 			.modal-content
 				.modal-header
@@ -15,7 +15,7 @@
 				%h2#myModalLabel 
 					Agregar Sección
 				.modal-body
-					= render :partial => 'cal_estudiante_seccion/form'
+					= render partial: 'cal_estudiante_seccion/form'
 
 .accordion#acordion1
 
@@ -24,8 +24,8 @@
 		- if @secciones_periodo.count > 0
 			.accordion-group
 				.accordion-heading
-					= link_to "Período Académico #{periodo.id}", "#collapse#{periodo.id}", {:class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "accordion1"}
-				.accordion-body.collapse.in{:id => "collapse#{periodo.id}"}
+					= link_to "Período Académico #{periodo.id}", "#collapse#{periodo.id}", {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "accordion1"}
+				.accordion-body.collapse.in{id: "collapse#{periodo.id}"}
 					.accordion-inner
 						%table.table.table-bordered.table-striped.table-condensed
 							%thead
@@ -46,7 +46,7 @@
 								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI') 	
 
 								%tbody
-									%tr{:class => tipo_calificacion}
+									%tr{class: tipo_calificacion}
 										- aux = est_sec_per.cal_seccion.cal_materia.anno
 										- aux = "--" if aux.eql? 0
 										%td= aux
@@ -59,8 +59,8 @@
 										- if session[:cal_administrador]
 											%td= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
 											%td
-												= link_to({:controller => 'cal_estudiante_seccion', :action => 'eliminar', :id => est_sec_per.id, :controlador => @controlador, :accion => @accion}, {:class => 'btn btn-danger btn-mini', :method => :delete, :data => {:confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
-													= content_tag(:i, "", :class => "icon-trash icon-white")
+												= link_to({controller: 'cal_estudiante_seccion', action: 'eliminar', id: est_sec_per.id, :controlador => @controlador, :accion => @accion}, {class: 'btn btn-danger btn-mini', :method => :delete, :data => {:confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
+													= content_tag(:i, "", class: "icon-trash icon-white")
 
 :javascript
 

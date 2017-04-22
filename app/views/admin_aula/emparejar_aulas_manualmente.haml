@@ -70,7 +70,7 @@
           %td
             =ae.tipo_bloque.tipo_hora.descripcion_hora2
           %td
-            =link_to_modal "Eliminar Pareja",{:action => "confirmar_eliminar_pareja",:title =>"Confirmar Eliminación",:width=>600, :params=>{:pareja => ae.pareja}}
+            =link_to_modal "Eliminar Pareja",{action: "confirmar_eliminar_pareja",title:"Confirmar Eliminación",width:600, params:{pareja: ae.pareja}}
 %br/
-=button_to "Finalizar", :action => "index", :controller => "planificacion"
+=button_to "Finalizar", action: "index", controller: "planificacion"
 

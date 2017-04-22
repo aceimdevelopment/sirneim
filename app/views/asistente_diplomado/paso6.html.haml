@@ -1,6 +1,6 @@
-= render :partial => 'barra_progreso'
+= render partial: 'barra_progreso'
 .well.well-small
-  =form_tag :action =>'paso6_guardar' do
+  =form_tag action:'paso6_guardar' do
     .control-group
       %label.control-label
         %b ¿Desea establecer la cohorte utilizada en este asistente como la cohorte actual?
@@ -27,7 +27,7 @@
             = radio_button_tag 'preinscripcion', 'no'
             No
     .form_actions
-      = button_tag :class=> "btn btn-primary", :type => "submit" do
+      = button_tag class: "btn btn-primary", :type => "submit" do
         = "Aplicar Ajustes"
 
-= render :partial => 'nav_wizard'
+= render partial: 'nav_wizard'

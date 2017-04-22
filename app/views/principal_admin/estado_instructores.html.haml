@@ -31,11 +31,11 @@
             -else
               = ins.notificacion(session[:parametros][:periodo_calificacion])
           %td
-            %div{:class => ins.estado.downcase}= ins.estado
+            %div{class: ins.estado.downcase}= ins.estado
             -if ins.estado == "Completo"
               -completo = true
   -if completo            
-    =link_to_modal "Enviar Notificación",{:action => "enviar_notificaciones",:title => "Enviar Notificación",:width=>800}
+    =link_to_modal "Enviar Notificación",{action: "enviar_notificaciones",title: "Enviar Notificación",width:800}
 
 -if @instructores_notificados.size > 0
   %h1 Instructores notificados

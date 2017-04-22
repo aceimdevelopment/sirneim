@@ -1,6 +1,6 @@
-=link_to "Generar PDF", :action => "ver_pdf_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
+=link_to "Generar PDF", action: "ver_pdf_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
 |
-=link_to "Generar Excel",:action => "ver_excel_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
+=link_to "Generar Excel",action: "ver_excel_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
 %br
 Filtrar Contenido:
 =text_field_tag "filtro"
@@ -39,10 +39,10 @@ Filtrar Contenido:
         %td
           =h.tipo_nivel.descripcion
 
-=link_to "Generar PDF", :action => "ver_pdf_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
+=link_to "Generar PDF", action: "ver_pdf_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
 |
-=link_to "Generar Excel",:action => "ver_excel_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
+=link_to "Generar Excel",action: "ver_excel_convenio", :tipo_convenio => @historiales.first.tipo_convenio_id
 %br
 %br
-=link_to "<Atrás", :action => "index_reportes_convenios"
+=link_to "<Atrás", action: "index_reportes_convenios"
 

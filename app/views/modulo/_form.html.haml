@@ -1,4 +1,4 @@
-=form_for(@modulo,:url=>{:action => "crear"}) do |a|
+=form_for(@modulo,url:{action: "crear"}) do |a|
   -if @modulo.errors.any?
     %ul
       -flash[:alert] = ""
@@ -12,19 +12,19 @@
 
     %label
       %b Diplomado:
-    =a.text_field :diplomado_id, :class => "input", :readonly => true,  :required => true
+    =a.text_field :diplomado_id, class: "input", :readonly => true,  required: true
 
     %label 
       %b Número de Identificación:
-    =a.number_field :numero, :in => 1...11, :include_blank => 'Seleccione...', :class => "span1", :required => true
-    =#a.select :numero, options_for_select((1..10)), {:include_blank => 'Seleccione...'}, :required => true
+    =a.number_field :numero, :in => 1...11, :include_blank => 'Seleccione...', class: "span1", required: true
+    =#a.select :numero, options_for_select((1..10)), {:include_blank => 'Seleccione...'}, required: true
     %label
       %b Descripción:
-    =a.text_field :descripcion, :placeholder => "Descripcion…", :class => "input"
+    =a.text_field :descripcion, placeholder: "Descripcion…", class: "input"
     %br
-    =a.submit "Registrar >", :class => "btn btn-primary"
+    =a.submit "Registrar >", class: "btn btn-primary"
 
 %p  
-  = link_to :back, {:class => "btn"} do
+  = link_to :back, {class: "btn"} do
     %i.icon-backward
     Atrás

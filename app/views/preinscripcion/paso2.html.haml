@@ -1,6 +1,6 @@
 Ingrese los datos a continuación:
 
-=form_tag :action => "paso2_guardar" do 
+=form_tag action: "paso2_guardar" do 
   -if @usuario.errors.any? || @datos_estudiante.errors.any?
     %p
       %div#error-explanation
@@ -85,7 +85,7 @@ Ingrese los datos a continuación:
       %label
         Dirección de domicilio
         %span.req *  
-      =text_area :usuario, :direccion, :size => "60x4"
+      =text_area :usuario, :direccion, size: "60x4"
       Ejemplo: Avenida A, con calle B. Caracas.
     
   %fieldset
@@ -122,7 +122,7 @@ Ingrese los datos a continuación:
       %p
         %label
           Dirección de trabajo
-        =text_area :datos_estudiante, :direccion_de_trabajo, :size => "60x4"
+        =text_area :datos_estudiante, :direccion_de_trabajo, size: "60x4"
         Ejemplo: Avenida A, con calle B. Caracas.
   %fieldset
     %legend Estudios realizados
@@ -192,7 +192,7 @@ Ingrese los datos a continuación:
       %p
         %label
           Explique brevemente su experiencia
-        =text_area :datos_estudiante, :descripcion_experiencia, :size => "60x8"
+        =text_area :datos_estudiante, :descripcion_experiencia, size: "60x8"
       %p
         %label
           ¿Ha dado clases de español?
@@ -215,12 +215,12 @@ Ingrese los datos a continuación:
       %label
         ¿Por qué le interesa cursar el diplomado?
         %span.req *  
-      =text_area :datos_estudiante, :por_que_interesa_diplomado, :size => "60x4"
+      =text_area :datos_estudiante, :por_que_interesa_diplomado, size: "60x4"
     %p
       %label
         Expectativas sobre el diplomado
         %span.req *  
-      =text_area :datos_estudiante, :expectativas_sobre_diplomado, :size => "60x4"
+      =text_area :datos_estudiante, :expectativas_sobre_diplomado, size: "60x4"
     
   %p 
     %span.req *  

@@ -2,13 +2,13 @@
 	= "Profesor: #{@cal_seccion.descripcion_profesor_asignado}" 
 
 .well.well-small
-	=link_to "Regresar", {:action => 'index'}, :class => 'btn'
+	=link_to "Regresar", {action: 'index'}, class: 'btn'
 
-	=link_to "Descargar notas", {:controller => 'cal_calificar', :action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
+	=link_to "Descargar notas", {controller: 'cal_calificar', action: 'descargar_notas', id: @cal_seccion.id}, class: "btn btn-success pull-right"
 
-= render :partial => 'cal_calificar/detalle_seccion'
+= render partial: 'cal_calificar/detalle_seccion'
 
 .well.well-small
-	=link_to "Regresar", {:action => 'index'}, :class => 'btn'
+	=link_to "Regresar", {action: 'index'}, class: 'btn'
 	
-	=link_to "Descargar notas", {:controller => 'cal_calificar', :action => 'descargar_notas', :id => @cal_seccion.id}, :class => "btn btn-success pull-right"
+	=link_to "Descargar notas", {controller: 'cal_calificar', action: 'descargar_notas', id: @cal_seccion.id}, class: "btn btn-success pull-right"

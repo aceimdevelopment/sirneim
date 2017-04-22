@@ -36,7 +36,7 @@ class DocentesController < ApplicationController
     # @usuario = Usuario.where (:ci => params[:id]).limit(1).first
     # @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first unless @usuario.nil?
 
-    @docente = Docente.where (:usuario_ci => params[:id]).limit(1).first
+    @docente = Docente.where(usuario_ci: params[:id]).limit(1).first
     @usuario = @docente.usuario if @docente
 
   end

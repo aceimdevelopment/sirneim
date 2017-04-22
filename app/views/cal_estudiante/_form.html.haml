@@ -1,4 +1,4 @@
-= form_tag({:action => 'crear'}, :class => 'form-horizontal') do
+= form_tag({action: 'crear'}, class: 'form-horizontal') do
 
   %fieldset
     %legend Datos de Personales
@@ -6,29 +6,29 @@
       %label.control-label
         CI:
       .controls
-        = text_field :cal_usuario, :ci, :class => 'text_field', :placeholder => "Cédula de Identidad…", :required => true, :autofocus => true
+        = text_field :cal_usuario, :ci, class: 'text_field', placeholder: "Cédula de Identidad…", required: true, autofocus: true
 
     .control-group
       %label.control-label
         Nombres:
       .controls
-        = text_field :cal_usuario, :nombres, :class => 'text_field', :placeholder => "Nombres…", :required => true
+        = text_field :cal_usuario, :nombres, class: 'text_field', placeholder: "Nombres…", required: true
 
     .control-group
       %label.control-label
         Apellidos:
       .controls
-        = text_field :cal_usuario, :apellidos, :class => 'text_field', :placeholder => "Apellidos…", :required => true
+        = text_field :cal_usuario, :apellidos, class: 'text_field', placeholder: "Apellidos…", required: true
 
     .control-group
       %label.control-label
         Sexo:
       .controls
         %label.checkbox
-          =radio_button :cal_usuario, :cal_tipo_sexo_id, "M", :required => true
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "M", required: true
           Masculino
           |
-          =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", :required => true
+          =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", required: true
           Femenino
 
   %fieldset
@@ -38,13 +38,13 @@
       %label.control-label
         Plan:
       .controls
-        = text_field :cal_estudiante, :plan, :class => 'text_field', :placeholder => "Plan (Uxxi)"
+        = text_field :cal_estudiante, :plan, class: 'text_field', placeholder: "Plan (Uxxi)"
 
     .control-group
       %label.control-label
         Idioma 1:
       .controls
-        = collection_select :cal_estudiante, :idioma1_id, @cal_departamentos, :id, :descripcion, {:prompt => true}, { :class => 'input', :onchange => "ver_select(this.value)", :required => true }
+        = collection_select :cal_estudiante, :idioma1_id, @cal_departamentos, :id, :descripcion, {prompt: true}, {class: 'input', onchange: "ver_select(this.value)", required: true}
 
 
     .control-group
@@ -52,12 +52,12 @@
         Idioma 2:
       .controls
 
-        = collection_select :cal_estudiante, :idioma2_id, @cal_departamentos, :id, :descripcion, {:prompt => true}, { :class => 'input', :style => 'display:none;', :id => 'idioma2', :required => true}
+        = collection_select :cal_estudiante, :idioma2_id, @cal_departamentos, :id, :descripcion, {prompt: true}, {class: 'input', style: 'display:none;', id: 'idioma2', required: true}
 
 
     .form-actions
-      = submit_tag 'Registrar', :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), {:controller => 'cal_principal_admin', :action =>  'usuarios'} , :class => 'btn'
+      = submit_tag 'Registrar', class: 'btn btn-primary'
+      = link_to t('.cancel', default: t("helpers.links.cancel")), {controller: 'cal_principal_admin', action:  'usuarios'} , class: 'btn'
 
 :javascript
 

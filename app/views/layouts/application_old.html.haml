@@ -36,18 +36,18 @@
       %nav#sitenav 
         -if controller_name == "planificacion" || controller_name == "convenio" || controller_name == "reportes" || controller_name == "gestionar_cartelera" || controller_name == "admin_seccion" || action_name == "ingresar_aulas_planificacion" || action_name == "ingresar_horario_aulas_planificacion" || action_name == "emparejar_aulas_manualmente" || action_name == "ingresar_horario_disponible_instructores" || controller_name == "parametros_generales"
           %li
-            =link_to "Principal", :controller => "principal", :action => "principal"
+            =link_to "Principal", controller: "principal", action: "principal"
         -else
           %li.current
-            =link_to "Principal", :controller => "principal", :action => "principal"
+            =link_to "Principal", controller: "principal", action: "principal"
         -if session[:rol] == "Administrador"
           -if (session[:administrador].usuario_ci == "10264009") || (session[:administrador].usuario_ci == "14519813") || (session[:administrador].usuario_ci == "13736933" || session[:administrador].usuario_ci == "19220025" || session[:administrador].usuario_ci == "19395140" || session[:administrador].usuario_ci == "13872341" || session[:administrador].usuario_ci == "19499931")
             -if controller_name == "planificacion" || controller_name == "convenio" || controller_name == "reportes" || controller_name == "gestionar_cartelera" || controller_name == "admin_seccion" || action_name == "ingresar_aulas_planificacion" || action_name == "ingresar_horario_aulas_planificacion" || action_name == "emparejar_aulas_manualmente" || action_name == "ingresar_horario_disponible_instructores" || controller_name == "parametros_generales"
               %li.current
-                =#link_to "Gestión y Planificación", :controller=>"planificacion", :action => "index"
+                =#link_to "Gestión y Planificación", controller:"planificacion", action: "index"
             -else
               %li
-                =#link_to "Gestión y Planificación", :controller=>"planificacion", :action => "index"
+                =#link_to "Gestión y Planificación", controller:"planificacion", action: "index"
         %li
           =link_to "Contacto", "mailto:diplomado.ele.eim.ucv@gmail.com"
     .contenedor
@@ -64,17 +64,17 @@
             %a Opciones de la sesión
             %ul.subnav
               %li
-                =link_to "Cambiar Contraseña", :controller=>"usuario", :action=>"contrasena", :controlador=>controller_name, :accion=>action_name 
+                =link_to "Cambiar Contraseña", controller:"usuario", action:"contrasena", :controlador=>controller_name, :accion=>action_name 
               %li
-                =link_to "Cambiar Datos Personales", :controller=>"usuario", :action=>"modificar", :controlador=>controller_name, :accion=>action_name
+                =link_to "Cambiar Datos Personales", controller:"usuario", action:"modificar", :controlador=>controller_name, :accion=>action_name
               %li
-                =link_to "Cerrar sesión", :action => "cerrar_sesion", :controller => "inicio" 
+                =link_to "Cerrar sesión", action: "cerrar_sesion", controller: "inicio" 
         %br
         -if session[:rol] == "Administrador"
           #cambio_cohorte
             ="Cohorte #{session[:parametros][:cohorte_actual]}" 
-            = link_to "Cambiar Cohorte", :controller => "parametros_generales", :action => "cambiar_cohorte"
-            =#link_to_modal "Cambiar",{:title => "Cambio de Periodo",:controller => "principal", :action => "cambiar_periodo_modal", :params => {:controlador => controller_name,:accion => action_name},:width=>300}
+            = link_to "Cambiar Cohorte", controller: "parametros_generales", action: "cambiar_cohorte"
+            =#link_to_modal "Cambiar",{title: "Cambio de Periodo",controller: "principal", action: "cambiar_periodo_modal", params: {:controlador => controller_name,:accion => action_name},width:300}
       #interno 
         %h2
           =@titulo_pagina
@@ -82,15 +82,15 @@
           .titulo
             =@subtitulo_pagina
         -if flash[:mensaje]
-          #mensaje-flash{:style => "display:none;"}
-            %p{ :class => "ui-state-highlight ui-corner-all", :style => "margin-top: 20px; padding: 3px 3px" }
-              %span.ui-icon.ui-icon-info{ :style =>"display:inline-block;" }
+          #mensaje-flash{style: "display:none;"}
+            %p{ class: "ui-state-highlight ui-corner-all", style: "margin-top: 20px; padding: 3px 3px" }
+              %span.ui-icon.ui-icon-info{ style:"display:inline-block;" }
               #{flash[:mensaje]}  
           =javascript_tag "$(document).ready(function(){ $('#mensaje-flash').show('pulsate',{},'fast'); });"
         =yield
         -if (controller_name != "principal" || action_name != "index") && (controller_name != "principal_admin" || action_name != "index") && (controller_name != "principal_instructor" || action_name != "index") && (controller_name != "reportes") && (controller_name != "planificacion") && (controller_name != "convenio") && (controller_name != "admin_seccion") && (controller_name != "gestionar_cartelera") && (action_name != "ingresar_horario_disponible_instructores") && (controller_name != "parametros_generales")
           %p 
-            =link_to "<< Regresar a principal", :controller => "principal", :action => "principal"
+            =link_to "<< Regresar a principal", controller: "principal", action: "principal"
     #pie
       CIUDAD UNIVERSITARIA DE CARACAS - PATRIMONIO CULTURAL DE LA HUMANIDAD
       %br/
@@ -98,5 +98,5 @@
       %br/
     =image_tag "bottom.png"
     #ventana-modal 
-    %div{ :id => "action_#{action_name}" }   
+    %div{ id: "action_#{action_name}" }   
     

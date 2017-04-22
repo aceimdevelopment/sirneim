@@ -1,4 +1,4 @@
-=form_tag "/aceim_diplomados/docentes/#{@accion}", :class => "form-horizontal" do 
+=form_tag "/aceim_diplomados/docentes/#{@accion}", class: "form-horizontal" do 
   -if @usuario.errors.any?
     %ul
       -flash[:alert] = ""
@@ -17,9 +17,9 @@
       %label.control-label
         Cédula de Identidad:
       .controls
-        =text_field :usuario, :ci, :autofocus => "true", :placeholder => "Identificación…", :required => true, :class => "input-medium", :readonly => (@accion.eql? "actualizar")
-        = link_to "", { :role => 'button', :class => 'btn btn-mini', :data => {:toggle => 'modal'}, :onclick => "return $('#modificar_ci').modal();"} do
-          = content_tag(:i, "", :class => "icon-edit")
+        =text_field :usuario, :ci, autofocus: "true", placeholder: "Identificación…", required: true, class: "input-medium", :readonly => (@accion.eql? "actualizar")
+        = link_to "", { role: 'button', class: 'btn btn-mini', :data => {:toggle => 'modal'}, :onclick => "return $('#modificar_ci').modal();"} do
+          = content_tag(:i, "", class: "icon-edit")
           Modificar Cédula
         %span.help-block
           Ejemplo: 12345678
@@ -29,7 +29,7 @@
       %label.control-label
         Nombres:
       .controls
-        =text_field :usuario, :nombres, :placeholder => "Nombre…", :required => true
+        =text_field :usuario, :nombres, placeholder: "Nombre…", required: true
         %span.help-block
           Ejemplo: María
 
@@ -37,7 +37,7 @@
       %label.control-label
         Apellidos:
       .controls
-        =text_field :usuario, :apellidos, :placeholder => "Apellido…", :required => true
+        =text_field :usuario, :apellidos, placeholder: "Apellido…", required: true
         %span.help-block
           Ejemplo: Torres
 
@@ -45,7 +45,7 @@
       %label.control-label
         Lugar de nacimiento:
       .controls
-        =text_field :usuario, :lugar_nacimiento, :placeholder => "Lugar de Nacimiento…", :required => true
+        =text_field :usuario, :lugar_nacimiento, placeholder: "Lugar de Nacimiento…", required: true
         %span.help-block
           Ejemplo: Caracas
 
@@ -53,17 +53,17 @@
       %label.control-label
         Fecha de nacimiento:
       .controls
-        =date_select :usuario, :fecha_nacimiento, {:placeholder => "Fecha de Nacimiento…", :start_year => 1950}, {:required => true, :class => 'span1'}
+        =date_select :usuario, :fecha_nacimiento, {placeholder: "Fecha de Nacimiento…", :start_year => 1950}, {required: true, class: 'span1'}
 
     .control-group
       %label.control-label
         Sexo:
       .controls
         %label.checkbox
-          =radio_button :usuario, :tipo_sexo_id, "M", :required => true
+          =radio_button :usuario, :tipo_sexo_id, "M", required: true
           Masculino
           |
-          =radio_button :usuario, :tipo_sexo_id, "F", :required => true
+          =radio_button :usuario, :tipo_sexo_id, "F", required: true
           Femenino
 
 
@@ -74,7 +74,7 @@
       %label.control-label
         Teléfono habitación
       .controls
-        =telephone_field :usuario, :telefono_habitacion, :placeholder => "Teléfono de Habitación…"
+        =telephone_field :usuario, :telefono_habitacion, placeholder: "Teléfono de Habitación…"
         %span.help-block
           Ejemplo: 0212-5551122
 
@@ -82,7 +82,7 @@
       %label.control-label
         Teléfono celular
       .controls
-        =telephone_field :usuario, :telefono_movil, :placeholder => "Celular…", :required => true
+        =telephone_field :usuario, :telefono_movil, placeholder: "Celular…", required: true
         %span.help-block
           Ejemplo: 0414-2391212
 
@@ -90,7 +90,7 @@
       %label.control-label
         Correo electrónico
       .controls
-        =text_field :usuario, :correo, :placeholder => "Correo Electrónico…", :required => true
+        =text_field :usuario, :correo, placeholder: "Correo Electrónico…", required: true
         %span.help-block
           Ejemplo: maria@gmail.com
 
@@ -98,7 +98,7 @@
       %label.control-label
         Correo electrónico (alternativo)
       .controls
-        =text_field :usuario, :correo_alternativo, :placeholder => "Correo Alternativo…", :required => true
+        =text_field :usuario, :correo_alternativo, placeholder: "Correo Alternativo…", required: true
         %span.help-block
           Ejemplo: maria2@gmail.com
 
@@ -106,7 +106,7 @@
       %label.control-label
         Dirección de domicilio
       .controls
-        =text_area :usuario, :direccion, :rows => 4, :placeholder => "Domicilio…", :required => true
+        =text_area :usuario, :direccion, :rows => 4, placeholder: "Domicilio…", required: true
         %span.help-block
           Ejemplo: Avenida A, con calle B. Los Naranjos.
 
@@ -117,7 +117,7 @@
       %label.control-label
         Experiencia
       .controls
-        =text_area :docente, :experiencia, :rows => 4, :placeholder => "Experiencia…"
+        =text_area :docente, :experiencia, :rows => 4, placeholder: "Experiencia…"
         %span.help-block
 
 
@@ -125,23 +125,23 @@
       - @submit = "Siguiente"
     - else
       - @submit = "Registrar"
-    =submit_tag @submit, :class => "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
+    =submit_tag @submit, class: "btn btn-primary" #, :confirm => "¿Está seguro de enviar los datos?"
 
 
-#modificar_ci.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modificar_ci.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-header
     %button.close.fade{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3#myModalLabel Modificar Cédula de Identidad
   .modal-body
-    =form_tag "/aceim_diplomados/docentes/modificar_ci/#{@usuario.ci}", :class => "form-horizontal" do 
+    =form_tag "/aceim_diplomados/docentes/modificar_ci/#{@usuario.ci}", class: "form-horizontal" do 
       .control-group
         %label.control-label{:for => "nueva_ci"} Cédula Nueva:
         .controls
-          =number_field_tag :nueva_ci, nil, :autofocus => true, :required => true, :placeholder => "Nueva Cédula"
+          =number_field_tag :nueva_ci, nil, autofocus: true, required: true, placeholder: "Nueva Cédula"
       .control-group
         %label.control-label{:for => "repetir_ci"} Repetir Cédula:
         .controls
-          =number_field_tag :repetir_ci, nil, :autofocus => true, :required => true, :placeholder => "Reperir Cédula"
+          =number_field_tag :repetir_ci, nil, autofocus: true, required: true, placeholder: "Reperir Cédula"
       .form-actions
-        %input.btn.btn-primary{"data-disable-with" => "Por favor espere...", :name => "commit", :type => "submit", :value => "Guardar"}
+        %input.btn.btn-primary{"data-disable-with" => "Por favor espere...", :name => "commit", :type => "submit", value: "Guardar"}
           %a.btn{"data-dismiss" => "modal", :href => ""} Cancelar 

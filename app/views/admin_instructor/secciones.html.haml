@@ -9,11 +9,11 @@ Filtrar Contenido:
         Nivel
       %th
         Idioma
-      %th{:width => "150px"}
+      %th{width: "150px"}
         Curso
-      %th{:width => "150px"}
+      %th{width: "150px"}
         Horario
-      %th{:width => "150px"}
+      %th{width: "150px"}
         Aula
       %th
         Sec
@@ -35,9 +35,9 @@ Filtrar Contenido:
         %td
           =s.aula_corta  
         %td
-          =link_to s.seccion_numero, :action=>"nivel4", :controller=> "estado_inscripcion", :seccion => s
+          =link_to s.seccion_numero, action:"nivel4", controller: "estado_inscripcion", :seccion => s
         %td
           =s.inscritos
   %br/
   %br/
-=link_to "<Atrás", :action=>"index"
+=link_to "<Atrás", action:"index"

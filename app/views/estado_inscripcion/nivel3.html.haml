@@ -31,5 +31,5 @@
         %td
           =s.instructor.usuario.descripcion
         %td
-          =link_to s.seccion_numero, :action=>"nivel4", :seccion => s
-=link_to "<atrás", :action=>"nivel2", :id => @tipo1
+          =link_to s.seccion_numero, action:"nivel4", :seccion => s
+=link_to "<atrás", action:"nivel2", id: @tipo1

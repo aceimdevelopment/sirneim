@@ -20,19 +20,19 @@
 	.well.well-small
 		=render 'layouts/cal_cargar_sesion'
 	
-		=link_to "¿Olvidó su clave?", "#", :class=> "btn btn-mini", :onclick => "return $('#olvido_clave').modal();"
+		=link_to "¿Olvidó su clave?", "#", class: "btn btn-mini", :onclick => "return $('#olvido_clave').modal();"
 
 .modal.hide.fade#olvido_clave
 	.modal-header
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		%h3 Recuperar Contraseña
 
-	=form_tag :url => {:action => 'olvido_clave_enviar'}, :class => "form-horizontal"  do 
+	=form_tag :url => {action: 'olvido_clave_enviar'}, class: "form-horizontal"  do 
 		.modal-body
 			.control-group
 				%label.control-label
 					CI:
 				.controls
-					=text_field :cal_usuario, :ci, :placeholder => "Ingrese su cédula de identidad…", :required => true
+					=text_field :cal_usuario, :ci, placeholder: "Ingrese su cédula de identidad…", required: true
 		.modal-footer
-			=submit_tag 'Recuperar', :class => "btn btn-primary"
+			=submit_tag 'Recuperar', class: "btn btn-primary"
