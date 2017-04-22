@@ -46,7 +46,7 @@ end
   
   def validar
     ci = params[:usuario][:ci]    
-    if session[:estudiante]=Estudiante.where(:usuario_ci=>ci).limit(1).first
+    if session[:estudiante]=Estudiante.where(usuario_ci:ci).limit(1).first
       session[:estudiante_ci] = ci
       redirect_to :action=> "opciones_menu"
     else
@@ -71,7 +71,7 @@ end
     periodo = session[:parametros][:periodo_actual]
     ci = session[:estudiante_ci]
     @usuario = Usuario.where(:ci=>ci).limit(1).first
-    @cursos = EstudianteCurso.where(:usuario_ci => ci).collect{|c| c.tipo_curso}
+    @cursos = EstudianteCurso.where(usuario_ci: ci).collect{|c| c.tipo_curso}
     @titulo_pagina = "Modificar Estudiante: #{@usuario.descripcion}"
     @subtitulo_pagina = "Seleccione el Curso"
   end
@@ -79,7 +79,7 @@ end
   def cambiar_convenio
     idioma_id,tipo_categoria_id = params[:parametros][:tipo_curso].split(",")
     ci = params[:parametros][:usuario_ci]
-    @estudiante_curso= EstudianteCurso.where(:usuario_ci=>ci,:idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id).limit(1).first
+    @estudiante_curso= EstudianteCurso.where(usuario_ci:ci,idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id).limit(1).first
     render :layout => false
   end
 
@@ -89,14 +89,14 @@ end
     idioma_id = params[:estudiante_curso][:idioma_id]
     tipo_categoria_id = params[:estudiante_curso][:tipo_categoria_id]
     ci = params[:estudiante_curso][:usuario_ci]
-    estudiante_curso= EstudianteCurso.where(:usuario_ci=>ci,
-    :idioma_id=>idioma_id, 
-    :tipo_categoria_id=>tipo_categoria_id).limit(1).first
+    estudiante_curso= EstudianteCurso.where(usuario_ci:ci,
+    idioma_id:  idioma_id, 
+    tipo_categoria_id: tipo_categoria_id).limit(1).first
     
     if estudiante_curso.tipo_convenio_id != tipo_convenio_id
-      historial = HistorialAcademico.where(:usuario_ci=>ci,
-        :idioma_id=>idioma_id, 
-        :tipo_categoria_id=>tipo_categoria_id, 
+      historial = HistorialAcademico.where(usuario_ci:ci,
+        idioma_id:  idioma_id, 
+        tipo_categoria_id: tipo_categoria_id, 
         :periodo_id=>periodo).limit(1).first
       estudiante_curso.tipo_convenio_id = tipo_convenio_id
       
@@ -155,7 +155,7 @@ end
     periodo = session[:parametros][:periodo_actual]
     ci = session[:estudiante_ci]
     @usuario = Usuario.where(:ci=>ci).limit(1).first
-    @cursos = EstudianteCurso.where(:usuario_ci => ci).collect{|c| c.tipo_curso}
+    @cursos = EstudianteCurso.where(usuario_ci: ci).collect{|c| c.tipo_curso}
     @titulo_pagina = "Modificar Estudiante: #{@usuario.descripcion}"
     @subtitulo_pagina = "Seleccione el Curso"
   end
@@ -166,8 +166,8 @@ end
     idioma_id = p[:idioma_id]
     tipo_categoria_id = p[:tipo_categoria_id]
     ci = p[:usuario_ci]
-    @historial = HistorialAcademico.where(:periodo_id=>periodo, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :usuario_ci=>ci).limit(1).first
-    @secciones = Seccion.where(:idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :periodo_id => periodo, :tipo_nivel_id=>@historial.tipo_nivel_id)
+    @historial = HistorialAcademico.where(:periodo_id=>periodo, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, usuario_ci:ci).limit(1).first
+    @secciones = Seccion.where(idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, :periodo_id => periodo, :tipo_nivel_id=>@historial.tipo_nivel_id)
     render :layout=> false
   end
   
@@ -175,7 +175,7 @@ end
     
     periodo_id,idioma_id,tipo_categoria_id, tipo_nivel_id, numero = params[:historial][:seccion].split(",")
     ci = params[:historial][:usuario_ci]    
-    historial = HistorialAcademico.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :usuario_ci=>ci).limit(1).first
+    historial = HistorialAcademico.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, usuario_ci:ci).limit(1).first
     unless historial.seccion_numero.eql? numero
       historial.seccion_numero = numero
       if historial.save
@@ -197,7 +197,7 @@ end
     periodo = session[:parametros][:periodo_actual]
     ci = session[:estudiante_ci]
     @usuario = Usuario.where(:ci=>ci).limit(1).first
-    @cursos = EstudianteCurso.where(:usuario_ci => ci).collect{|c| c.tipo_curso}
+    @cursos = EstudianteCurso.where(usuario_ci: ci).collect{|c| c.tipo_curso}
     @titulo_pagina = "Modificar Estudiante: #{@usuario.descripcion}"
     @subtitulo_pagina = "Seleccione el Curso"
     @accion = params[:accion]
@@ -208,16 +208,16 @@ end
     p=params[:parametros]
     periodo = session[:parametros][:periodo_actual]
     ci = p[:usuario_ci]
-    @historial = HistorialAcademico.where(:periodo_id=>periodo, :idioma_id=>p[:idioma_id], :tipo_categoria_id=>p[:tipo_categoria_id], :usuario_ci=>ci).limit(1).first
+    @historial = HistorialAcademico.where(:periodo_id=>periodo, idioma_id:  p[:idioma_id], tipo_categoria_id: p[:tipo_categoria_id], usuario_ci:ci).limit(1).first
     render :layout => false   
   end
 
   def cambiar_nota
     if (session[:administrador].usuario_ci != "aceim")
       pa = params[:parametros]
-      @historial = HistorialAcademico.where(:usuario_ci => pa[:usuario_ci],
-                                            :idioma_id => pa[:idioma_id],
-                                            :tipo_categoria_id => pa[:tipo_categoria_id],
+      @historial = HistorialAcademico.where(usuario_ci: pa[:usuario_ci],
+                                            idioma_id:  pa[:idioma_id],
+                                            tipo_categoria_id:  pa[:tipo_categoria_id],
                                             :tipo_nivel_id => pa[:tipo_nivel_id],
                                             :periodo_id => pa[:periodo_id],
                                             :seccion_numero => pa[:seccion_numero]
@@ -235,7 +235,7 @@ end
     ci = params[:historial][:usuario_ci]
     periodo = session[:parametros][:periodo_actual]
     unless params[:historial][:numero_deposito].eql? ""
-      @historial = HistorialAcademico.where(:periodo_id=>periodo, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :usuario_ci=>ci, :tipo_nivel_id=>tipo_nivel_id).limit(1).first
+      @historial = HistorialAcademico.where(:periodo_id=>periodo, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, usuario_ci:ci, :tipo_nivel_id=>tipo_nivel_id).limit(1).first
       @historial.tipo_estado_inscripcion_id = "INS"
       @historial.numero_deposito = params[:historial][:numero_deposito]
   
@@ -257,7 +257,7 @@ end
     p=params[:parametros]
     ci = p[:usuario_ci]
     periodo = session[:parametros][:periodo_actual]
-    @historial = HistorialAcademico.where(:idioma_id=>p[:idioma_id],:tipo_categoria_id=>p[:tipo_categoria_id],:periodo_id=>periodo,:usuario_ci=>ci).limit(1).first
+    @historial = HistorialAcademico.where(idioma_id:  p[:idioma_id],tipo_categoria_id: p[:tipo_categoria_id],:periodo_id=>periodo,usuario_ci:ci).limit(1).first
     render :layout => false
   end
   
@@ -265,7 +265,7 @@ end
     periodo = session[:parametros][:periodo_actual]
     idioma_id,tipo_categoria_id = params[:tipo_curso].split(",")
     ci = params[:usuario_ci]
-    h = HistorialAcademico.where(:usuario_ci=>ci, :periodo_id=>periodo, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id).limit(1).first
+    h = HistorialAcademico.where(usuario_ci:ci, :periodo_id=>periodo, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id).limit(1).first
     if h.destroy
       session[:estudiante] = Estudiante.find(ci)
       info_bitacora("Eliminado Curso: #{h.curso.descripcion}")
@@ -308,7 +308,7 @@ end
     
     periodo_actual = session[:parametros][:periodo_actual]
 
-    if HistorialAcademico.where(:usuario_ci=>ci, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id).delete_if{|x| !x.aprobo_curso?}.count > 0 &&  pdf = DocumentosPDF.generar_constancia_notas(ci,idioma_id,tipo_categoria_id,false)
+    if HistorialAcademico.where(usuario_ci:ci, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id).delete_if{|x| !x.aprobo_curso?}.count > 0 &&  pdf = DocumentosPDF.generar_constancia_notas(ci,idioma_id,tipo_categoria_id,false)
         send_data pdf.render,:filename => "constancia_notas_#{idioma_id}-#{tipo_categoria_id} #{ci}.pdf",:type => "application/pdf", :disposition => "attachment"
         info_bitacora("Constancia de Notas generada: #{idioma_id}-#{tipo_categoria_id} #{ci}")
     else
@@ -329,7 +329,7 @@ end
     
     periodo_actual = session[:parametros][:periodo_actual]
 
-    if HistorialAcademico.where(:usuario_ci=>ci, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id).count > 0 &&  pdf = DocumentosPDF.generar_constancia_estudio(ci,idioma_id,tipo_categoria_id,remitente,periodo_actual)
+    if HistorialAcademico.where(usuario_ci:ci, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id).count > 0 &&  pdf = DocumentosPDF.generar_constancia_estudio(ci,idioma_id,tipo_categoria_id,remitente,periodo_actual)
         send_data pdf.render,:filename => "constancia_estudio_#{idioma_id}-#{tipo_categoria_id} #{ci}.pdf"
         info_bitacora("Constancia de Estudio generada: #{idioma_id}-#{tipo_categoria_id} #{ci}")
     else
@@ -361,7 +361,7 @@ end
     p=params[:parametros]
     ci = p[:usuario_ci]
     periodo = session[:parametros][:periodo_actual]
-    @historial = HistorialAcademico.where(:idioma_id=>p[:idioma_id],:tipo_categoria_id=>p[:tipo_categoria_id],:periodo_id=>periodo,:usuario_ci=>ci).limit(1).first
+    @historial = HistorialAcademico.where(idioma_id:  p[:idioma_id],tipo_categoria_id: p[:tipo_categoria_id],:periodo_id=>periodo,usuario_ci:ci).limit(1).first
     render :layout => false
  
 
@@ -372,7 +372,7 @@ end
     periodo = session[:parametros][:periodo_actual]
     idioma_id,tipo_categoria_id = params[:tipo_curso].split(",")
     ci = params[:usuario_ci]
-    h = HistorialAcademico.where(:usuario_ci=>ci, :periodo_id=>periodo, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id).limit(1).first
+    h = HistorialAcademico.where(usuario_ci:ci, :periodo_id=>periodo, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id).limit(1).first
   
     h.tipo_estado_calificacion_id = "CO"
     h.tipo_estado_inscripcion_id = "CON"

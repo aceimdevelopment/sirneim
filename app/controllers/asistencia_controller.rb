@@ -36,8 +36,8 @@ class AsistenciaController < ApplicationController
       session[:seccion_numero] = params[:sn]
     end
     @historiales = HistorialAcademico.where(:periodo_id => session[:periodo_id],
-                                              :idioma_id => session[:idioma_id],
-                                              :tipo_categoria_id => session[:tipo_categoria_id],
+                                              idioma_id:  session[:idioma_id],
+                                              tipo_categoria_id:  session[:tipo_categoria_id],
                                               :tipo_estado_inscripcion_id => "INS",
                                               :tipo_nivel_id => session[:tipo_nivel_id],
                                               :seccion_numero => session[:seccion_numero]
@@ -99,8 +99,8 @@ class AsistenciaController < ApplicationController
 
   def asistencia_pdf
     historiales = HistorialAcademico.where(:periodo_id => session[:periodo_id],
-                                              :idioma_id => session[:idioma_id],
-                                              :tipo_categoria_id => session[:tipo_categoria_id],
+                                              idioma_id:  session[:idioma_id],
+                                              tipo_categoria_id:  session[:tipo_categoria_id],
                                               :tipo_estado_inscripcion_id => "INS",
                                               :tipo_nivel_id => session[:tipo_nivel_id],
                                               :seccion_numero => session[:seccion_numero]

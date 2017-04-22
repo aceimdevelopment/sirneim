@@ -18,9 +18,9 @@ class PrincipalController < ApplicationController
     end
 
     # @preinscrito = !!HistorialAcademico.where(
-    #   :usuario_ci => session[:usuario].ci,
-    #   :idioma_id => session[:tipo_curso].idioma_id,
-    #   :tipo_categoria_id => session[:tipo_curso].tipo_categoria_id,
+    #   usuario_ci: session[:usuario].ci,
+    #   idioma_id:  session[:tipo_curso].idioma_id,
+    #   tipo_categoria_id:  session[:tipo_curso].tipo_categoria_id,
     #   :periodo_id => session[:parametros][:periodo_inscripcion]).limit(1).first
   end
 

@@ -74,11 +74,11 @@ class CalificacionController < ApplicationController
     exitoso = true
     historial = nil #debe quedar asignado un ultimo historial
     params[:historial_academico].each{ |pa| 
-      historial = HistorialAcademico.where(:usuario_ci => pa[0],
+      historial = HistorialAcademico.where(usuario_ci: pa[0],
                                           :periodo_id => session[:periodo_id],
-                                          :idioma_id => session[:idioma_id],
+                                          idioma_id:  session[:idioma_id],
 					  :tipo_estado_inscripcion_id => "INS",
-                                          :tipo_categoria_id => session[:tipo_categoria_id],
+                                          tipo_categoria_id:  session[:tipo_categoria_id],
                                           :tipo_nivel_id => session[:tipo_nivel_id],
                                           :seccion_numero => session[:seccion_numero]
                                           ).limit(1).first
@@ -127,11 +127,11 @@ class CalificacionController < ApplicationController
       end
       #bitacora
       params[:historial_academico].each{ |pa| 
-      historial = HistorialAcademico.where(:usuario_ci => pa[0],
+      historial = HistorialAcademico.where(usuario_ci: pa[0],
                                           :periodo_id => session[:periodo_id],
-                                          :idioma_id => session[:idioma_id],
+                                          idioma_id:  session[:idioma_id],
 					                                :tipo_estado_inscripcion_id => "INS",
-                                          :tipo_categoria_id => session[:tipo_categoria_id],
+                                          tipo_categoria_id:  session[:tipo_categoria_id],
                                           :tipo_nivel_id => session[:tipo_nivel_id],
                                           :seccion_numero => session[:seccion_numero]
                                           ).limit(1).first
@@ -157,11 +157,11 @@ class CalificacionController < ApplicationController
     arreglo.each{|a|
       params[a.keys[0]].each_with_index{|nota,i|
         exitoso_local = true
-        historial = HistorialAcademico.where(:usuario_ci => nota[0],
+        historial = HistorialAcademico.where(usuario_ci: nota[0],
                                           :periodo_id => session[:periodo_id],
-                                          :idioma_id => session[:idioma_id],
+                                          idioma_id:  session[:idioma_id],
 					                                :tipo_estado_inscripcion_id => "INS",
-                                          :tipo_categoria_id => session[:tipo_categoria_id],
+                                          tipo_categoria_id:  session[:tipo_categoria_id],
                                           :tipo_nivel_id => session[:tipo_nivel_id],
                                           :seccion_numero => session[:seccion_numero]
                                           ).limit(1).first     
@@ -208,11 +208,11 @@ class CalificacionController < ApplicationController
     end
     #bitacora
       params[:notafinal].each{ |pa| 
-      historial = HistorialAcademico.where(:usuario_ci => pa[0],
+      historial = HistorialAcademico.where(usuario_ci: pa[0],
                                           :periodo_id => session[:periodo_id],
-                                          :idioma_id => session[:idioma_id],
+                                          idioma_id:  session[:idioma_id],
 					  :tipo_estado_inscripcion_id => "INS",
-                                          :tipo_categoria_id => session[:tipo_categoria_id],
+                                          tipo_categoria_id:  session[:tipo_categoria_id],
                                           :tipo_nivel_id => session[:tipo_nivel_id],
                                           :seccion_numero => session[:seccion_numero]
                                           ).limit(1).first   
@@ -248,9 +248,9 @@ class CalificacionController < ApplicationController
 
   def guardar_nota_individual
     guardo = true
-    historial = HistorialAcademico.where(:usuario_ci => params[:ci],
-                                         :idioma_id => params[:idioma],
-                                         :tipo_categoria_id => params[:tipo_categoria],
+    historial = HistorialAcademico.where(usuario_ci: params[:ci],
+                                         idioma_id:  params[:idioma],
+                                         tipo_categoria_id:  params[:tipo_categoria],
                                          :tipo_nivel_id => params[:tipo_nivel],
                                          :periodo_id => params[:periodo],
                                          :seccion_numero => params[:seccion]

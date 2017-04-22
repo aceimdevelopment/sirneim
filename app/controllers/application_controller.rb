@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   def historiales_usuarios
       @historiales = HistorialAcademico.where(:periodo_id => session[:periodo_id],
-                                              :idioma_id => session[:idioma_id],
-                                              :tipo_categoria_id => session[:tipo_categoria_id],
+                                              idioma_id:  session[:idioma_id],
+                                              tipo_categoria_id:  session[:tipo_categoria_id],
 					      :tipo_estado_inscripcion_id => "INS",
                                               :tipo_nivel_id => session[:tipo_nivel_id],
                                               :seccion_numero => session[:seccion_numero]
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     
     Bitacora.info(
       :descripcion => descripcion, 
-      :usuario_ci => usuario_ci,
+      usuario_ci: usuario_ci,
       :estudiante_usuario_ci =>estudiante_ci,
       :administrador_usuario_ci =>administrador_ci,
       :ip_origen => request.remote_ip

@@ -39,13 +39,13 @@ class EstudianteNivelacionesController < ApplicationController
     @usuario.tipo_sexo_id = usr[:tipo_sexo_id]
     @usuario.telefono_movil = usr[:telefono_movil]                    
     if @usuario.save  
-      unless Estudiante.where(:usuario_ci => params[:usuario][:ci]).first
+      unless Estudiante.where(usuario_ci: params[:usuario][:ci]).first
         est = Estudiante.new
         est.usuario_ci = params[:usuario][:ci]
         est.save
       end                   
 
-      unless EstudianteCurso.where(:usuario_ci => params[:usuario][:ci]).first
+      unless EstudianteCurso.where(usuario_ci: params[:usuario][:ci]).first
         ec = EstudianteCurso.new
         ec.usuario_ci = @usuario.ci
         ec.idioma_id = idioma_id

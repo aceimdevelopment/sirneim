@@ -8,7 +8,7 @@ class EstudianteController < ApplicationController
 	
   def index
   	usuario = session[:usuario]
-  	# @estudiante = Estudiante.where(:usuario_ci => usuario[:ci]).limit(1).first
+  	# @estudiante = Estudiante.where(usuario_ci: usuario[:ci]).limit(1).first
     @estudiantes = Estudiante.all
 
     @grupo_a = Preinscripcion.where(:grupo_id => "a")
@@ -67,8 +67,8 @@ class EstudianteController < ApplicationController
   	periodo_anterior = ParametroGeneral.periodo_anterior
     periodo_actual = ParametroGeneral.periodo_actual
     
-    h = HistorialAcademico.where(:usuario_ci => usuario.ci, :periodo_id => periodo_anterior.id).limit(1).first
-    #, :idioma_id => tipo_curso.idioma_id, :tipo_categoria_id => tipo_curso.tipo_categoria_id
+    h = HistorialAcademico.where(usuario_ci: usuario.ci, :periodo_id => periodo_anterior.id).limit(1).first
+    #, idioma_id:  tipo_curso.idioma_id, tipo_categoria_id:  tipo_curso.tipo_categoria_id
     
     @historial = HistorialAcademico.new
     @historial.usuario_ci = h.usuario_ci
@@ -80,7 +80,7 @@ class EstudianteController < ApplicationController
     
     if siguiente_nivel = h.curso.siguiente_nivel
     
-    	if seccion = Seccion.where(:periodo_id=>@historial.periodo_id, :idioma_id=>@historial.idioma_id, :tipo_categoria_id=>@historial.tipo_categoria_id, :tipo_nivel_id => siguiente_nivel.tipo_nivel_id,:esta_abierta=>1).limit(1).first
+    	if seccion = Seccion.where(:periodo_id=>@historial.periodo_id, idioma_id:  @historial.idioma_id, tipo_categoria_id: @historial.tipo_categoria_id, :tipo_nivel_id => siguiente_nivel.tipo_nivel_id,:esta_abierta=>1).limit(1).first
     	
     		@historial.tipo_nivel_id = seccion.tipo_nivel_id
     		@historial.seccion_numero = seccion.seccion_numero    		
@@ -143,8 +143,8 @@ class EstudianteController < ApplicationController
   	
     periodo_actual = ParametroGeneral.periodo_actual
     
-    @historial = HistorialAcademico.where(:usuario_ci => usuario.ci, :periodo_id => periodo_actual.id).limit(1).first
-    #, :idioma_id => tipo_curso.idioma_id, :tipo_categoria_id => tipo_curso.tipo_categoria_id
+    @historial = HistorialAcademico.where(usuario_ci: usuario.ci, :periodo_id => periodo_actual.id).limit(1).first
+    #, idioma_id:  tipo_curso.idioma_id, tipo_categoria_id:  tipo_curso.tipo_categoria_id
     
     @horario = @historial.seccion.horario
 		
@@ -173,9 +173,9 @@ class EstudianteController < ApplicationController
     periodo_actual = ParametroGeneral.periodo_actual
     info_bitacora "Esta viendo sus cursos realizados"
     
-    @historial = HistorialAcademico.where(:usuario_ci => usuario.ci,
-    :idioma_id => tipo_curso.idioma_id,
-    :tipo_categoria_id => tipo_curso.tipo_categoria_id)
+    @historial = HistorialAcademico.where(usuario_ci: usuario.ci,
+    idioma_id:  tipo_curso.idioma_id,
+    tipo_categoria_id:  tipo_curso.tipo_categoria_id)
 		if @historial.size == 0
 		  flash[:mensaje] = "No tiene cursos en este idioma"
   		redirect_to :action=>"principal", :controller => "principal"

@@ -82,9 +82,9 @@ class EstadoInscripcionController < ApplicationController
     periodo = ParametroGeneral.periodo_actual
     @tipo1, @tipo2 = params[:id].split(",")
     
-    @seccion = Seccion.where(:idioma_id => @tipo2, :tipo_nivel_id => @tipo1, :periodo_id => periodo.id)
+    @seccion = Seccion.where(idioma_id:  @tipo2, :tipo_nivel_id => @tipo1, :periodo_id => periodo.id)
     if @seccion.first 
-      @seccion = Seccion.where(:idioma_id => @tipo1, :tipo_nivel_id => @tipo2,:periodo_id => periodo.id)
+      @seccion = Seccion.where(idioma_id:  @tipo1, :tipo_nivel_id => @tipo2,:periodo_id => periodo.id)
       @nombre="Niveles"
       @otro="Idiomas"
     else       
@@ -97,7 +97,7 @@ class EstadoInscripcionController < ApplicationController
   def nivel4
     periodo_id, idioma_id, tipo_categoria_id, tipo_nivel_id, seccion_numero = params[:seccion].split(",")
 
-    @historiales = HistorialAcademico.where(:periodo_id=>periodo_id,:idioma_id => idioma_id, :tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :tipo_estado_inscripcion_id=>"INS")
+    @historiales = HistorialAcademico.where(:periodo_id=>periodo_id,idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :tipo_estado_inscripcion_id=>"INS")
     if  @historiales.size == 0
       flash[:mensaje] = "No hay estudiantes confirmados en esta sección"
       redirect_to :action => "ver_secciones"
@@ -201,7 +201,7 @@ class EstadoInscripcionController < ApplicationController
 		@aulas = BloqueAulaDisponible.where(["aula_id NOT IN (?) AND asignada = ? AND tipo_dia_id = ? AND tipo_hora_id = ? ", horario_sec, 1, tipo_dia_id, tipo_hora_id])
 		
 
-    @seccion_horario = HorarioSeccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero,:tipo_dia_id=>tipo_dia_id, :tipo_hora_id=>tipo_hora_id).limit(1).first
+    @seccion_horario = HorarioSeccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero,:tipo_dia_id=>tipo_dia_id, :tipo_hora_id=>tipo_hora_id).limit(1).first
 
     numero_pareja = BloqueAulaDisponible.where(:tipo_hora_id => tipo_hora_id, :tipo_dia_id => tipo_dia_id, :aula_id => @seccion_horario.aula_id).first
 
@@ -221,7 +221,7 @@ class EstadoInscripcionController < ApplicationController
 		idioma = params[:idioma]
 		categoria = params[:categoria]
 
-    seccion_horario = HorarioSeccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero,:tipo_dia_id=>tipo_dia_id, :tipo_hora_id=>tipo_hora_id).limit(1).first
+    seccion_horario = HorarioSeccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero,:tipo_dia_id=>tipo_dia_id, :tipo_hora_id=>tipo_hora_id).limit(1).first
 
     if(tipo_dia_id != "SA")
 
@@ -284,7 +284,7 @@ class EstadoInscripcionController < ApplicationController
 		@accion = @p[:accion]
 		@controlador = @p[:controlador]
 
-    @seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero).limit(1).first
+    @seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero).limit(1).first
 
     instructores_secciones = Seccion.where(["periodo_id = ? AND bloque_horario_id = ? AND instructor_ci IS NOT NULL", periodo_id,@seccion.bloque_horario_id]).collect{|is| is.instructor_ci}
 
@@ -307,7 +307,7 @@ class EstadoInscripcionController < ApplicationController
 		accion = params[:accion]
 		controlador = params[:controlador]
     
-    seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero).limit(1).first
+    seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id,:seccion_numero=>numero).limit(1).first
 
     if instructor_ci=="" or instructor_ci=="-----"
       seccion.instructor_ci = nil
@@ -336,8 +336,8 @@ class EstadoInscripcionController < ApplicationController
 
     periodo_id, idioma_id,tipo_categoria_id,tipo_nivel_id,seccion_numero = p[:seccion].split(",")
 
-    @seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
-    @historiales = HistorialAcademico.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero)
+    @seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
+    @historiales = HistorialAcademico.where(:periodo_id=>periodo_id, idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero)
     if @seccion.esta_abierta
       @alerta = "¡ALERTA: Esta Sección aún esta abierta!"
     end
@@ -351,8 +351,8 @@ def eliminar_seccion
 		controlador = params[:controlador]
     periodo_id, idioma_id,tipo_categoria_id,tipo_nivel_id,seccion_numero = params[:seccion].split(",")
 
-    seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
-    historiales = HistorialAcademico.where(:periodo_id=>periodo_id,:idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero)
+    seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
+    historiales = HistorialAcademico.where(:periodo_id=>periodo_id,idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero)
     unless historiales.size==0
       historiales.each do |h|
         if h.destroy
@@ -383,8 +383,8 @@ def eliminar_seccion
 		@controlador = p[:controlador]
     periodo_id, idioma_id,tipo_categoria_id,tipo_nivel_id,seccion_numero = p[:seccion].split(",")
 
-    @seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
-    @historiales = HistorialAcademico.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :tipo_estado_inscripcion_id=>"PRE")
+    @seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
+    @historiales = HistorialAcademico.where(:periodo_id=>periodo_id, idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :tipo_estado_inscripcion_id=>"PRE")
 
     render :layout => false
   end
@@ -395,8 +395,8 @@ def eliminar_seccion
 		accion = params[:accion]
 		controlador = params[:controlador]
     periodo_id, idioma_id,tipo_categoria_id,tipo_nivel_id,seccion_numero = params[:seccion].split(",")
-    seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
-    historiales = HistorialAcademico.where(:periodo_id=>periodo_id,:idioma_id=>idioma_id,:tipo_categoria_id=>tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :tipo_estado_inscripcion_id=>"PRE")
+    seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero).limit(1).first
+    historiales = HistorialAcademico.where(:periodo_id=>periodo_id,idioma_id:  idioma_id,tipo_categoria_id: tipo_categoria_id,:tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :tipo_estado_inscripcion_id=>"PRE")
     unless historiales.size==0
       historiales.each do |h|
         if h.destroy
@@ -425,8 +425,8 @@ def eliminar_seccion
         periodo_id, idioma_id, tipo_categoria_id, tipo_nivel_id, seccion_numero = iden.split(",")
         secciones << Seccion.where(
           :periodo_id => periodo_id,
-          :idioma_id => idioma_id,
-          :tipo_categoria_id => tipo_categoria_id,
+          idioma_id:  idioma_id,
+          tipo_categoria_id:  tipo_categoria_id,
           :tipo_nivel_id => tipo_nivel_id,
           :seccion_numero => seccion_numero
         ).limit(1).first
@@ -457,7 +457,7 @@ def eliminar_seccion
       seleccion.each do |s|
         intructores_ci << s.at(0) if s.at(1).eql? "1"
       end
-      instructores = Instructor.where(:usuario_ci=>intructores_ci)
+      instructores = Instructor.where(usuario_ci:intructores_ci)
       para = instructores.collect{|i| i.usuario.correo}.to_a
     else
       para = params[:para].split(" ")

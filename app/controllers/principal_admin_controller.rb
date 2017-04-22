@@ -26,13 +26,13 @@ class PrincipalAdminController < ApplicationController
                                                  
     @instructores= Seccion.where("periodo_id = ? AND esta_abierta = ?", session[:parametros][:periodo_calificacion],1).collect{|x| x.instructor}.uniq.compact.sort_by{|i| "#{i.estado} #{i.fecha_que_califico(session[:parametros][:periodo_calificacion])}"}
     @instructores = @instructores.delete_if{|x| notificados.index x.usuario_ci}
-    @instructores_notificados = Instructor.where(:usuario_ci => notificados).sort_by{|x| x.fecha_notificacion(session[:parametros][:periodo_calificacion])}
+    @instructores_notificados = Instructor.where(usuario_ci: notificados).sort_by{|x| x.fecha_notificacion(session[:parametros][:periodo_calificacion])}
   end
   
   def enviar_notificaciones
     no_notificados = NotificacionCalificacion.where(:periodo_id => session[:parametros][:periodo_calificacion],
                                                  :correo_enviado => false).collect{|n| n.usuario_ci}
-    @instructores_no_notificados = Instructor.where(:usuario_ci => no_notificados)
+    @instructores_no_notificados = Instructor.where(usuario_ci: no_notificados)
     @texto = ""
     @instructores_no_notificados.each{ |ins|
       cantidad = 39 - ins.nombre_completo.size
@@ -49,7 +49,7 @@ class PrincipalAdminController < ApplicationController
   def enviar_correos
     no_notificados = NotificacionCalificacion.where(:periodo_id => session[:parametros][:periodo_calificacion],
                                                  :correo_enviado => false).collect{|n| n.usuario_ci}
-    @instructores_no_notificados = Instructor.where(:usuario_ci => no_notificados).sort_by{|x| x.usuario.nombre_completo}
+    @instructores_no_notificados = Instructor.where(usuario_ci: no_notificados).sort_by{|x| x.usuario.nombre_completo}
     texto = "Se notificó a los siguientes instructores: "
     @instructores_no_notificados.each{ |ins|
       ins.guardar_notificacion(session[:parametros][:periodo_calificacion])
@@ -74,7 +74,7 @@ class PrincipalAdminController < ApplicationController
   def confirmacion_rapida
     ci = params[:historial][:usuario_ci]
     periodo_actual=session[:parametros][:periodo_actual]
-    cursos = EstudianteCurso.where(:usuario_ci=>ci)
+    cursos = EstudianteCurso.where(usuario_ci:ci)
     
     if cursos.size<1
       flash[:mensaje]="Cédula no encontrada"
@@ -107,7 +107,7 @@ class PrincipalAdminController < ApplicationController
     ci = params[:historial][:usuario_ci]
     periodo = session[:parametros][:periodo_actual]
     unless params[:historial][:numero_deposito].eql? ""
-      @historial = HistorialAcademico.where(:periodo_id=>periodo, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :usuario_ci=>ci, :tipo_nivel_id=>tipo_nivel_id).limit(1).first
+      @historial = HistorialAcademico.where(:periodo_id=>periodo, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, usuario_ci:ci, :tipo_nivel_id=>tipo_nivel_id).limit(1).first
       @historial.tipo_estado_inscripcion_id = "INS"
       @historial.numero_deposito = params[:historial][:numero_deposito]
   
@@ -153,7 +153,7 @@ class PrincipalAdminController < ApplicationController
       intructores_ci << s.at(0) if s.at(1).eql? "1"
     end
     
-    instructores = Instructor.where(:usuario_ci=>intructores_ci)
+    instructores = Instructor.where(usuario_ci:intructores_ci)
     destinatarios = instructores.collect{|x| x.usuario.correo}
     destinatarios << "cursosdeidiomas.ucv.eim@gmail.com"
     destinatarios << "sergiorivas@gmail.com"

@@ -6,7 +6,7 @@ class InicioController < ApplicationController
   def index
     @cohorte_actual = Cohorte.actual
     @titulo = "Diplomados Ofertados para la Cohorte #{@cohorte_actual.descripcion}"
-    @diplomados = DiplomadoCohorte.where (:cohorte_id => @cohorte_actual.id)
+    @diplomados = DiplomadoCohorte.where(cohorte_id: @cohorte_actual.id)
 		reg = ContenidoWeb.where(:id => 'INI_CONTENT').first
     @content = reg.contenido
 
@@ -14,7 +14,7 @@ class InicioController < ApplicationController
     diplomado.normativa = @content
     diplomado.save
     # flash[:info] = @content.html_safe
-    @docentes_ct = CohorteTema.where(:cohorte_id => @cohorte_actual.id).group(:docente_ci)
+    @docentes_ct = CohorteTema.where(cohorte_id: @cohorte_actual.id).group(:docente_ci)
   end
   
   def registrar
@@ -38,7 +38,7 @@ class InicioController < ApplicationController
 
     if @usuario.save
       # Buscamos que no exista ningun estudiante con esa ci y lo creamos 
-      unless @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+      unless @estudiante = Estudiante.where(usuario_ci: @usuario.ci).first
         @estudiante = Estudiante.new
         @estudiante.usuario_ci = @usuario.ci
         @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
@@ -105,7 +105,7 @@ class InicioController < ApplicationController
       roles << "Administrador" if usuario.administrador
       roles << "Estudiante" if usuario.estudiante
       # roles << "Docente" if usuario.docente
-      #ests = EstudianteCurso.where(:usuario_ci => login) 
+      #ests = EstudianteCurso.where(usuario_ci: login) 
       #ests.each{ |ec|
       #  roles << "Estudiante"
       #}                       
@@ -142,8 +142,8 @@ class InicioController < ApplicationController
     #   @roles << { 
     #     :tipo => "Estudiante",
     #     :descripcion => ec.descripcion,
-    #     :tipo_categoria_id => ec.tipo_categoria_id,
-    #     :idioma_id => ec.idioma_id
+    #     tipo_categoria_id:  ec.tipo_categoria_id,
+    #     idioma_id:  ec.idioma_id
     #   }  
     # }
   end 
@@ -172,12 +172,12 @@ class InicioController < ApplicationController
       # ec = nil
       # if params[:tipo_categoria_id] && params[:idioma_id]
       #   ec = EstudianteCurso.where(
-      #     :usuario_ci => usuario.ci,
-      #     :tipo_categoria_id => params[:tipo_categoria_id],
-      #     :idioma_id => params[:idioma_id]).limit(1).first
+      #     usuario_ci: usuario.ci,
+      #     tipo_categoria_id:  params[:tipo_categoria_id],
+      #     idioma_id:  params[:idioma_id]).limit(1).first
       # else
       #   ec = EstudianteCurso.where(
-      #     :usuario_ci => usuario.ci).limit(1).first
+      #     usuario_ci: usuario.ci).limit(1).first
       # end
       # if ec      
       #   session[:estudiante] = usuario.estudiante

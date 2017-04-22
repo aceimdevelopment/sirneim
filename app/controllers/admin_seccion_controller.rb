@@ -27,7 +27,7 @@ class AdminSeccionController < ApplicationController
     if @filtro
       idioma_id , tipo_categoria_id = @filtro.split ","
       @secciones = Seccion.where(:periodo_id=>periodo,
-        :idioma_id => idioma_id, :tipo_categoria_id => tipo_categoria_id ).sort_by{|x| "#{x.tipo_curso.id}-#{'%03i'%x.curso.grado}-#{x.horario}-#{x.seccion_numero}"}
+        idioma_id:  idioma_id, tipo_categoria_id:  tipo_categoria_id ).sort_by{|x| "#{x.tipo_curso.id}-#{'%03i'%x.curso.grado}-#{x.horario}-#{x.seccion_numero}"}
       return
     end    
  
@@ -250,13 +250,13 @@ class AdminSeccionController < ApplicationController
 		@seccion_numero = params[:parametros][:seccion_numero]
 		@bloque_horario_id = params[:parametros][:bloque_horario_id]
 
-		e = Seccion.select("esta_abierta").where(:periodo_id => @periodo_id, :idioma_id => @idioma_id, :tipo_categoria_id => @tipo_categoria_id, :tipo_nivel_id => @tipo_nivel_id, :seccion_numero => @seccion_numero, :bloque_horario_id => @bloque_horario_id).first
+		e = Seccion.select("esta_abierta").where(:periodo_id => @periodo_id, idioma_id:  @idioma_id, tipo_categoria_id:  @tipo_categoria_id, :tipo_nivel_id => @tipo_nivel_id, :seccion_numero => @seccion_numero, :bloque_horario_id => @bloque_horario_id).first
 
 		@esta_abierta = e.esta_abierta
 
 		@idioma_cats = @idioma_id + "-" + @tipo_categoria_id
 
-		@seccion = Seccion.where(:periodo_id => @periodo_id, :idioma_id  => @idioma_id, :tipo_categoria_id => @tipo_categoria_id, :tipo_nivel_id => @tipo_nivel_id, :seccion_numero => @seccion_numero).first
+		@seccion = Seccion.where(:periodo_id => @periodo_id, :idioma_id  => @idioma_id, tipo_categoria_id:  @tipo_categoria_id, :tipo_nivel_id => @tipo_nivel_id, :seccion_numero => @seccion_numero).first
 
 		@idiomas = Idioma.select("idioma.*,tipo_curso.*").joins(:tipo_curso).where(["id != ? and tipo_curso.tipo_categoria_id != ?", "OR","BBVA"])
 
@@ -492,7 +492,7 @@ class AdminSeccionController < ApplicationController
 		@controlador = params[:parametros][:controlador]
     @p = params[:parametros][:seccion]
 
-		@seccion = Seccion.where(:periodo_id => periodo_id, :idioma_id => idioma_id, :tipo_categoria_id => tipo_categoria_id, :tipo_nivel_id => tipo_nivel_id, :seccion_numero => seccion_numero, :bloque_horario_id => @bloque_horario_id).first
+		@seccion = Seccion.where(:periodo_id => periodo_id, idioma_id:  idioma_id, tipo_categoria_id:  tipo_categoria_id, :tipo_nivel_id => tipo_nivel_id, :seccion_numero => seccion_numero, :bloque_horario_id => @bloque_horario_id).first
 
 		render :layout => false
 
@@ -507,7 +507,7 @@ class AdminSeccionController < ApplicationController
 
     bloque_horario_id = params[:horario]
 
-    seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :bloque_horario_id => bloque_horario_id).limit(1).first
+    seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, :tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :bloque_horario_id => bloque_horario_id).limit(1).first
 
 		accion = params[:accion]
 		controlador = params[:controlador]
@@ -539,7 +539,7 @@ class AdminSeccionController < ApplicationController
 		@controlador = params[:parametros][:controlador]
     @p = params[:parametros][:seccion]
 
-		@seccion = Seccion.where(:periodo_id => periodo_id, :idioma_id => idioma_id, :tipo_categoria_id => tipo_categoria_id, :tipo_nivel_id => tipo_nivel_id, :seccion_numero => seccion_numero, :bloque_horario_id => @bloque_horario_id).first
+		@seccion = Seccion.where(:periodo_id => periodo_id, idioma_id:  idioma_id, tipo_categoria_id:  tipo_categoria_id, :tipo_nivel_id => tipo_nivel_id, :seccion_numero => seccion_numero, :bloque_horario_id => @bloque_horario_id).first
 
 		render :layout => false
 
@@ -555,7 +555,7 @@ class AdminSeccionController < ApplicationController
 
     bloque_horario_id = params[:horario]
 
-    seccion = Seccion.where(:periodo_id=>periodo_id, :idioma_id=>idioma_id, :tipo_categoria_id=>tipo_categoria_id, :tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :bloque_horario_id => bloque_horario_id).limit(1).first
+    seccion = Seccion.where(:periodo_id=>periodo_id, idioma_id:  idioma_id, tipo_categoria_id: tipo_categoria_id, :tipo_nivel_id=>tipo_nivel_id, :seccion_numero=>seccion_numero, :bloque_horario_id => bloque_horario_id).limit(1).first
 
 		accion = params[:accion]
 		controlador = params[:controlador]

@@ -33,8 +33,8 @@ class DocentesController < ApplicationController
   def editar
     @titulo = "Editar Docente"
     @accion = "actualizar"
-    # @usuario = Usuario.where (:ci => params[:id]).limit(1).first
-    # @docente = Docente.where (:usuario_ci => @usuario.ci).limit(1).first unless @usuario.nil?
+    # @usuario = Usuario.where(:ci => params[:id]).limit(1).first
+    # @docente = Docente.where(usuario_ci: @usuario.ci).limit(1).first unless @usuario.nil?
 
     @docente = Docente.where(usuario_ci: params[:id]).limit(1).first
     @usuario = @docente.usuario if @docente
@@ -73,7 +73,7 @@ class DocentesController < ApplicationController
   # PUT /docentes/1
   # PUT /docentes/1.json
   def actualizar
-    @docente = Docente.where(:usuario_ci => params[:usuario][:ci]).limit(1).first
+    @docente = Docente.where(usuario_ci: params[:usuario][:ci]).limit(1).first
     @usuario = Usuario.where(:ci => params[:usuario][:ci]).limit(1).first
 
     params[:usuario][:nombres] = params[:usuario][:nombres].split.map(&:capitalize).join(' ') if params[:usuario][:nombres]

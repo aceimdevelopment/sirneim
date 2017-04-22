@@ -20,9 +20,9 @@ class InscripcionAdminController < ApplicationController
   def encontrar
     usuario_ci = params[:usuario][:ci]
     unless @usuario = Usuario.where(:ci => usuario_ci).limit(1).first
-      redirect_to :action => "buscar", :nuevo => true, :usuario_ci => usuario_ci
+      redirect_to :action => "buscar", :nuevo => true, usuario_ci: usuario_ci
     else
-      if not estudiante = Estudiante.where(:usuario_ci => usuario_ci).limit(1).first
+      if not estudiante = Estudiante.where(usuario_ci: usuario_ci).limit(1).first
         estudiante = Estudiante.new
         estudiante.usuario_ci = usuario_ci
         flash[:success] = "Estudiante Registrado" if estudiante.save!
@@ -58,9 +58,9 @@ class InscripcionAdminController < ApplicationController
   def planilla_inscripcion
     ci, idioma_id, tipo_categoria_id, tipo_nivel_id, periodo_id, seccion_numero = params[:historial].split","
     @historial = HistorialAcademico.where(
-      :usuario_ci => ci,
-      :idioma_id => idioma_id,
-      :tipo_categoria_id => tipo_categoria_id,
+      usuario_ci: ci,
+      idioma_id:  idioma_id,
+      tipo_categoria_id:  tipo_categoria_id,
       :periodo_id => periodo_id).limit(1).first
     info_bitacora "Se busco la planilla de inscripcion desde el  ADMIN en #{@historial.seccion.descripcion_con_periodo}"
     pdf = DocumentosPDF.planilla_inscripcion(@historial)
@@ -238,8 +238,8 @@ class InscripcionAdminController < ApplicationController
   #   @subtitulo_pagina = "Selección de Nivel"
   #   @usuario = session[:especial_usuario]
   #   @tipo_curso = session[:especial_tipo_curso] 
-  #   @niveles = Seccion.where(:idioma_id => @tipo_curso.idioma_id,
-  #     :tipo_categoria_id => @tipo_curso.tipo_categoria_id,
+  #   @niveles = Seccion.where(idioma_id:  @tipo_curso.idioma_id,
+  #     tipo_categoria_id:  @tipo_curso.tipo_categoria_id,
   #     :periodo_id => session[:parametros][:periodo_inscripcion]).collect{|x| x.curso}.uniq.sort_by{|y| y.grado}.collect{|w| w.tipo_nivel}
   # end
   
@@ -258,8 +258,8 @@ class InscripcionAdminController < ApplicationController
   #   @ec = ec
   #   @secciones = Seccion.where(
   #     :periodo_id => session[:parametros][:periodo_actual],
-  #     :idioma_id => ec.idioma_id,
-  #     :tipo_categoria_id => ec.tipo_categoria_id,
+  #     idioma_id:  ec.idioma_id,
+  #     tipo_categoria_id:  ec.tipo_categoria_id,
   #     :tipo_nivel_id => session[:especial_nivel]
   #     ).sort_by{|s| s.cupo}
   # end
@@ -284,9 +284,9 @@ class InscripcionAdminController < ApplicationController
   #   @historial.seccion_numero = seccion_numero
     
   #   if HistorialAcademico.where(
-  #     :usuario_ci => @historial.usuario_ci,
-  #     :idioma_id => @historial.idioma_id,
-  #     :tipo_categoria_id => @historial.tipo_categoria_id,
+  #     usuario_ci: @historial.usuario_ci,
+  #     idioma_id:  @historial.idioma_id,
+  #     tipo_categoria_id:  @historial.tipo_categoria_id,
   #     :periodo_id => @historial.periodo_id
   #     ).limit(1).first
   #     flash[:mensaje] = "El estudiante ya estaba inscrito en este periodo"
@@ -307,9 +307,9 @@ class InscripcionAdminController < ApplicationController
   #   @titulo_pagina = "Inscripción - Admin"  
   #   @subtitulo_pagina = "Impresión de Planilla"
   #   @historial = HistorialAcademico.where(
-  #     :usuario_ci => session[:especial_usuario].ci,
-  #     :idioma_id => session[:especial_tipo_curso].idioma_id,
-  #     :tipo_categoria_id => session[:especial_tipo_curso].tipo_categoria_id,
+  #     usuario_ci: session[:especial_usuario].ci,
+  #     idioma_id:  session[:especial_tipo_curso].idioma_id,
+  #     tipo_categoria_id:  session[:especial_tipo_curso].tipo_categoria_id,
   #     :periodo_id => session[:parametros][:periodo_actual]).limit(1).first
   # end
 

@@ -19,7 +19,7 @@ class AdminInstructorController < ApplicationController
   def nuevo_guardar 
     ci = params[:usuario][:ci]
     
-		@instructor = Instructor.where(:usuario_ci=>ci).limit(1).first
+		@instructor = Instructor.where(usuario_ci:ci).limit(1).first
 		@usuario = Usuario.where(:ci=>ci).limit(1).first
     if @instructor 
       flash[:mensaje] = "El usuario ya existia"
@@ -169,7 +169,7 @@ class AdminInstructorController < ApplicationController
         end
 
       else
-				HorarioDisponibleInstructor.update_all({:idioma_id => idioma_id},['instructor_ci = ?',instructor_ci])   
+				HorarioDisponibleInstructor.update_all({idioma_id:  idioma_id},['instructor_ci = ?',instructor_ci])   
       end
   
       if entrar == "SI"
@@ -238,7 +238,7 @@ class AdminInstructorController < ApplicationController
 			  instructor.asignado = 0
 			  instructor.save
 
-        HorarioDisponibleInstructor.update_all({:idioma_id => "OR"},['instructor_ci = ? and idioma_id = ?',instructor_ci,idioma_id])
+        HorarioDisponibleInstructor.update_all({idioma_id:  "OR"},['instructor_ci = ? and idioma_id = ?',instructor_ci,idioma_id])
       else
         HorarioDisponibleInstructor.delete_all(['instructor_ci = ? and idioma_id = ?',instructor_ci,idioma_id])   
       end        

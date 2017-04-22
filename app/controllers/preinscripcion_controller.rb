@@ -96,7 +96,7 @@ class PreinscripcionController < ApplicationController
     if a && b 
       @usuario.save
 
-      unless @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+      unless @estudiante = Estudiante.where(usuario_ci: @usuario.ci).first
         @estudiante = Estudiante.new
         @estudiante.usuario_ci = @usuario.ci
         @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]

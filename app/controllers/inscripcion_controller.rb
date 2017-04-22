@@ -25,7 +25,7 @@ class InscripcionController < ApplicationController
     aux = aux.split.map(&:capitalize).join(' ') if aux
     params[:usuario][:lugar_nacimiento] = aux
 
-    @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+    @estudiante = Estudiante.where(usuario_ci: @usuario.ci).first
     @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
     @estudiante.save
 
@@ -214,7 +214,7 @@ class InscripcionController < ApplicationController
       if a && b 
         @usuario.save
 
-        unless @estudiante = Estudiante.where(:usuario_ci => @usuario.ci).first
+        unless @estudiante = Estudiante.where(usuario_ci: @usuario.ci).first
           @estudiante = Estudiante.new
           @estudiante.usuario_ci = @usuario.ci
           @estudiante.cuenta_twitter = params[:estudiante][:cuenta_twitter]
