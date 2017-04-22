@@ -1,7 +1,7 @@
 # This file is used by Rack-based servers to start the application.
 
 require ::File.expand_path('../config/environment',  __FILE__)
-map '/sirneim' do
+#map '/sirneim' do
   run Aceim::Application
-end
+#end
                                                                       
