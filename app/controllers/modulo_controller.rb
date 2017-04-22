@@ -14,7 +14,7 @@ class ModuloController < ApplicationController
 		@modulo = Modulo.new(params[:modulo])
 	    if @modulo.save
 	    	flash[:success] = "Módulo Registrado Satisfactoriamente"
-	    	redirect_to session[:wizard] ? "/aceim_diplomados/asistente_diplomado/paso3" : "/aceim_diplomados/diplomado"
+	    	redirect_to session[:wizard] ? "/sirneim/asistente_diplomado/paso3" : "/sirneim/diplomado"
 	    else
 	    	render :action => "nuevo"
 	    end

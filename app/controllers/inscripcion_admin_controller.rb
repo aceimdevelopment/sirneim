@@ -7,7 +7,7 @@ class InscripcionAdminController < ApplicationController
   
   def buscar
     @titulo = "Participante"
-    @url = "/aceim_diplomados/inscripcion_admin/encontrar"
+    @url = "/sirneim/inscripcion_admin/encontrar"
     @nuevo = params[:nuevo]
     @usuario_ci = params[:usuario_ci]
     session[:inscripcion] = true

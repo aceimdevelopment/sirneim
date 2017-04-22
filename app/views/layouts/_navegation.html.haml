@@ -7,7 +7,7 @@
         %span.icon-bar
       -cohorte_actual = Cohorte.actual  
       -if session[:administrador]
-        %a.brand{:href => "/aceim_diplomados/principal_admin", style: ""} Aceim
+        %a.brand{:href => "/sirneim/principal_admin", style: ""} Aceim
       .container-fluid.nav-collapse
         %ul.nav
           -if session[:administrador]
@@ -44,7 +44,7 @@
               %li= link_to "Cambiar Contraseña", controller:"usuario", action:"contrasena", :controlador=>controller_name, :accion=>action_name 
               %li= link_to "Cambiar Datos Personales", controller:"usuario", action:"modificar", :controlador=>controller_name, :accion=>action_name 
               = drop_down_divider
-              = menu_item "Cerrar sesión", "/aceim_diplomados/inicio/cerrar_sesion"
+              = menu_item "Cerrar sesión", "/sirneim/inicio/cerrar_sesion"
           -else
             =render 'layouts/cargar_sesion' if (action_name != "registrar")
 

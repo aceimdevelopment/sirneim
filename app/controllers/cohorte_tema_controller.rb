@@ -39,7 +39,7 @@ class CohorteTemaController < ApplicationController
 		if @cohorte_tema.save
 			flash[:success] = "Asiganción correcta"
 			if session[:wizard]
-				redirect_to "/aceim_diplomados/asistente_diplomado/paso5/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+				redirect_to "/sirneim/asistente_diplomado/paso5/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			else	
 				redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			end
@@ -57,7 +57,7 @@ class CohorteTemaController < ApplicationController
 			flash[:success] = "Asignación actualizada"
 			redirect_to :back
 			# if session[:wizard]
-			# 	redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
+			# 	redirect_to "/sirneim/asistente_diplomado/paso3/#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			# else	
 			# 	redirect_to :action => "nuevo", :id => "#{@cohorte_tema.diplomado_id},#{@cohorte_tema.cohorte_id}"
 			# end

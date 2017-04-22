@@ -41,7 +41,7 @@ class TemaController < ApplicationController
 		if @tema.update_attributes(params[:tema])
 			flash[:success] = "Tema Actualizado Satisfactoriamente" 
 			if session[:wizard]
-				redirect_to "/aceim_diplomados/asistente_diplomado/paso3/#{@tema.diplomado_id}"
+				redirect_to "/sirneim/asistente_diplomado/paso3/#{@tema.diplomado_id}"
 			else
 				redirect_to :back
 			end
