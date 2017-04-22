@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TipoEstadoInscripcionController < ApplicationController
 	before_filter :filtro_logueado
 	before_filter :filtro_administrador
