@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class AdministradorMailer < ActionMailer::Base
   #layout 'layout'
   default :from => "diplomado.ele.eim.ucv@gmail.com"        

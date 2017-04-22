@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class InstructorMailer < ActionMailer::Base
   default :from => "diplomado.ele.eim.ucv@gmail.com"      
   

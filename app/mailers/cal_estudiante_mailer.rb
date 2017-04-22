@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalEstudianteMailer < ActionMailer::Base
   default :from => "sirneim@gmail.com"
   
