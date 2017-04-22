@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class EstudianteNivelacionesController < ApplicationController
   # GET /estudiante_nivelaciones
   # GET /estudiante_nivelaciones.json

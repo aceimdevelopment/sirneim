@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class DocentesController < ApplicationController
   # GET /docentes
   # GET /docentes.json

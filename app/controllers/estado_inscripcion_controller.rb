@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class EstadoInscripcionController < ApplicationController
   
   def ver_preinscripcion

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ConvenioController < ApplicationController
   
   before_filter :filtro_logueado

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ReportesController < ApplicationController
   
   def index_reportes_convenios

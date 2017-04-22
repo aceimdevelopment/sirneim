@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalMateriaController < ApplicationController
 
 	before_filter :cal_filtro_logueado
