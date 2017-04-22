@@ -45,11 +45,11 @@ class AsistenteDiplomadoController < ApplicationController
 	def paso3
 		@accion = "actualizar"
 		@diplomado = Diplomado.find params[:id] 
-		@atras = "/sirneim/asistente_diplomado/paso2"
+		@atras = "/asistente_diplomado/paso2"
 
 		@titulo = "#{action_name.capitalize}: Editar caracteristicas del Diplomado"
 		@porcentaje = (3.0/PASOS)*100
-		@siguiente = "/sirneim/asistente_diplomado/paso4/#{@diplomado.id}"
+		@siguiente = "/asistente_diplomado/paso4/#{@diplomado.id}"
 
 	end
 
@@ -66,10 +66,10 @@ class AsistenteDiplomadoController < ApplicationController
 			@diplomado_cohorte.diplomado_id = params[:id]
 			@accion = "registrar"
 		end
-		@atras = "/sirneim/asistente_diplomado/paso3/#{@diplomado_cohorte.diplomado_id}"
+		@atras = "/asistente_diplomado/paso3/#{@diplomado_cohorte.diplomado_id}"
 		@titulo = "#{action_name.capitalize}: Editar datos del Diplomado en la Cohorte"
 		@porcentaje = (4.0/PASOS)*100
-		@siguiente = "/sirneim/asistente_diplomado/paso5/#{@diplomado_cohorte.id.to_s}"
+		@siguiente = "/asistente_diplomado/paso5/#{@diplomado_cohorte.id.to_s}"
 	end
 
 	def paso5
@@ -83,9 +83,9 @@ class AsistenteDiplomadoController < ApplicationController
 			@cohorte_tema.cohorte_id = cohorte_id
 			@titulo = "#{action_name.capitalize}: Asignación de fechas y docentes a cada tema"
 			@grupos = @diplomado_cohorte.grupos
-			@atras = "/sirneim/asistente_diplomado/paso4/#{@diplomado_cohorte.diplomado_id}"
+			@atras = "/asistente_diplomado/paso4/#{@diplomado_cohorte.diplomado_id}"
 			@porcentaje = (5.0/PASOS)*100
-			@siguiente = "/sirneim/asistente_diplomado/paso6/#{@diplomado_cohorte.id}"
+			@siguiente = "/asistente_diplomado/paso6/#{@diplomado_cohorte.id}"
 
 		else
 			flash[:alert] = "No se ha encontrado el diplomado en esta cohorte, por favor registrelo antes"
@@ -97,10 +97,10 @@ class AsistenteDiplomadoController < ApplicationController
 	def paso6
 		diplomado_id, cohorte_id = params[:id].split ","
 		@diplomado_cohorte = @diplomado_cohorte = DiplomadoCohorte.where(:diplomado_id => diplomado_id, :cohorte_id => cohorte_id).limit(1).first
-		@atras = "/sirneim/asistente_diplomado/paso5/#{@diplomado_cohorte.id}"
+		@atras = "/asistente_diplomado/paso5/#{@diplomado_cohorte.id}"
 		@titulo = "#{action_name.capitalize}: Ajustes finales"
 		@porcentaje = (5.5/PASOS)*100
-		@siguiente = "/sirneim/asistente_diplomado/finalizar"		
+		@siguiente = "/asistente_diplomado/finalizar"		
 	end
 
 	def paso6_guardar
