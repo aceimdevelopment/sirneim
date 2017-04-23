@@ -12,4 +12,4 @@ codigos_barra/
 .DS_Store
 Gemfile
 Gemfile.lock
-
+.ruby-version
