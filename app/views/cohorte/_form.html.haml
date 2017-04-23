@@ -22,10 +22,10 @@
         ="Ej. #{@year}-#{@year+1} (Carlos Raúl Villanueva)"
   .form-actions      
     - if session[:wizard]
-      - @atras = '/principal_admin'
+      - @atras = '/sirneim/principal_admin'
       - @commit = 'Siguiente'
     - else
-      - @atras = '/cohorte'
+      - @atras = '/sirneim/cohorte'
       - @commit = 'Registrar'
     = link_to @atras, {class: "btn"} do
       %i.icon-backward

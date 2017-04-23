@@ -37,7 +37,7 @@ class ParametrosGeneralesController < ApplicationController
       cohorte_actual.valor = params[:cohorte][:id] 
       cohorte_actual.save
       session[:parametros][:cohorte_actual] = cohorte_actual.valor
-      url = params[:url] ? params[:url] : '/principal_admin/index'  
+      url = params[:url] ? params[:url] : '/sirneim/principal_admin/index'  
       redirect_to url
   end
   

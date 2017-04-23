@@ -60,11 +60,11 @@
 							A nombre de:
 							= diplomado_cohorte.cuenta_bancaria_cliente
 
-						= link_to "/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {class: "btn", :data => {:toggle => "tooltip"}, "title"=>"Editar caracteristicas del diplomado en esta cohorte"} do
+						= link_to "/sirneim/diplomado_cohorte/editar/#{diplomado_cohorte.id}", {class: "btn", :data => {:toggle => "tooltip"}, "title"=>"Editar caracteristicas del diplomado en esta cohorte"} do
 							%i.icon-edit
 							Editar Características para esta Cohorte
 
-						= link_to "/cohorte_tema/nuevo/#{diplomado_cohorte.id}", {class: "btn", :data => {:toggle => "tooltip"}, "title"=>"Asignar fechas y docentes a temas"} do
+						= link_to "/sirneim/cohorte_tema/nuevo/#{diplomado_cohorte.id}", {class: "btn", :data => {:toggle => "tooltip"}, "title"=>"Asignar fechas y docentes a temas"} do
 							%i.icon-list-alt
 							Asignar Docentes y Fechas a los Cursos de esta Cohorte
 

@@ -21,7 +21,7 @@
 		- else
 			= link_to url_for (action: "desaprobar", id: aprobado.id), {class: 'btn btn-danger btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Rechazar participante"} do
 				%i.icon-remove.icon-white
-			= link_to "/admin_estudiante/descargar_planilla_pre_diplomado_cohorte?estudiante_ci=#{aprobado.estudiante_ci}&diplomado_id=#{aprobado.diplomado_id}&cohorte_id=#{aprobado.cohorte_id}", {class: 'btn btn-success btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Descargar planilla de preinscripción"} do
+			= link_to "/sirneim/admin_estudiante/descargar_planilla_pre_diplomado_cohorte?estudiante_ci=#{aprobado.estudiante_ci}&diplomado_id=#{aprobado.diplomado_id}&cohorte_id=#{aprobado.cohorte_id}", {class: 'btn btn-success btn-mini', :data => {:toggle => "tooltip"}, "title"=>"Descargar planilla de preinscripción"} do
 				%i.icon-download.icon-white
 		= #form_tag url_for(action: "aprobar"), :remote => true do
 		=#hidden_field_tag :id, preinscrito.id 
