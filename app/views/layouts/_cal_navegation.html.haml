@@ -4,7 +4,7 @@
       -if session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id < 3 
         %ul.nav
           %li
-            %a.brand{:href => "/cal_principal_admin"} Inicio
+            %a.brand{href: "/cal_principal_admin"} Inicio
           = drop_down "Usuarios" do
             %li=link_to "Gestionar Profesores y Estudiantes", {controller: 'cal_principal_admin', action: 'usuarios'}
           %li
