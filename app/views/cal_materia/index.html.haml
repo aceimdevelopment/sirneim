@@ -27,6 +27,7 @@
 							%th Año
 							%th Orden
 							%th Cód. UXXI
+							%th Opciones
 								
 
 					- dep.cal_materias.order("orden ASC").each do |asignatura|
@@ -37,6 +38,7 @@
 							%td= asignatura.anno
 							%td= asignatura.orden
 							%td= asignatura.id_upsi
+							%td= link_to 'Editar', {action: :editar, id: asignatura.id}, class: 'btn btn-info'
 
 
 :javascript

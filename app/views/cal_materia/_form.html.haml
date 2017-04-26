@@ -1,9 +1,10 @@
-=form_for(@cal_materia,url:{controller: 'cal_materia', action: 'crear'}, :html => {class: 'form-horizontal well well-small'}) do |a|
+=form_for(@cal_materia,url:{controller: 'cal_materia', action: @accion}, :html => {class: 'form-horizontal well well-small'}) do |a|
   -if @cal_materia.errors.any?
     %ul
       -flash[:alert] = ''
       -@cal_materia.errors.full_messages.each do |msg|
         -flash[:alert] += "#{msg}\n"
+
 
   .control-group
     %label.control-label
@@ -21,9 +22,14 @@
     %label.control-label
       Identificador:
     .controls
-      = a.text_field :id, placeholder: 'Identidicador…', size: 10, required: true, class: 'input'
-      %span.help-inline
-        ="Ej. WEB2 (Máximo 10 caracteres)"
+      -if @accion.eql? 'actualizar'
+        = hidden_field_tag :id, @cal_materia.id
+        %a.label
+          =@cal_materia.id
+      -else
+        = a.text_field :id, placeholder: 'Identidicador…', size: 10, required: true, class: 'input'
+        %span.help-inline
+          ="Ej. WEB2 (Máximo 10 caracteres)"
 
   .control-group
     %label.control-label
@@ -60,4 +66,4 @@
   .form-actions      
     = link_to 'Atrás', 'index', class: "btn"
 
-    = button_tag 'Registrar', class: 'btn btn-primary'
+    = button_tag 'Guardar', class: 'btn btn-primary'

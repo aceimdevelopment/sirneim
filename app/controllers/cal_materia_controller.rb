@@ -11,6 +11,13 @@ class CalMateriaController < ApplicationController
 		
 	end
 
+	def editar
+		@departamentos = CalDepartamento.all
+		@catedras = CalCategoria.all
+		@cal_materia = CalMateria.find params[:id]
+
+	end
+
 	def nueva
 		@departamentos = CalDepartamento.all
 		@catedras = CalCategoria.all
@@ -33,6 +40,20 @@ class CalMateriaController < ApplicationController
 		end
 
 		
+	end
+
+	def actualizar
+		
+		@cal_materia = CalMateria.find params[:id]
+
+		if @cal_materia.update_attributes(params[:cal_materia])
+			flash[:success] = "Asignatura Actualizada Satisfactoriamente"
+			redirect_to :action => 'index'
+		else
+			@departamentos = CalDepartamento.all
+			@catedras = CalCategoria.all			
+			render :action => 'editar'
+		end
 	end
 
 end

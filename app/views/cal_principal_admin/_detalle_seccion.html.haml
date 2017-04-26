@@ -1,0 +1,86 @@
+.tab-pane{class: @mat_activa, id: "mat_#{@mat.id}"}
+
+	.well.well-small
+		%table.table.table-bordered.table-striped.table-condensed.table-hover
+			%thead
+				%tr
+					%th Sección
+					%th Profesor Tutor (Calificador)
+					%th Profesores Secundarios
+					%th Estado
+					- if @admin and @admin.cal_tipo_admin_id <4
+						%th Opciones Generales
+			%tbody
+				- @secciones.each do |seccion|
+					%tr
+						%td= seccion.numero
+						%td
+							= "#{seccion.descripcion_profesor_asignado}"
+							%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Actualizar Tutor-Calificador'}
+								= link_to "", {:href => "cal_principal_admin/seleccionar_profesor?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
+									= content_tag(:i, "", class: "icon-pencil icon-white")
+									= content_tag(:i, "", class: "icon-user icon-white")
+						%td
+							-seccion.cal_profesores.each do |p|
+								%p
+									= p.descripcion
+
+									%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Desasignar Este Profesor'}
+										= link_to "", {:href => "cal_seccion/desasignar_profesor_secundario?id=#{seccion.id}&cal_profesor_ci=#{p.cal_usuario_ci}", class: 'btn btn-danger btn-mini', 'data_confirm' => "¿Está seguro de esta acción?"},{role: 'button'} do
+											= content_tag(:i, "", class: "icon-minus icon-white")
+											= content_tag(:i, "", class: "icon-user icon-white")
+
+							%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Profesor Secundario'}
+								= link_to "", {:href => "cal_seccion/seleccionar_profesor_secundario?id=#{seccion.id}", class: 'btn btn-success btn-mini'},{role: 'button'} do
+									= content_tag(:i, "", class: "icon-plus icon-white")
+
+									= content_tag(:i, "", class: "icon-user icon-white")
+
+						%td
+							-if seccion.calificada
+								%span.label.label-success Calidicada
+								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Aprobados'}
+									%span.label
+										= seccion.total_aprobados
+								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Reprobados'}
+									%span.label
+										= seccion.total_reprobados
+								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Perdidas Por Inasistencias'}																		
+									%span.label
+										= seccion.total_perdidos
+							- else
+								%span.label.label-info Pendiente por calificar
+								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Sin Calificar'}																		
+									%span.label
+										= seccion.total_sin_calificar
+						- if @admin and @admin.cal_tipo_admin_id <4
+							%td
+								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Ver Detalle y Calificar'}
+									= link_to "", {:href => "cal_principal_admin/ver_seccion_admin?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
+										= content_tag(:i, "", class: "icon-eye-open icon-white")
+										= content_tag(:i, "", class: "icon-list icon-white")
+										= content_tag(:i, "", class: " icon-check icon-white")
+								-if @admin and @admin.cal_tipo_admin_id <3
+									-if seccion.calificada
+										%td
+											%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=> 'Habilitar para Calificar Nuevamente'}
+												= link_to "", {:href => "cal_principal_admin/habilitar_calificar?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
+													= content_tag(:i, "", class: "icon-off icon-white")
+													= content_tag(:i, "", class: "icon-list icon-white")
+
+									%td
+										%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Seccion'}
+											= link_to "", {:href => "cal_seccion/eliminar?id=#{seccion.id}", class: 'btn btn-danger btn-mini', 'data_confirm' => "Se perderan los estudiantes inscritos en la sección, ¿Está seguro de esta acción?"},{role: 'button'} do
+												= content_tag(:i, "", class: "icon-trash icon-white") 
+
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nueva Sección'}
+
+			= form_tag 'cal_principal_admin/nueva_seccion_admin_guardar', {class: 'form-horizontal', id: "nueva_seccion_#{@mat.id}"} do 
+				= hidden_field_tag "[cal_materia]id", @mat.id
+				= text_field_tag "[cal_seccion]numero" , nil, {autofocus: true, placeholder: 'Identificador de la Sección...'}
+
+				= grouped_collection_select :cal_seccion, :cal_profesor_ci, @departamentos, :cal_profesores, :descripcion, :id, :descripcion, {:prompt => "Profesor"}, { class: 'selects2', style: 'width:30%'}
+
+				= hidden_field_tag "[cal_seccion]cal_semestre_id", @cal_semestre_actual.id
+
+				= submit_tag 'Agregar', class: 'btn btn-primary'
