@@ -33,9 +33,9 @@
 									%th Año
 									%th Asignatura
 									%th Sección
-									%th Trimestre I
-									%th Trimestre II
-									%th Trimestre III
+									%th TRIM I
+									%th TRIM II
+									%th TRIM III
 									%th Definitiva
 									- if session[:cal_administrador]
 										%th= 'Profesor'
@@ -50,7 +50,10 @@
 										- aux = est_sec_per.cal_seccion.cal_materia.anno
 										- aux = "--" if aux.eql? 0
 										%td= aux
-										%td= est_sec_per.cal_seccion.cal_materia.descripcion
+										%td
+											= est_sec_per.cal_seccion.cal_materia.descripcion
+											%span.badge.badge-inverse= est_sec_per.cal_seccion.cal_materia.id_upsi
+										
 										%td= est_sec_per.cal_seccion.numero
 										%td= est_sec_per.calificacion_primera
 										%td= est_sec_per.calificacion_segunda
