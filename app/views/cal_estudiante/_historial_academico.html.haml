@@ -64,7 +64,7 @@
 										%td= est_sec_per.calificacion_final
 										- if periodo.id.eql? '2016-02A'
 											%td
-												= form_tag('/cal_estudiante/confirmar', remote: true) do
+												= form_tag({controller: 'cal_estudiante', action:'confirmar'}, remote: true) do
 													= hidden_field_tag :id, est_sec_per.id
 													= check_box nil, :confirmar, checked: (est_sec_per.confirmar_inscripcion.eql? 1), onchange: 'confirmar($(this));'
 
