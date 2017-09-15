@@ -39,7 +39,11 @@ class DocumentosPDF
     #instructor
     pdf.add_text_wrap 50,600,510,to_utf16("Profesor: #{seccion.cal_profesor.cal_usuario.descripcion}"),10
  
-    estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+    if seccion.cal_semestre_id.eql? '2016-02A'
+      estudiantes_seccion = seccion.cal_estudiantes_secciones.confirmados.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+    else
+      estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+    end
 
     if seccion.cal_materia.cal_categoria_id.eql? 'IB' or seccion.cal_materia.cal_categoria_id.eql? 'LIN' or seccion.cal_materia.cal_categoria_id.eql? 'LE'
       p1 = 25 

@@ -3,6 +3,17 @@
 class CalEstudianteController < ApplicationController
 	before_filter :cal_filtro_logueado
 
+	def confirmar
+		id = params[:id].split
+	    @est_sec_per = CalEstudianteSeccion.find id 
+	    @est_sec_per.confirmar_inscripcion = params[:confirmar]
+	    @est_sec_per.save
+
+	    redirect_to :back
+
+		
+	end
+
 	def actualizar_idiomas
 		
 		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first

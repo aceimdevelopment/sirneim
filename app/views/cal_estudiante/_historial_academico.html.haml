@@ -37,16 +37,19 @@
 									%th TRIM II
 									%th TRIM III
 									%th Definitiva
+									- if periodo.id.eql? '2016-02A'
+										%th Confimar
 									- if session[:cal_administrador]
 										%th= 'Profesor'
 										%th Opciones
 							- @secciones_periodo.each do |est_sec_per|
 								- tipo_calificacion = ''
 								- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
-								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI') 	
+								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI')
+								- tipo_calificacion = 'info' if est_sec_per.confirmar_inscripcion.eql? 1
 
 								%tbody
-									%tr{class: tipo_calificacion}
+									%tr{class: tipo_calificacion, id: est_sec_per.id}
 										- aux = est_sec_per.cal_seccion.cal_materia.anno
 										- aux = "--" if aux.eql? 0
 										%td= aux
@@ -59,6 +62,12 @@
 										%td= est_sec_per.calificacion_segunda
 										%td= est_sec_per.calificacion_tercera
 										%td= est_sec_per.calificacion_final
+										- if periodo.id.eql? '2016-02A'
+											%td
+												= form_tag('/cal_estudiante/confirmar', remote: true) do
+													= hidden_field_tag :id, est_sec_per.id
+													= check_box nil, :confirmar, checked: (est_sec_per.confirmar_inscripcion.eql? 1), onchange: 'confirmar($(this));'
+
 										- if session[:cal_administrador]
 											%td= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
 											%td
@@ -70,4 +79,15 @@
 	$(document).ready(function() {
 		$(".collapse").collapse();
 	});
+
+
+	function confirmar(ele) {
+		ele.parent().submit();
+
+		if (ele.is(":checked")) {
+			ele.closest('tr').addClass('info');
+		}else{
+			ele.closest('tr').removeClass('info');
+		}
+	};
 	

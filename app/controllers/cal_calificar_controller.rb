@@ -17,7 +17,13 @@ class CalCalificarController < ApplicationController
 	def ver_seccion
 		id = params[:id]
 		@cal_seccion = CalSeccion.find(id)
-		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
+
+		if @cal_seccion.cal_semestre_id.eql? '2016-02A'
+			@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.confirmados.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+		else
+			@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+		end
+
 		@titulo = "Sección: #{@cal_seccion.descripcion}"
 		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LIN' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LE'
 			@p1 = 25 

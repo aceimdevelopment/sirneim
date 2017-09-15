@@ -33,8 +33,11 @@ class CalArchivo
 		@book = Spreadsheet::Workbook.new
 		@sheet = @book.create_worksheet :name => "Seccion #{seccion.id}"
 
-		estudiantes = seccion.cal_estudiantes.sort_by{|e| e.cal_usuario.apellidos}
-
+		if seccion.cal_semestre_id.eql? '2016-02A'
+			estudiantes = seccion.cal_estudiantes_secciones.confirmados.sort_by{|e| e.cal_estudiante.cal_usuario.apellidos}
+		else
+			estudiantes = seccion.cal_estudiantes_secciones.sort_by{|e| e.cal_estudiante.cal_usuario.apellidos}
+		end
 		# cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
 
 		@sheet.column(0).width = 15 #estudiantes.collect{|e| e.cal_usuario_ci.length if e.cal_usuario_ci}.max+2;
@@ -48,7 +51,7 @@ class CalArchivo
 
 		data = []
 		estudiantes.each_with_index do |est,i|
-			usuario = est.cal_usuario
+			usuario = est.cal_estudiante.cal_usuario
 			@sheet.row(i+3).concat  [usuario.ci, usuario.apellido_nombre, usuario.correo_electronico, usuario.telefono_movil]
 		end
 
