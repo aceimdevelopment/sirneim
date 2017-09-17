@@ -49,7 +49,7 @@
 								- tipo_calificacion = 'info' if est_sec_per.confirmar_inscripcion.eql? 1
 
 								%tbody
-									- if periodo.id.eql? '2016-02A' and (session[:cal_administrador] or (est_sec_per.confirmar_inscripcion.eql? 1))
+									- if (periodo.id != '2016-02A') or (session[:cal_administrador] or (est_sec_per.confirmar_inscripcion.eql? 1))
 										%tr{class: tipo_calificacion, id: est_sec_per.id}
 											- aux = est_sec_per.cal_seccion.cal_materia.anno
 											- aux = "--" if aux.eql? 0
