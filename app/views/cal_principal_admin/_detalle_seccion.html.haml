@@ -37,7 +37,13 @@
 									= content_tag(:i, "", class: "icon-user icon-white")
 
 						%td
-							-if seccion.calificada
+							-if seccion.cal_semestre_id.eql? '2016-02A'
+								%span.label.label-info 
+								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Inscritos/Confirmados'}																		
+									%span.label
+										= "#{seccion.total_estudiantes}/#{seccion.total_confirmados}"
+
+							-if seccion.calificada 
 								%span.label.label-success Calidicada
 								%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Total Aprobados'}
 									%span.label

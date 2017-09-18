@@ -43,6 +43,10 @@ class CalSeccion < ActiveRecord::Base
 		cal_estudiantes_secciones.count
 	end
 
+	def total_confirmados
+		cal_estudiantes_secciones.confirmados.count
+	end
+
 	def total_aprobados
 		cal_estudiantes_secciones.where(:cal_tipo_estado_calificacion_id => 'AP').count
 	end

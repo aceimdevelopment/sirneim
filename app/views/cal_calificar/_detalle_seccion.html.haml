@@ -17,7 +17,10 @@
 
 %p#text
 %h5
-	= "Total de Estudiantes: #{@estudiantes_secciones.count}"
+	- if @cal_seccion.cal_semestre_id.eql? '2016-02A'
+		= "Inscritos: #{@cal_seccion.total_estudiantes} / Confirmados: #{@cal_seccion.total_confirmados}"
+	- else
+		= "Total de Estudiantes: #{@estudiantes_secciones.count}"
 = form_tag(controller: 'cal_calificar', action: "calificar") do
 	= hidden_field_tag "id", @cal_seccion.id
 
@@ -31,9 +34,9 @@
 					%th Definitiva
 			%tbody
 				- @estudiantes_secciones.each_with_index do |es,i|
-					- tipo_calificacion = 'info' if es.confirmar_inscripcion.eql? 1
 					- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
 					- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+					- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
 
 					%tr{class: tipo_calificacion}
 						%td #{i+1}
@@ -61,9 +64,11 @@
 							%th	Estado
 				%tbody
 					- @estudiantes_secciones.each_with_index do |es,i|
-						- tipo_calificacion = 'info' if es.confirmar_inscripcion.eql? 1
+
 						- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
 						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+						- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
+
 
 						%tr{class: tipo_calificacion}
 							%td #{i+1}
@@ -98,9 +103,11 @@
 						%th Definitiva
 				%tbody
 					- @estudiantes_secciones.each_with_index do |es,i|
-						- tipo_calificacion = 'info' if es.confirmar_inscripcion.eql? 1
+
 						- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
 						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+
+						- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
 
 						%tr{class: tipo_calificacion}
 							%td #{i+1}
