@@ -31,6 +31,7 @@
 					%th Definitiva
 			%tbody
 				- @estudiantes_secciones.each_with_index do |es,i|
+					- tipo_calificacion = 'info' if es.confirmar_inscripcion.eql? 1
 					- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
 					- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
 
@@ -60,6 +61,7 @@
 							%th	Estado
 				%tbody
 					- @estudiantes_secciones.each_with_index do |es,i|
+						- tipo_calificacion = 'info' if es.confirmar_inscripcion.eql? 1
 						- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
 						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
 
@@ -96,6 +98,7 @@
 						%th Definitiva
 				%tbody
 					- @estudiantes_secciones.each_with_index do |es,i|
+						- tipo_calificacion = 'info' if es.confirmar_inscripcion.eql? 1
 						- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
 						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
 

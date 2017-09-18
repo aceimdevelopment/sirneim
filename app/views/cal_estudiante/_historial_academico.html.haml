@@ -43,10 +43,9 @@
 										%th= 'Profesor'
 										%th Opciones
 							- @secciones_periodo.each do |est_sec_per|
-								- tipo_calificacion = ''
+								- tipo_calificacion = 'info' if est_sec_per.confirmar_inscripcion.eql? 1
 								- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
 								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI')
-								- tipo_calificacion = 'info' if est_sec_per.confirmar_inscripcion.eql? 1
 
 								%tbody
 									- if (periodo.id != '2016-02A') or (session[:cal_administrador] or (est_sec_per.confirmar_inscripcion.eql? 1))

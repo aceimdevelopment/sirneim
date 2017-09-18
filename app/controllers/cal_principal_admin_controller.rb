@@ -102,7 +102,7 @@ class CalPrincipalAdminController < ApplicationController
 		id = params[:id]
 		@admin = session[:cal_administrador]
 		@cal_seccion = CalSeccion.find(id)
-		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.confirmados.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
+		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
 		@titulo = "Sección: #{@cal_seccion.descripcion}"
 		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LIN' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LE'
 			@p1 = 25 
