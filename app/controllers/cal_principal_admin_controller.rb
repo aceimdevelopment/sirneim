@@ -47,23 +47,25 @@ class CalPrincipalAdminController < ApplicationController
 
 		if @admin and @admin.cal_tipo_admin_id.eql? 3
 
-			@cal_departamento_id = 'ALE'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "14755681"
+			if @admin.cal_usuario_ci.eql? "14755681"
+				@cal_departamento_id = 'ALE' and @editar_asignaturas = true 
+			end
 
-			@cal_departamento_id = 'FRA'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "10673613"
+			(@cal_departamento_id = 'FRA' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "10673613"
 
-			@cal_departamento_id = 'EG'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "8965636"
-			@cal_departamento_id = 'EG'; @editar_asignaturas = false if @admin.cal_usuario_ci.eql? "12054218"
-			@cal_departamento_id = 'EG'; @editar_asignaturas = false if @admin.cal_usuario_ci.eql? "3607466"
+			(@cal_departamento_id = 'EG' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "8965636"
+			(@cal_departamento_id = 'EG' and @editar_asignaturas = false) if @admin.cal_usuario_ci.eql? "12054218"
+			(@cal_departamento_id = 'EG' and @editar_asignaturas = false) if @admin.cal_usuario_ci.eql? "3607466"
 
-			@cal_departamento_id = 'ING'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "12293163"
-			@cal_departamento_id = 'ING'; @editar_asignaturas = false if @admin.cal_usuario_ci.eql? "6311731"
-			@cal_departamento_id = 'ING'; @editar_asignaturas = false if @admin.cal_usuario_ci.eql? "10350508"
+			(@cal_departamento_id = 'ING' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "12293163"
+			(@cal_departamento_id = 'ING' and @editar_asignaturas = false) if @admin.cal_usuario_ci.eql? "6311731"
+			(@cal_departamento_id = 'ING' and @editar_asignaturas = false) if @admin.cal_usuario_ci.eql? "10350508"
 
-			@cal_departamento_id = 'ITA'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "1045134"
+			(@cal_departamento_id = 'ITA'; @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "1045134"
 
-			@cal_departamento_id = 'POR'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "10274406"
+			(@cal_departamento_id = 'POR' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "10274406"
 
-			@cal_departamento_id = 'TRA'; @editar_asignaturas = true if @admin.cal_usuario_ci.eql? "3673283"
+			(@cal_departamento_id = 'TRA' and  @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "3673283"
 
 		end
 		@departamentos = CalDepartamento.where(:id => @cal_departamento_id)	if @cal_departamento_id
