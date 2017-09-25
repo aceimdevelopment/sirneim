@@ -47,9 +47,8 @@ class CalPrincipalAdminController < ApplicationController
 
 		if @admin and @admin.cal_tipo_admin_id.eql? 3
 
-			if @admin.cal_usuario_ci.eql? "14755681"
-				@cal_departamento_id = 'ALE' and @editar_asignaturas = true 
-			end
+			
+			(@cal_departamento_id = 'ALE' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "14755681"
 
 			(@cal_departamento_id = 'FRA' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "10673613"
 
@@ -68,6 +67,8 @@ class CalPrincipalAdminController < ApplicationController
 			(@cal_departamento_id = 'TRA' and  @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "3673283"
 
 		end
+		@editar_asignaturas = true if @admin and @admin.cal_tipo_admin_id < 3
+
 		@departamentos = CalDepartamento.where(:id => @cal_departamento_id)	if @cal_departamento_id
 		
 	end
