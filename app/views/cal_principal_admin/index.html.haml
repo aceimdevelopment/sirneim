@@ -39,7 +39,7 @@
 		- @departamentos.each_with_index do |dep,i|
 			- dpto_activo = (session[:dpto_id].eql? dep.id) ? "active" : ""
 			%li{class: dpto_activo}
-				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/../cal_principal_admin/set_tab', data: {dpto_id: '#{dep.id}'}, dataType: 'json'});"
+				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {dpto_id: '#{dep.id}'}, dataType: 'json'});"
 
 	.tab-content
 		- @departamentos.each_with_index do |dep,i|
@@ -56,7 +56,7 @@
 							- cat_activa = (session[:cat_id].eql? cat.id) ? "active" : ""
 
 							%li{class: cat_activa}
-								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/../cal_principal_admin/set_tab', data: {cat_id: '#{cat.id}'}, dataType: 'json'});"
+								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {cat_id: '#{cat.id}'}, dataType: 'json'});"
 
 					.tab-content
 						- @catedras.each_with_index do |cat_dep,j|
@@ -78,7 +78,7 @@
 											
 											%li{class: mat_activa}
 												-if secciones.count > 0
-													= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/../cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
+													= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
 														= mat.descripcion
 														%span.badge.badge-inverse= mat.id_upsi
 												-else
