@@ -1,53 +1,6 @@
+By Daniel Moros, 
 
-insert into `aceimdiplomados_production`.`parametro_general` ( `id`, `valor`) values ( 'PREINSCRIPCION_ABIERTA', 'NO')
-
-
-
-SERGIO                     
-2 * hacer el script de start y stop (sergio/andres)
-1 * asignar desde nivelacion (sergio)                                     LISTO ********
-1 * revisar el cambio de convenio que cambie el historial (andres)        LISTO ********
-1 * revisar lo de los correos (sergio/andres)                             LISTO ********
-2 - enviar correo de recordatorio de calificacion (andres)
-2 * optimizar la pagina de estado de la inscripcion
-2 * modificar los parametros generales
-2 - abrir y cerrar inscripcion
-2 - establecer periodo de inscripcion
-2 - establecer periodo de calificacion
-2 - establecer periodo actual         
-2 * olvide mi clave
-3 * cambio de cedula
-3 * Enviar SMS (andres/sergio)
-
-* CASOS A PROBAR
-alfaliz no paso 13160642
-lilian barboza exo paso 4520324  cargar convenio
-any 18249230
-jossie 13872341
-froy 18751667
-mercy 10870485  cargar convenio
-coto 12950975
-mayerling 14890581
-joaly curso 13218824
-marco 11680240
-rose melville 19203903
-absthar convenio estudiante con froi
-david perez 15612357
-diego perez  19754458
-novia de nestor  19023671
-astrif 19087666
-zuneth 18749647
-oscar 10336541  
-ana maria 15123425
-nuevo viviani
-jesus mata  12685678
-intructor/estudiante
-teen 23696957 23696958
-nino del b    10544123 26252827
-10180862
-
-
-== Welcome to Rails
+== Welcome to Sirneim ;)
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.
