@@ -18,7 +18,7 @@ class CalCalificarController < ApplicationController
 		id = params[:id]
 		@cal_seccion = CalSeccion.find(id)
 
-		if @cal_seccion.cal_semestre_id.eql? '2016-02A'
+		if @cal_seccion.cal_semestre_id.eql? '2017-02A'
 			@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.confirmados.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
 		else
 			@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}

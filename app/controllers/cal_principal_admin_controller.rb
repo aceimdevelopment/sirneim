@@ -38,7 +38,21 @@ class CalPrincipalAdminController < ApplicationController
 		@profesores = CalProfesor.all.delete_if{|po| po.cal_usuario.nil?}.sort_by{|po| po.cal_usuario.apellido_nombre }
 	end
 
+	def set_tab
+		session[:dpto_id] = params[:dpto_id] if params[:dpto_id]
+		session[:cat_id] = params[:cat_id] if params[:cat_id]
+		session[:mat_id] = params[:mat_id] if params[:mat_id]
+
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :ok }
+		end
+
+
+	end
+
 	def index
+
 		cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
 		@cal_semestre_actual = CalSemestre.where(:id => cal_semestre_actual_id).limit(1).first
 		@departamentos = CalDepartamento.all
@@ -192,16 +206,30 @@ class CalPrincipalAdminController < ApplicationController
 	end
 
 	def habilitar_calificar
-		id = params[:id]
-		@cal_seccion = CalSeccion.find(id)
+		if params[:id]
+			numero, cal_materia_id, cal_semestre_id = params[:id].to_s.split(",")
+			p numero.center(200, "N")
+			p cal_materia_id.center(200, "M")
+			p cal_semestre_id.center(200, "S")
 
-		@cal_seccion.calificada = false
-		@cal_seccion.cal_estudiantes_secciones.each{|es| es.cal_tipo_estado_calificacion_id = 'SC'; es.save}
-
-		if @cal_seccion.save
-			flash[:success] = "El Profesor #{@cal_seccion.cal_profesor.cal_usuario.nombres} ya puede calificar la seccion: #{@cal_seccion.descripcion} "
+			@cal_secciones = CalSeccion.where(numero: numero, cal_materia_id: cal_materia_id, cal_semestre_id: cal_semestre_id).limit(1)
 		else
-			flash[:danger] = "No se pudo actualizar el valor"
+			cal_semestre_actual_id = CalSemestre.find session[:cal_parametros][:semestre_actual]
+			@cal_secciones = cal_semestre_actual_id.cal_secciones.calificadas
+		end
+		total = 0
+		error = 0
+		@cal_secciones.each do |cal_seccion|
+			cal_seccion.calificada = false
+			cal_seccion.cal_estudiantes_secciones.each{|es| es.cal_tipo_estado_calificacion_id = 'SC'; es.save}
+			if cal_seccion.save
+				total += 1
+			else
+				error += 1
+			end
+			flash[:info] = "Sin asignaturas por habilitar" if (total == 0)
+			flash[:success] = "#{total} asignatura(s) habilitada(s) para calificar" if total > 0  
+			flash[:danger] = "#{error} asignatura(s) no pudo(ieron) ser habilitada(s). Favor revise he intentelo nuevamente" if error > 0 
 		end
 
 		redirect_to :action => 'index'		

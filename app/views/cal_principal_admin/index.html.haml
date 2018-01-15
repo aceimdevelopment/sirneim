@@ -4,6 +4,17 @@
 		= "#{@cal_semestre_actual.id}"
 
 	- if @admin.cal_tipo_admin_id < 2
+		- if (@cal_semestre_actual.cal_secciones.calificadas.count > 0)
+			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Habilitar calificación para todas las secciones del Período Actual'}
+				= link_to "", {:href => '/cal_principal_admin/habilitar_calificar', class: "btn btn-success", 'data_confirm' => "Se Habilitaran todas las secciones de éste período, ¿Está seguro de esta acción?"},{role: 'button'} do
+					= content_tag(:i, "", class: "icon-off icon-white") 
+					= content_tag(:i, "", class: "icon-list icon-white")
+		
+		- else
+			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Todas las secciones de este periodo habilidatas para calificar'}
+				= link_to "", {:href => 'javascript:void(0)', class: "btn btn-success disabled", 'data_confirm' => "Se Habilitaran todas las secciones de éste período, ¿Está seguro de esta acción?"},{role: 'button'} do
+					= content_tag(:i, "", class: "icon-off icon-white") 
+					= content_tag(:i, "", class: "icon-list icon-white")
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Importar Secciones y Estudiantes desde un archivo PDF'}
 			= link_to "", {:href => 'cal_principal_admin/importar_secciones_paso1', class: 'btn btn-info'},{role: 'button'} do
 				= content_tag(:i, "", class: "icon-file icon-white")
@@ -26,14 +37,14 @@
 	%h5 Seleccione el Departamento:
 	%ul.nav.nav-pills
 		- @departamentos.each_with_index do |dep,i|
-			-activa = (i.eql? 0) ? "" : ""
-			%li{class: activa}
-				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab"
+			- dpto_activo = (session[:dpto_id].eql? dep.id) ? "active" : ""
+			%li{class: dpto_activo}
+				= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/cal_principal_admin/set_tab', data: {dpto_id: '#{dep.id}'}, dataType: 'json'});"
 
 	.tab-content
 		- @departamentos.each_with_index do |dep,i|
-			-activa = (i.eql? 0) ? "" : ""
-			.tab-pane{class: activa, id: "dep_#{dep.id}"}
+			- dpto_activo = (session[:dpto_id].eql? dep.id) ? "active" : ""
+			.tab-pane{class: dpto_activo, id: "dep_#{dep.id}"}
 
 				- @catedras = dep.cal_departamentos_categorias.sort_by{|cate| cate.orden}
 				.tabbable.tabs-top
@@ -41,14 +52,18 @@
 					%ul.nav.nav-pills
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria
-							-cat_activa = (j.eql? 0) ? "" : ""
+							-# cat_activa = (j.eql? 0) ? "" : ""
+							- cat_activa = (session[:cat_id].eql? cat.id) ? "active" : ""
+
 							%li{class: cat_activa}
-								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab"
+								= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/cal_principal_admin/set_tab', data: {cat_id: '#{cat.id}'}, dataType: 'json'});"
 
 					.tab-content
 						- @catedras.each_with_index do |cat_dep,j|
 							- cat = cat_dep.cal_categoria						
-							-cat_activa = (j.eql? 0) ? "" : ""
+							-# cat_activa = (j.eql? 0) ? "" : ""
+							- cat_activa = (session[:cat_id].eql? cat.id) ? "active" : ""
+
 							.tab-pane{class: cat_activa, id: "cat_#{dep.id}_#{cat.id}"}
 
 								- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id).sort_by{|m| m.orden}
@@ -56,12 +71,14 @@
 									%h5 Seleccione la Asignatura:
 									%ul.nav.nav-tabs
 										- @materias.each_with_index do |mat,k|
-											-mat_activa = (k.eql? 0) ? "" : "" 
+											-# mat_activa = (k.eql? 0) ? "" : "" 
+											- mat_activa = (session[:mat_id].eql? mat.id) ? "active" : ""
+								
 											-secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
 											
 											%li{class: mat_activa}
 												-if secciones.count > 0
-													= link_to "#mat_#{mat.id}", "data-toggle"=> "tab" do
+													= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
 														= mat.descripcion
 														%span.badge.badge-inverse= mat.id_upsi
 												-else
@@ -73,7 +90,9 @@
 
 									.tab-content
 										- @materias.each_with_index do |mat,k|
-											-@mat_activa = (k.eql? 0) ? "" : ""
+											-# @mat_activa = (k.eql? 0) ? "" : ""
+											- @mat_activa = (session[:mat_id].eql? mat.id) ? "active" : ""
+
 											-@secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
 											-if @secciones.count > 0
 												- @mat = mat

@@ -39,6 +39,10 @@ class CalSeccion < ActiveRecord::Base
 	# has_and_belongs_to_many :estudiantes, :join_table => "estudiante_en_seccion", :foreign_key => [:seccion_id, :materia_id, :categoria_id, :departamento_id, :semestre_id]
 	# accepts_nested_attributes_for :estudiantes
 
+	scope :calificadas, -> {where "calificada IS TRUE"}
+	scope :sin_calificar, -> {where "calificada IS FALSE"}
+
+
 	def total_estudiantes
 		cal_estudiantes_secciones.count
 	end

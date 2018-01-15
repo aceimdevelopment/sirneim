@@ -49,7 +49,7 @@
 				= submit_tag "Guardar", id: "submit", class: "btn btn-success pull-right", :disable_with => "Espere...", :data => {:confirm => 'Una vez que guardes las calificaciones no podrás cambiar su valor, ¿Estás Seguro?'}
 	- else
 
-		- if @cal_seccion.cal_materia_id.eql? 'SEMI' or @cal_seccion.cal_materia_id.eql? 'SERCOM' or @cal_seccion.cal_materia_id.eql? 'METO' 
+		- if @cal_seccion.cal_materia_id.eql? 'SERCOM' 
 
 			%table.table.table-bordered.table-striped.table-condensed.table-hover{style: "text-align:left;"}
 				%thead
