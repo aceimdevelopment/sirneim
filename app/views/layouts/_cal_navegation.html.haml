@@ -13,6 +13,9 @@
           %li
             = link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
 
+          %li
+            = link_to "Nuevos", {controller: 'cal_semestre', action: 'lista'}
+
       .nav.pull-right
 
         -if session[:cal_usuario]

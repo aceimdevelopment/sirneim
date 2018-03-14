@@ -5,6 +5,10 @@ class CalSemestreController < ApplicationController
   before_filter :cal_filtro_logueado
   before_filter :cal_filtro_administrador
 
+  def lista
+    @estudiantes = CalEstudiante.where(cal_tipo_estado_inscripcion_id: 'NUEVO')
+  end
+
   def nuevo
     @cal_semestre = CalSemestre.new
   end
