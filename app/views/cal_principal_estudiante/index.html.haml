@@ -9,7 +9,7 @@
 	= render partial: 'cal_usuario/datos_modal'
 
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
-	= render partial: 'cal_estudiante/actualizar_idiomas' #unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
+	= render partial: 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
 -if false
 	-if @estudiante.cita_horaria
 		%h3 Cita Horaria:
