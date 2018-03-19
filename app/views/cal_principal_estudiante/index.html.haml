@@ -49,15 +49,16 @@
 
 	%li=link_to "Programación Estudios Generales - Instrumental Obligatoria - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "EG_IO", :cal_semestre_id => @periodo_actual.id} 
 
+	%li=link_to "Programación Estudios Generales - Optativas - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "EG_OPT", :cal_semestre_id => @periodo_actual.id} 
+
 	%li=link_to "Programación Tradución e Interpretación - Interpretación - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "T&I_INT", :cal_semestre_id => @periodo_actual.id} 
 
-	%li=link_to "Programación Tradución e Interpretación - Interpretación - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "T&I_TRAD", :cal_semestre_id => @periodo_actual.id} 
+	%li=link_to "Programación Tradución e Interpretación - Tradución - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "T&I_TRAD", :cal_semestre_id => @periodo_actual.id} 
 
 
 %h3 Otros Archivos:
 %ul
+	%li=link_to "Comunicado Sobre Inscripciones 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "SOBRE_INSCRIP_2017-02A"}
 	%li=link_to "Horario Tentativo 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "HORARIO_TENTATIVO_2017-02A"} 
-
-
 
 = render partial: 'cal_estudiante/historial_academico'
