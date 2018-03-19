@@ -39,6 +39,7 @@ class CalEstudiante <  ActiveRecord::Base
 	# def secciones
 	# 	estudiante_en_secciones.secciones
 	# end
+	scope :con_cita_horaria, -> {where "cita_horaria_id IS NOT NULL"}
 
 	def combo_idiomas
 		aux = ""

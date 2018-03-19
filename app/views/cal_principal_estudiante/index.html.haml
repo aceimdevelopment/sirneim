@@ -10,23 +10,23 @@
 
 - if @estudiante.idioma1_id.nil? and @estudiante.idioma2_id.nil?
 	= render partial: 'cal_estudiante/actualizar_idiomas' unless @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO'
--if false
-	-if @estudiante.cita_horaria
-		%h3 Cita Horaria:
-		.well.well-small
-			%p
-				%b Fecha:
-				=(I18n.localize(@estudiante.cita_horaria.fecha, :format => "%A, %d de %B de %Y")).capitalize()
-				= "-"
-				%b Hora:
-				= @estudiante.cita_horaria.hora
 
-	- if @archivos
+-if @estudiante.cita_horaria
+	%h3 Cita Horaria:
+	.well.well-small
 		%p
-			%h3= "Horario #{@periodo_actual.id}:"
-			.well.well-small
-				- @archivos.each do |archivo|
-					%p= link_to archivo, controller: 'cal_descargar', action: 'horario', id: archivo
+			%b Fecha:
+			=(I18n.localize(@estudiante.cita_horaria.fecha, :format => "%A, %d de %B de %Y")).capitalize()
+			= "-"
+			%b Hora:
+			= @estudiante.cita_horaria.hora
+
+- if @archivos
+	%p
+		%h3= "Horario #{@periodo_actual.id}:"
+		.well.well-small
+			- @archivos.each do |archivo|
+				%p= link_to archivo, controller: 'cal_descargar', action: 'horario', id: archivo
 
 - if false
 	%h3 Exámenes de Reparación y Suficiencia Octubre 2016 
