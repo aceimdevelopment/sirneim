@@ -37,12 +37,27 @@
 			= link_to "Martes 18 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "02_RepSuf_Mar_18Oct2016.pdf"
 		%li
 			= link_to "Miércoles 19 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "03_RepSuf_Mier_19 Oct2016.pdf"
-- if false #@programaciones and @programaciones.count > 0
-	%h3 Programaciones (Pdf):
-	%ul
+%h3 Programaciones (Pdf):
+%ul
+	- if @programaciones and @programaciones.count > 0
 		- @programaciones.each do |programacion|
 			%li
 				=link_to "Programación #{programacion.descripcion} - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: programacion.id, :cal_semestre_id => @periodo_actual.id} 
+	%li=link_to "Programación Estudios Generales - Lingǘística - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "EG_LI", :cal_semestre_id => @periodo_actual.id} 
+
+	%li=link_to "Programación Estudios Generales - Lengua Española - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "EG_LE", :cal_semestre_id => @periodo_actual.id} 
+
+	%li=link_to "Programación Estudios Generales - Instrumental Obligatoria - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "EG_IO", :cal_semestre_id => @periodo_actual.id} 
+
+	%li=link_to "Programación Tradución e Interpretación - Interpretación - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "T&I_INT", :cal_semestre_id => @periodo_actual.id} 
+
+	%li=link_to "Programación Tradución e Interpretación - Interpretación - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "T&I_TRAD", :cal_semestre_id => @periodo_actual.id} 
+
+
+%h3 Otros Archivos:
+%ul
+	%li=link_to "Horario Tentativo 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "HORARIO_TENTATIVO_2017-02A"} 
+
 
 
 = render partial: 'cal_estudiante/historial_academico'

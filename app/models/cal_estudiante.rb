@@ -36,6 +36,13 @@ class CalEstudiante <  ActiveRecord::Base
 	# 	:foreign_key => :estudiante_ci
 	# accepts_nested_attributes_for :cal_estudiante_en_seccionesaawsq
 
+	def annos
+		cal_secciones.collect{|s| s.cal_materia.anno}.uniq
+	end
+	def annos_del_semestre_actual
+		cal_estudiantes_secciones.del_semestre_actual.collect{|s| s.cal_seccion.cal_materia.anno}.uniq
+	end
+
 	# def secciones
 	# 	estudiante_en_secciones.secciones
 	# end

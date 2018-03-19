@@ -41,7 +41,7 @@ class CalDescargarController < ApplicationController
 
 	def archivo
 		tipo = params[:tipo] ? params[:tipo] : "pdf"
-		send_file "#{Rails.root}/attachments/#{params[:id]}", :type => "application/#{tipo}", :x_sendfile => true, :disposition => "attachment"
+		send_file "#{Rails.root}/attachments/#{params[:id]}.#{tipo}", :type => "application/#{tipo}", :x_sendfile => true, :disposition => "attachment"
 
 	end
 
