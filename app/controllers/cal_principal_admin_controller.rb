@@ -33,6 +33,17 @@ class CalPrincipalAdminController < ApplicationController
 	end
 
 
+	def set_programaciones
+
+		CalParametroGeneral.cambiar_programacion(params[:id])
+
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :ok }
+		end
+		
+	end
+
 	def usuarios
 		@estudiantes = CalEstudiante.all.delete_if{|es| es.cal_usuario.nil?}.sort_by{|es| es.cal_usuario.apellido_nombre}
 		@profesores = CalProfesor.all.delete_if{|po| po.cal_usuario.nil?}.sort_by{|po| po.cal_usuario.apellido_nombre }

@@ -1,4 +1,13 @@
 %h2 Configuraciones Generales 
+%h3 
+	Programaciones:
+	%span.badge  
+		= radio_button_tag :programaciones, nil, (CalParametroGeneral.programaciones.eql? 'APAGADAS'), onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_programaciones?id=ENCENDIDAS', dataType: 'json'})"
+		Agagadas
+	%span.badge.badge-success
+		= radio_button_tag :programaciones, nil, (CalParametroGeneral.programaciones.eql? 'ENCENDIDAS'), onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_programaciones?id=APAGADAS', dataType: 'json'})"
+		Encendidas
+
 %h3 Período:
 %ul 
 	%li= link_to 'Agregar Nuevo Período', {controller: 'cal_semestre', action: 'nuevo'}, class: 'btn'
