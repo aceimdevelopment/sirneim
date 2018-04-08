@@ -33,7 +33,8 @@
 									%th Año
 									%th Asignatura
 									%th Sección
-									%th Profesor
+									%th Profesor Princial
+									%th Profesor(es) Secundario(s)
 									%th TRIM I
 									%th TRIM II
 									%th TRIM III
@@ -58,11 +59,12 @@
 												%span.badge.badge-inverse= est_sec_per.cal_seccion.cal_materia.id_upsi
 											
 											%td= est_sec_per.cal_seccion.numero
-											%td
-												- if session[:cal_administrador]
-													= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
-												- else
-													= est_sec_per.cal_seccion.cal_profesor.cal_usuario.apellido_nombre if est_sec_per.cal_seccion.cal_profesor
+											- if session[:cal_administrador]
+												%td= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
+												%td=raw est_sec_per.cal_seccion.cal_profesores.collect{|p| p.descripcion}.join(" </br> ") if est_sec_per.cal_seccion.cal_profesores.count > 0
+											- else
+												%td= est_sec_per.cal_seccion.cal_profesor.cal_usuario.apellido_nombre if est_sec_per.cal_seccion.cal_profesor
+												%td=raw est_sec_per.cal_seccion.cal_profesores.collect{|p| p.cal_usuario.apellido_nombre}.join(" </br>") if est_sec_per.cal_seccion.cal_profesores.count > 0
 
 											%td= est_sec_per.calificacion_primera
 											%td= est_sec_per.calificacion_segunda
