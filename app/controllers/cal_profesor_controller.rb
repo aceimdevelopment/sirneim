@@ -28,7 +28,7 @@ class CalProfesorController < ApplicationController
 			end
 
 			if @cal_profesor.save
-				redirect_to :controller => 'cal_principal_admin', :action => 'usuarios'
+				redirect_to controller: 'cal_usuario', action: 'index', search: @cal_profesor.cal_usuario_ci
 			else
 				flash[:alert] = "No se pudo registrar el profesor, revisa lo siguiente: #{@cal_profesor.errors.message.join(' ')}"
 				render :action => 'nuevo'

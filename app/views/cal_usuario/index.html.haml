@@ -1,0 +1,27 @@
+=#link_to 'Registrar Nuevo Profesor', {controller: 'cal_profesor', action: 'nuevo'}, class: 'btn btn-mini'
+=#link_to 'Registrar Nuevo Estudiante', {controller: 'cal_estudiante', action: 'nuevo'}, class: 'btn btn-mini'
+
+%table.table.tablesorter.tablefilter.likert
+  %thead
+    %tr
+      %th No.
+      %th.span3 Roles
+      %th.span4 Nombre y Apellido
+      %th Cédula
+      %th Correo Electrónico
+      %th Móvil
+      %th Opciones
+  %tbody
+    -@usuarios.each_with_index do |u,i|
+      %tr
+        %td=i+1
+        %td
+          = u.roles
+          = "(#{u.cal_profesor.cal_departamento.descripcion})" if u.cal_profesor
+        %td= link_to_if u.cal_estudiante, u.nombre_completo, {controller: 'cal_principal_admin', action: 'detalle_usuario', :ci => u.ci}
+        %td=u.ci
+        %td=u.correo_electronico
+        %td= u.telefono_movil
+
+        - if @super_user
+          %td= link_to "Resetear Contraseña", {action: 'resetear_contrasena', :ci => u.ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}, class: 'btn btn-mini'

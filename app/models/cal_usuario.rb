@@ -27,6 +27,9 @@ class CalUsuario < ActiveRecord::Base
 	validates :contrasena, :presence => true
 	validates :contrasena, :confirmation => true
 
+	scope :search, lambda { |clave| 
+	  where("ci LIKE ? OR nombres LIKE ? OR apellidos LIKE ? OR ci LIKE ? OR correo_electronico LIKE ?","%#{clave}%","%#{clave}%","%#{clave}%", "%#{clave}%", "%#{clave}%")
+	}
 
 	def descripcion_contacto
 		contacto = ""
@@ -52,6 +55,15 @@ class CalUsuario < ActiveRecord::Base
 			""
 		end
 
+	end
+
+	def roles
+		aux = ""
+		aux += " Administrador" if cal_administrador
+		aux += " Estudiante" if cal_estudiante
+		aux += " Profesor" if cal_profesor
+
+		return aux
 	end
 
 	def descripcion

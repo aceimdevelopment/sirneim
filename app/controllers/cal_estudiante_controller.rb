@@ -50,7 +50,7 @@ class CalEstudianteController < ApplicationController
 			@cal_estudiante = CalEstudiante.new(params[:cal_estudiante])
 			if @cal_estudiante.save
 				flash[:success] = "Estudiante Registrado satisfactoriamente"
-				redirect_to :controller => 'cal_principal_admin', :action => 'usuarios'
+				redirect_to controller: 'cal_principal_admin', action: 'detalle_usuario', ci: @cal_usuario.ci  
 			else
 				flash[:danger] = "No se pudo registrar el estudiante, revisa lo siguiente: #{@cal_profesor.errors.message.join(' ')}"
 				render :action => 'nuevo'

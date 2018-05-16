@@ -5,6 +5,24 @@ class CalUsuarioController < ApplicationController
   before_filter :cal_filtro_logueado
   # before_filter :cal_filtro_administrador
 
+  def index
+    @super_user = session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id < 3
+    @admin = session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id < 4
+    if params[:search]
+      @usuarios = CalUsuario.search(params[:search]).limit(50)
+      if @usuarios.count > 0 && @usuarios.count < 50  
+        flash[:success] = "Total de coincidencias: #{@usuarios.count}"
+      elsif @usuarios.count == 0
+        flash[:error] = "No se encontraron conincidencas. Intenta con otra búsqueda"
+      else
+        flash[:error] = "50 o más conincidencia. Puedes ser más explicito en la búsqueda. Recuerda que puedes buscar por CI, Nombre, Apellido, Correo Electrónico o incluso Número Telefónico"
+      end
+
+    else
+      @usuarios = CalUsuario.limit(50).order("apellidos, nombres, ci")      
+    end
+  end
+
   def editar
     @cal_usuario = session[:cal_usuario]
     @editar = true

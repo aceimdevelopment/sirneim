@@ -1,20 +1,29 @@
 .navbar.navbar-fluid.navbar-static-top{role:"navigation"}
   .navbar-inner
     .container-fluid
-      -if session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id < 3 
-        %ul.nav
-          %li
-            = link_to "Inicio", {controller: 'cal_principal_admin', action: 'index'}, class: 'brand' 
-          = drop_down "Usuarios" do
-            %li=link_to "Gestionar Profesores y Estudiantes", {controller: 'cal_principal_admin', action: 'usuarios'}
-          %li
-            = link_to "Configuración General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
+      %ul.nav
+        -if session[:cal_administrador]
+          -if session[:cal_administrador].cal_tipo_admin_id <=4 
+            %li
+              %form.navbar-form.pull-left{action: '/cal_usuario/index', role: :search} 
+                = text_field_tag :search, params[:search],{class: 'span2', placeholder: 'Usuario', required: true}
+                = submit_tag 'Buscar', class: 'btn btn-primary'
+            %li{style: 'margin-left:20px;'}
+              = link_to "Inicio", {controller: 'cal_principal_admin', action: 'index'}, class: 'brand' 
+            
+          -if session[:cal_administrador].cal_tipo_admin_id <=3 
+            = drop_down "Usuarios" do
+              %li=link_to 'Registrar Profesor', {controller: 'cal_profesor', action: 'nuevo'}
+              %li=link_to 'Registrar Estudiante', {controller: 'cal_estudiante', action: 'nuevo'}
+              %li=#link_to "Gestionar Profesores y Estudiantes", {controller: 'cal_principal_admin', action: 'usuarios'}
+            %li
+              = link_to "Configuración General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
 
-          %li
-            = link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
+            %li
+              = link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
 
-          %li
-            = link_to "Nuevos", {controller: 'cal_semestre', action: 'lista'}
+            %li
+              = link_to "Nuevos", {controller: 'cal_semestre', action: 'lista'}
 
       .nav.pull-right
 
