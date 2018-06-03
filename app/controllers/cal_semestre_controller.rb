@@ -5,8 +5,29 @@ class CalSemestreController < ApplicationController
   before_filter :cal_filtro_logueado
   before_filter :cal_filtro_administrador
 
-  def lista
+  def lista_nuevos
     @estudiantes = CalEstudiante.where(cal_tipo_estado_inscripcion_id: 'NUEVO')
+  end
+
+  def lista_estudiantes_asignaturas
+
+    @semestre_id = session[:cal_parametros][:semestre_actual]
+    @semestre_id = params[:semestre][:id] if params[:semestre] and params[:semestre][:id] 
+
+
+    @semestres = CalSemestre.order('id desc')
+    if params[:id].eql? 'nuevos'
+      @nuevos = true
+      @estudiantes = CalEstudiante.where(cal_tipo_estado_inscripcion_id: 'NUEVO')
+      @titulo_pagina = "Listado Estudiantes nuevos: "  
+    else
+      semestre = CalSemestre.find @semestre_id
+      @estudiantes = semestre.cal_estudiantes_secciones.uniq #CalEstudiante.join(:cal_secciones).where('cal_secciones.cal_semestre_id = ?', @semestre_id)
+      @titulo_pagina = "Listado Estudiantes correspondientes al periodo: "  
+      
+    end
+
+
   end
 
   def nuevo

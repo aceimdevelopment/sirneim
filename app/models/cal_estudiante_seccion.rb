@@ -19,6 +19,10 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	scope :confirmados, -> {where "confirmar_inscripcion = ?", 1}
 	scope :del_semestre_actual, -> {where "cal_semestre_id = ?", CalParametroGeneral.cal_semestre_actual_id}
 
+
+	scope :del_semestre, lambda { |semestre_id| where "cal_semestre_id = ?", semestre_id}
+
+
 	def pi?
 		cal_tipo_estado_calificacion_id.eql? 'PI'
 	end

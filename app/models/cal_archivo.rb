@@ -1,6 +1,45 @@
 # encoding: utf-8
 class CalArchivo
 
+	def self.listado_excel_asignaturas_estudiantes_periodo(cal_semestre_id, nuevos=nil)
+		require 'spreadsheet'
+
+		@book = Spreadsheet::Workbook.new
+		@sheet = @book.create_worksheet :name => "ReporteEstudiantesPeriodo#{cal_semestre_id}"
+
+		semestre = CalSemestre.find cal_semestre_id
+
+      	if nuevos
+      		estudiantes = CalEstudiante.where(cal_tipo_estado_inscripcion_id: 'NUEVO')
+      	else
+    		estudiantes = semestre.cal_estudiantes_secciones.uniq #CalEstudiante.join(:cal_secciones).where('cal_secciones.cal_semestre_id = ?', @semestre_id)
+    	end
+		# secciones = e.cal_estudiantes_secciones.del_semestre @semestre_id
+
+		data = 
+		@sheet.row(0).concat %w{# CI NOMBRE ASIG1 ASIG2 ASIG3 ASIG4 ASIG5 ASIG6 ASIG7 ASIG8 ASIG9 ASIG10 ASIG11 ASIG12}
+
+		data = []
+		estudiantes.each_with_index do |e,i|
+			secciones = e.cal_estudiantes_secciones.del_semestre cal_semestre_id
+			aux = [i+1, e.cal_usuario_ci, e.cal_usuario.apellido_nombre]
+
+			secciones.each do |seccion|
+				aux << "#{seccion.cal_seccion.descripcion} (#{seccion.cal_seccion.cal_materia.id_upsi})"
+			end
+			aux 
+			@sheet.row(i+1).concat  aux
+			# aux = { "CI" => usuario.ci, "NOMBRES" => usuario.apellido_nombre, "CORREO" => usuario.correo_electronico, "MOVIL" => usuario.telefono_movil}
+		end
+		if nuevos
+			file_name = "reporte_estudiantes_asignaturas_nuevos.xls"
+		else
+			file_name = "reporte_estudiantes_asignaturas_periodo_#{cal_semestre_id}.xls"
+		end
+		return file_name if @book.write file_name
+	end
+
+
 	def self.listado_excel(tipo,usuarios)
 		require 'spreadsheet'
 

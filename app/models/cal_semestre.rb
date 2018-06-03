@@ -7,4 +7,6 @@ class CalSemestre < ActiveRecord::Base
 
 	accepts_nested_attributes_for :cal_secciones
 
+	has_many :cal_estudiantes_secciones, :through => :cal_secciones, :source => :cal_estudiantes
+
 end
