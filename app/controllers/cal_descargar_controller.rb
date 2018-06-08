@@ -50,6 +50,14 @@ class CalDescargarController < ApplicationController
 
 	end
 
+	def kardex
+		pdf = CalArchivo.hacer_kardex params[:id]
+		unless send_data pdf.render,:filename => "kardex_#{params[:id]}.pdf",:type => "application/pdf", :disposition => "attachment"
+	    	flash[:mensaje] = "En estos momentos no se pueden descargar el kardex, intentelo luego."
+	    end
+		
+	end
+
 	def horario
 
 		@estudiante = CalEstudiante.where(:cal_usuario_ci => session[:cal_usuario].ci).limit(1).first

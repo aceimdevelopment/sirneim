@@ -22,13 +22,18 @@ class CalEstudianteSeccion < ActiveRecord::Base
 
 	scope :del_semestre, lambda { |semestre_id| where "cal_semestre_id = ?", semestre_id}
 
+	def descripcion
+		aux = cal_seccion.cal_materia.descripcion
+		aux += " <b>(Retirada)</b>" if retirada?
+		return aux
+	end
 
 	def pi?
 		cal_tipo_estado_calificacion_id.eql? 'PI'
 	end
 
 	def retirada?
-		return (retirada.eql? 1) ? true : false
+		return (cal_tipo_estado_inscripcion_id.eql? 'RET') ? true : false
 	end
 	# validates :id, :presence => true, :uniqueness => true	
 

@@ -47,7 +47,7 @@ class CalEstudianteSeccionController < ApplicationController
 		valor = 
 		id = params[:id]
 		if es = CalEstudianteSeccion.find(id)
-			es.retirada = params[:valor]
+			es.cal_tipo_estado_inscripcion_id = params[:valor]
 			if es.save
 				flash[:success] = "El cambiado el valor de retiro de #{es.cal_estudiante.cal_usuario.nickname} de la sección #{es.cal_seccion.descripcion} se realizó correctamente"
 			else

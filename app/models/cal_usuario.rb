@@ -41,7 +41,9 @@ class CalUsuario < ActiveRecord::Base
 	end
 
 	def nickname
-		nombres.split[0]
+		aux = nombres.split[0]
+		return (aux.size < 6) ? nombres : aux 
+		
 	end
 
 	def nombre_completo

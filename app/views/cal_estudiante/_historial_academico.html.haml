@@ -1,10 +1,17 @@
-%h3 Historial Academico:
-- if session[:cal_administrador]
+%h3 
+	Historial Academico:
+	- if session[:cal_administrador]
+		%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex de #{@estudiante.cal_usuario.nickname.capitalize}"}
+			= link_to({controller: 'cal_descargar', action: 'kardex', id: @estudiante.id}, {class: 'btn btn-mini'}) do
+				%i.icon-download-alt.icon-white
+				Kardex
+
+- if session[:cal_administrador]	
 	%h5
 		Agregar Asignatura:
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar a una sección'}		
 			= link_to "#", { class: 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' } do
-				= content_tag(:i, "", class: "icon-plus icon-white")
+				%i.icon-plus.icon-white
 
 
 	.modal.fade#estudiante_seccion{ role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
@@ -81,11 +88,11 @@
 												%td
 													- if est_sec_per.retirada?
 														%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Admitir Asignatura'}
-															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 0}, {class: 'btn btn-success btn-mini'}) do
+															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 'INS'}, {class: 'btn btn-success btn-mini'}) do
 																%i.icon-ok.icon-white
 													- else
 														%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Retirar Asignatura'}
-															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 1}, {class: 'btn btn-danger btn-mini'}) do
+															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 'RET'}, {class: 'btn btn-danger btn-mini'}) do
 																%i.icon-remove.icon-white
 
 													%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Asignatura'}
