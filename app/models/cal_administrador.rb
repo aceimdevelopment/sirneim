@@ -11,4 +11,9 @@ class CalAdministrador < ActiveRecord::Base
     	:class_name => 'CalTipoAdmin',
     	:foreign_key => ['cal_tipo_admin_id']
 
+
+  def super_admin?
+  	return (cal_tipo_admin_id and cal_tipo_admin_id <2) 
+  end
+
 end

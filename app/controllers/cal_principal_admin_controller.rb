@@ -184,7 +184,7 @@ class CalPrincipalAdminController < ApplicationController
 		cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
 		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first
 		# @secciones_estudiantes = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
-
+		@admin = session[:cal_administrador]
 
 
 

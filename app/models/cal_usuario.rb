@@ -40,6 +40,10 @@ class CalUsuario < ActiveRecord::Base
 		return contacto
 	end
 
+	def nickname
+		nombres.split[0]
+	end
+
 	def nombre_completo
 		if nombres and apellidos
 			"#{nombres}, #{apellidos}"

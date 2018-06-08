@@ -39,8 +39,8 @@
 					- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
 
 					%tr{class: tipo_calificacion}
-						%td #{i+1}
-						%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
+						%td #i+1  
+						%td= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
 						%td
 							= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {disabled: calificada, value: es.calificacion_final.to_i, class: 'span9', required: true, :step => 0.1, :in => 0...21}
 
@@ -71,8 +71,9 @@
 
 
 						%tr{class: tipo_calificacion}
-							%td #{i+1}
-							%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
+							%td #i+1  
+
+							%td= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
 							- unless calificada
 								%td
 									= radio_button_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", 0, (es.cal_tipo_estado_calificacion_id.eql? 'RE'), required: true
@@ -110,8 +111,10 @@
 						- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
 
 						%tr{class: tipo_calificacion}
-							%td #{i+1}
-							%td #{es.cal_estudiante.cal_usuario.descripcion_apellido}
+							%td= i+1  
+
+							%td= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+							
 							%td
 								- unless calificada 
 									= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true, es.pi?, {:onclick => "pi(#{es.cal_estudiante_ci})"}

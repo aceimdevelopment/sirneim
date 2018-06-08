@@ -8,9 +8,10 @@
 	%li
 		%b Nombre:	
 		= @estudiante.cal_usuario.nombre_completo
-	%li
-		%b Contraseña:
-		= @estudiante.cal_usuario.contrasena
+	- if @admin and @admin.super_admin?
+		%li
+			%b Contraseña:
+			= @estudiante.cal_usuario.contrasena
 
 %h3 Datos de contacto:
 %ul.well.well-small

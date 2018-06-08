@@ -4,7 +4,7 @@ class CalEstudianteSeccion < ActiveRecord::Base
 
 	attr_accessible :cal_estudiante_ci, :cal_numero, :cal_materia_id, :cal_semestre_id, 
 	:calificacion_primera, :calificacion_segunda, :calificacion_tercera, :calificacion_final, 
-	:cal_tipo_estado_calificacion_id, :cal_tipo_estado_inscripcion_id
+	:cal_tipo_estado_calificacion_id, :cal_tipo_estado_inscripcion_id, :retirada
 
 	belongs_to :cal_seccion,
     	:foreign_key => [:cal_numero, :cal_materia_id, :cal_semestre_id]
@@ -27,6 +27,9 @@ class CalEstudianteSeccion < ActiveRecord::Base
 		cal_tipo_estado_calificacion_id.eql? 'PI'
 	end
 
+	def retirada?
+		return (retirada.eql? 1) ? true : false
+	end
 	# validates :id, :presence => true, :uniqueness => true	
 
 end

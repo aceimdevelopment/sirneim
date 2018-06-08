@@ -45,7 +45,7 @@
 										%th Opciones
 							- @secciones_periodo.each do |est_sec_per|
 								- tipo_calificacion = 'success' if est_sec_per.cal_tipo_estado_calificacion_id.eql? 'AP'
-								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI')
+								- tipo_calificacion = 'error' if (est_sec_per.cal_tipo_estado_calificacion_id.eql? 'RE' or est_sec_per.cal_tipo_estado_calificacion_id.eql? 'PI' or est_sec_per.retirada?)
 
 								- tipo_calificacion = 'info' if (periodo.id.eql? '2016-02A' and est_sec_per.confirmar_inscripcion.eql? 1)
 								%tbody
@@ -57,7 +57,8 @@
 											%td
 												= est_sec_per.cal_seccion.cal_materia.descripcion
 												%span.badge.badge-inverse= est_sec_per.cal_seccion.cal_materia.id_upsi
-											
+												%span.badge= 'Retirada' if est_sec_per.retirada?
+												
 											%td= est_sec_per.cal_seccion.numero
 											- if session[:cal_administrador]
 												%td= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
@@ -78,8 +79,18 @@
 															= check_box nil, :confirmar, checked: (est_sec_per.confirmar_inscripcion.eql? 1), onchange: 'confirmar($(this));'
 
 												%td
-													= link_to({controller: 'cal_estudiante_seccion', action: 'eliminar', id: est_sec_per.id, :controlador => @controlador, :accion => @accion}, {class: 'btn btn-danger btn-mini', :method => :delete, :data => {:confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
-														= content_tag(:i, "", class: "icon-trash icon-white")
+													- if est_sec_per.retirada?
+														%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Admitir Asignatura'}
+															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 0}, {class: 'btn btn-success btn-mini'}) do
+																%i.icon-ok.icon-white
+													- else
+														%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Retirar Asignatura'}
+															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 1}, {class: 'btn btn-danger btn-mini'}) do
+																%i.icon-remove.icon-white
+
+													%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Asignatura'}
+														= link_to({controller: 'cal_estudiante_seccion', action: 'eliminar', id: est_sec_per.id, :controlador => @controlador, :accion => @accion}, {class: 'btn btn-danger btn-mini', :method => :delete, :data => {:confirm => "Se perderan los datos de las notas, ¿Está seguro de esta acción?" }}) do
+															%i.icon-trash.icon-white
 
 :javascript
 

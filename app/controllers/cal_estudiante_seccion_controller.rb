@@ -33,7 +33,7 @@ class CalEstudianteSeccionController < ApplicationController
 		ci = id[0]
 		if es = CalEstudianteSeccion.find(id)
 			if es.destroy
-				flash[:success] = "El estudiante fue retirado de la sección correctamente, ci:#{ci}"
+				flash[:success] = "El estudiante fue eliminado de la sección correctamente, ci:#{ci}"
 			else
 				flash[:error] = "El estudiante no pudo ser eliminado"
 			end				
@@ -43,4 +43,20 @@ class CalEstudianteSeccionController < ApplicationController
 		redirect_to :controller => params[:controlador], :action => params[:accion], :ci => ci
 	end
 
+	def set_retirar
+		valor = 
+		id = params[:id]
+		if es = CalEstudianteSeccion.find(id)
+			es.retirada = params[:valor]
+			if es.save
+				flash[:success] = "El cambiado el valor de retiro de #{es.cal_estudiante.cal_usuario.nickname} de la sección #{es.cal_seccion.descripcion} se realizó correctamente"
+			else
+				flash[:error] = "No se pudo cambiar el valor de retiro, intentelo de nuevo: #{es.errors.full_messages.join' | '}"
+			end				
+		else
+			flash[:error] = "El estudiante no fue encontrado en la sección especificada"
+		end
+		redirect_to :back
+
+	end
 end

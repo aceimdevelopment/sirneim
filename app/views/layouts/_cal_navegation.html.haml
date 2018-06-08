@@ -6,6 +6,7 @@
           -if session[:cal_administrador].cal_tipo_admin_id <=4 
             %li
               %form.navbar-form.pull-left{action: '/sirneim/cal_usuario/index', role: :search} 
+
                 = text_field_tag :search, params[:search],{class: 'span2', placeholder: 'Usuario', required: true}
                 = submit_tag 'Buscar', class: 'btn btn-primary'
             %li{style: 'margin-left:20px;'}
@@ -15,7 +16,6 @@
             = drop_down "Usuarios" do
               %li=link_to 'Registrar Profesor', {controller: 'cal_profesor', action: 'nuevo'}
               %li=link_to 'Registrar Estudiante', {controller: 'cal_estudiante', action: 'nuevo'}
-
 
               %li=link_to 'Estudiantes-Asignaturas', '/sirneim/cal_semestre/lista_estudiantes_asignaturas'
               %li=link_to 'Estudiantes-Asignaturas Nuevos', '/sirneim/cal_semestre/lista_estudiantes_asignaturas/nuevos'

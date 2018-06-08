@@ -2,6 +2,8 @@
 
 class CalInicioController < ApplicationController
   def index
+    reset_session
+
   end
 
   def validar
