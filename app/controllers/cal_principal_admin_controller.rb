@@ -186,13 +186,9 @@ class CalPrincipalAdminController < ApplicationController
 		# @secciones_estudiantes = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
 		@admin = session[:cal_administrador]
 
-
-
 		@periodos = CalSemestre.order("id DESC").all
 
 		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC")
-
-
 
 		# @secciones = CalSeccion.where(:cal_periodo_id => cal_semestre_actual_id)
 		@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
