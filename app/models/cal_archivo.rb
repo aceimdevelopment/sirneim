@@ -81,9 +81,10 @@ class CalArchivo
 
 				secciones_periodo.each do |h|
 					aux = h.cal_seccion.cal_materia.descripcion
+					nota_final = h.calificacion_final.nil? ?  '--' : h.calificacion_final
 					data << {"codigo" => "#{h.cal_seccion.cal_materia.id_upsi}",
 						"asignatura" => to_utf16(h.descripcion),
-						"final" => to_utf16("#{h.calificacion_final}"),
+						"final" => to_utf16("#{nota_final}"),
 						"seccion" => to_utf16("#{h.cal_seccion.numero}")
 				 	}
 
@@ -105,6 +106,12 @@ class CalArchivo
 		pdf.text to_utf16("<b>NOTA:</b> CUANDO EXISTA DISCREPANCIA ENTRE LOS DATOS CONTENIDOS EN LAS ACTAS DE EXAMENES Y ÉSTE COMPROBANTE, LOS PRIMEROS SE TENDRÁN COMO AUTÉNTICOS PARA CUALQUIER FIN."), font_size: 11
 		pdf.text "\n"
 		pdf.text to_utf16("* ÉSTE COMPROBANTE ES DE CARACTER INFORMATIVO, NO TIENE VALIDEZ LEGAL *"), font_size: 11, justification: :center
+
+		pdf.text "\n"
+		pdf.text "\n"
+		pdf.text to_utf16("________________"), font_size: 11, justification: :right
+		pdf.text to_utf16("Firma Autorizada"), font_size: 11, justification: :right
+
 
 
 		return pdf

@@ -13,7 +13,7 @@
 			= 'Excel'
 %br
 .well{style: "overflow-x: scroll;width: 90%; overflow-y: hidden;"}
-	%table.table.table-bordered.table-striped.table-condensed.table-hover
+	%table.table-bordered.table-striped.table-condensed.table-hover
 		%thead
 			%tr
 				%th #
@@ -39,7 +39,7 @@
 					%tr
 						%td= i+1
 						%td= e.cal_usuario_ci
-						%td= e.cal_usuario.nombre_completo
+						%td= e.cal_usuario.apellido_nombre
 						- secciones.each do |seccion| 
 							%td= "#{seccion.cal_seccion.descripcion} (#{seccion.cal_seccion.cal_materia.id_upsi})"
 						- j = secciones.count

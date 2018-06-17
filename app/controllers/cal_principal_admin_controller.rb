@@ -29,7 +29,7 @@ class CalPrincipalAdminController < ApplicationController
 	def configuracion_general
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual
 		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
-		@cal_periodos = CalSemestre.all
+		@cal_periodos = CalSemestre.order("id desc").all
 	end
 
 

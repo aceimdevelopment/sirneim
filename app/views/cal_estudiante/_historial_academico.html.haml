@@ -1,10 +1,9 @@
 %h3 
 	Historial Academico:
-	- if session[:cal_administrador]
-		%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex de #{@estudiante.cal_usuario.nickname.capitalize}"}
-			= link_to({controller: 'cal_descargar', action: 'kardex', id: @estudiante.id}, {class: 'btn btn-mini'}) do
-				%i.icon-download-alt.icon-white
-				Kardex
+	%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex de #{@estudiante.cal_usuario.nickname.capitalize}"}
+		= link_to({controller: 'cal_descargar', action: 'kardex', id: @estudiante.id}, {class: 'btn btn-mini'}) do
+			%i.icon-download-alt.icon-white
+			Kardex
 
 - if session[:cal_administrador]	
 	%h5
@@ -87,7 +86,7 @@
 
 												%td
 													- if est_sec_per.retirada?
-														%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Admitir Asignatura'}
+														%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Reinscribir Asignatura'}
 															= link_to({controller: 'cal_estudiante_seccion', action: 'set_retirar', id: est_sec_per.id, valor: 'INS'}, {class: 'btn btn-success btn-mini'}) do
 																%i.icon-ok.icon-white
 													- else

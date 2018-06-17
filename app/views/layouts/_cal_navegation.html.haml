@@ -20,12 +20,10 @@
               %li=link_to 'Estudiantes-Asignaturas', '/sirneim/cal_semestre/lista_estudiantes_asignaturas'
               %li=link_to 'Estudiantes-Asignaturas Nuevos', '/sirneim/cal_semestre/lista_estudiantes_asignaturas/nuevos'
 
+          -if session[:cal_administrador].cal_tipo_admin_id <3 or session[:cal_administrador].cal_tipo_admin_id == 4 
+            %li= link_to "Configuración General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
 
-            %li
-              = link_to "Configuración General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
-
-            %li
-              = link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
+            %li= link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
 
       .nav.pull-right
 

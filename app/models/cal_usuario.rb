@@ -65,7 +65,7 @@ class CalUsuario < ActiveRecord::Base
 
 	def roles
 		aux = ""
-		aux += " Administrador" if cal_administrador
+		aux += " Administrador (#{cal_administrador.cal_tipo_admin.descripcion})" if cal_administrador
 		aux += " Estudiante" if cal_estudiante
 		aux += " Profesor" if cal_profesor
 

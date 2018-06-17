@@ -22,11 +22,11 @@ class CalSemestreController < ApplicationController
       @titulo_pagina = "Listado Estudiantes nuevos: "  
     else
       semestre = CalSemestre.find @semestre_id
-      @estudiantes = semestre.cal_estudiantes_secciones.uniq #CalEstudiante.join(:cal_secciones).where('cal_secciones.cal_semestre_id = ?', @semestre_id)
+      @estudiantes = semestre.cal_estudiantes_secciones.order('cal_usuario_ci ASC').uniq #CalEstudiante.join(:cal_secciones).where('cal_secciones.cal_semestre_id = ?', @semestre_id)
       @titulo_pagina = "Listado Estudiantes correspondientes al periodo: "  
-      
     end
 
+    flash[:success] = "Total de Estudiantes: #{@estudiantes.count}"
 
   end
 
