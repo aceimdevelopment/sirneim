@@ -13,14 +13,15 @@ class CalSeccion < ActiveRecord::Base
 	belongs_to :cal_semestre
 
 	has_many :cal_estudiantes_secciones,
-		:class_name => 'CalEstudianteSeccion',
- 		:foreign_key => [:cal_numero, :cal_materia_id, :cal_semestre_id],
+		class_name: 'CalEstudianteSeccion',
+ 		foreign_key: [:cal_numero, :cal_materia_id, :cal_semestre_id],
  		# :primary_key => [:cal_numero, :cal_materia_id, :cal_semestre_id]
  		# ojo al colocar la linea anterior dejan de aparecer los estudiantes_secciones de las secciones
- 		:primary_key => [:numero, :cal_materia_id, :cal_semestre_id]
+ 		primary_key: [:numero, :cal_materia_id, :cal_semestre_id], 
+ 		dependent: :delete_all
 	accepts_nested_attributes_for :cal_estudiantes_secciones
 
-	has_many :cal_estudiantes, :through => :cal_estudiantes_secciones, :source => :cal_estudiante
+	has_many :cal_estudiantes, through: :cal_estudiantes_secciones, source: :cal_estudiante
 
 
 	has_many :cal_secciones_profesores_secundarios,

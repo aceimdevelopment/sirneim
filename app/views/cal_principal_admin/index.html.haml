@@ -13,27 +13,26 @@
 		- else			
 			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Todas las secciones de este periodo habilidatas para calificar'}
 				= link_to "", {:href => 'javascript:void(0)', class: "btn btn-success disabled", 'data_confirm' => "Se Habilitaran todas las secciones de éste período, ¿Está seguro de esta acción?"},{role: 'button'} do
-					=# content_tag(:i, "", class: "icon-off icon-white") 
 					%span.icon.icon-off.icon-white
 					= content_tag(:i, "", class: "icon-list icon-white")
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Importar Secciones y Estudiantes desde un archivo PDF'}
 		
 
 			= link_to "", {:href => 'cal_principal_admin/importar_secciones_paso1', class: 'btn btn-info'},{role: 'button'} do
-				= content_tag(:i, "", class: "icon-file icon-white")
-				= content_tag(:i, "", class: "icon-arrow-right icon-white")
-				= content_tag(:i, "", class: "icon-list icon-white") 
+				%i.icon-file.icon-white
+				%i.icon-arrow-right.icon-white
+				%i.icon-list.icon-white
 
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Clonar Secciones del Período Anterior'}
 			= link_to "", {:href => 'cal_seccion/clonar_secciones_anteriores', class: 'btn btn-success'},{role: 'button'} do
-				= content_tag(:i, "", class: "icon-retweet icon-white") 
-				= content_tag(:i, "", class: "icon-list icon-white") 
-
+				%i.icon-retweet.icon-white
+				%i.icon-list.icon-white
 
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar Todas las Secciones del Período Actual'}
-			= link_to "", {:href => 'cal_seccion/eliminar_todas_secciones_actual', class: 'btn btn-danger', 'data_confirm' => "Se perderan los estudiantes inscritos en las secciones, ¿Está seguro de esta acción?"},{role: 'button'} do
-				= content_tag(:i, "", class: "icon-trash icon-white") 
-				= content_tag(:i, "", class: "icon-list icon-white")
+			= link_to "", {href: "cal_seccion/eliminar_todas_secciones_actual", class: 'btn btn-danger', data: {confirm: "Se perderan los estudiantes inscritos en la sección, ¿Está seguro de esta acción?"}, method: :delete} do
+				%i.icon-trash.icon-white
+				%i.icon-list.icon-white
+				%i.icon-trash.icon-white
 
 
 .tabbable.tabs-top
@@ -80,15 +79,13 @@
 											-secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
 											
 											%li{class: mat_activa}
-												-if secciones.count > 0
-													= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
-														= mat.descripcion
-														%span.badge.badge-inverse= mat.id_upsi
-												-else
-													%a.mute
-														= mat.descripcion
-														%span.label.label-important
-															inactiva
+												= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
+													= mat.descripcion
+													%span.badge.badge-inverse= mat.id_upsi
+													-if secciones.count < 1
+														.mute
+															%span.label.label-important
+																inactiva
 
 
 									.tab-content
@@ -97,9 +94,8 @@
 											- @mat_activa = (session[:mat_id].eql? mat.id) ? "active" : ""
 
 											-@secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
-											-if @secciones.count > 0
-												- @mat = mat
-												=render partial: 'detalle_seccion'
+											- @mat = mat
+											=render partial: 'detalle_seccion'
 
 
 - @cal_usuario = session[:cal_usuario]

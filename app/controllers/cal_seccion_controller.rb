@@ -64,6 +64,9 @@ class CalSeccionController < ApplicationController
 
 		@cal_seccion = CalSeccion.find params[:id]
 
+		cal_estudiantes_secciones = 
+		@cal_seccion.cal_estudiantes_secciones.each{|es| es.delete}
+		@cal_seccion.cal_secciones_profesores_secundarios.each{|profe| profe.delete}
 		if @cal_seccion.delete
 			flash[:info] = "Se eliminó la sección de manera correcta"
 		end
