@@ -34,15 +34,20 @@
 					%th Definitiva
 			%tbody
 				- @estudiantes_secciones.each_with_index do |es,i|
+					- retirada = es.retirada?  
 					- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
-					- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+					- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI' or retirada)
 					- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
 
-					%tr{class: tipo_calificacion}
-						%td #i+1  
-						%td= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+					- muted = retirada ? "muted" : ""
+					%tr{class: "#{tipo_calificacion} #{muted}"}
+						%td= i+1
 						%td
-							= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {disabled: calificada, value: es.calificacion_final.to_i, class: 'span9', required: true, :step => 0.1, :in => 0...21}
+							= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+							%span.badge= 'Retirada' if retirada
+
+						%td
+							= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {disabled: (calificada or retirada), value: es.calificacion_final.to_i, class: 'span9', required: true, :step => 0.1, :in => 0...21}
 
 		.well.well-small
 			-unless calificada 
@@ -64,25 +69,29 @@
 							%th	Estado
 				%tbody
 					- @estudiantes_secciones.each_with_index do |es,i|
-
+						- retirada = es.retirada?
 						- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
-						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI' or retirada)
 						- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
+						- muted = retirada ? "muted" : ""
 
+						%tr{class: "#{tipo_calificacion} #{muted}"}
+							%td= i+1  
 
-						%tr{class: tipo_calificacion}
-							%td #i+1  
+							%td
+								= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+								%span.badge= 'Retirada' if retirada
 
-							%td= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
 							- unless calificada
 								%td
-									= radio_button_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", 0, (es.cal_tipo_estado_calificacion_id.eql? 'RE'), required: true
+									= radio_button_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", 0, (es.cal_tipo_estado_calificacion_id.eql? 'RE'), required: true, disabled: retirada
 								%td
-									= radio_button_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", 20, (es.cal_tipo_estado_calificacion_id.eql? 'AP'), required: true
+									= radio_button_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", 20, (es.cal_tipo_estado_calificacion_id.eql? 'AP'), required: true, disabled: retirada
 								%td
 							- else
 								%td
-									%b= es.cal_tipo_estado_calificacion.descripcion
+									- valor = retirada ? 'Retirada' : es.cal_tipo_estado_calificacion.descripcion 
+									%b= valor
 		- else
 
 			%table.table.table-bordered.table-striped.table-condensed.table-hover{style: "text-align:left;"}
@@ -104,40 +113,44 @@
 						%th Definitiva
 				%tbody
 					- @estudiantes_secciones.each_with_index do |es,i|
-
+						- retirada = es.retirada?
 						- tipo_calificacion = 'success' if es.cal_tipo_estado_calificacion_id.eql? 'AP'
-						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI')
+						- tipo_calificacion = 'error' if (es.cal_tipo_estado_calificacion_id.eql? 'RE' or es.cal_tipo_estado_calificacion_id.eql? 'PI' or retirada)
 
 						- tipo_calificacion = 'info' if @cal_seccion.cal_semestre_id.eql? '2016-02A' and es.confirmar_inscripcion.eql? 1
-
-						%tr{class: tipo_calificacion}
+						- muted = retirada ? "muted" : ""
+						%tr{class: "#{tipo_calificacion} #{muted}"}
 							%td= i+1  
 
-							%td= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+							%td
+								= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+								%span.badge= 'Retirada' if retirada
+
 							
 							%td
 								- unless calificada 
-									= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true, es.pi?, {:onclick => "pi(#{es.cal_estudiante_ci})"}
+									= check_box_tag "[est][#{es.cal_estudiante_ci}]pi", true, es.pi?, {:onclick => "pi(#{es.cal_estudiante_ci})", disabled: retirada}
 								- else
 									= es.cal_tipo_estado_calificacion.descripcion
 							%td 
-								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_primera", {}, {class: 'span9', required: @es_semestre1, :step => 0.1, :in => 0...21, value: es.calificacion_primera, disabled: (calificada or es.pi?), :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_primera", {}, {class: 'span9', required: @es_semestre1, :step => 0.1, :in => 0...21, value: es.calificacion_primera, disabled: (calificada or es.pi? or retirada), :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 							%td{style: "border-right-style: double;border-right-color: darkgray;"}
 								%p{id: "#{es.cal_estudiante_ci}_calificacion_primera_text"}
 									= sprintf( "%0.01f", es.calificacion_primera*@p1/100) if es.calificacion_primera
 							%td 
-								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {class: 'span9', required: @es_semestre2, :step => 0.1, :in => 0...21, disabled: (calificada or es.pi?), value: es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+								=number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_segunda", {}, {class: 'span9', required: @es_semestre2, :step => 0.1, :in => 0...21, disabled: (calificada or es.pi? or retirada), value: es.calificacion_segunda, :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 							%td{style: "border-right-style: double;border-right-color: darkgray;"}
 								%p{id: "#{es.cal_estudiante_ci}_calificacion_segunda_text"}
 									= sprintf( "%0.01f", es.calificacion_segunda*@p2/100) if es.calificacion_segunda
 							%td
-								= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {class: 'span9', required: @es_semestre3, :step => 0.1, :in => 0...21, value: es.calificacion_tercera, disabled: (calificada or es.pi?), :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
+								= number_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_tercera", {}, {class: 'span9', required: @es_semestre3, :step => 0.1, :in => 0...21, value: es.calificacion_tercera, disabled: (calificada or es.pi? or retirada), :onchange => "return calcular(#{@p1}, #{@p2}, #{@p3}, #{es.cal_estudiante_ci});"}
 
 							%td{style: "border-right-style: double;border-right-color: darkgray;"}
 								%p{id: "#{es.cal_estudiante_ci}_calificacion_tercera_text"}
 									= sprintf( "%0.01f", es.calificacion_tercera*@p3/100) if es.calificacion_tercera
 							%td
 								- valor = es.pi? ? es.cal_tipo_estado_calificacion.descripcion : es.calificacion_final.to_i
+								- valor = 'Retirada' if retirada
 								= text_field_tag "[est][#{es.cal_estudiante_ci}]calificacion_final", {}, {:readonly => true, disabled: calificada, value: valor , class: 'span9'}
 
 		-unless calificada 

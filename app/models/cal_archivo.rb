@@ -212,7 +212,7 @@ class CalArchivo
 		data = []
 		estudiantes.each_with_index do |est,i|
 			usuario = est.cal_estudiante.cal_usuario
-			@sheet.row(i+3).concat  [usuario.ci, usuario.apellido_nombre, usuario.correo_electronico, usuario.telefono_movil]
+			@sheet.row(i+3).concat  [usuario.ci, est.nombre_estudiante_con_retiro, usuario.correo_electronico, usuario.telefono_movil]
 		end
 
 		file_name = "reporte_seccion.xls"

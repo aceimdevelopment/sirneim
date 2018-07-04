@@ -122,6 +122,8 @@ class DocumentosPDF
     data = []
 
     estudiantes_seccion.each_with_index do |h,i|
+      estado = h.cal_tipo_estado_calificacion.descripcion.to_s
+      estado = 'Retirada' if h.retirada?
       data << {"#" => "#{i+1}",
         "cedula" => to_utf16(h.cal_estudiante_ci),
         "nombre" => to_utf16(h.cal_estudiante.cal_usuario.descripcion_apellido),
@@ -129,7 +131,7 @@ class DocumentosPDF
         "nota2" => to_utf16(h.calificacion_segunda.to_s),
         "nota3" => to_utf16(h.calificacion_tercera.to_s),
         "final" => to_utf16(h.calificacion_final.to_i.to_s),
-        "estado" => to_utf16(h.cal_tipo_estado_calificacion.descripcion.to_s),
+        "estado" => to_utf16(estado),
       }
 
     end

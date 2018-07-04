@@ -32,6 +32,13 @@ class CalEstudianteSeccion < ActiveRecord::Base
 		cal_tipo_estado_calificacion_id.eql? 'PI'
 	end
 
+
+	def nombre_estudiante_con_retiro
+		aux = cal_estudiante.cal_usuario.apellido_nombre
+		aux += " (retirado)" if retirada? 
+		return aux
+	end
+
 	def retirada?
 		return (cal_tipo_estado_inscripcion_id.eql? 'RET') ? true : false
 	end
