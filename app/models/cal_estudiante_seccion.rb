@@ -19,7 +19,8 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	scope :confirmados, -> {where "confirmar_inscripcion = ?", 1}
 	scope :del_semestre_actual, -> {where "cal_semestre_id = ?", CalParametroGeneral.cal_semestre_actual_id}
 
-
+	scope :no_retirados, -> {where "cal_tipo_estado_inscripcion_id != ?", 'RET'}
+	scope :retirados, -> {where "cal_tipo_estado_inscripcion_id = ?", 'RET'}
 	scope :del_semestre, lambda { |semestre_id| where "cal_semestre_id = ?", semestre_id}
 
 	def descripcion

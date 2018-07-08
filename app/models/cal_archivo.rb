@@ -194,9 +194,9 @@ class CalArchivo
 		@sheet = @book.create_worksheet :name => "Seccion #{seccion.id}"
 
 		if seccion.cal_semestre_id.eql? '2016-02A'
-			estudiantes = seccion.cal_estudiantes_secciones.confirmados.sort_by{|e| e.cal_estudiante.cal_usuario.apellidos}
+			estudiantes = seccion.cal_estudiantes_secciones.no_retirados.confirmados.sort_by{|e| e.cal_estudiante.cal_usuario.apellidos}
 		else
-			estudiantes = seccion.cal_estudiantes_secciones.sort_by{|e| e.cal_estudiante.cal_usuario.apellidos}
+			estudiantes = seccion.cal_estudiantes_secciones.no_retirados.sort_by{|e| e.cal_estudiante.cal_usuario.apellidos}
 		end
 		# cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
 
