@@ -8,6 +8,8 @@
       %th.span3 Roles
       %th.span4 Nombre y Apellido
       %th Cédula
+      - if @super_user 
+        %th Contraseña
       %th Correo Electrónico
       %th Móvil
       %th Opciones
@@ -20,6 +22,8 @@
           = "(#{u.cal_profesor.cal_departamento.descripcion})" if u.cal_profesor
         %td= link_to_if u.cal_estudiante, u.nombre_completo, {controller: 'cal_principal_admin', action: 'detalle_usuario', :ci => u.ci}
         %td=u.ci
+        - if @super_user 
+          %td=u.contrasena
         %td=u.correo_electronico
         %td= u.telefono_movil
 

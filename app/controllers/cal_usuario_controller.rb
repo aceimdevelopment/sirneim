@@ -64,9 +64,21 @@ class CalUsuarioController < ApplicationController
       redirect_to :action => :olvido_clave
     end
     
-
-
-
   end
+
+  def resetear_contrasena
+    @usuario = CalUsuario.where(:ci => params[:ci]).limit(1).first
+    @usuario.contrasena = @usuario.ci
+    
+    if @usuario.save
+      flash[:success] = "Contraseña reseteada corréctamente"
+      redirect_to  :back
+    else
+      flash[:error] = "no se pudo resetear la contraseña"
+      redirect_to  :back
+    end
+    
+  end
+
 
 end
