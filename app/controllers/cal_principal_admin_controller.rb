@@ -71,7 +71,6 @@ class CalPrincipalAdminController < ApplicationController
 		@admin = session[:cal_administrador]
 
 		if @admin and @admin.cal_tipo_admin_id.eql? 3
-
 			
 			(@cal_departamento_id = 'ALE' and @editar_asignaturas = true) if @admin.cal_usuario_ci.eql? "14755681"
 
@@ -97,7 +96,7 @@ class CalPrincipalAdminController < ApplicationController
 		@departamentos = CalDepartamento.where(:id => @cal_departamento_id)	if @cal_departamento_id
 		
 	end
-
+	
 	def seleccionar_profesor
 		@cal_profesores = CalProfesor.all.sort_by{|profe| profe.cal_usuario.apellidos}
 		@titulo = "Cambio de profesor de sección"
@@ -131,6 +130,7 @@ class CalPrincipalAdminController < ApplicationController
 		@cal_seccion = CalSeccion.find(id)
 		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
 		@titulo = "Sección: #{@cal_seccion.descripcion}"
+		
 		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LIN' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LE'
 			@p1 = 25 
 			@p2 =35

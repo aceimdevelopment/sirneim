@@ -41,6 +41,15 @@
 
   .control-group
     %label.control-label
+      Unidades de Crédito:
+    .controls
+      = a.number_field :creditos, :in => 0...31, class: 'input', required: true
+      %span.help-inline
+        ="Año de la asignatura"
+
+
+  .control-group
+    %label.control-label
       Año:
     .controls
       = a.number_field :anno, :in => 0...5, class: 'input', required: true

@@ -34,7 +34,7 @@ class DocumentosPDF
     pdf.add_text 100,715,to_utf16("Coordinación Académica"),11
 
     #titulo    
-    pdf.add_text_wrap 50,650,510,to_utf16("Sección: #{seccion.descripcion} / Periodo: #{seccion.cal_semestre_id}"), 12,:center
+    pdf.add_text_wrap 50,650,510,to_utf16("Sección: #{seccion.descripcion} / Periodo: #{seccion.cal_semestre_id} / U. Créditos: #{seccion.cal_materia.creditos}"), 12,:center
 
     #instructor
     pdf.add_text_wrap 50,600,510,to_utf16("Profesor: #{seccion.cal_profesor.cal_usuario.descripcion}"),10
@@ -69,7 +69,7 @@ class DocumentosPDF
     tabla.orientation   = :center
     tabla.position      = :center
     
-    tabla.column_order = ["#", "nombre", "cedula", "nota1","nota2","nota3","final", "estado"]
+    tabla.column_order = ["#", "nombre", "cedula", "nota1","nota2","nota3","final", "tipo", "estado"]
 
     tabla.columns["#"] = PDF::SimpleTable::Column.new("#") { |col|
       col.width = 30
@@ -89,26 +89,32 @@ class DocumentosPDF
       col.justification = :left
     }
       tabla.columns["nota1"] = PDF::SimpleTable::Column.new("nota1") { |col|
-        col.width = 50
+        col.width = 32
         col.heading = to_utf16("<b>(#{p1}%)</b>")
         col.heading.justification = :center
         col.justification = :center
       }
       tabla.columns["nota2"] = PDF::SimpleTable::Column.new("nota2") { |col|
-        col.width = 50
+        col.width = 32
         col.heading = to_utf16("<b>(#{p2}%)</b>")
         col.heading.justification = :center
         col.justification = :center
       }
       tabla.columns["nota3"] = PDF::SimpleTable::Column.new("nota3") { |col|
-        col.width = 50
+        col.width = 32
         col.heading = to_utf16("<b>(#{p3}%)</b>")
         col.heading.justification = :center
         col.justification = :center
       }
       tabla.columns["final"] = PDF::SimpleTable::Column.new("final") { |col|
-        col.width = 40
+        col.width = 32
         col.heading = to_utf16("<b>Final</b>")
+        col.heading.justification = :center
+        col.justification = :center
+      }
+      tabla.columns["tipo"] = PDF::SimpleTable::Column.new("tipo") { |col|
+        col.width = 33
+        col.heading = to_utf16("<b>Desc Calif</b>")
         col.heading.justification = :center
         col.justification = :center
       }
@@ -131,6 +137,7 @@ class DocumentosPDF
         "nota2" => to_utf16(h.calificacion_segunda.to_s),
         "nota3" => to_utf16(h.calificacion_tercera.to_s),
         "final" => to_utf16(h.calificacion_final.to_i.to_s),
+        "tipo" => to_utf16(h.tipo_calificacion),
         "estado" => to_utf16(estado),
       }
 

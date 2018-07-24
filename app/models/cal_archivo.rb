@@ -52,7 +52,7 @@ class CalArchivo
 				tabla.orientation   = :center
 				tabla.position      = :center
 
-				tabla.column_order = ["codigo", "asignatura", "final", "seccion"]
+				tabla.column_order = ["codigo", "asignatura", "creditos", "final", "seccion"]
 
 				tabla.columns["codigo"] = PDF::SimpleTable::Column.new("codigo") { |col|
 					col.heading = to_utf16("<b>Código</b>")
@@ -65,6 +65,12 @@ class CalArchivo
 					col.heading.justification = :left
 					col.justification = :left
 				}
+				tabla.columns["creditos"] = PDF::SimpleTable::Column.new("asignatura") { |col|
+					col.width = 25
+					col.heading = "<b>UC</b>"
+					col.heading.justification = :left
+					col.justification = :left
+				}				
 				tabla.columns["final"] = PDF::SimpleTable::Column.new("final") { |col|
 					col.width = 60
 					col.heading = to_utf16("<b>Cal. Num</b>")
@@ -77,13 +83,14 @@ class CalArchivo
 					col.justification = :center
 				}
 				data = []
-				tabla.column_order = ["codigo", "asignatura", "final", "seccion"]
+				tabla.column_order = ["codigo", "asignatura", "creditos", "final", "seccion"]
 
 				secciones_periodo.each do |h|
 					aux = h.cal_seccion.cal_materia.descripcion
 					nota_final = h.calificacion_final.nil? ?  '--' : h.calificacion_final
 					data << {"codigo" => "#{h.cal_seccion.cal_materia.id_upsi}",
 						"asignatura" => to_utf16(h.descripcion),
+						"final" => to_utf16("#{h.cal_seccion.cal_materia.creditos}"),
 						"final" => to_utf16("#{nota_final}"),
 						"seccion" => to_utf16("#{h.cal_seccion.numero}")
 				 	}

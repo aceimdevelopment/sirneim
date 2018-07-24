@@ -26,6 +26,7 @@
 							%th Cátedra
 							%th Año
 							%th Orden
+							%th U. Créditos
 							%th Cód. UXXI
 							%th Opciones
 								
@@ -37,6 +38,7 @@
 							%td= asignatura.cal_categoria.descripcion
 							%td= asignatura.anno
 							%td= asignatura.orden
+							%td= asignatura.creditos
 							%td= asignatura.id_upsi
 							%td= link_to 'Editar', {action: :editar, id: asignatura.id}, class: 'btn btn-info'
 

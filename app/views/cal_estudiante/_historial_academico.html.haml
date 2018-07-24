@@ -39,6 +39,7 @@
 									%th Año
 									%th Asignatura
 									%th Sección
+									%th UC
 									%th Profesor Princial
 									%th Profesor(es) Secundario(s)
 									%th TRIM I
@@ -66,6 +67,7 @@
 												%span.badge= 'Retirada' if est_sec_per.retirada?
 												
 											%td= est_sec_per.cal_seccion.numero
+											%td= est_sec_per.cal_seccion.cal_materia.creditos
 											- if session[:cal_administrador]
 												%td= est_sec_per.cal_seccion.cal_profesor.descripcion if est_sec_per.cal_seccion.cal_profesor
 												%td=raw est_sec_per.cal_seccion.cal_profesores.collect{|p| p.descripcion}.join(" </br> ") if est_sec_per.cal_seccion.cal_profesores.count > 0

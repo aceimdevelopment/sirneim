@@ -33,6 +33,24 @@ class CalEstudianteSeccion < ActiveRecord::Base
 		cal_tipo_estado_calificacion_id.eql? 'PI'
 	end
 
+	def tipo_calificacion
+		tipo = ''
+		if retirada?
+			tipo = 'RT'
+		elsif pi?
+			tipo = 'PI'
+		elsif calificacion_final.nil?
+			tipo = 'PD'
+		else
+
+			if cal_seccion.numero.include? 'R'
+				tipo = calificacion_final.to_i > 9 ? 'RA' : 'RR'
+			else
+				tipo = calificacion_final.to_i > 9 ? 'NF' : 'AP'
+			end
+		end
+		return tipo
+	end
 
 	def nombre_estudiante_con_retiro
 		aux = cal_estudiante.cal_usuario.apellido_nombre

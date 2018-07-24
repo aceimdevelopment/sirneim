@@ -1,5 +1,7 @@
 %h4
-	= "Profesor: #{@cal_seccion.descripcion_profesor_asignado}" 
+	= "Profesor: #{@cal_seccion.descripcion_profesor_asignado}"
+	.pull-right
+		= "Unidades de Créditos: #{@cal_seccion.cal_materia.creditos}"
 
 .well.well-small
 	=link_to "Regresar", {action: 'index'}, class: 'btn'
