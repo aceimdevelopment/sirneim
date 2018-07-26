@@ -90,7 +90,7 @@ class CalArchivo
 					nota_final = h.calificacion_final.nil? ?  '--' : h.calificacion_final
 					data << {"codigo" => "#{h.cal_seccion.cal_materia.id_upsi}",
 						"asignatura" => to_utf16(h.descripcion),
-						"tipo" => to_utf16("#{h.cal_seccion.cal_materia.creditos}"),
+						"creditos" => to_utf16("#{h.cal_seccion.cal_materia.creditos}"),
 						"final" => to_utf16("#{nota_final}"),
 						"seccion" => to_utf16("#{h.cal_seccion.numero}")
 				 	}
