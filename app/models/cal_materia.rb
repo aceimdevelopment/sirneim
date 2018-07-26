@@ -10,7 +10,7 @@ class CalMateria < ActiveRecord::Base
 	accepts_nested_attributes_for :cal_secciones
 
 	validates :id, :presence => true, :uniqueness => true
-	validates :id_upsi, :presence => true, :uniqueness => true
+	validates :id_upsi, :presence => true, :uniqueness => true#, :message => 'Código UXXI ya está en uso'
 	validates :descripcion, :presence => true
 
 	def descripcion_completa
