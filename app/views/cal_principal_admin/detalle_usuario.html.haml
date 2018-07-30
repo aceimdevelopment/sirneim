@@ -28,13 +28,15 @@
 - @accion = action_name
 - @controlador = controller_name
 
-%h3 Combinación de Idiomas:
+%h3 Combinación de Idiomas y Plan:
 .well.well-small
-	= "#{@estudiante.combo_idiomas}"
+	= "#{@estudiante.plan}"
 
 	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
 		= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
 			= content_tag(:i, "", class: "icon-edit icon-white")
+	
+%h3= "#{@estudiante.}" 
 
 = render partial: 'cal_estudiante/historial_academico'
 
