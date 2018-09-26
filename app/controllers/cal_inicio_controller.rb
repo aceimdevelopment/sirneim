@@ -2,8 +2,10 @@
 
 class CalInicioController < ApplicationController
   def index
+    temp = flash[:error]
     reset_session
 
+    flash[:error] = temp
   end
 
   def validar
