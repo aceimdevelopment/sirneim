@@ -24,8 +24,12 @@ class CalUsuarioController < ApplicationController
   end
 
   def editar
-    @cal_usuario = session[:cal_usuario]
-    @editar = true
+    if params[:ci]
+      @cal_usuario = CalUsuario.find params[:ci]
+    else  
+      @cal_usuario = session[:cal_usuario]
+    end 
+    @editar = (session[:cal_administrador] and session[:cal_administrador].cal_tipo_admin_id <= 3) #true
 
     if params[:controlador] and params[:accion]
       @accion = params[:accion]
@@ -38,8 +42,8 @@ class CalUsuarioController < ApplicationController
     controlador = params[:controlador]
     accion = params[:accion]
     usr = params[:cal_usuario]
-
-    @usuario = session[:cal_usuario]
+    ci = params[:ci]
+    @usuario = CalUsuario.find ci #session[:cal_usuario]
 
     if @usuario.update_attributes(usr)
     	flash[:success] = "Datos guardados Satisfactoriamente"
@@ -47,7 +51,7 @@ class CalUsuarioController < ApplicationController
     	flash[:error] = "No se pudo guardar los datos: #{@usuario.errors.full_messages.join' | '}"
     end
 
-    redirect_to :controller => controlador, :action => accion    
+    redirect_to controller: controlador, action: accion, ci: @usuario.ci
   end
 
   def olvido_clave_enviar

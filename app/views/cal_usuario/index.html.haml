@@ -20,7 +20,7 @@
         %td
           = u.roles
           = "(#{u.cal_profesor.cal_departamento.descripcion})" if u.cal_profesor
-        %td= link_to_if u.cal_estudiante, u.nombre_completo, {controller: 'cal_principal_admin', action: 'detalle_usuario', :ci => u.ci}
+        %td= link_to u.nombre_completo, {controller: 'cal_principal_admin', action: 'detalle_usuario', :ci => u.ci}
         %td=u.ci
         - if @super_user 
           %td=u.contrasena

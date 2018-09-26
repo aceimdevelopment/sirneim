@@ -12,8 +12,11 @@
   -else 
     =hidden_field_tag 'controlador', controller_name
     =hidden_field_tag 'accion', action_name
+  
+  =hidden_field_tag 'ci', @cal_usuario.ci
   %fieldset
     %legend Datos Personales
+
 
     -if @editar
       .control-group
@@ -33,6 +36,20 @@
         .controls
           %b= @cal_usuario.descripcion
 
+    - if @cal_usuario.ci.eql? session[:cal_usuario].ci
+      .control-group
+        %label.control-label
+          Contraseña:
+        .controls
+          =password_field :cal_usuario, :contrasena, required: true
+
+      .control-group
+        %label.control-label
+          Confirmación:
+        .controls
+          =password_field :cal_usuario, :contrasena_confirmation, required: true
+
+
     .control-group
       %label.control-label
         Sexo:
@@ -43,18 +60,6 @@
           |
           =radio_button :cal_usuario, :cal_tipo_sexo_id, "F", required: true
           Femenino
-
-    .control-group
-      %label.control-label
-        Contraseña:
-      .controls
-        =password_field :cal_usuario, :contrasena, required: true
-
-    .control-group
-      %label.control-label
-        Confirmación:
-      .controls
-        =password_field :cal_usuario, :contrasena_confirmation, required: true
 
   %fieldset
     %legend Datos de Contacto

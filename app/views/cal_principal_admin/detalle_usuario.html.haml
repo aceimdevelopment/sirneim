@@ -1,47 +1,64 @@
-=link_to "Regresar", :back, {class: 'btn'}
+%h3= link_to "<< Regresar", :back, {class: 'btn'}
 
-%h3 Datos Personales
-%ul.well.well-small
-	%li
-		%b Cédula de Identidad:
-		= @estudiante.cal_usuario_ci
-	%li
-		%b Nombre:	
-		= @estudiante.cal_usuario.nombre_completo
-	- if @admin and @admin.super_admin?
+.well.well-small
+	%h3 
+		Datos Personales y de Contacto: 
+	
+		= link_to "Actualizar", {controller: 'cal_usuario', action: 'editar', ci: @usuario.ci,  controlador: controller_name, accion: action_name}, class: 'btn'
+	%h5 Datos Personales: 
+	%ul
 		%li
-			%b Contraseña:
-			= @estudiante.cal_usuario.contrasena
+			%b Cédula de Identidad:
+			= @usuario.ci
+		%li
+			%b Nombre:	
+			= @usuario.nombre_completo
+		- if @admin and @admin.super_admin?
+			%li
+				%b Contraseña:
+				= @usuario.contrasena
+	%hr
 
-%h3 Datos de contacto:
-%ul.well.well-small
-	%li 
-		%b Correo Electrónico:
-		= "#{@estudiante.cal_usuario.correo_electronico}" 
-	%li 
-		%b Teléfono Móvil:
-		= "#{@estudiante.cal_usuario.telefono_movil}"
-	%li 
-		%b Teléfono Habitación:
-		= "#{@estudiante.cal_usuario.telefono_habitacion}"
+	%h5 Datos de contacto:
+	%ul
+		%li 
+			%b Correo Electrónico:
+			= "#{@usuario.correo_electronico}" 
+		%li 
+			%b Teléfono Móvil:
+			= "#{@usuario.telefono_movil}"
+		%li 
+			%b Teléfono Habitación:
+			= "#{@usuario.telefono_habitacion}"
 
 - @accion = action_name
 - @controlador = controller_name
+- if @estudiante
+	.well.well-small
+		%h3 Combinación de Idiomas y Plan:
+		= "#{@estudiante.plan}"
 
-%h3 Combinación de Idiomas y Plan:
-.well.well-small
-	= "#{@estudiante.plan}"
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
+			= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
+				= content_tag(:i, "", class: "icon-edit icon-white")
 
-	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
-		= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
-			= content_tag(:i, "", class: "icon-edit icon-white")
-	
-%h3= "#{@estudiante.}" 
-
-= render partial: 'cal_estudiante/historial_academico'
+	.well.well-small
+		= render partial: 'cal_estudiante/historial_academico'
 
 
-= render partial: 'cal_estudiante/actualizar_idiomas'
+	= render partial: 'cal_estudiante/actualizar_idiomas'
+
+- if @profesor
+	.well.well-small
+		%h3 Departamento:
+		= @profesor.cal_departamento.descripcion
+
+	- @secciones = @profesor.cal_secciones
+	- if @secciones.count > 0
+		.well.well-small
+			%h3= "Secciones (#{@secciones.count}):"
+			- @secciones.each do |s| 
+				%p= link_to_if (@admin and @admin.super_admin?), s.descripcion, "/sirneim/cal_principal_admin/ver_seccion_admin?id=#{s.id}"
 
 :javascript
 

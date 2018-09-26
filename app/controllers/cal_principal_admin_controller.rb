@@ -182,13 +182,26 @@ class CalPrincipalAdminController < ApplicationController
 
 	def detalle_usuario
 		cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
-		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first
+
+		# params[:ci] = session[:cal_usuario].ci if params[:ci].nil?
+
+		@estudiante = CalEstudiante.where(cal_usuario_ci: params[:ci]).limit(1).first
+		@profesor = CalProfesor.where(cal_usuario_ci: params[:ci]).limit(1).first
+
+		if @estudiante
+			@usuario = @estudiante.cal_usuario
+		elsif @profesor
+			@usuario = @profesor.cal_usuario
+		else
+			@usuario = CalUsuario.find  params[:ci]
+		end
+
 		# @secciones_estudiantes = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci)		
 		@admin = session[:cal_administrador]
 
 		@periodos = CalSemestre.order("id DESC").all
 
-		@secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC")
+		@secciones = CalEstudianteSeccion.where(cal_estudiante_ci: @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC") if @estudiante
 
 		# @secciones = CalSeccion.where(:cal_periodo_id => cal_semestre_actual_id)
 		@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
