@@ -2,7 +2,7 @@
   -if @cal_materia.errors.any?
     %ul
       -flash[:alert] = ''
-      -@cal_materia.errors.full_messages.each do |msg|
+      -@cal_materia.errors.each do |att, msg| 
         -flash[:alert] += "#{msg}\n"
 
 
@@ -36,41 +36,35 @@
       Descripción:
     .controls
       = a.text_field :descripcion, {placeholder: 'Descripción…', class: 'input', required: true}
-      %span.help-inline
-        ="Ej. Herramientas web 2.0 para la enseñanza de lenguas extranjeras"
+      %span.help-inline= "Ej. Herramientas web 2.0 para la enseñanza de lenguas extranjeras"
 
   .control-group
     %label.control-label
       Unidades de Crédito:
     .controls
       = a.number_field :creditos, :in => 0...31, class: 'input', required: true
-      %span.help-inline
-        ="Año de la asignatura"
-
+      %span.help-inline= "Año de la asignatura"
 
   .control-group
     %label.control-label
       Año:
     .controls
       = a.number_field :anno, :in => 0...6, class: 'input', required: true
-      %span.help-inline
-        ="Año de la asignatura"
+      %span.help-inline= "Año de la asignatura"
 
   .control-group
     %label.control-label
       Orden:
     .controls
       = a.number_field :orden, :in => 1...12, class: 'input', required: true
-      %span.help-inline
-        ="Orden de la asignatura"
+      %span.help-inline="Orden de la asignatura"
 
   .control-group
     %label.control-label
       Uxxi:
     .controls
-      = a.text_field :id_upsi, {placeholder: 'Código UXXIP…', class: 'input', required: true}
-      %span.help-inline
-        ="Código Uxxi"
+      = a.text_field :id_upsi, {placeholder: 'Código UXXI…', class: 'input', required: true}
+      %span.help-inline= "Código Uxxi"
 
   .form-actions      
     = link_to 'Atrás', 'index', class: "btn"

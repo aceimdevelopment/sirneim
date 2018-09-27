@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalMateria < ActiveRecord::Base
 
 	attr_accessible :id, :descripcion, :cal_categoria_id, :cal_departamento_id, :orden, :anno, :id_upsi, :creditos
@@ -9,9 +11,12 @@ class CalMateria < ActiveRecord::Base
 	has_many :cal_secciones
 	accepts_nested_attributes_for :cal_secciones
 
-	validates :id, :presence => true, :uniqueness => true
-	validates :id_upsi, :presence => true, :uniqueness => true#, :message => 'Código UXXI ya está en uso'
-	validates :descripcion, :presence => true
+	validates :id, presence: true, uniqueness: true
+	#validates :id_upsi, presence: true, uniqueness: true, message: 'Código UXXI ya está en uso'
+	validates_uniqueness_of :id_upsi, message: 'Código UXXI ya está en uso', field: false	
+	validates_presence_of :id_upsi, message: 'Código UXXI requerido'	
+
+	validates :descripcion, presence: true
 
 	def descripcion_completa
 		desc = "#{descripcion} "
