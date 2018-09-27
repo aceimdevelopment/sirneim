@@ -6,13 +6,8 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require select2
-//= require select2_locale_es
 //= require bootstrap
 //= require twitter/bootstrap
-//= require bootstrap-datepicker
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 //= require_self
 //= require_tree .
 
