@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CalSemestre < ActiveRecord::Base
 
 	attr_accessible :id, :fecha_inicio, :fecha_culminacion

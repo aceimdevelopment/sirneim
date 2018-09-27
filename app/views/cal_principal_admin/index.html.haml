@@ -95,7 +95,7 @@
 
 											-@secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
 											- @mat = mat
-											=render partial: 'detalle_seccion'
+											= render partial: 'detalle_seccion'
 
 
 - @cal_usuario = session[:cal_usuario]

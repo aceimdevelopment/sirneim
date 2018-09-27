@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalCategoria < ActiveRecord::Base
 
 	attr_accessible :id, :descripcion, :orden
