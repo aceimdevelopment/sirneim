@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Aceim
+module Sirneim
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -48,15 +48,11 @@ module Aceim
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
      :address              => "smtp.gmail.com",
-      # :address              => "strix.ciens.ucv.ve",
      :port                 => 587,
      :domain               => 'gmail.com',
      :user_name            => 'sirneim',
-    #  :user_name            => 'andresviviani3',
-    #  :password             => 'aceimaceim',
-      # :user_name            => 'sergio.rivas',
      :password             => 'julio2015',
-      # :password             => 'aqsw123',
+
       :authentication       => 'plain',
       :enable_starttls_auto => true  }    
   end
@@ -67,17 +63,3 @@ require 'composite_primary_keys'
 require "pdf/writer"
 require 'iconv'
 require 'pdf/simpletable'
-
-# require 'resque'
-# require 'resque-meta'
-# require 'resque/plugins/progress'
-
-=begin
-begin
-  require 'barby'   
-  require 'barby/barcode/code_128'
-  require 'barby/outputter/rmagick_outputter'
-  require 'resque/tasks'
-rescue
-end
-=end
