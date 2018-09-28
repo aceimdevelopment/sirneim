@@ -157,17 +157,13 @@ class CalArchivo
 		estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
 
 		estudiantes_seccion.each_with_index do |es,i|
-
-			nota_final = es.calificacion_final.nil? ?  '--' : es.calificacion_final
-
 			e = es.cal_estudiante
-
 			data << {"n" => i+1,
 				"ci" => to_utf16(e.cal_usuario_ci),
 				"nom" => to_utf16(e.cal_usuario.apellido_nombre),
 				"cod" => to_utf16(e.plan),
 				"cal_des" => to_utf16(es.tipo_calificacion),
-				"cal_num" => to_utf16("#{nota_final}"),
+				"cal_num" => to_utf16("#{es.colocar_nota}"),
 				"cal_letras" => to_utf16("#{es.calificacion_en_letras}")
 		 	}
 

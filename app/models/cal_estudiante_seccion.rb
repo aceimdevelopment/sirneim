@@ -33,6 +33,14 @@ class CalEstudianteSeccion < ActiveRecord::Base
 		cal_tipo_estado_calificacion_id.eql? 'PI'
 	end
 
+	def colocar_nota
+		if calificacion_final.nil?
+			return '--'
+		else
+			return sprintf("%02i",calificacion_final)
+		end
+	end
+
 	def tipo_calificacion
 		tipo = ''
 		if retirada?
