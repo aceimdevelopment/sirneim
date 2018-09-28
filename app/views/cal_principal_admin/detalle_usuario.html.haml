@@ -58,7 +58,7 @@
 		.well.well-small
 			%h3= "Secciones (#{@secciones.count}):"
 			- @secciones.each do |s| 
-				%p= link_to_if (@admin and @admin.super_admin?), s.descripcion, "/sirneim/cal_principal_admin/ver_seccion_admin?id=#{s.id}"
+				%p= link_to_if (@admin and @admin.super_admin?), s.descripcion, "cal_principal_admin/ver_seccion_admin?id=#{s.id}"
 
 :javascript
 
