@@ -52,6 +52,64 @@ class CalEstudianteSeccion < ActiveRecord::Base
 		return tipo
 	end
 
+	def calificacion_en_letras
+
+		valor = ''
+		if retirada?
+			valor = 'RETIRADA'
+		elsif pi?
+			valor = 'PERDIDA POR INASISTENCIA'
+		elsif calificacion_final.nil?
+			valor = 'POR DEFINIR'
+		else
+			case calificacion_final
+			when 1
+				valor = "CERO UNO"
+			when 2
+				valor = "CERO DOS"
+			when 3
+				valor = "CERO TRES"
+			when 4
+				valor = "CERO CUATRO"
+			when 5
+				valor = "CERO CINCO"
+			when 6
+				valor = "CERO SEIS"
+			when 7
+				valor = "CERO SIETE"
+			when 8
+				valor = "CERO OCHO"
+			when 9
+				valor = "CERO NUEVE"
+			when 10
+				valor = "DIEZ"
+			when 11
+				valor = "ONCE"
+			when 12
+				valor = "DOCE"
+			when 13
+				valor = "TRECE"
+			when 14
+				valor = "CATORCE"
+			when 15
+				valor = "QUINCE"
+			when 16
+				valor = "DIEZ Y SEIS"
+			when 17
+				valor = "DIEZ Y SIETE"
+			when 18
+				valor = "DIEZ Y OCHO"
+			when 19
+				valor = "DIEZ Y NUEVE"
+			when 20
+				valor = "VEINTE"
+			else
+				valor = "SIN VALOR"
+			end						
+		end
+		return valor
+	end
+
 	def nombre_estudiante_con_retiro
 		aux = cal_estudiante.cal_usuario.apellido_nombre
 		aux += " (retirado)" if retirada? 

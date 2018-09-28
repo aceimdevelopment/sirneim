@@ -6,6 +6,190 @@ class CalArchivo
 	end
 
 
+	def self.hacer_acta(seccion_id)
+
+		seccion = CalSeccion.find seccion_id
+		pdf = PDF::Writer.new
+
+		acta_no = "#{seccion.cal_materia.id_upsi}#{seccion.numero}#{seccion.cal_semestre.anno}"
+		# Parametros
+		pdf.margins_cm(1.8)
+
+		# Logos
+		pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 275, 720, 50,nil
+
+		#texto del encabezado
+		pdf.add_text_wrap 50,705,510,to_utf16("UNIVERSIDAD CENTRAL DE VENEZUELA"), 12,:center
+		pdf.add_text_wrap 50,690,510,to_utf16("PLANILLA DE EXÁMENES"), 12,:center
+		pdf.add_text_wrap 50,675,510,to_utf16("TIPO DE EXAMEN: FINAL ANUAL (SEPTIEMBRE)"), 12,:center
+
+		#titulo
+
+		pdf.add_text 50,660,to_utf16("FECHA DE LA EMISIÓN: <b>#{Time.now.strftime('%d/%m/%Y %I:%M %p')}</b>"),9
+		pdf.add_text 50,645,to_utf16("EJERCICIO: <b>#{seccion.ejercicio}</b>"),9
+		pdf.add_text 50,630,to_utf16("FACULTAD: <b>HUMANIDADES Y EDUCACIÓN</b>"),9
+		pdf.add_text 50,615,to_utf16("ESCUELA: <b>IDIOMAS</b>"),9
+
+
+		pdf.start_page_numbering(400, 660, 9, nil, to_utf16("PÁGINA: <b><PAGENUM>/<TOTALPAGENUM></b>"), 1)
+		pdf.add_text 400,645,to_utf16("ACTA N°: <b>#{acta_no.upcase}</b>"),9
+		pdf.add_text 400,630,to_utf16("PERIODO ACADÉMICO: <b>#{seccion.cal_semestre.anno}</b>"),9
+		pdf.add_text 400,615,to_utf16("TIPO CONVOCATORIA: <b>#{seccion.tipo_convocatoria}</b>"),9
+
+		pdf.text "\n"*12
+
+		tabla = PDF::SimpleTable.new
+		tabla.heading_font_size = 9
+		tabla.font_size = 9
+		tabla.show_lines    = :all
+		tabla.show_headings = true
+		tabla.orientation   = :center
+		tabla.position      = :center
+
+		tabla.column_order = ["asignatura", "codigo", "creditos", "curso", "seccion", "duracion"]
+
+		tabla.columns["asignatura"] = PDF::SimpleTable::Column.new("asignatura") { |col|
+			col.heading = to_utf16("<b>ASIGNATURA</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["codigo"] = PDF::SimpleTable::Column.new("codigo") { |col|
+			col.heading = "<b>COD. ASIGNATURA</b>"
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["creditos"] = PDF::SimpleTable::Column.new("creditos") { |col|
+			col.heading = "<b>UNID/CRED</b>"
+			col.heading.justification = :center
+			col.justification = :center
+		}				
+		tabla.columns["curso"] = PDF::SimpleTable::Column.new("curso") { |col|
+			col.heading = to_utf16("<b>CURSO</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["seccion"] = PDF::SimpleTable::Column.new("seccion") { |col|
+			col.heading = to_utf16("<b>SECCIÓN</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["duracion"] = PDF::SimpleTable::Column.new("duracion") { |col|
+			col.heading = to_utf16("<b>DURACIÓN</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+
+		data = []
+
+		data << {"asignatura" => to_utf16("#{seccion.cal_materia.descripcion}"),
+			"codigo" => to_utf16("#{seccion.cal_materia.id_upsi}"),
+			"creditos" => to_utf16("#{seccion.cal_materia.creditos}"),
+			"curso" => 1,
+			"seccion" => to_utf16("#{seccion.numero}"),
+			"duracion" => "A2"
+	 	}
+
+		tabla.data.replace data
+		tabla.render_on(pdf)
+
+ 		# pdf.line 50,560,570,560
+ 		# pdf.line 50,559,570,559
+
+		pdf.text "\n"*2
+
+		tabla = PDF::SimpleTable.new
+		tabla.heading_font_size = 8
+		tabla.font_size = 7
+		tabla.show_lines    = :all
+		tabla.line_color = Color::RGB::Gray
+		tabla.show_headings = true
+		tabla.shade_headings = true
+		tabla.shade_heading_color = Color::RGB.new(238,238,238)
+		tabla.shade_color = Color::RGB.new(230,238,238)
+		tabla.shade_color2 = Color::RGB::White
+		tabla.shade_rows = :striped
+		tabla.orientation   = :center
+		tabla.position      = :center
+
+
+		tabla.columns["n"] = PDF::SimpleTable::Column.new("n") { |col|
+			col.heading = to_utf16("<b>N°</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["ci"] = PDF::SimpleTable::Column.new("ci") { |col|
+			col.width = 60
+			col.heading = "<b>CEDULA DE IDENTIDAD</b>"
+			col.heading.justification = :center
+			col.justification = :left
+		}
+		tabla.columns["nom"] = PDF::SimpleTable::Column.new("nom") { |col|
+			col.heading = "<b>APELLIDOS Y NOMBRES</b>"
+			col.heading.justification = :center
+			col.justification = :left
+		}
+		tabla.columns["cod"] = PDF::SimpleTable::Column.new("cod") { |col|
+			col.width = 50
+			col.heading = "<b>COD PLAN</b>"
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["cal_des"] = PDF::SimpleTable::Column.new("cal_des") { |col|
+			col.width = 50
+			col.heading = "<b>CALIF. DESCRIP</b>"
+			col.heading.justification = :center
+			col.justification = :center
+		}		
+		tabla.columns["cal_num"] = PDF::SimpleTable::Column.new("cal_num") { |col|
+			col.width = 50
+			col.heading = to_utf16("<b>CALIF. NUMER.</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.columns["cal_letras"] = PDF::SimpleTable::Column.new("cal_letras") { |col|
+			col.heading = to_utf16("<b>CALIF. EN LETRAS</b>")
+			col.heading.justification = :center
+			col.justification = :center
+		}
+		tabla.column_order = ["n", "ci", "nom", "cod", "cal_des", "cal_num", "cal_letras"]
+		data = []
+
+		estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+
+		estudiantes_seccion.each_with_index do |es,i|
+
+			nota_final = es.calificacion_final.nil? ?  '--' : es.calificacion_final
+
+			e = es.cal_estudiante
+
+			data << {"n" => i+1,
+				"ci" => to_utf16(e.cal_usuario_ci),
+				"nom" => to_utf16(e.cal_usuario.apellido_nombre),
+				"cod" => to_utf16(e.plan),
+				"cal_des" => to_utf16(es.tipo_calificacion),
+				"cal_num" => to_utf16(nota_final),
+				"cal_letras" => to_utf16(es.calificacion_en_letras)
+		 	}
+
+		end
+		if data.count > 0
+			tabla.data.replace data
+			tabla.render_on(pdf)
+		end
+		pdf.add_text 150,110,"<b>JURADO EXAMINADOR</b>",9
+		pdf.add_text 50,85,"APELLIDOS Y NOMBRES",9
+		pdf.add_text 300,85,"FIRMAS",9
+		pdf.add_text 50,70,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre}"),9
+
+		pdf.add_text 470,110, to_utf16("<b>SECRETARÍA</b>"),9
+		pdf.add_text 450,85,"NOMBRE: ________________",9
+		pdf.add_text 450,70,"FIRMA:     ________________",9
+		pdf.add_text 450,55,"FECHA:    ________________",9
+
+		return pdf
+		
+	end
+
 
 	def self.hacer_kardex(id)
 		# Variable Locales
@@ -124,10 +308,6 @@ class CalArchivo
 		return pdf
 
 	end
-
-
-
-
 
 	def self.listado_excel_asignaturas_estudiantes_periodo(cal_semestre_id, nuevos=nil)
 		require 'spreadsheet'

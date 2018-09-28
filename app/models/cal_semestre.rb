@@ -10,4 +10,7 @@ class CalSemestre < ActiveRecord::Base
 
 	has_many :cal_estudiantes_secciones, :through => :cal_secciones, :source => :cal_estudiantes
 
+	def anno
+		"#{id.split('-').first}"
+	end
 end

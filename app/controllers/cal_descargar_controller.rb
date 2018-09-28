@@ -50,6 +50,16 @@ class CalDescargarController < ApplicationController
 
 	end
 
+	def acta_examen
+		pdf = CalArchivo.hacer_acta params[:id]
+		unless send_data pdf.render,:filename => "acta_#{params[:id].to_s.gsub(",","_")}.pdf",:type => "application/pdf", :disposition => "attachment"
+	    	flash[:mensaje] = "En estos momentos no se pueden descargar el acta, intentelo más tarde."
+	    end
+		
+	end
+
+
+
 	def kardex
 		pdf = CalArchivo.hacer_kardex params[:id]
 		unless send_data pdf.render,:filename => "kardex_#{params[:id]}.pdf",:type => "application/pdf", :disposition => "attachment"

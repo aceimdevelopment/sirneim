@@ -91,4 +91,22 @@ class CalSeccion < ActiveRecord::Base
 			"No asignado"
 		end
 	end
+
+	def ejercicio
+		"#{cal_semestre.anno}_A2"
+	end
+
+	def reparacion?
+		return numero.include? 'R'
+	end
+
+	def tipo_convocatoria
+		aux = numero[0..1]
+		if reparacion?
+			aux = "RA2" #{aux}"
+		else
+			aux = "FA2" #"F#{aux}"
+		end
+		return aux
+	end
 end
