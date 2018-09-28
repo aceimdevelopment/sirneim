@@ -23,6 +23,7 @@ class CalUsuarioController < ApplicationController
     end
   end
 
+
   def editar
     if params[:ci]
       @cal_usuario = CalUsuario.find params[:ci]

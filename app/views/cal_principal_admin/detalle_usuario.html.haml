@@ -36,8 +36,22 @@
 - if @estudiante
 	.well.well-small
 		%h3 Combinación de Idiomas y Plan:
-		= "#{@estudiante.plan}"
+		#plan_value
+			= "#{@estudiante.plan}"
+			- if @admin and @admin.super_admin? 
+				%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Plan de Estudio'}		
+					= link_to('javascript:void(0)', { class: 'btn btn-success btn-mini', :onclick => "$('#plan').show('slow');$('#plan_value').hide('slow'); ", 'data_toggle' => 'modal' }) do
+						= content_tag(:i, "", class: "icon-edit icon-white")
 
+		%form.hide.navbar-form#plan{action: '/sirneim/cal_estudiante/actualizar_plan', role: :search}
+			= hidden_field_tag :ci, @estudiante.cal_usuario_ci
+			= text_field_tag :plan, params[:search],{class: 'span2', placeholder: 'Usuario', required: true, value: @estudiante.plan}
+			= submit_tag 'Enviar', class: 'btn btn-primary btn-mini'
+
+
+
+		= "#{@estudiante.idioma1.descripcion}" if @estudiante.idioma1 
+		= "- #{@estudiante.idioma2.descripcion}" if @estudiante.idioma2 
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
 			= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
 				= content_tag(:i, "", class: "icon-edit icon-white")
