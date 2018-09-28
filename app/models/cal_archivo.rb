@@ -167,8 +167,8 @@ class CalArchivo
 				"nom" => to_utf16(e.cal_usuario.apellido_nombre),
 				"cod" => to_utf16(e.plan),
 				"cal_des" => to_utf16(es.tipo_calificacion),
-				"cal_num" => to_utf16(nota_final),
-				"cal_letras" => to_utf16(es.calificacion_en_letras)
+				"cal_num" => to_utf16("#{nota_final}"),
+				"cal_letras" => to_utf16("#{es.calificacion_en_letras}")
 		 	}
 
 		end
