@@ -175,7 +175,7 @@ class CalArchivo
 		pdf.add_text 150,110,"<b>JURADO EXAMINADOR</b>",9
 		pdf.add_text 50,85,"APELLIDOS Y NOMBRES",9
 		pdf.add_text 300,85,"FIRMAS",9
-		pdf.add_text 50,70,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre}"),9
+		pdf.add_text 50,70,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase}"),9
 
 		pdf.add_text 470,110, to_utf16("<b>SECRETARÍA</b>"),9
 		pdf.add_text 450,85,"NOMBRE: ________________",9
