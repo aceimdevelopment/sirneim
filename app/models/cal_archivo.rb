@@ -16,27 +16,27 @@ class CalArchivo
 		pdf.margins_cm(1.8)
 
 		# Logos
-		pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 275, 720, 50,nil
+		pdf.add_image_from_file 'app/assets/images/logo_ucv.jpg', 275, 730, 40,nil
 
 		#texto del encabezado
-		pdf.add_text_wrap 50,705,510,to_utf16("UNIVERSIDAD CENTRAL DE VENEZUELA"), 12,:center
-		pdf.add_text_wrap 50,690,510,to_utf16("PLANILLA DE EXÁMENES"), 12,:center
-		pdf.add_text_wrap 50,675,510,to_utf16("TIPO DE EXAMEN: FINAL ANUAL (SEPTIEMBRE)"), 12,:center
+		pdf.add_text_wrap 50,710,510,to_utf16("UNIVERSIDAD CENTRAL DE VENEZUELA"), 12,:center
+		pdf.add_text_wrap 50,695,510,to_utf16("PLANILLA DE EXÁMENES"), 12,:center
+		pdf.add_text_wrap 50,680,510,to_utf16("TIPO DE EXAMEN: FINAL ANUAL (SEPTIEMBRE)"), 12,:center
 
 		#titulo
 
-		pdf.add_text 50,660,to_utf16("FECHA DE LA EMISIÓN: <b>#{Time.now.strftime('%d/%m/%Y %I:%M %p')}</b>"),9
-		pdf.add_text 50,645,to_utf16("EJERCICIO: <b>#{seccion.ejercicio}</b>"),9
-		pdf.add_text 50,630,to_utf16("FACULTAD: <b>HUMANIDADES Y EDUCACIÓN</b>"),9
-		pdf.add_text 50,615,to_utf16("ESCUELA: <b>IDIOMAS</b>"),9
+		pdf.add_text 50,665,to_utf16("FECHA DE LA EMISIÓN: <b>#{Time.now.strftime('%d/%m/%Y %I:%M %p')}</b>"),9
+		pdf.add_text 50,650,to_utf16("EJERCICIO: <b>#{seccion.ejercicio}</b>"),9
+		pdf.add_text 50,635,to_utf16("FACULTAD: <b>HUMANIDADES Y EDUCACIÓN</b>"),9
+		pdf.add_text 50,620,to_utf16("ESCUELA: <b>IDIOMAS</b>"),9
 
 
-		pdf.start_page_numbering(400, 660, 9, nil, to_utf16("PÁGINA: <b><PAGENUM>/<TOTALPAGENUM></b>"), 1)
-		pdf.add_text 400,645,to_utf16("ACTA N°: <b>#{acta_no.upcase}</b>"),9
-		pdf.add_text 400,630,to_utf16("PERIODO ACADÉMICO: <b>#{seccion.cal_semestre.anno}</b>"),9
-		pdf.add_text 400,615,to_utf16("TIPO CONVOCATORIA: <b>#{seccion.tipo_convocatoria}</b>"),9
+		pdf.start_page_numbering(400, 665, 9, nil, to_utf16("PÁGINA: <b><PAGENUM>/<TOTALPAGENUM></b>"), 1)
+		pdf.add_text 400,650,to_utf16("ACTA N°: <b>#{acta_no.upcase}</b>"),9
+		pdf.add_text 400,635,to_utf16("PERIODO ACADÉMICO: <b>#{seccion.cal_semestre.anno}</b>"),9
+		pdf.add_text 400,620,to_utf16("TIPO CONVOCATORIA: <b>#{seccion.tipo_convocatoria}</b>"),9
 
-		pdf.text "\n"*12
+		pdf.text "\n"*11
 
 		tabla = PDF::SimpleTable.new
 		tabla.heading_font_size = 9
@@ -95,7 +95,7 @@ class CalArchivo
  		# pdf.line 50,560,570,560
  		# pdf.line 50,559,570,559
 
-		pdf.text "\n"*2
+		pdf.text "\n"*1
 
 		tabla = PDF::SimpleTable.new
 		tabla.heading_font_size = 8
@@ -172,15 +172,15 @@ class CalArchivo
 			tabla.data.replace data
 			tabla.render_on(pdf)
 		end
-		pdf.add_text 150,110,"<b>JURADO EXAMINADOR</b>",9
-		pdf.add_text 50,85,"APELLIDOS Y NOMBRES",9
-		pdf.add_text 300,85,"FIRMAS",9
-		pdf.add_text 50,70,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase}"),9
+		pdf.add_text 150,80,"<b>JURADO EXAMINADOR</b>",9
+		pdf.add_text 50,65,"APELLIDOS Y NOMBRES",9
+		pdf.add_text 300,65,"FIRMAS",9
+		pdf.add_text 50,50,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase}"),9
 
-		pdf.add_text 470,110, to_utf16("<b>SECRETARÍA</b>"),9
-		pdf.add_text 450,85,"NOMBRE: ________________",9
-		pdf.add_text 450,70,"FIRMA:     ________________",9
-		pdf.add_text 450,55,"FECHA:    ________________",9
+		pdf.add_text 470,80, to_utf16("<b>SECRETARÍA</b>"),9
+		pdf.add_text 450,65,"NOMBRE: ________________",9
+		pdf.add_text 450,50,"FIRMA:     ________________",9
+		pdf.add_text 450,35,"FECHA:    ________________",9
 
 		return pdf
 		
