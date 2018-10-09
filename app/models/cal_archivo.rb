@@ -11,7 +11,6 @@ class CalArchivo
 		seccion = CalSeccion.find seccion_id
 		pdf = PDF::Writer.new
 
-		acta_no = "#{seccion.cal_materia.id_upsi}#{seccion.numero}#{seccion.cal_semestre.anno}"
 		# Parametros
 		pdf.margins_cm(1.8)
 
@@ -32,7 +31,7 @@ class CalArchivo
 
 
 		pdf.start_page_numbering(400, 665, 9, nil, to_utf16("PÁGINA: <b><PAGENUM>/<TOTALPAGENUM></b>"), 1)
-		pdf.add_text 400,650,to_utf16("ACTA N°: <b>#{acta_no.upcase}</b>"),9
+		pdf.add_text 400,650,to_utf16("ACTA N°: <b>#{seccion.acta_no.upcase}</b>"),9
 		pdf.add_text 400,635,to_utf16("PERIODO ACADÉMICO: <b>#{seccion.cal_semestre.anno}</b>"),9
 		pdf.add_text 400,620,to_utf16("TIPO CONVOCATORIA: <b>#{seccion.tipo_convocatoria}</b>"),9
 
@@ -86,7 +85,7 @@ class CalArchivo
 			"creditos" => to_utf16("#{seccion.cal_materia.creditos}"),
 			"curso" => 1,
 			"seccion" => to_utf16("#{seccion.numero}"),
-			"duracion" => "A2"
+			"duracion" => "0"
 	 	}
 
 		tabla.data.replace data
@@ -172,15 +171,20 @@ class CalArchivo
 			tabla.data.replace data
 			tabla.render_on(pdf)
 		end
-		pdf.add_text 150,80,"<b>JURADO EXAMINADOR</b>",9
-		pdf.add_text 50,65,"APELLIDOS Y NOMBRES",9
-		pdf.add_text 300,65,"FIRMAS",9
-		pdf.add_text 50,50,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase}"),9
+		pdf.add_text 150,90,"<b>JURADO EXAMINADOR</b>",9
+		pdf.add_text 50,75,"APELLIDOS Y NOMBRES",9
+		pdf.add_text 300,75,"FIRMAS",9
+		pdf.add_text 250,60,"___________________________",9
+		pdf.add_text 250,45,"___________________________",9
+		pdf.add_text 250,30,"___________________________",9
+		pdf.add_text 50,60,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase}"),9
+		pdf.add_text 50,45,"_______________________________",9
+		pdf.add_text 50,30,"_______________________________",9
 
-		pdf.add_text 470,80, to_utf16("<b>SECRETARÍA</b>"),9
-		pdf.add_text 450,65,"NOMBRE: ________________",9
-		pdf.add_text 450,50,"FIRMA:     ________________",9
-		pdf.add_text 450,35,"FECHA:    ________________",9
+		pdf.add_text 470,90, to_utf16("<b>SECRETARÍA</b>"),9
+		pdf.add_text 410,60,"NOMBRE: _______________________",9
+		pdf.add_text 410,45,"FIRMA:     _______________________",9
+		pdf.add_text 410,30,"FECHA:    _______________________",9
 
 		return pdf
 		

@@ -93,7 +93,7 @@ class CalSeccion < ActiveRecord::Base
 	end
 
 	def ejercicio
-		"#{cal_semestre.anno}_A2"
+		"#{cal_semestre.id}"
 	end
 
 	def reparacion?
@@ -108,5 +108,9 @@ class CalSeccion < ActiveRecord::Base
 			aux = "FA2" #"F#{aux}"
 		end
 		return aux
+	end
+
+	def acta_no
+		"#{self.cal_materia.id_upsi}#{self.numero}#{self.cal_semestre.id}"
 	end
 end
