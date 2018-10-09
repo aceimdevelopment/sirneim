@@ -7,7 +7,6 @@ class CalEstudiante <  ActiveRecord::Base
     	:class_name => 'CalUsuario',
     	:foreign_key => ['cal_usuario_ci']
 
-
  	belongs_to :idioma1,
     	:class_name => 'CalDepartamento',
     	:foreign_key => ['idioma1_id']
