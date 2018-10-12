@@ -1,0 +1,27 @@
+.modal-dialog
+  .modal-content
+    %h5.alert.alert-info
+      Plan para Estudiante
+      = @hp.cal_estudiante.cal_usuario.nombre_completo 
+    .modal-header
+      <button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+    .modal-body
+
+      =form_for(@hp, html: {class: "form-horizontal"}) do |f| 
+        = f.hidden_field :cal_estudiante_ci
+        .modal-body
+          .control-group
+            %label.control-label
+              Plan de Estudio:
+            .controls
+              = f.collection_select :tipo_plan_id, TipoPlan.all, :id, :descripcion_completa
+
+          .control-group
+            %label.control-label
+              Semestre:
+            .controls 
+              = f.collection_select :desde_cal_semestre_id, CalSemestre.all, :id, :id
+
+        .modal-footer
+          %a.btn{data: {dismiss: 'modal'}} Cancelar
+          = f.submit class: 'btn btn-primary'

@@ -35,6 +35,17 @@ class CalEstudiante <  ActiveRecord::Base
 	# 	:foreign_key => :estudiante_ci
 	# accepts_nested_attributes_for :cal_estudiante_en_seccionesaawsq
 
+	has_many :historiales_planes,
+		class_name: 'CalEstudianteTipoPlan',
+		:foreign_key => :cal_estudiante_ci,
+		:primary_key => :cal_usuario_ci
+
+
+	accepts_nested_attributes_for :historiales_planes
+
+	has_many :planes, :through => :historiales_planes, :source => :tipo_plan
+
+
 	def annos
 		cal_secciones.collect{|s| s.cal_materia.anno}.uniq
 	end

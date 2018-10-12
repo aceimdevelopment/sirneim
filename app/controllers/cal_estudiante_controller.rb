@@ -15,20 +15,20 @@ class CalEstudianteController < ApplicationController
 	end
 
 
-	def actualizar_plan
-		@cal_estudiante = CalEstudiante.find params[:ci]
+	# def actualizar_plan
+	# 	@cal_estudiante = CalEstudiante.find params[:ci]
 
-		@cal_estudiante.plan = params[:plan]
+	# 	@cal_estudiante.plan = params[:plan]
 	
-		if @cal_estudiante.save
-			flash[:success] = "¡Plan actualizado!"
-		else
-			flash[:error] = "El plan no pudo ser actualizado. Por favor inténtelo de nuevo: #{@cal_estudiante.errors.full_messages.join' | '}"
-		end
+	# 	if @cal_estudiante.save
+	# 		flash[:success] = "¡Plan actualizado!"
+	# 	else
+	# 		flash[:error] = "El plan no pudo ser actualizado. Por favor inténtelo de nuevo: #{@cal_estudiante.errors.full_messages.join' | '}"
+	# 	end
 
-		redirect_to "/sirneim/cal_principal_admin/detalle_usuario?ci=#{@cal_estudiante.cal_usuario_ci}"
+	# 	redirect_to "/sirneim/cal_principal_admin/detalle_usuario?ci=#{@cal_estudiante.cal_usuario_ci}"
 
-	end
+	# end
 
 	def actualizar_idiomas
 		

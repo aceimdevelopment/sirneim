@@ -157,10 +157,12 @@ class CalArchivo
 
 		estudiantes_seccion.each_with_index do |es,i|
 			e = es.cal_estudiante
+			plan = ""
+			plan += e.planes.collect{|c| c.id}.join(" | ") if e.planes
 			data << {"n" => i+1,
 				"ci" => to_utf16(e.cal_usuario_ci),
 				"nom" => to_utf16(e.cal_usuario.apellido_nombre),
-				"cod" => to_utf16(e.plan),
+				"cod" => to_utf16(plan),
 				"cal_des" => to_utf16(es.tipo_calificacion),
 				"cal_num" => to_utf16("#{es.colocar_nota}"),
 				"cal_letras" => to_utf16("#{es.calificacion_en_letras}")

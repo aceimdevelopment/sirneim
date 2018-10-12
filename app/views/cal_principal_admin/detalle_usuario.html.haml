@@ -35,30 +35,49 @@
 - @controlador = controller_name
 - if @estudiante
 	.well.well-small
-		%h3 Combinación de Idiomas y Plan:
-		#plan_value
-			= "#{@estudiante.plan}"
-			- if @admin and @admin.super_admin? 
-				%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Plan de Estudio'}		
-					= link_to('javascript:void(0)', { class: 'btn btn-success btn-mini', :onclick => "$('#plan').show('slow');$('#plan_value').hide('slow'); ", 'data_toggle' => 'modal' }) do
+		%h3 Plan de Estudio y Combinación de Idiomas:
+		
+
+
+		%table.table.table-bordered.table-striped.table-condensed
+			%td
+				
+				- if @admin and @admin.super_admin? and @estudiante.planes.count < 3
+					%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nuevo Plan de Estudio'}
+						= link_to('javascript:void(0)', { class: 'btn btn-success btn-mini', :onclick => "return $('#nuevo_plan_semestre').modal();", 'data_toggle' => 'modal' }) do
+							= content_tag(:i, "", class: "icon-plus icon-white")
+
+					.modal.hide.fade#nuevo_plan_semestre{'aria-hidden'=> false}
+						- @hp = CalEstudianteTipoPlan.new
+						- @hp.cal_estudiante_ci = @estudiante.id
+						= render 'cal_estudiante_tipo_plan/form'
+				%b 
+					Planes:
+				- @estudiante.historiales_planes.each do |hp| 
+					= hp.descripcion
+
+					- if @admin and @admin.super_admin?
+			
+						%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
+							= link_to('javascript:void(0)', {onclick: "return $('##{hp.tipo_plan_id}_semestre').modal();", 'data_toggle' => 'modal'}) do
+								= content_tag(:i, "", class: "icon-edit")
+
+						.modal.hide.fade{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, id: "#{hp.tipo_plan_id}_semestre"}
+							- @hp = hp
+							= render 'cal_estudiante_tipo_plan/form'
+					|
+
+		%table.table.table-bordered.table-striped.table-condensed
+			%td
+				%b Idiomas:
+				= "#{@estudiante.idioma1.descripcion}" if @estudiante.idioma1 
+				= "- #{@estudiante.idioma2.descripcion}" if @estudiante.idioma2 
+				%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
+					= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
 						= content_tag(:i, "", class: "icon-edit icon-white")
-
-		%form.hide.navbar-form#plan{action: '/sirneim/cal_estudiante/actualizar_plan', role: :search}
-			= hidden_field_tag :ci, @estudiante.cal_usuario_ci
-			= text_field_tag :plan, params[:search],{class: 'span2', placeholder: 'Usuario', required: true, value: @estudiante.plan}
-			= submit_tag 'Enviar', class: 'btn btn-primary btn-mini'
-
-
-
-		= "#{@estudiante.idioma1.descripcion}" if @estudiante.idioma1 
-		= "- #{@estudiante.idioma2.descripcion}" if @estudiante.idioma2 
-		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar Idiomas'}		
-			= link_to("#", { class: 'btn btn-success btn-mini', :onclick => "return $('#actualizar_idiomas').modal();", 'data_toggle' => 'modal' }) do
-				= content_tag(:i, "", class: "icon-edit icon-white")
 
 	.well.well-small
 		= render partial: 'cal_estudiante/historial_academico'
-
 
 	= render partial: 'cal_estudiante/actualizar_idiomas'
 

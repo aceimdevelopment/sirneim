@@ -1,0 +1,22 @@
+<h1>Planes de Estudios</h1>
+
+<table class='table table-bordered table-striped table-condensed table-hover' >
+  <tr>
+    <th>Id</th>
+    <th>Descripcion</th>
+    <th>Opciones</th>
+  </tr>
+
+<% @tipo_planes.each do |tipo_plan| %>
+  <tr>
+    <td><%= tipo_plan.id %></td>
+    <td><%= tipo_plan.descripcion %></td>
+    <td><%= link_to 'Editar', edit_tipo_plan_path(tipo_plan), class: 'btn btn-primary' %></td>
+    <td><%= link_to 'Eliminar', tipo_plan, confirm: '¿Está seguro de ésta acción?', method: :delete, class: 'btn btn-danger' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Tipo Plan', new_tipo_plan_path, class: 'btn btn-success' %>

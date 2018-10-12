@@ -6,6 +6,10 @@
 		= content_tag(:i, "", class: "icon-list icon-white") 
 
 
+%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Planes de Estudio'}
+	= link_to "", {:href => tipo_plan_index_path, class: 'btn btn-success'},{role: 'button'} do
+		Planes
+
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
 	%ul.nav.nav-pills
