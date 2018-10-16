@@ -46,7 +46,8 @@ class CalEstudiante <  ActiveRecord::Base
 	has_many :planes, :through => :historiales_planes, :source => :tipo_plan
 
 	def ultimo_plan
-		historiales_planes.order("desde_cal_semestre_id DESC").first.tipo_plan
+		hp = historiales_planes.order("desde_cal_semestre_id DESC").first
+		hp ? hp.tipo_plan : hp
 	end
 
 	def annos
