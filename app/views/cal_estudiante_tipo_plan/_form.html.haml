@@ -18,9 +18,9 @@
 
           .control-group
             %label.control-label
-              Semestre:
+              Periodo:
             .controls 
-              = f.collection_select :desde_cal_semestre_id, CalSemestre.all, :id, :id
+              = f.collection_select :desde_cal_semestre_id, CalSemestre.order("id DESC").all, :id, :id
 
         .modal-footer
           %a.btn{data: {dismiss: 'modal'}} Cancelar

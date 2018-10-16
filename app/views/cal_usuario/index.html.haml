@@ -6,6 +6,7 @@
     %tr
       %th No.
       %th.span3 Roles
+      %th Plan
       %th.span4 Nombre y Apellido
       %th Cédula
       - if @super_user 
@@ -20,6 +21,12 @@
         %td
           = u.roles
           = "(#{u.cal_profesor.cal_departamento.descripcion})" if u.cal_profesor
+        %td
+          - if u.cal_estudiante and u.cal_estudiante.ultimo_plan
+            = u.cal_estudiante.planes.last.id
+          - else
+            = "--"
+
         %td= link_to u.nombre_completo, {controller: 'cal_principal_admin', action: 'detalle_usuario', :ci => u.ci}
         %td=u.ci
         - if @super_user 
@@ -28,4 +35,15 @@
         %td= u.telefono_movil
 
         - if @super_user
-          %td= link_to "Resetear Contraseña", {action: 'resetear_contrasena', :ci => u.ci }, :data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}, class: 'btn btn-mini'
+
+          %td
+
+            %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex"}
+              = link_to({controller: 'cal_descargar', action: 'kardex', id: u.id}, {class: 'btn btn-mini'}) do
+                %i.icon-download-alt.icon-white
+                Kardex
+          %td
+            %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Resetear Contraseña"}
+              = link_to({controller: 'cal_usuario', action: 'resetear_contrasena', ci: u.id}, {:data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}, class: 'btn btn-mini'}) do
+                %i.icon-lock.icon-white
+                %i.icon-repeat.icon-white

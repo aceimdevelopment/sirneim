@@ -179,7 +179,7 @@ class CalArchivo
 		pdf.add_text 250,60,"___________________________",9
 		pdf.add_text 250,45,"___________________________",9
 		pdf.add_text 250,30,"___________________________",9
-		pdf.add_text 50,60,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase}"),9
+		pdf.add_text 50,60,to_utf16("#{seccion.cal_profesor.cal_usuario.apellido_nombre.upcase if seccion.cal_profesor }"),9
 		pdf.add_text 50,45,"_______________________________",9
 		pdf.add_text 50,30,"_______________________________",9
 
@@ -196,7 +196,7 @@ class CalArchivo
 	def self.hacer_kardex(id)
 		# Variable Locales
 		estudiante = CalEstudiante.find id
-		periodos = CalSemestre.order("id DESC").all
+		periodos = CalSemestre.order("id ASC").all
 		secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC")
 
 		pdf = PDF::Writer.new
@@ -212,10 +212,11 @@ class CalArchivo
 		pdf.add_text_wrap 50,690,510,to_utf16("FACULTAD DE HUMANIDADES Y EDUCACIÓN"), 12,:center
 		pdf.add_text_wrap 50,675,510,to_utf16("ESCUELA DE IDIOMAS MODERNOS"), 12,:center
 		pdf.add_text_wrap 50,660,510,to_utf16("CONTROL DE ESTUDIOS DE PREGRADO"), 12,:center
-		pdf.add_text_wrap 50,645,510,to_utf16("<b>Historial Académico</b>"), 12,:center
+		pdf.add_text_wrap 50,645,510,to_utf16("<b>Historia Académica</b>"), 12,:center
 
 		#titulo
 		pdf.add_text 50,625,to_utf16("<b>Cédula:</b> #{estudiante.cal_usuario_ci}"),9
+		pdf.add_text 50,610,to_utf16("<b>Plan:</b> #{estudiante.ultimo_plan.descripcion_completa}"),9
 		pdf.add_text 150,625,to_utf16("<b>Alumno:</b> #{estudiante.cal_usuario.apellido_nombre.upcase}"),9
 
 		pdf.text "\n"*10
@@ -238,7 +239,6 @@ class CalArchivo
 				tabla.orientation   = :center
 				tabla.position      = :center
 
-				tabla.column_order = ["codigo", "asignatura", "creditos", "final", "seccion"]
 
 				tabla.columns["codigo"] = PDF::SimpleTable::Column.new("codigo") { |col|
 					col.heading = to_utf16("<b>Código</b>")
@@ -246,20 +246,32 @@ class CalArchivo
 					col.justification = :center
 				}
 				tabla.columns["asignatura"] = PDF::SimpleTable::Column.new("asignatura") { |col|
-					col.width = 300
+					col.width = 250
 					col.heading = "<b>Nombre Asignatura</b>"
 					col.heading.justification = :left
 					col.justification = :left
 				}
-				tabla.columns["creditos"] = PDF::SimpleTable::Column.new("asignatura") { |col|
+				tabla.columns["convocatoria"] = PDF::SimpleTable::Column.new("convocatoria") { |col|
+					col.width = 35
+					col.heading = "<b>Conv</b>"
+					col.heading.justification = :center
+					col.justification = :center
+				}
+				tabla.columns["creditos"] = PDF::SimpleTable::Column.new("creditos") { |col|
 					col.width = 25
 					col.heading = "<b>UC</b>"
-					col.heading.justification = :left
-					col.justification = :left
+					col.heading.justification = :center
+					col.justification = :center
 				}				
 				tabla.columns["final"] = PDF::SimpleTable::Column.new("final") { |col|
 					col.width = 60
 					col.heading = to_utf16("<b>Cal. Num</b>")
+					col.heading.justification = :center
+					col.justification = :center
+				}
+				tabla.columns["final_alfa"] = PDF::SimpleTable::Column.new("final_alfa") { |col|
+					col.width = 60
+					col.heading = to_utf16("<b>Cal. Alf</b>")
 					col.heading.justification = :center
 					col.justification = :center
 				}
@@ -269,15 +281,17 @@ class CalArchivo
 					col.justification = :center
 				}
 				data = []
-				tabla.column_order = ["codigo", "asignatura", "creditos", "final", "seccion"]
+				tabla.column_order = ["codigo", "asignatura", "convocatoria", "creditos", "final", "final_alfa", "seccion"]
 
 				secciones_periodo.each do |h|
 					aux = h.cal_seccion.cal_materia.descripcion
 					nota_final = h.calificacion_final.nil? ?  '--' : h.calificacion_final
 					data << {"codigo" => "#{h.cal_seccion.cal_materia.id_upsi}",
 						"asignatura" => to_utf16(h.descripcion),
+						"convocatoria" => to_utf16("#{h.cal_seccion.tipo_convocatoria}"),
 						"creditos" => to_utf16("#{h.cal_seccion.cal_materia.creditos}"),
 						"final" => to_utf16("#{nota_final}"),
+						"final_alfa" => to_utf16("#{h.tipo_calificacion}"),
 						"seccion" => to_utf16("#{h.cal_seccion.numero}")
 				 	}
 
@@ -304,8 +318,6 @@ class CalArchivo
 		pdf.text "\n"
 		pdf.text to_utf16("________________"), font_size: 11, justification: :right
 		pdf.text to_utf16("Firma Autorizada"), font_size: 11, justification: :right
-
-
 
 		return pdf
 

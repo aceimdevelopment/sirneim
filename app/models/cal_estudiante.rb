@@ -45,6 +45,9 @@ class CalEstudiante <  ActiveRecord::Base
 
 	has_many :planes, :through => :historiales_planes, :source => :tipo_plan
 
+	def ultimo_plan
+		historiales_planes.order("desde_cal_semestre_id DESC").first.tipo_plan
+	end
 
 	def annos
 		cal_secciones.collect{|s| s.cal_materia.anno}.uniq

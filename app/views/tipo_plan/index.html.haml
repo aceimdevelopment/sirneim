@@ -1,0 +1,18 @@
+%h1 Planes de Estudios
+%table.table.table-bordered.table-striped.table-condensed.table-hover
+  %tr
+    %th Id
+    %th Descripcion
+    %th Opciones
+  - @tipo_planes.each do |tipo_plan|
+    %tr
+      %td= tipo_plan.id
+      %td= tipo_plan.descripcion
+      %td= link_to 'Editar', edit_tipo_plan_path(tipo_plan), class: 'btn btn-primary'
+      - total_planes_estudiantes = tipo_plan.cal_estudiantes.count
+      - if total_planes_estudiantes and total_planes_estudiantes > 0
+        %td= link_to 'Eliminar', tipo_plan, confirm: "¡ATENCIÓN! Esta acción eliminará también #{total_planes_estudiantes} planes de estudio '#{tipo_plan.id}' asociados a los estudiantes. ¿Está seguro?", method: :delete, class: 'btn btn-danger'
+      - else
+        %td= link_to 'Eliminar', tipo_plan, confirm: "¿Está seguro?", method: :delete, class: 'btn btn-danger'
+%br/
+= link_to 'Nuevo Plan', new_tipo_plan_path, class: 'btn btn-success'

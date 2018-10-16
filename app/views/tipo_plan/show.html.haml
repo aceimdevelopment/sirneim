@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %b Descripcion:
+  = @tipo_plan.descripcion
+= link_to 'Editar', edit_tipo_plan_path(@tipo_plan)
+|
+= link_to 'Regresar', tipo_plan_path
