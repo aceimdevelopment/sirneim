@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Aceim::Application.load_tasks
+Sirneim::Application.load_tasks

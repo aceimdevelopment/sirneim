@@ -89,7 +89,7 @@ class TipoPlanController < ApplicationController
     @tipo_plan.destroy
 
     respond_to do |format|
-      format.html { redirect_to tipo_plane_index_path }
+      format.html { redirect_to tipo_plan_index_path }
       format.json { head :ok }
     end
   end
