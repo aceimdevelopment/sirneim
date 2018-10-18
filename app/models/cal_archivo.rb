@@ -44,7 +44,7 @@ class CalArchivo
 
 		@seccion.cal_estudiantes_secciones.each_with_index do |es,i|
 			e = es.cal_estudiante
-			@sheet.row(i+14).concat [i, e.cal_usuario_ci, e.cal_usuario.apellido_nombre, es.tipo_calificacion, es.colocar_nota, @seccion.tipo_convocatoria]
+			@sheet.row(i+14).concat [i+1, e.cal_usuario_ci, e.cal_usuario.apellido_nombre, es.tipo_calificacion, es.colocar_nota, @seccion.tipo_convocatoria]
 		end
 
 		file_name = "reporte_#{@seccion.id}.xls"
