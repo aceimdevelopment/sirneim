@@ -76,13 +76,13 @@
 											-# mat_activa = (k.eql? 0) ? "" : "" 
 											- mat_activa = (session[:mat_id].eql? mat.id) ? "active" : ""
 								
-											-secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
+											-#secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id)
 											
 											%li{class: mat_activa}
 												= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
 													= mat.descripcion
 													%span.badge.badge-inverse= mat.id_upsi
-													-if secciones.count < 1
+													-if mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual.id).count < 1
 														.mute
 															%span.label.label-important
 																inactiva

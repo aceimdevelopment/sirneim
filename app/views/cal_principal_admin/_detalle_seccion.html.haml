@@ -68,6 +68,14 @@
 							- if @admin and @admin.cal_tipo_admin_id <5
 								%td
 
+
+									%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Descargar Acta de Examen en Excel'}
+										= link_to "", {:href => "cal_descargar/acta_examen_excel/?id=#{seccion.id}", class: 'btn btn-info btn-success btn-mini'},{role: 'button'} do
+											= content_tag(:i, "", class: " icon-white")
+											%i.icon-download-alt.icon-white
+											%i.icon-list.icon-white
+											X
+
 									%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Descargar Acta de Examen'}
 										= link_to "", {:href => "cal_descargar/acta_examen?id=#{seccion.id}", class: 'btn btn-info btn-mini'},{role: 'button'} do
 											= content_tag(:i, "", class: " icon-white")

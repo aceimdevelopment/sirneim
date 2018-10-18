@@ -6,6 +6,51 @@ class CalArchivo
 	end
 
 
+
+	def self.hacer_acta_excel(seccion_id)
+		require 'spreadsheet'
+
+		@seccion = CalSeccion.find seccion_id
+		@book = Spreadsheet::Workbook.new
+		@sheet = @book.create_worksheet :name => "Reporte #{seccion_id}"
+
+		# @sheet.column(0).width = 10
+		# @sheet.column(1).width = 40
+		# @sheet.column(2).width = 30
+		# @sheet.column(3).width = 15
+
+		data = ['Facultad', 'HUMANIDADES Y EDUCACIÓN']
+		@sheet.row(0).concat data
+		data = ['Escuela', 'IDIOMAS MODERNOS']
+		@sheet.row(1).concat data
+		data = ['Plan']
+		@sheet.row(2).concat data
+		data = ['Materia', @seccion.cal_materia.descripcion]
+		@sheet.row(3).concat data
+		data = ['Código', @seccion.cal_materia.id_upsi]
+		@sheet.row(4).concat data
+		data = ['Créditos', @seccion.cal_materia.creditos]
+		@sheet.row(5).concat data
+		data = ['Sección', @seccion.numero]
+		@sheet.row(6).concat data
+		data = ['Profesor', "#{@seccion.cal_profesor.cal_usuario.nombre_completo if @seccion.cal_profesor}"]
+		@sheet.row(7).concat data
+		@sheet.row(8).concat ['CI. Profesor', @seccion.cal_profesor_ci]
+		@sheet.row(9).concat ['Semestre 0']
+		@sheet.row(10).concat ['Año', @seccion.cal_semestre.anno]
+
+		data = ['No.', 'Cédula I', 'Nombres y Apellidos', 'Nota_Final', 'Nota_Def', 'Tipo_Ex.']
+		@sheet.row(13).concat data
+
+		@seccion.cal_estudiantes_secciones.each_with_index do |es,i|
+			e = es.cal_estudiante
+			@sheet.row(i+14).concat [i, e.cal_usuario_ci, e.cal_usuario.apellido_nombre, es.tipo_calificacion, es.colocar_nota, @seccion.tipo_convocatoria]
+		end
+
+		file_name = "reporte_#{@seccion.id}.xls"
+		return file_name if @book.write file_name
+	end
+
 	def self.hacer_acta(seccion_id)
 
 		seccion = CalSeccion.find seccion_id
