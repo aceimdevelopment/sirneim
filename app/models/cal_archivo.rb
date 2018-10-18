@@ -14,9 +14,9 @@ class CalArchivo
 		@book = Spreadsheet::Workbook.new
 		@sheet = @book.create_worksheet :name => "Reporte #{seccion_id}"
 
-		# @sheet.column(0).width = 10
+		@sheet.column(0).width = 12
 		# @sheet.column(1).width = 40
-		# @sheet.column(2).width = 30
+		@sheet.column(2).width = 40
 		# @sheet.column(3).width = 15
 
 		data = ['Facultad', 'HUMANIDADES Y EDUCACIÓN']
