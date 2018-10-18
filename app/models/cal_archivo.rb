@@ -36,7 +36,7 @@ class CalArchivo
 		data = ['Profesor', "#{@seccion.cal_profesor.cal_usuario.nombre_completo if @seccion.cal_profesor}"]
 		@sheet.row(7).concat data
 		@sheet.row(8).concat ['CI. Profesor', @seccion.cal_profesor_ci]
-		@sheet.row(9).concat ['Semestre 0']
+		@sheet.row(9).concat ['Semestre', '0']
 		@sheet.row(10).concat ['Año', @seccion.cal_semestre.anno]
 
 		data = ['No.', 'Cédula I', 'Nombres y Apellidos', 'Nota_Final', 'Nota_Def', 'Tipo_Ex.']
