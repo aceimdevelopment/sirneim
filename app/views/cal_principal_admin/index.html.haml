@@ -6,7 +6,7 @@
 	- if @admin.cal_tipo_admin_id < 2
 		- if (@cal_semestre_actual.cal_secciones.calificadas.count > 0)
 			%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Habilitar calificación para todas las secciones del Período Actual'}
-				= link_to "", {:href => '/../cal_principal_admin/habilitar_calificar', class: "btn btn-success", 'data_confirm' => "Se Habilitaran todas las secciones de éste período, ¿Está seguro de esta acción?"},{role: 'button'} do
+				= link_to "", {:href => 'cal_principal_admin/habilitar_calificar', class: "btn btn-success", 'data_confirm' => "Se Habilitaran todas las secciones de éste período, ¿Está seguro de esta acción?"},{role: 'button'} do
 					%span.icon.icon-off.icon-white
 					= content_tag(:i, "", class: "icon icon-list icon-white")
 		

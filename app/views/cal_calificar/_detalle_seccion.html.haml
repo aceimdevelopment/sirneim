@@ -43,7 +43,8 @@
 					%tr{class: "#{tipo_calificacion} #{muted}"}
 						%td= i+1
 						%td
-							= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+							= "(#{es.cal_estudiante_ci})"
+							= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.apellido_nombre, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
 							%span.badge= 'Retirada' if retirada
 
 						%td
@@ -79,7 +80,9 @@
 							%td= i+1  
 
 							%td
-								= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+
+								= "(#{es.cal_estudiante_ci})"
+								= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.apellido_nombre, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
 								%span.badge= 'Retirada' if retirada
 
 							- unless calificada
@@ -123,7 +126,10 @@
 							%td= i+1  
 
 							%td
-								= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.descripcion_apellido, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+
+								= "(#{es.cal_estudiante_ci})"
+								= link_to_if (@admin and @admin.cal_tipo_admin_id <5), es.cal_estudiante.cal_usuario.apellido_nombre, {action: 'detalle_usuario', controller: 'cal_principal_admin', ci: es.cal_estudiante_ci}
+
 								%span.badge= 'Retirada' if retirada
 
 							
