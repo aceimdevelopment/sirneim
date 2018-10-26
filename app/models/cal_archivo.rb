@@ -49,50 +49,6 @@ class CalArchivo
 		return file_name if @book.write file_name
 	end
 
-	def self.hacer_acta(seccion_id)
-
-		seccion = CalSeccion.find seccion_id
-		pdf = PDF::Writer.new
-
-		encabezado_acta_pdf pdf, seccion
-
-		pdf.text "\n"*1
-		
-		tabla = PDF::SimpleTable.new
-
-		encabezado_tabla_pdf tabla
-		data = []
-
-		estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
-
-		estudiantes_seccion.each_with_index do |es,i|
-			e = es.cal_estudiante
-
-			# plan += e.planes.collect{|c| c.id}.join(" | ") if e.planes
-			plan = "#{e.ultimo_plan}"
-			data << {"n" => i+1,
-				"ci" => to_utf16(e.cal_usuario_ci),
-				"nom" => to_utf16(e.cal_usuario.apellido_nombre),
-				"cod" => to_utf16(plan),
-				"cal_des" => to_utf16(es.tipo_calificacion),
-				"cal_num" => to_utf16("#{es.colocar_nota}"),
-				"cal_letras" => to_utf16("#{es.calificacion_en_letras}")
-		 	}
-
-		end
-
-		if data.count > 0
-			tabla.data.replace data
-			tabla.render_on(pdf)
-		end
-
-		pie_acta_pdf pdf, seccion
-
-		return pdf
-		
-	end
-
-
 	def self.hacer_kardex(id)
 		# Variable Locales
 		estudiante = CalEstudiante.find id
@@ -320,7 +276,62 @@ class CalArchivo
 		return file_name if @book.write file_name
 	end
 
+
+	def self.hacer_acta(seccion_id)
+		por_pagina = 35
+		pdf = PDF::Writer.new
+		seccion = CalSeccion.find seccion_id
+		estudiantes_seccion = seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
+		pdf.start_page_numbering(400, 665, 9, nil, to_utf16("PÁGINA: <b><PAGENUM>/<TOTALPAGENUM></b>"), 1)
+		(estudiantes_seccion.each_slice por_pagina).to_a.each_with_index do |ests_sec, j| 
+			pdf.start_new_page true if j > 0
+			pagina_acta_examen_pdf pdf, ests_sec, j*por_pagina
+		end
+
+		return pdf
+
+	end
+
+
 	private 
+
+	def self.pagina_acta_examen_pdf pdf, estudiantes_seccion, j
+
+		seccion = estudiantes_seccion.first.cal_seccion
+
+		encabezado_acta_pdf pdf, seccion, j
+
+		pdf.text "\n"
+
+		tabla = PDF::SimpleTable.new
+		encabezado_tabla_pdf tabla
+
+
+		data = []
+
+		estudiantes_seccion.each_with_index do |es,i|
+			e = es.cal_estudiante
+			# plan += e.planes.collect{|c| c.id}.join(" | ") if e.planes
+			plan = "#{e.ultimo_plan}"
+			data << {"n" => j+i+1,
+				"ci" => to_utf16(e.cal_usuario_ci),
+				"nom" => to_utf16(e.cal_usuario.apellido_nombre),
+				"cod" => to_utf16(plan),
+				"cal_des" => to_utf16(es.tipo_calificacion),
+				"cal_num" => to_utf16("#{es.colocar_nota}"),
+				"cal_letras" => to_utf16("#{es.calificacion_en_letras}")
+		 	}
+
+		end
+
+		if data.count > 0
+			tabla.data.replace data
+			tabla.render_on(pdf)
+		end
+
+		pie_acta_pdf pdf, seccion
+
+	end
 
 	def self.encabezado_tabla_pdf tabla
 		tabla.heading_font_size = 8
@@ -380,7 +391,7 @@ class CalArchivo
 		
 	end
 
-	def self.encabezado_acta_pdf pdf, seccion
+	def self.encabezado_acta_pdf pdf, seccion, j
 
 		pdf.margins_cm(1.8)
 
@@ -399,13 +410,12 @@ class CalArchivo
 		pdf.add_text 50,635,to_utf16("FACULTAD: <b>HUMANIDADES Y EDUCACIÓN</b>"),9
 		pdf.add_text 50,620,to_utf16("ESCUELA: <b>IDIOMAS</b>"),9
 
-
-		pdf.start_page_numbering(400, 665, 9, nil, to_utf16("PÁGINA: <b><PAGENUM>/<TOTALPAGENUM></b>"), 1)
 		pdf.add_text 400,650,to_utf16("ACTA N°: <b>#{seccion.acta_no.upcase}</b>"),9
 		pdf.add_text 400,635,to_utf16("PERIODO ACADÉMICO: <b>#{seccion.cal_semestre.anno}</b>"),9
 		pdf.add_text 400,620,to_utf16("TIPO CONVOCATORIA: <b>#{seccion.tipo_convocatoria}</b>"),9
 
 		pdf.text "\n"*11
+		pdf.text "\n"*3 if j > 0
 
 		tabla = PDF::SimpleTable.new
 		tabla.heading_font_size = 9
