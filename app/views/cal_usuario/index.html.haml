@@ -22,8 +22,8 @@
           = u.roles
           = "(#{u.cal_profesor.cal_departamento.descripcion})" if u.cal_profesor
         %td
-          - if u.cal_estudiante and u.cal_estudiante.ultimo_plan
-            = u.cal_estudiante.planes.last.id
+          - if u.cal_estudiante and u.cal_estudiante.ultimo_plan and u.cal_estudiante.planes.last
+            = u.cal_estudiante.planes.last.id 
           - else
             = "--"
 

@@ -72,7 +72,7 @@ class CalArchivo
 
 		#titulo
 		pdf.add_text 50,625,to_utf16("<b>Cédula:</b> #{estudiante.cal_usuario_ci}"),9
-		pdf.add_text 50,610,to_utf16("<b>Plan:</b> #{estudiante.ultimo_plan.descripcion_completa}"),9
+		pdf.add_text 50,610,to_utf16("<b>Plan:</b> #{estudiante.ultimo_plan}"),9
 		pdf.add_text 150,625,to_utf16("<b>Alumno:</b> #{estudiante.cal_usuario.apellido_nombre.upcase}"),9
 
 		pdf.text "\n"*10
