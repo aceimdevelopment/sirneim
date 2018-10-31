@@ -7,29 +7,31 @@ class CalArchivo
 
 	def self.registro_estudiantil_x_plan # periodo_id # Falta pasar el periodo_id
 
-		require 'spreadsheet'
+		# require 'spreadsheet'
 
-		@book = Spreadsheet::Workbook.new
-		@sheet = @book.create_worksheet :name => "registro_estudiantil_x_plan"
+		# @book = Spreadsheet::Workbook.new
+		# @sheet = @book.create_worksheet :name => "registro_estudiantil_x_plan"
 
-		@sheet.row(0).concat %w{CEDULA ASIGNATURA DENOMINACION CREDITO NOTA_FINAL NOTA_DEFI TIPO_EXAM PER_LECTI ANO_LECTI SECCION PLAN1}
+		# @sheet.row(0).concat %w{CEDULA ASIGNATURA DENOMINACION CREDITO NOTA_FINAL NOTA_DEFI TIPO_EXAM PER_LECTI ANO_LECTI SECCION PLAN1}
 
-		# Plan.all.each do |plan|
-		plan = Plan.first
-		plan.estudiantes.each do |es|
-			es.cal_estudiantes_secciones.del_semestre_actual.each do |h| # puede cambiar por el periodo_id
-				est = h.cal_estudiante
-				sec = h.cal_seccion
-				nota_def = h.pi? : 'PI' : h.colocar_nota
-				nota_final = h.calificacion_final and h.calificacion_final.to_i < 9 ? 'AP' : h.colocar_nota
+		# # Plan.all.each do |plan|
+		# plan = Plan.first
+		# plan.estudiantes.each do |es|
+		# 	es.cal_estudiantes_secciones.del_semestre_actual.each do |h| # puede cambiar por el periodo_id
+		# 		est = h.cal_estudiante
+		# 		sec = h.cal_seccion
+		# 		nota_def = h.pi? : 'PI' : h.colocar_nota
+		# 		nota_final = h.calificacion_final and h.calificacion_final.to_i < 9 ? 'AP' : h.colocar_nota
 
-				@sheet.row(i+1).concat  [est.cal_usuario_ci, sec.cal_materia.id_upsi, sec.cal_materia.descripcion, sec.creditos, nota_final, nota_def, sec.r_or_f?, 0, sec.cal_semestre.anno, sec.id, plan.id]
+		# 		@sheet.row(i+1).concat  [est.cal_usuario_ci, sec.cal_materia.id_upsi, sec.cal_materia.descripcion, sec.creditos, nota_final, nota_def, sec.r_or_f?, 0, sec.cal_semestre.anno, sec.id, plan.id]
 
-			end
-		end
+		# 	end
+		# end
 
-		file_name = "reporte_#{tipo}.csv"
-		return file_name if @book.write file_name
+		file_name = "reporte_#{tipo}.xls"
+		# return file_name if @book.write file_name
+
+		
 		
 	end
 
