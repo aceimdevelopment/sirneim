@@ -34,11 +34,13 @@
 				%i.icon-list.icon-white
 				%i.icon-trash.icon-white
 
-		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Descargar Listado Registro Estudiantil por Plan en el periodo actual'}
-			= link_to "", {:href => 'cal_descargar/listado_estudiantes_x_plan_scv', class: "btn btn-success"},{role: 'button'} do
-				%i.icon.icon-download.icon-white
-				%i.icon.icon-list.icon-white
-				Descargar
+		- Plan.all.each do |plan|		
+
+			%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Listado Registro Estudiantil por Plan #{plan.id} en el periodo actual"}
+				= link_to "", {:href => "cal_descargar/listado_estudiantes_x_plan_scv/#{plan.id}", class: "btn btn-success"},{role: 'button'} do
+					%i.icon.icon-download.icon-white
+					%i.icon.icon-list.icon-white
+					= "Plan #{plan.id}"
 
 
 

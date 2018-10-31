@@ -6,15 +6,15 @@ class CalArchivo
 	end
 
 
-	def self.estudiantes_x_plan_scv
+	def self.estudiantes_x_plan_scv tipo_plan_id
 
 		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
 		csv_data =CSV.generate(headers: true) do |csv|
-			csv << atributos
-			csv << {'CEDULA' => '15573230', 'ASIGNATURA' => 'Inglés', 'CREDITO' => '0'}
 
-			plan = TipoPlan.first
+			csv << atributos
+
+			plan = TipoPlan.find tipo_plan_id
 			plan.cal_estudiantes.each do |es|
 				es.cal_estudiantes_secciones.del_semestre_actual.each_with_index do |h,i| # puede cambiar por el periodo_id
 					est = h.cal_estudiante

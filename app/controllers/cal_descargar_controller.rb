@@ -22,10 +22,9 @@ class CalDescargarController < ApplicationController
   #   File.delete(file_name)
   # end
 
-	def listado_estudiantes_x_plan_scv
-		data = CalArchivo.estudiantes_x_plan_scv
-		send_data data, filename: 'estudiantes_x_plan_scv.scv'
-		send_data data, filename: 'estudiantes_x_plan_scv2.scv'
+	def listado_estudiantes_x_plan_scv 
+		data = CalArchivo.estudiantes_x_plan_scv params[:id]
+		send_data data, filename: "estudiantes_x_plan_scv_#{params[:id]}.scv"
 	end
 
 
