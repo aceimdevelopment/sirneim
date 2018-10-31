@@ -34,7 +34,7 @@
 				%i.icon-list.icon-white
 				%i.icon-trash.icon-white
 
-		- Plan.all.each do |plan|		
+		- TipoPlan.all.each do |plan|		
 
 			%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Listado Registro Estudiantil por Plan #{plan.id} en el periodo actual"}
 				= link_to "", {:href => "cal_descargar/listado_estudiantes_x_plan_scv/#{plan.id}", class: "btn btn-success"},{role: 'button'} do
