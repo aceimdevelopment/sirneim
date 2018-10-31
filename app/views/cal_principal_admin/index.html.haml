@@ -33,6 +33,13 @@
 				%i.icon-list.icon-white
 				%i.icon-trash.icon-white
 
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Descargar Listado Registro Estudiantil por Plan en el periodo actual'}
+			= link_to "", {:href => 'cal_principal_admin/listado_registro_estudiantil_x_plan', class: "btn btn-success"},{role: 'button'} do
+				%span.icon.icon-download.icon-white
+				%span.icon.icon-list.icon-white
+				Descargar
+
+
 
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
