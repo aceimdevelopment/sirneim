@@ -97,7 +97,11 @@ class CalSeccion < ActiveRecord::Base
 	end
 
 	def r_or_f?
-		numero.include? 'R' ? 'R' : 'F'
+		if numero.include? 'R'
+			return 'R'
+		else 
+			'F'
+		end
 	end
 
 	def reparacion?
