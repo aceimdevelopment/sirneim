@@ -96,6 +96,10 @@ class CalSeccion < ActiveRecord::Base
 		"#{cal_semestre.id}"
 	end
 
+	def r_or_f?
+		numero.include? 'R' ? 'R' : 'F'
+	end
+
 	def reparacion?
 		return numero.include? 'R'
 	end

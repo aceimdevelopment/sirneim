@@ -22,6 +22,12 @@ class CalDescargarController < ApplicationController
   #   File.delete(file_name)
   # end
 
+	def listado_registro_estudiantil_x_plan
+		file_name = CalArchivo.registro_estudiantil_x_plan
+		send_file file_name, x_sendfile: true, stream: false, disposition: "attachment"
+	end
+
+
 	def listado_estudiantes_periodo_excel
 		file_name = CalArchivo.listado_excel_asignaturas_estudiantes_periodo(params[:id], params[:nuevos])
 		send_file file_name, type:"application/vnd.ms-excel", x_sendfile: true, stream: false, disposition: "attachment"
