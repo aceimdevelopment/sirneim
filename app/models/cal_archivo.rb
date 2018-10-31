@@ -6,9 +6,16 @@ class CalArchivo
 	end
 
 
-	def listado_estudiante_x_plana_a_csv
-		data = CalArchivo.estudiantes_x_plan_csv
-		send_data data, filename: 'listado_estudiantes_x_plan'
+	def self.estudiantes_x_plan_scv
+
+		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
+
+		CSV.generate(headers: true) do |csv|
+			csv << attributes
+			csv << {'CEDULA' => '15573230', 'ASIGNATURA' => 'Inglés', 'CREDITO' => '0'}
+		end
+
+		return csv
 	end
 
 
