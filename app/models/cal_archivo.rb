@@ -10,12 +10,27 @@ class CalArchivo
 
 		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
-		CSV.generate(headers: true) do |csv|
-			csv << attributes
+		csv_data =CSV.generate(headers: true) do |csv|
+			csv << atributos
 			csv << {'CEDULA' => '15573230', 'ASIGNATURA' => 'Inglés', 'CREDITO' => '0'}
-		end
 
-		return csv
+			plan = TipoPlan.first
+			plan.cal_estudiantes.each do |es|
+				es.cal_estudiantes_secciones.del_semestre_actual.each_with_index do |h,i| # puede cambiar por el periodo_id
+					est = h.cal_estudiante
+					sec = h.cal_seccion
+					mat = sec.cal_materia
+					nota_def = h.pi? ? 'PI' : h.colocar_nota
+					nota_final = h.calificacion_final and h.calificacion_final.to_i < 9 ? 'AP' : h.colocar_nota
+
+					csv << [est.cal_usuario_ci, mat.id_upsi, mat.descripcion, mat.creditos, nota_final, nota_def, sec.r_or_f?, 0, sec.cal_semestre.anno, sec.numero, plan.id]
+					# @sheet.row(i+1).concat  [est.cal_usuario_ci, "sec.cal_materia.id_upsi", "sec.cal_materia.descripcion", "sec.creditos", nota_final, nota_def, 'R', 1018, 'A1', 'plan.id']
+
+				end
+			end
+
+		end
+		return csv_data
 	end
 
 
@@ -27,7 +42,7 @@ class CalArchivo
 		@sheet = @book.create_worksheet :name => "registro_estudiantil_x_plan"
 
 		# @sheet.row(0).concat %w{CEDULA ASIGNATURA DENOMINACION CREDITO NOTA_FINAL NOTA_DEFI TIPO_EXAM PER_LECTI ANO_LECTI SECCION PLAN1}
-		@	sheet.row(0).concat ['	CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
+		@sheet.row(0).concat ['	CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
 		# Plan.all.each do |plan|
 		plan = TipoPlan.first

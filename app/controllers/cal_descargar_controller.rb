@@ -24,7 +24,8 @@ class CalDescargarController < ApplicationController
 
 	def listado_estudiantes_x_plan_scv
 		data = CalArchivo.estudiantes_x_plan_scv
-		send_data data, filename: 'estudiantes_x_plan_scv'
+		send_data data, filename: 'estudiantes_x_plan_scv.scv'
+		send_data data, filename: 'estudiantes_x_plan_scv2.scv'
 	end
 
 
