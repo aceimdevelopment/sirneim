@@ -5,6 +5,13 @@ class CalArchivo
 		ic_ignore.iconv(valor)
 	end
 
+
+	def listado_estudiante_x_plana_a_csv
+		data = CalArchivo.estudiantes_x_plan_csv
+		send_data data, filename: 'listado_estudiantes_x_plan'
+	end
+
+
 	def self.registro_estudiantil_x_plan # periodo_id # Falta pasar el periodo_id
 
 		require 'spreadsheet'
@@ -13,26 +20,25 @@ class CalArchivo
 		@sheet = @book.create_worksheet :name => "registro_estudiantil_x_plan"
 
 		# @sheet.row(0).concat %w{CEDULA ASIGNATURA DENOMINACION CREDITO NOTA_FINAL NOTA_DEFI TIPO_EXAM PER_LECTI ANO_LECTI SECCION PLAN1}
-		@sheet.row(0).concat ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1'}
+		@	sheet.row(0).concat ['	CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
 		# Plan.all.each do |plan|
-		plan = Plan.first
-		plan.estudiantes.each do |es|
-			es.cal_estudiantes_secciones.del_semestre_actual.each do |h| # puede cambiar por el periodo_id
+		plan = TipoPlan.first
+		plan.cal_estudiantes.each do |es|
+			es.cal_estudiantes_secciones.del_semestre_actual.each_with_index do |h,i| # puede cambiar por el periodo_id
 				est = h.cal_estudiante
 				sec = h.cal_seccion
-				# nota_def = h.pi? : 'PI' : h.colocar_nota
-				nota_def = 20
-				# nota_final = h.calificacion_final and h.calificacion_final.to_i < 9 ? 'AP' : h.colocar_nota
-				nota_final = 05
+				mat = sec.cal_materia
+				nota_def = h.pi? ? 'PI' : h.colocar_nota
+				nota_final = h.calificacion_final and h.calificacion_final.to_i < 9 ? 'AP' : h.colocar_nota
 
-				# @sheet.row(i+1).concat  [est.cal_usuario_ci, sec.cal_materia.id_upsi, sec.cal_materia.descripcion, sec.creditos, nota_final, nota_def, sec.r_or_f?, 0, sec.cal_semestre.anno, sec.id, plan.id]
-				@sheet.row(i+1).concat  [est.cal_usuario_ci, "sec.cal_materia.id_upsi", "sec.cal_materia.descripcion", "sec.creditos", nota_final, nota_def, 'R', 1018, 'A1', 'plan.id']
+				@sheet.row(i+1).concat [est.cal_usuario_ci, mat.id_upsi, "mat.descripcion", mat.creditos, nota_final, nota_def, sec.r_or_f?, 0, sec.cal_semestre.anno, sec.id, plan.id]
+				# @sheet.row(i+1).concat  [est.cal_usuario_ci, "sec.cal_materia.id_upsi", "sec.cal_materia.descripcion", "sec.creditos", nota_final, nota_def, 'R', 1018, 'A1', 'plan.id']
 
 			end
 		end
 
-		file_name = "reporte_#{tipo}.xls"
+		file_name = "reporte_estudiantil_x_plan.csv"
 		return file_name if @book.write file_name
 		
 	end
