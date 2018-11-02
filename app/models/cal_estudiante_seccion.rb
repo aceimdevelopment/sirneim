@@ -23,6 +23,20 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	scope :retirados, -> {where "cal_tipo_estado_inscripcion_id = ?", 'RET'}
 	scope :del_semestre, lambda { |semestre_id| where "cal_semestre_id = ?", semestre_id}
 
+	def nota_final_para_csv
+		# Notas 00 a 20 / AP = Aplasado, A = Aprobado, PI = , SN = Sin nota, NP
+		if pi?
+			return'PI'
+		elsif calificacion_final.nil?
+			return 'SN'
+		elsif calificacion_final.to_i < 10
+			return 'AP'
+		else
+			return colocar_nota
+		end
+
+	end
+
 	def descripcion
 		aux = cal_seccion.cal_materia.descripcion
 		aux += " <b>(Retirada)</b>" if retirada?

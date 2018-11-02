@@ -21,7 +21,7 @@ class CalArchivo
 					sec = h.cal_seccion
 					mat = sec.cal_materia
 					nota_def = h.pi? ? 'PI' : h.colocar_nota.to_s
-					nota_final = (h.calificacion_final and h.calificacion_final.to_i < 9) ? 'AP' : h.colocar_nota.to_s
+					nota_final = h.nota_final_para_csv.to_s
 
 					csv << [est.cal_usuario_ci, mat.id_upsi, mat.descripcion, mat.creditos, nota_final, nota_def, sec.r_or_f?, 0, sec.cal_semestre.anno, sec.numero, plan.id]
 
