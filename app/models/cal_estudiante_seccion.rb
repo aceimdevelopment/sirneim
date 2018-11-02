@@ -26,13 +26,13 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	def nota_final_para_csv
 		# Notas 00 a 20 / AP = Aplasado, A = Aprobado, PI = , SN = Sin nota, NP
 		if pi?
-			return'PI'
+			return'00'
 		elsif calificacion_final.nil?
 			return 'SN'
 		elsif calificacion_final.to_i < 10
 			return 'AP'
 		else
-			return colocar_nota
+			return colocar_nota.to_s
 		end
 
 	end
