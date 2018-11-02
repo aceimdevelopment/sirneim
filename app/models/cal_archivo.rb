@@ -6,7 +6,7 @@ class CalArchivo
 	end
 
 
-	def self.estudiantes_x_plan_scv tipo_plan_id
+	def self.estudiantes_x_plan_csv tipo_plan_id
 
 		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
