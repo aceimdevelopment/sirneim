@@ -36,6 +36,7 @@ class CalEstudianteSeccion < ActiveRecord::Base
 				return 'A'
 			else
 				return 'AP'
+			end
 		elsif reprobada?
 			return 'AP'
 		else
