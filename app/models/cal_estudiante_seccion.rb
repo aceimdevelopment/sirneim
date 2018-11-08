@@ -77,7 +77,7 @@ class CalEstudianteSeccion < ActiveRecord::Base
 
 	def colocar_nota
 		if calificacion_final.nil?
-			return '--'
+			return 'SN'
 		else
 			return sprintf("%02i",calificacion_final)
 		end
