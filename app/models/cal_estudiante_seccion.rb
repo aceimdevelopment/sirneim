@@ -27,14 +27,41 @@ class CalEstudianteSeccion < ActiveRecord::Base
 		# Notas 00 a 20 / AP = Aplasado, A = Aprobado, PI = , SN = Sin nota, NP
 		if pi?
 			return'00'
-		elsif calificacion_final.nil?
+		elsif retirada?
+			return 'RT'
+		elsif !calificacion_completa?
 			return 'SN'
-		elsif calificacion_final.to_i < 10
+		elsif cal_materia_id.eql? 'SERCOM'
+			if aprobada?
+				return 'A'
+			else
+				return 'AP'
+		elsif reprobada?
 			return 'AP'
 		else
 			return colocar_nota.to_s
 		end
 
+	end
+
+	def calificacion_para_kardex
+		return calificacion_completa? ? calificacion_final : 'SN'
+	end
+
+	def reprobada?
+		return cal_tipo_estado_calificacion_id.eql? 'RE'
+	end
+
+	def aprobada?
+		return cal_tipo_estado_calificacion_id.eql? 'AP'
+	end
+
+	def calificacion_completa?
+		if calificacion_primera.nil? or calificacion_segunda.nil? or calificacion_tercera.nil? or calificacion_final.nil?
+			return false
+		else
+			return true
+		end
 	end
 
 	def descripcion

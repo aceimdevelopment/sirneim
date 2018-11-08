@@ -10,7 +10,7 @@ class CalArchivo
 
 		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
-		csv_data =CSV.generate(headers: true) do |csv|
+		csv_data =CSV.generate(headers: true, col_sep: ";") do |csv|
 
 			csv << atributos
 
@@ -202,7 +202,7 @@ class CalArchivo
 
 				secciones_periodo.each do |h|
 					aux = h.cal_seccion.cal_materia.descripcion
-					nota_final = h.calificacion_final.nil? ?  '--' : h.calificacion_final
+					nota_final = h.calificacion_para_kardex
 					data << {"codigo" => "#{h.cal_seccion.cal_materia.id_upsi}",
 						"asignatura" => to_utf16(h.descripcion),
 						"convocatoria" => to_utf16("#{h.cal_seccion.tipo_convocatoria}"),
