@@ -51,21 +51,22 @@
 						- @hp = CalEstudianteTipoPlan.new
 						- @hp.cal_estudiante_ci = @estudiante.id
 						= render 'cal_estudiante_tipo_plan/form'
-				%b 
-					Planes:
-				- @estudiante.historiales_planes.each do |hp| 
-					= hp.descripcion
+				%b Planes:
+				%table
+					- @estudiante.historiales_planes.order("desde_cal_semestre_id DESC").each do |hp|
+						%tr
+							%th
+								= hp.descripcion
+								- if @admin and @admin.super_admin?
+						
+									%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
+										= link_to('javascript:void(0)', {onclick: "return $('##{hp.tipo_plan_id}_semestre').modal();", 'data_toggle' => 'modal'}) do
+											= content_tag(:i, "", class: "icon-edit")
 
-					- if @admin and @admin.super_admin?
-			
-						%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
-							= link_to('javascript:void(0)', {onclick: "return $('##{hp.tipo_plan_id}_semestre').modal();", 'data_toggle' => 'modal'}) do
-								= content_tag(:i, "", class: "icon-edit")
+									.modal.hide.fade{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, id: "#{hp.tipo_plan_id}_semestre"}
+										- @hp = hp
+										= render 'cal_estudiante_tipo_plan/form'
 
-						.modal.hide.fade{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, id: "#{hp.tipo_plan_id}_semestre"}
-							- @hp = hp
-							= render 'cal_estudiante_tipo_plan/form'
-					|
 
 		%table.table.table-bordered.table-striped.table-condensed
 			%td
