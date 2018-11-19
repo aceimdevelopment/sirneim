@@ -4,7 +4,7 @@ class CalEstudianteTipoPlan <  ActiveRecord::Base
 
 	attr_accessible  :cal_estudiante_ci, :tipo_plan_id, :desde_cal_semestre_id
 
-	validates :tipo_plan_id, uniqueness: {scope: [:cal_estudiante_ci, :desde_cal_semestre_id]}
+	#validates :tipo_plan_id, uniqueness: {scope: [:cal_estudiante_ci, :desde_cal_semestre_id]}
 
 #	validates_uniqueness_of [:cal_estudiante_ci, :tipo_plan_id], message: 'Plan de Estudio ya existe. Por favor edítelo.', field_name: false
 #	validates :id, presence: true, uniqueness: true
