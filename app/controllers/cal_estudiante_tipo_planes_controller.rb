@@ -42,31 +42,35 @@ class CalEstudianteTipoPlanesController < ApplicationController
   def create
     @cal_estudiante_tipo_plan = CalEstudianteTipoPlan.new(params[:cal_estudiante_tipo_plan])
 
-    if @cal_estudiante_tipo_plan.save
-      flash[:success] = 'Plan de Estudio Agregado.'
-    else
-      flash[:danger] = "#{@cal_estudiante_tipo_plan.errors}"
+    begin    
+
+      if @cal_estudiante_tipo_plan.save
+        flash[:success] = 'Plan de Estudio Agregado.'
+      else
+        flash[:success] = "#{@cal_estudiante_tipo_plan.errors.full_messages.join' | '}"
+      end
+    rescue Exception => e
+        flash[:success] = "Error Excepcional: #{e}"
     end
     redirect_to controller: "cal_principal_admin", action: "detalle_usuario", ci: "#{@cal_estudiante_tipo_plan.cal_estudiante_ci}"
-
   end
 
   # PUT /cal_estudiante_tipo_planes/1
   # PUT /cal_estudiante_tipo_planes/1.json
   def update
-    @cal_estudiante_tipo_plan = CalEstudianteTipoPlan.find(params[:id])
+    est_plan = params[:cal_estudiante_tipo_plan]
+    ci,plan,semestre = params[:id].split(',')
 
-    begin    
-      if @cal_estudiante_tipo_plan.update_attributes(params[:cal_estudiante_tipo_plan])
-        # format.html { redirect_to controller: "cal_principal_admin", action: "detalle_usuario?ci=#{@cal_estudiante_tipo_plan.cal_estudiante_ci}", notice: 'Plan de Estudio Actualizado.' }
-        flash[:success] = 'Plan de Estudio Actualizado.'
-      else
-        flash[:danger] = "#{@cal_estudiante_tipo_plan.errors}"
-      end
+    begin
+      update_ci = true
+      connection = ActiveRecord::Base.connection()
+      sql = "UPDATE cal_estudiante_tipo_plan SET desde_cal_semestre_id='#{est_plan[:desde_cal_semestre_id]}', tipo_plan_id='#{est_plan[:tipo_plan_id]}' WHERE (cal_estudiante_ci='#{ci}') AND (tipo_plan_id='#{plan}') AND (desde_cal_semestre_id='#{semestre}');"
+      connection.execute(sql)        
     rescue Exception => e
-      flash[:danger] = "#{@cal_estudiante_tipo_plan.errors}"   
+      flash[:danger] = "No es posible actualizar el plan. por favor verifique: #{e}"
     end
-    redirect_to controller: "cal_principal_admin", action: "detalle_usuario", ci: "#{@cal_estudiante_tipo_plan.cal_estudiante_ci}"
+
+    redirect_to controller: "cal_principal_admin", action: "detalle_usuario", ci: ci
 
   end
 

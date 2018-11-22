@@ -1,13 +1,15 @@
 class CalEstudianteTipoPlan <  ActiveRecord::Base
 
-	set_primary_keys :cal_estudiante_ci, :tipo_plan_id
+	set_primary_keys :cal_estudiante_ci, :tipo_plan_id, :desde_cal_semestre_id
 
 	attr_accessible  :cal_estudiante_ci, :tipo_plan_id, :desde_cal_semestre_id
 
-	validates :tipo_plan_id, uniqueness: {scope: [:cal_estudiante_ci, :desde_cal_semestre_id]}
+#	validates :cal_estudiante_ci, uniqueness: {scope: [:tipo_plan_id, :desde_cal_semestre_id]}
 
-#	validates_uniqueness_of [:cal_estudiante_ci, :tipo_plan_id], message: 'Plan de Estudio ya existe. Por favor edítelo.', field_name: false
-#	validates :id, presence: true, uniqueness: true
+	validates_uniqueness_of :cal_estudiante_ci, scope: [:tipo_plan_id, :desde_cal_semestre_id]
+
+	#validates_uniqueness_of [:cal_estudiante_ci, :tipo_plan_id], message: 'Plan de Estudio ya existe. Por favor edítelo.', field_name: false
+	# validates :id, uniqueness: true
 
 	belongs_to :cal_estudiante,
 		foreign_key: 'cal_estudiante_ci' 	
@@ -15,7 +17,6 @@ class CalEstudianteTipoPlan <  ActiveRecord::Base
 	belongs_to :tipo_plan
 
 	belongs_to :cal_semestre,
-		class_name: 'CalTipoAdmin',
 		foreign_key: 'desde_cal_semestre_id'	
 		
 	def descripcion
