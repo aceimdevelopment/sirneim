@@ -6,6 +6,8 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require select2 
+//= require select2_locale_es 
 //= require bootstrap
 //= require twitter/bootstrap
 //= require_self
