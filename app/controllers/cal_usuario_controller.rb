@@ -86,4 +86,25 @@ class CalUsuarioController < ApplicationController
   end
 
 
+  def cambiar_ci
+    begin
+      cedula = Integer(params[:cedula])
+      connection = ActiveRecord::Base.connection()
+      sql = "update cal_usuario set ci = '#{cedula}' where ci = '#{params[:usuario_ci]}';"
+      connection.execute(sql)
+      flash[:success] = "Cambio de cédula de identidad correcto."
+      redirect_to controller: 'cal_principal_admin', action: 'detalle_usuario', ci: cedula
+
+
+    rescue Exception => e
+      flash[:error] = "Error excepcional: #{e}"
+      p " Error ".center(200," !! ")
+      p "Error excepcional: #{e}".center(200," -- ")
+      p " Error ".center(200," !! ")
+      redirect_to controller: 'cal_principal_admin', action: 'detalle_usuario', ci: params[:usuario_ci]
+    end
+
+  end
+
+
 end
