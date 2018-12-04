@@ -1,0 +1,28 @@
+- if @admin and @admin.super_admin? and @estudiante.combinaciones.count < 3
+  %b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nueva Combinación de Idiomas'}
+    = link_to('javascript:void(0)', { class: 'btn btn-success btn-mini', :onclick => "return $('#nueva_combinacion').modal();", 'data_toggle' => 'modal' }) do
+      = content_tag(:i, "", class: "icon-plus icon-white")
+
+  .modal.hide.fade#nueva_combinacion{'aria-hidden'=> false}
+    - @combinacion = Combinacion.new
+    - @combinacion.cal_estudiante_ci = @estudiante.id
+    = render 'combinaciones/form'
+%b Combinaciones de Idiomas:
+%table.table.table-bordered.table-striped.table-condensed
+  - @estudiante.combinaciones.order("desde_cal_semestre_id DESC").each do |combinacion|
+    %tr
+      %th
+        = combinacion.descripcion
+        - if @admin and @admin.super_admin?
+    
+          %b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
+            = link_to('javascript:void(0)', {onclick: "return $('#combinacion_#{combinacion.desde_cal_semestre_id}').modal();", 'data_toggle' => 'modal'}) do
+              = content_tag(:i, "", class: "icon-edit")
+
+          %b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar'}
+            = link_to(combinacion, method: :delete, confirm: '¿Está Seguro?') do
+              = content_tag(:i, "", class: "icon-trash", style: "color:red")
+
+          .modal.hide.fade{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, id: "combinacion_#{combinacion.desde_cal_semestre_id}"}
+            - @combinacion = combinacion
+            = render 'combinaciones/form'

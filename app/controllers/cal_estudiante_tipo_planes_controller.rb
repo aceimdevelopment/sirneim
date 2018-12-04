@@ -1,14 +1,4 @@
 class CalEstudianteTipoPlanesController < ApplicationController
-  # GET /cal_estudiante_tipo_planes
-  # GET /cal_estudiante_tipo_planes.json
-  def index
-    @cal_estudiante_tipo_planes = CalEstudianteTipoPlan.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @cal_estudiante_tipo_planes }
-    end
-  end
 
   # GET /cal_estudiante_tipo_planes/1
   # GET /cal_estudiante_tipo_planes/1.json
@@ -78,10 +68,12 @@ class CalEstudianteTipoPlanesController < ApplicationController
   # DELETE /cal_estudiante_tipo_planes/1.json
   def destroy
     @cal_estudiante_tipo_plan = CalEstudianteTipoPlan.find(params[:id])
+
+    ci = @cal_estudiante_tipo_plan.cal_estudiante_ci
     @cal_estudiante_tipo_plan.destroy
 
     respond_to do |format|
-      format.html { redirect_to cal_estudiante_tipo_planes_url }
+      format.html { redirect_to :back, notice: 'Plan eliminado'}
       format.json { head :ok }
     end
   end

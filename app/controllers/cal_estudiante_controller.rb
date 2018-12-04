@@ -31,50 +31,73 @@ class CalEstudianteController < ApplicationController
 	# end
 
 	def actualizar_idiomas
-		
-		@estudiante = CalEstudiante.where(:cal_usuario_ci => params[:ci]).limit(1).first
+		@estudiante = CalEstudiante.find params[:ci]
 
-		if @estudiante.update_attributes(params[:cal_estudiante])
-			flash[:success] = "Datos guardados satisfactoriamente"
+		if @estudiante.combinaciones.count > 0
+			flash[:error] = "Usted ya posee una combinación de idiomas. Para cambiarla por favor diríjase al personal administrativo."
 		else
-			flash[:error] = "No se pudo guardar los datos: #{@estudiante.errors.full_messages.join' | '}"
-		end		
-		@return = params[:url] ? params[:url] : 'index'
+			combinacion = @estudiante.combinaciones.new
+			combinacion.idioma_id1 = params[:cal_estudiante][:idioma_id1]
+			combinacion.idioma_id2 = params[:cal_estudiante][:idioma_id2]
+			combinacion.desde_cal_semestre_id = CalParametroGeneral.cal_semestre_actual_id
 
-		if session[:cal_estudiante]
-			redirect_to :controller => 'cal_principal_estudiante', :action => 'index'
-		elsif session[:cal_administrador]
-			redirect_to :controller => 'cal_principal_admin', :action => 'detalle_usuario', :ci => params[:ci]
-		else
-			redirect_to :action => 'index'			
+			if combinacion.save
+				flash[:success] = "Datos guardados satisfactoriamente"
+			else
+				flash[:error] = "No se pudo guardar los datos: #{combinacion.errors.full_messages.join' | '}"
+			end
+
 		end
-
+		redirect_to :back, flash: flash
 	end
 
 	def nuevo
 		@cal_usuario = CalUsuario.new
-
-		@cal_departamentos = CalDepartamento.all
+		@cal_departamentos = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
 	end
 
 	def crear
 		@cal_usuario = CalUsuario.new(params[:cal_usuario])
 		@cal_usuario.contrasena = @cal_usuario.ci 
-		@cal_departamentos = CalDepartamento.all
-		if @cal_usuario.save
-			params[:cal_estudiante][:cal_usuario_ci] = @cal_usuario.ci
-			@cal_estudiante = CalEstudiante.new(params[:cal_estudiante])
-			if @cal_estudiante.save
-				flash[:success] = "Estudiante Registrado satisfactoriamente"
-				redirect_to controller: 'cal_principal_admin', action: 'detalle_usuario', ci: @cal_usuario.ci  
+		@cal_departamentos = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
+		begin		
+			if @cal_usuario.save
+				@cal_estudiante = CalEstudiante.new
+				@cal_estudiante.cal_usuario_ci = @cal_usuario.ci
+				if @cal_estudiante.save
+					flash[:success] = "Estudiante Registrado satisfactoriamente. "
+					@combinaciones = @cal_estudiante.combinaciones.new
+					@combinaciones.idioma_id1 = params[:combinacion][:idioma_id1]
+					@combinaciones.idioma_id2 = params[:combinacion][:idioma_id2]
+					@combinaciones.desde_cal_semestre_id = CalParametroGeneral.cal_semestre_actual_id
+					if @combinaciones.save
+						flash[:success] += "Combinacion de idiomas guardada. "
+						es_plan = @cal_estudiante.historiales_planes.new
+						es_plan.tipo_plan_id = params[:tipo_plan][:id]
+						es_plan.desde_cal_semestre_id = CalParametroGeneral.cal_semestre_actual_id
+						if es_plan.save
+							flash[:success] += "Plan de Estudio guardado. "
+							redirect_to controller: 'cal_principal_admin', action: 'detalle_usuario', ci: @cal_usuario.ci
+						else
+							flash[:error] = "Error al intentar guardar el plan de estudio."
+							render :action => 'nuevo'
+						end
+					else
+						flash[:error] = "Error al intentar guardar el plan de estudio."
+						render :action => 'nuevo'
+					end
+				else
+					flash[:error] = "No se pudo registrar el estudiante, revisa lo siguiente: #{@cal_estudiante.errors.message.join(' ')}"
+					render :action => 'nuevo'
+				end
 			else
-				flash[:danger] = "No se pudo registrar el estudiante, revisa lo siguiente: #{@cal_profesor.errors.message.join(' ')}"
+				flash[:error] = "No se pudo registrar el usuario, revisa lo siguiente: #{@cal_usuario.errors.message.join(' ')}"
 				render :action => 'nuevo'
-			end
-		else
-			flash[:danger] = "No se pudo registrar el usuario, revisa lo siguiente: #{@cal_usuario.errors.message.join(' ')}"
+			end	
+		rescue Exception => e
+			flash[:error] = "Error excepcional: #{e}"
 			render :action => 'nuevo'
-		end	
+		end
 	end
 
 end

@@ -1,0 +1,32 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %h5.alert.alert-info
+        Combinación para Estudiante
+        = @combinacion.cal_estudiante.cal_usuario.nombre_completo 
+    .modal-header
+      - if session[:cal_administrador]
+        <button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+    .modal-body
+
+      =form_for(@combinacion, html: {class: "form-horizontal"}) do |f| 
+        = f.hidden_field :cal_estudiante_ci
+        .modal-body
+          .control-group
+            %label.control-label
+              Combinación:
+            .controls
+
+              = f.collection_select :idioma_id1, @idiomas1, :id, :descripcion, {:prompt => true}, { class: 'input', required: true}
+
+              = f.collection_select :idioma_id2, @idiomas2, :id, :descripcion, {:prompt => true}, { class: 'input', required: true}
+
+          .control-group
+            %label.control-label
+              Periodo:
+            .controls 
+              = f.collection_select :desde_cal_semestre_id, CalSemestre.order("id DESC").all, :id, :id
+
+        .modal-footer
+          %a.btn{data: {dismiss: 'modal'}} Cancelar
+          = f.submit class: 'btn btn-primary', value: 'Guardar', id: 'actualizar_btn'

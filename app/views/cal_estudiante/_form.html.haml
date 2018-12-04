@@ -38,21 +38,21 @@
       %label.control-label
         Plan:
       .controls
-        = text_field :cal_estudiante, :plan, class: 'text_field', placeholder: "Plan (Uxxi)"
+        = collection_select :tipo_plan, :id, TipoPlan.all, :id, :descripcion_completa, {prompt: true}, {class: 'input', required: true}
+        =# text_field :plan, class: 'text_field', placeholder: "Plan (Uxxi)"
 
     .control-group
       %label.control-label
         Idioma 1:
       .controls
-        = collection_select :cal_estudiante, :idioma1_id, @cal_departamentos, :id, :descripcion, {prompt: true}, {class: 'input', onchange: "ver_select(this.value)", required: true}
-
+        = collection_select :combinacion, :idioma_id1, @cal_departamentos, :id, :descripcion, {prompt: true}, {class: 'input', onchange: "ver_select(this.value)", required: true}
 
     .control-group
       %label.control-label
         Idioma 2:
       .controls
 
-        = collection_select :cal_estudiante, :idioma2_id, @cal_departamentos, :id, :descripcion, {prompt: true}, {class: 'input', style: 'display:none;', id: 'idioma2', required: true}
+        = collection_select :combinacion, :idioma_id2, @cal_departamentos, :id, :descripcion, {prompt: true}, {class: 'input', style: 'display:none;', id: 'idioma2', required: true}
 
 
     .form-actions
@@ -81,9 +81,6 @@
     $('#idioma2').show();
 
     if (val == ''){
-    $('#idioma2').hide();
-    $('#actualizar_btn').hide();
-
-    
+      $('#idioma2').hide();
     }
   }

@@ -45,6 +45,12 @@ class CalEstudiante <  ActiveRecord::Base
 
 	has_many :planes, :through => :historiales_planes, :source => :tipo_plan
 
+	has_many :combinaciones,
+		:class_name => 'Combinacion',
+		:foreign_key => :cal_estudiante_ci, dependent: :delete_all
+
+	accepts_nested_attributes_for :combinaciones
+
 	def ultimo_plan
 		hp = historiales_planes.order("desde_cal_semestre_id DESC").first
 		hp ? hp.tipo_plan_id : ""

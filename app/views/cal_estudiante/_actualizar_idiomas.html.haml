@@ -15,10 +15,10 @@
 
 				=form_tag({controller: 'cal_estudiante', action: 'actualizar_idiomas'}, class: "form-horizontal")  do 
 					= hidden_field_tag :ci, @estudiante.cal_usuario_ci  
-					= collection_select :cal_estudiante, :idioma1_id, @idiomas1, :id, :descripcion, {:prompt => true}, { class: 'input', :onchange => "ver_select(this.value)", required: true }
+					= collection_select :cal_estudiante, :idioma_id1, @idiomas, :id, :descripcion, {:prompt => true}, { class: 'input', :onchange => "ver_select(this.value)", required: true }
 
 
-					= collection_select :cal_estudiante, :idioma2_id, @idiomas2, :id, :descripcion, {:prompt => true}, { class: 'input', style: 'display:none;', id: 'idioma2', :onchange => "$('#actualizar_btn').show();", required: true}
+					= collection_select :cal_estudiante, :idioma_id2, @idiomas, :id, :descripcion, {:prompt => true}, { class: 'input hide', id: 'idioma2', :onchange => "$('#actualizar_btn').show();", required: true}
 
 					=submit_tag 'Actualizar', class: "btn btn-primary", id: 'actualizar_btn', style: 'display:none;'
 

@@ -1,0 +1,29 @@
+- if @admin and @admin.super_admin? and @estudiante.planes.count < 3
+  %b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar Nuevo Plan de Estudio'}
+    = link_to('javascript:void(0)', { class: 'btn btn-success btn-mini', :onclick => "return $('#nuevo_plan_semestre').modal();", 'data_toggle' => 'modal' }) do
+      = content_tag(:i, "", class: "icon-plus icon-white")
+
+  .modal.hide.fade#nuevo_plan_semestre{'aria-hidden'=> false}
+    - @hp = CalEstudianteTipoPlan.new
+    - @hp.cal_estudiante_ci = @estudiante.id
+    = render 'cal_estudiante_tipo_plan/form'
+%b Planes:
+%table.table.table-bordered.table-striped.table-condensed
+  - @estudiante.historiales_planes.order("desde_cal_semestre_id DESC").each do |hp|
+    %tr
+      %th
+        = hp.descripcion
+        - if @admin and @admin.super_admin?
+    
+          %b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
+            = link_to('javascript:void(0)', {onclick: "return $('##{hp.tipo_plan_id}_semestre').modal();", 'data_toggle' => 'modal'}) do
+              = content_tag(:i, "", class: "icon-edit")
+
+
+          %b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Eliminar'}
+            = link_to(hp, method: :delete, confirm: '¿Está Seguro?') do
+              = content_tag(:i, "", class: "icon-trash", style: "color:red")
+
+          .modal.hide.fade{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false, id: "#{hp.tipo_plan_id}_semestre"}
+            - @hp = hp
+            = render 'cal_estudiante_tipo_plan/form'

@@ -1,4 +1,6 @@
 Sirneim::Application.routes.draw do
+  resources :combinaciones
+
   resources :cal_estudiante_tipo_planes
 
   resources :tipo_plan
