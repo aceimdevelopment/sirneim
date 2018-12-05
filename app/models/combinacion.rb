@@ -31,4 +31,21 @@ class Combinacion < ActiveRecord::Base
   	"#{desc1} / #{desc2} - #{desde_cal_semestre_id}"
   end
 
+  def self.migrar_combinaciones
+    CalEstudiante.all.each do |es|
+      unless es.idioma1_id.nil? and es.idioma2_id.nil?
+        c = es.combinaciones.new
+        c.idioma_id1 = es.idioma1_id
+        c.idioma_id2 = es.idioma2_id
+        c.desde_cal_semestre_id = CalParametroGeneral.cal_semestre_actual_id
+        if c.save
+          p "." 
+        else
+          p "X"
+        end
+      end
+    end
+  end
+
+
 end
