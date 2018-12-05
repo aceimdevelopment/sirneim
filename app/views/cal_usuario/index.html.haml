@@ -35,13 +35,12 @@
         %td= u.telefono_movil
 
         - if @super_user
-
-          %td
-
-            %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex"}
-              = link_to({controller: 'cal_descargar', action: 'kardex', id: u.id}, {class: 'btn btn-mini'}) do
-                %i.icon-download-alt.icon-white
-                Kardex
+          - if u.cal_estudiante
+            %td
+              %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex"}
+                = link_to({controller: 'cal_descargar', action: 'kardex', id: u.id}, {class: 'btn btn-mini'}) do
+                  %i.icon-download-alt.icon-white
+                  Kardex
           %td
             %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Resetear Contraseña"}
               = link_to({controller: 'cal_usuario', action: 'resetear_contrasena', ci: u.id}, {:data => {:confirm => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}, class: 'btn btn-mini'}) do
