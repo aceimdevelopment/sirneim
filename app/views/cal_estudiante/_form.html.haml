@@ -12,13 +12,13 @@
       %label.control-label
         Nombres:
       .controls
-        = text_field :cal_usuario, :nombres, class: 'text_field', placeholder: "Nombres…", required: true
+        = text_field :cal_usuario, :nombres, class: 'text_field upcase', placeholder: "Nombres…", required: true
 
     .control-group
       %label.control-label
         Apellidos:
       .controls
-        = text_field :cal_usuario, :apellidos, class: 'text_field', placeholder: "Apellidos…", required: true
+        = text_field :cal_usuario, :apellidos, class: 'text_field upcase', placeholder: "Apellidos…", required: true
 
     .control-group
       %label.control-label
@@ -84,3 +84,9 @@
       $('#idioma2').hide();
     }
   }
+
+  $('.upcase').on('input', function(evt) {
+    $(this).val(function(_, val) {
+      return val.toUpperCase();
+    });
+  });

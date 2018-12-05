@@ -7,6 +7,8 @@ class CalUsuario < ActiveRecord::Base
 	attr_accessor :contrasena_confirmation
  	attr_accessible :ci, :nombres, :apellidos, :contrasena, :telefono_movil, :correo_electronico, :cal_tipo_sexo_id, :telefono_habitacion, :direccion_habitacion
 
+	before_save :upcase_nombres
+	
 	has_one :cal_administrador,
     	:class_name => 'CalAdministrador',
     	:foreign_key => ['cal_usuario_ci']
@@ -83,4 +85,11 @@ class CalUsuario < ActiveRecord::Base
 	def self.autenticar(login,clave)
     	return CalUsuario.where(:ci => login, :contrasena => clave).limit(1).first
   	end  
+
+protected
+	def upcase_nombres
+	  self.nombres.upcase!
+	  self.apellidos.upcase!
+	end
+
 end

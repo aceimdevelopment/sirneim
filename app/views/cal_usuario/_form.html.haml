@@ -23,12 +23,12 @@
         %label.control-label
           Nombres:
         .controls
-          =text_field :cal_usuario, :nombres, placeholder: "Nombres…", required: true
+          =text_field :cal_usuario, :nombres, placeholder: "Nombres…", required: true, class: 'text_field upcase'
       .control-group
         %label.control-label
           Apellidos:
         .controls
-          =text_field :cal_usuario, :apellidos, placeholder: "Apellidos…", required: true
+          =text_field :cal_usuario, :apellidos, placeholder: "Apellidos…", required: true, class: 'text_field upcase'
     - else    
       .control-group
         %label.control-label
@@ -83,3 +83,12 @@
         =text_field :cal_usuario, :correo_electronico, placeholder: "Correo Electrónico…", required: true
 
     =submit_tag 'Actualizar', class: "btn btn-primary"
+
+
+:javascript
+  $('.upcase').on('input', function(evt) {
+    $(this).val(function(_, val) {
+      return val.toUpperCase();
+    });
+  });
+    
