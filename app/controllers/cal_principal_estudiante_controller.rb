@@ -21,6 +21,7 @@ class CalPrincipalEstudianteController < ApplicationController
 			@programaciones = CalDepartamento.where(:id => [ "#{@estudiante.idioma1_id}" ,"#{@estudiante.idioma2_id}"]) #,'EG','TRA'
 
 		end
+		@total = @secciones.all.count
 
 		#@archivos = @estudiante.archivos_disponibles_para_descarga 
 
@@ -82,7 +83,6 @@ class CalPrincipalEstudianteController < ApplicationController
 
 		# @aprobadas = @secciones_aux.where("calificacion_final >= ?", 10).all.count
 		# @reprobadas = @secciones_aux.where("calificacion_final < ?", 10).all.count
-		@total = @secciones.all.count
 	
 
 		# @secciones.each do |seccion|

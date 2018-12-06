@@ -23,9 +23,9 @@ class CalDescargarController < ApplicationController
   # end
 
 	def listado_estudiantes_x_plan_csv
-		peridoo_id = CalParametroGeneral.cal_semestre_actual_id
-		data = CalArchivo.estudiantes_x_plan_csv params[:id]
-		send_data data, filename: "estudiantes_x_plan_#{peridoo_id}_#{params[:id]}.csv"
+		periodo_id = session[:cal_parametros][:semestre_actual]
+		data = CalArchivo.estudiantes_x_plan_csv params[:id], periodo_id
+		send_data data, filename: "estudiantes_x_plan_#{periodo_id}_#{params[:id]}.csv"
 	end
 
 

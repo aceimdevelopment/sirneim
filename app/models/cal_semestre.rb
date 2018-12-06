@@ -13,4 +13,15 @@ class CalSemestre < ActiveRecord::Base
 	def anno
 		"#{id.split('-').first}"
 	end
+
+	def semestre_anterior
+		todos = CalSemestre.all
+		indice = todos.index self
+		indice -= 1
+		indice = 0 if indice < 0
+		
+		return todos[indice]
+
+		
+	end
 end

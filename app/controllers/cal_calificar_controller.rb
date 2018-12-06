@@ -8,8 +8,8 @@ class CalCalificarController < ApplicationController
 
 	def seleccionar_seccion
 		@profesor = CalProfesor.find (session[:cal_profesor].cal_usuario_ci)
-		@titulo = "Secciones disponibles"
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual
+		@titulo = "Secciones disponibles para este período #{@periodo_actual.id}"
 		@cal_secciones = @profesor.cal_secciones.where(:cal_semestre_id => @periodo_actual.id)
 		@cal_secciones_secundarias = @profesor.cal_secciones_secundarias.where(:cal_semestre_id => @periodo_actual.id)
 	end
@@ -27,7 +27,7 @@ class CalCalificarController < ApplicationController
 		#	@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|h| h.cal_estudiante.cal_usuario.apellidos}
 		#end
 
-		@titulo = "Sección: #{@cal_seccion.descripcion}"
+		@titulo = "Sección: #{@cal_seccion.descripcion} - Período #{@cal_seccion.cal_semestre_id}"
 		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LIN' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LE'
 			@p1 = 25 
 			@p2 =35

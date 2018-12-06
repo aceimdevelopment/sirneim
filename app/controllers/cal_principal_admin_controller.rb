@@ -5,6 +5,16 @@ class CalPrincipalAdminController < ApplicationController
 	before_filter :cal_filtro_logueado
 	before_filter :cal_filtro_administrador
 
+	def cambiar_sesion_periodo
+		periodo_actual = CalSemestre.find params[:nuevo].first
+		periodo_anterior = periodo_actual.semestre_anterior
+
+		session[:cal_parametros][:semestre_actual] = periodo_actual.id
+		session[:cal_parametros][:semestre_anterior] = periodo_anterior.id
+
+		redirect_to controller: 'cal_principal_admin'
+	end
+
 	def nueva_seccion_admin
 		@seccion = CalSeccion.new
 		@seccion.cal_semestre_id = cal_parametros[:semestre_actual]
@@ -58,14 +68,12 @@ class CalPrincipalAdminController < ApplicationController
 			format.html { redirect_to :back }
 			format.json { head :ok }
 		end
-
-
 	end
 
 	def index
 
-		cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
-		@cal_semestre_actual = CalSemestre.where(:id => cal_semestre_actual_id).limit(1).first
+		@cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
+		@cal_semestre_actual = CalSemestre.where(:id => @cal_semestre_actual_id).limit(1).first
 		@departamentos = CalDepartamento.all
 		@cal_usuario = session[:cal_usuario]
 		@admin = session[:cal_administrador]
@@ -129,7 +137,7 @@ class CalPrincipalAdminController < ApplicationController
 		@admin = session[:cal_administrador]
 		@cal_seccion = CalSeccion.find(id)
 		@estudiantes_secciones = @cal_seccion.cal_estudiantes_secciones.sort_by{|es| es.cal_estudiante.cal_usuario.apellidos}
-		@titulo = "Sección: #{@cal_seccion.descripcion}"
+		@titulo = "Sección: #{@cal_seccion.descripcion} - Período: #{@cal_seccion.cal_semestre_id}"
 		
 		if @cal_seccion.cal_materia.cal_categoria_id.eql? 'IB' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LIN' or @cal_seccion.cal_materia.cal_categoria_id.eql? 'LE'
 			@p1 = 25 
@@ -228,10 +236,6 @@ class CalPrincipalAdminController < ApplicationController
 	def habilitar_calificar
 		if params[:id]
 			numero, cal_materia_id, cal_semestre_id = params[:id].to_s.split(",")
-			p numero.center(200, "N")
-			p cal_materia_id.center(200, "M")
-			p cal_semestre_id.center(200, "S")
-
 			@cal_secciones = CalSeccion.where(numero: numero, cal_materia_id: cal_materia_id, cal_semestre_id: cal_semestre_id).limit(1)
 		else
 			cal_semestre_actual_id = CalSemestre.find session[:cal_parametros][:semestre_actual]

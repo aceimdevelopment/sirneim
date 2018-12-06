@@ -6,8 +6,8 @@ class CalSeccionController < ApplicationController
 	before_filter :cal_filtro_administrador
 
 	def clonar_secciones_anteriores
-		@periodo_actual = CalParametroGeneral.cal_semestre_actual
-		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
+		@periodo_actual = session[:cal_parametros][:semestre_actual]
+		@periodo_anterior = session[:cal_parametros][:semestre_anterior]
 
 		@secciones = CalSeccion.where(:cal_semestre_id => @periodo_anterior.id)
 
@@ -38,8 +38,7 @@ class CalSeccionController < ApplicationController
 
 	def eliminar_todas_secciones_actual
 
-		@periodo_actual = CalParametroGeneral.cal_semestre_actual
-
+		@periodo_actual = session[:cal_parametros][:semestre_actual]
 		@secciones = CalSeccion.where(:cal_semestre_id => @periodo_actual.id)
 
 		total_eliminadas = 0
@@ -53,7 +52,7 @@ class CalSeccionController < ApplicationController
 			end
 		end
 
-		flash[:info] = "Se Eliminaron un total de #{total_eliminadas} secciones. Hubo #{errores} error(es)"
+		flash[:info] = "Se eliminaron un total de #{total_eliminadas} secciones. Hubo #{errores} error(es)"
 		redirect_to :back
 
 	end

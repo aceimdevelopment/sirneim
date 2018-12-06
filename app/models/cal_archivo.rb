@@ -6,7 +6,7 @@ class CalArchivo
 	end
 
 
-	def self.estudiantes_x_plan_csv tipo_plan_id
+	def self.estudiantes_x_plan_csv tipo_plan_id, periodo_id
 
 		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']
 
@@ -16,7 +16,7 @@ class CalArchivo
 
 			plan = TipoPlan.find tipo_plan_id
 			plan.cal_estudiantes.each do |es|
-				es.cal_estudiantes_secciones.del_semestre_actual.each_with_index do |h,i| # puede cambiar por el periodo_id
+				(es.cal_estudiantes_secciones.del_semestre periodo_id).each_with_index do |h,i| # puede cambiar por el periodo_id
 					est = h.cal_estudiante
 					sec = h.cal_seccion
 					mat = sec.cal_materia
