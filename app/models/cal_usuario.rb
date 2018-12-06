@@ -33,6 +33,16 @@ class CalUsuario < ActiveRecord::Base
 	  where("ci LIKE ? OR nombres LIKE ? OR apellidos LIKE ? OR ci LIKE ? OR correo_electronico LIKE ?","%#{clave}%","%#{clave}%","%#{clave}%", "%#{clave}%", "%#{clave}%")
 	}
 
+	def mujer?
+		return cal_tipo_sexo_id.eql? 'F'
+	end
+
+	def hombre?
+		return cal_tipo_sexo_id.eql? 'M'
+	end
+
+
+
 	def descripcion_contacto
 		contacto = ""
 		contacto += "Correo: #{correo_electronico.to_s}" if correo_electronico
