@@ -6,6 +6,49 @@ class CalArchivo
 	end
 
 
+	def self.cita_horaria periodo_id
+
+		require 'spreadsheet'
+
+		@book = Spreadsheet::Workbook.new
+		@sheet = @book.create_worksheet :name => "cita-hotaria"
+		periodo = CalSemestre.find periodo_id
+
+		@sheet.row(0).concat ['CÉDULA', 'NOMBRES', 'PLAN', 'PROMEDIO']
+
+		inscritos = CalEstudianteSeccion.where(cal_tipo_estado_inscripcion_id: 'INS', cal_semestre_id: periodo_id).group(:cal_estudiante_ci).average(:calificacion_final)
+
+		inscritos.each_with_index do |ins,i|
+			ci = ins[0]
+			est = CalEstudiante.find ci
+			nombres = est.cal_usuario.apellido_nombre
+			plan = est.ultimo_plan
+			prom = (ins[1].to_f).round(2)
+			@sheet.row(i+1).concat [ci,nombres,plan,prom]
+
+		end
+
+		# total_inscritos = inscritos.count
+		# retirados = CalEstudianteSeccion.where(cal_tipo_estado_inscripcion_id: 'RET', cal_semestre_id: periodo_id).group(:cal_estudiante_ci)
+
+		# retirados.each_with_index do |ret,i|
+		# 	ci = ins[0]
+		# 	est = CalEstudiante.find ci
+		# 	nombres = est.cal_usuario.apellido_nombre
+		# 	plan = est.ultimo_plan
+		# 	prom = 'Retiro Total'
+		# 	@sheet.row(i+1).concat [ci,nombres,plan,prom]
+
+		# end
+
+		file_name = "aux_cita_horaria.xls"
+		return file_name if @book.write file_name
+
+	end
+
+
+
+
 	def self.estudiantes_x_plan_csv tipo_plan_id, periodo_id
 
 		atributos = ['CEDULA', 'ASIGNATURA', 'DENOMINACION', 'CREDITO', 'NOTA_FINAL', 'NOTA_DEFI', 'TIPO_EXAM', 'PER_LECTI', 'ANO_LECTI', 'SECCION', 'PLAN1']

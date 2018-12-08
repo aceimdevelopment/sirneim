@@ -167,7 +167,8 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	end
 
 	def retirada?
-		return (cal_tipo_estado_inscripcion_id.eql? 'RET') ? true : false
+		# return (cal_tipo_estado_inscripcion_id.eql? 'RET') ? true : false
+		cal_tipo_estado_inscripcion_id.eql? 'RET'
 	end
 	# validates :id, :presence => true, :uniqueness => true	
 

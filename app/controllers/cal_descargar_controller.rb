@@ -22,6 +22,13 @@ class CalDescargarController < ApplicationController
   #   File.delete(file_name)
   # end
 
+
+  def cita_horaria
+		file_name = CalArchivo.cita_horaria params[:id]
+		# send_data data, filename: "cita_horaria_#{params[:id]}.xls"
+		send_file file_name, :type => "application/vnd.ms-excel", :x_sendfile => true, :stream => false, :filename => "cita_horaria_#{params[:id]}.xls",:disposition => "attachment"
+  end
+
 	def listado_estudiantes_x_plan_csv
 		periodo_id = session[:cal_parametros][:semestre_actual]
 		data = CalArchivo.estudiantes_x_plan_csv params[:id], periodo_id

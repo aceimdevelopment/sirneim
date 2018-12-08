@@ -41,6 +41,14 @@
 					= "Plan #{plan.id}"
 
 
+		%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Cita Horaria del periodo #{@cal_semestre_actual_id}"}
+			= link_to "", {:href => "cal_descargar/cita_horaria/#{@cal_semestre_actual_id}", class: "btn btn-success"},{role: 'button'} do
+				%i.icon.icon-download.icon-white
+				%i.icon.icon-list.icon-white
+				= "Excel Cita-Horaria periodo #{@cal_semestre_actual_id}"
+
+
+
 
 .tabbable.tabs-top
 	%h5 Seleccione el Departamento:
@@ -110,9 +118,3 @@
 -if (@cal_usuario.correo_electronico.blank? or @cal_usuario.telefono_movil.blank? or @cal_usuario.telefono_habitacion.blank?)
 
 	= render partial: 'cal_usuario/datos_modal'
-
-:javascript
-
-	$(document).ready(function() {
-		$('.tooltip-btn').tooltip();
-	});
