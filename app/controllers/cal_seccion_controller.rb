@@ -5,6 +5,14 @@ class CalSeccionController < ApplicationController
 	before_filter :cal_filtro_logueado
 	before_filter :cal_filtro_administrador
 
+	def cambiar_capacidad
+
+	    @seccion = CalSeccion.find params[:id].split
+	    @seccion.capacidad = params[:capacidad]
+	    @seccion.save
+		redirect_to :back
+	end
+
 	def clonar_secciones_anteriores
 		@periodo_actual = session[:cal_parametros][:semestre_actual]
 		@periodo_anterior = session[:cal_parametros][:semestre_anterior]

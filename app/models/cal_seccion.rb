@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class CalSeccion < ActiveRecord::Base
-	attr_accessible :numero, :cal_materia_id, :cal_semestre_id, :cal_profesor_ci
+	attr_accessible :numero, :cal_materia_id, :cal_semestre_id, :cal_profesor_ci, :capacidad
 
 	set_primary_keys :numero, :cal_materia_id, :cal_semestre_id
 
