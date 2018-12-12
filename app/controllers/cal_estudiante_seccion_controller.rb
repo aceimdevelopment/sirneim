@@ -21,7 +21,7 @@ class CalEstudianteSeccionController < ApplicationController
 		@estudiante = CalEstudiante.where(cal_usuario_ci: params[:id]).limit(0).first 
 		@titulo = "Inscripción para el período #{@cal_semestre_actual_id} - Paso 2 - Seleccionar Secciones"
 		if @inscripciones.count > 2
-			flash[:info] = "El estudiante ya posee más de 2 asignaturas inscritas en el periodo actual. Por favor haga clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{params[:id].to_s}' class='btn btn-primary btn-small'>aquí</a> para para mayor información y realizar ajustes sobre las asignaturas" 
+			flash[:info] = "El estudiante ya posee más de 2 asignaturas inscritas en el periodo actual. Por favor haga clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{params[:id].first.to_i}' class='btn btn-primary btn-small'>aquí</a> para para mayor información y realizar ajustes sobre las asignaturas" 
 			redirect_to action: 'buscar_estudiante', id: params[:id]
 		else		
 			@departamentos = CalDepartamento.all
@@ -49,7 +49,7 @@ class CalEstudianteSeccionController < ApplicationController
 				else
 					flash[:error] += "#{es_se.errors.full_messages.join' | '}"
 				end
-				flash[:info] = "Para mayor información vaya al detalle del estudiante haciendo clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{ci.to_s}' class='btn btn-primary btn-small'>aquí</a> "
+				flash[:info] = "Para mayor información vaya al detalle del estudiante haciendo clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{ci.first.to_i}' class='btn btn-primary btn-small'>aquí</a> "
 			end 
 		rescue Exception => e
 			flash[:error] = "Error Excepcional: #{e}"
