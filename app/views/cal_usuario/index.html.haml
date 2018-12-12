@@ -37,7 +37,7 @@
         - if @super_user
           - if u.cal_estudiante
             %td
-              = link_to({controller: 'cal_estudiante_seccion', action: 'seleccionar', id: u.id}, class: 'btn btn-small btn-warning') do
+              = link_to({controller: 'cal_estudiante_seccion', action: 'seleccionar', id: u.id}, class: 'btn btn-mini btn-warning') do
                 Inscribir
                 %span.icon-pencil
 
