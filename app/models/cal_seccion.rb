@@ -42,6 +42,8 @@ class CalSeccion < ActiveRecord::Base
 
 	scope :calificadas, -> {where "calificada IS TRUE"}
 	scope :sin_calificar, -> {where "calificada IS FALSE"}
+	scope :del_periodo, lambda { |semestre_id| where "cal_semestre_id = ?", semestre_id}
+	scope :del_periodo_actual, -> { where "cal_semestre_id = ?", CalParametroGeneral.cal_semestre_actual_id}
 
 
 	def total_estudiantes

@@ -1,0 +1,110 @@
+%h3
+	= @estudiante.descripcion
+	%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Ir al detalle del usuario"}
+		= link_to({controller: 'cal_principal_admin', action: 'detalle_usuario', ci: @estudiante.id}, class: 'btn btn-default') do
+			%i.icon-plus.icon-white
+			Detalle
+		%br
+
+= form_tag({controller: 'cal_estudiante_seccion',action: 'inscribir'},{class: 'form-horizontal well well-small'} ) do
+	=hidden_field_tag :ci, @estudiante.cal_usuario_ci
+	.tabbable.tabs-left
+		%h5 Seleccione el Departamento:
+		%ul.nav.nav-tabs
+			- @departamentos.each_with_index do |dep,i|
+				- dpto_activo = (session[:dpto_id].eql? dep.id) ? "active" : ""
+				%li{class: dpto_activo}
+					= link_to dep.descripcion, "#dep_#{dep.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {dpto_id: '#{dep.id}'}, dataType: 'json'});"
+
+		.tab-content
+			- @departamentos.each_with_index do |dep,i|
+				- dpto_activo = (session[:dpto_id].eql? dep.id) ? "active" : ""
+				.tab-pane{class: dpto_activo, id: "dep_#{dep.id}"}
+
+					-# @catedras = dep.cal_departamentos_categorias.sort_by{|cate| cate.orden}
+					- @catedras = dep.cal_categorias.order('orden ASC')
+					.tabbable.tabs-left
+						%h5 Seleccione la Cátedra:
+						%ul.nav.nav-tabs
+							- @catedras.each_with_index do |cat,j|
+								- cat_activa = (session[:cat_id].eql? cat.id) ? "active" : ""
+
+								%li{class: cat_activa}
+									= link_to cat.descripcion, "#cat_#{dep.id}_#{cat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {cat_id: '#{cat.id}'}, dataType: 'json'});"
+
+						.tab-content
+							- @catedras.each_with_index do |cat,j|
+								- cat_activa = (session[:cat_id].eql? cat.id) ? "active" : ""
+
+								.tab-pane{class: cat_activa, id: "cat_#{dep.id}_#{cat.id}"}
+
+									- @materias = cat.cal_materias.where(:cal_departamento_id => dep.id).sort_by{|m| m.orden}
+									.tabbable.tabs-left
+										%h5 Seleccione la Asignatura:
+										%ul.nav.nav-tabs
+											- @materias.each_with_index do |mat,k|
+
+												- if mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual_id).count > 0
+													- mat_activa = (session[:mat_id].eql? mat.id) ? "active" : ""
+												
+													%li{class: mat_activa}
+														= link_to "#mat_#{mat.id}", "data-toggle"=> "tab", onclick: "$.ajax({url: '/sirneim/cal_principal_admin/set_tab', data: {mat_id: '#{mat.id}'}, dataType: 'json'});" do
+															= mat.descripcion
+															%span.badge.badge-inverse= mat.id_upsi
+
+										.tab-content
+											- @materias.each_with_index do |mat,k|
+												- @secciones = mat.cal_secciones.where(:cal_semestre_id => @cal_semestre_actual_id)
+												- if @secciones.count > 0
+													- @mat_activa = (session[:mat_id].eql? mat.id) ? "active" : ""
+
+													- @mat = mat
+													= render 'cal_estudiante_seccion/detalle_inscripcion'
+
+	.well.well-small
+		%h5 Selección:
+		%table.table.table-bordered.table-striped.table-condensed.table-hover#seleccion
+			%thead
+				%tr
+					%th Departamento
+					%th Cátedra
+					%th Sección
+					%th Período
+					%th
+			%tbody
+				- @secciones_disponibles.each do |sec| 
+					%tr.hide{id: "sel_#{sec.cal_materia_id}_#{sec.numero}", class: "sel_#{sec.cal_materia_id}"} 
+
+						%td= sec.cal_materia.cal_departamento.descripcion
+						%td= sec.cal_materia.cal_categoria.descripcion
+						%td= sec.descripcion
+						%td= sec.cal_semestre_id
+						%td= borrar_seleccion_link sec.cal_materia_id
+		%div{style: 'max-width: 400px; margin: 0 auto 10px;'}= submit_tag 'Confirmar', class: 'btn btn-large btn-block btn-primary', 'data-confirm' => '¿Confirma que desea completar la inscripción?', onclick: "$(this).attr('data-confirm', escribir_seleccion());"
+	- if @inscripciones.count > 0
+		.well.well-small
+			Inscritas:
+			%table.table.table-bordered.table-striped.table-condensed.table-hover
+				%thead
+					%tr
+						%th Departamento
+						%th Cátedra
+						%th Sección
+						%th Período
+				%tbody
+					- @inscripciones.each do |ins| 
+						%tr
+							%td= ins.cal_seccion.cal_materia.cal_departamento.descripcion
+							%td= ins.cal_seccion.cal_materia.cal_categoria.descripcion
+							%td= ins.cal_seccion.descripcion
+							%td= ins.cal_semestre_id
+:javascript
+	function borrar_seleccion(materia_id) {
+		$('.'+materia_id).prop('checked', false);
+		$('.sel_'+materia_id).hide();
+	};
+	function agregar_a_seleccion(materia_id,seccion_numero) {
+		$('.sel_'+materia_id).hide();
+		$('#sel_'+materia_id+'_'+seccion_numero).show();
+	};
+

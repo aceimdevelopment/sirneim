@@ -1,0 +1,27 @@
+
+= form_tag({controller: 'cal_estudiante_seccion',action: 'seleccionar'},{class: 'form-inline'} ) do
+
+	.control-group
+		%label.control-label
+			Estudiante:
+		.controls
+			=collection_select(:id, nil, @estudiantes, :id, :descripcion, {prompt: true}, {required: true, id: 'selects2', style: 'width:100%;', autofocus: true})
+
+	%br
+	= submit_tag "Seleccionar", :disable_with => 'Enviando...', class: 'btn btn-primary pull-right'
+
+:javascript
+
+	$(document).ready(function() {
+
+		$("#selects2").select2({
+		    placeholder: "--Escriba datos del estudiante para buscarlo--",
+		    allowClear: true,
+		    minimumInputLength: 4
+		});
+		
+	});
+
+
+
+
