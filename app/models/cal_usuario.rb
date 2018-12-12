@@ -41,8 +41,6 @@ class CalUsuario < ActiveRecord::Base
 		return cal_tipo_sexo_id.eql? 'M'
 	end
 
-
-
 	def descripcion_contacto
 		contacto = ""
 		contacto += "Correo: #{correo_electronico.to_s}" if correo_electronico
