@@ -1,0 +1,19 @@
+%h3 Departamento:
+= @profesor.cal_departamento.descripcion
+
+- @secciones = @profesor.cal_secciones.order('cal_semestre_id DESC')
+- if @secciones.count > 0
+	.well.well-small
+		%h3= "Secciones (#{@secciones.count}):"
+		%table.table.table-bordered.table-striped.table-condensed.table-hover{style: "text-align:left;"}
+			%thead
+				%tr
+					%th Descripcion
+					%th Departamento
+					%th Periodo
+			%tbody
+				- @secciones.each do |s| 
+					%tr
+						%td= link_to_if (@admin and @admin.super_admin?), s.descripcion, {controller: 'cal_principal_admin', action: 'ver_seccion_admin', id: s.id}
+						%td= s.cal_materia.cal_departamento.descripcion
+						%td= s.cal_semestre_id

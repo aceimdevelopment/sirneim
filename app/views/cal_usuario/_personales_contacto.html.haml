@@ -1,0 +1,41 @@
+= link_to "Actualizar Datos Personales", {controller: 'cal_usuario', action: 'editar', ci: @usuario.ci,  controlador: controller_name, accion: action_name}, class: 'btn'
+%h5 Datos Personales: 
+%ul.well.well-small{style: "list-style-type: none;"}
+	%li
+		%b Cédula de Identidad:
+		= @usuario.ci
+
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
+			= link_to('javascript:void(0)', {onclick: "return $('#cambiar_cedula').modal();", 'data_toggle' => 'modal'}) do
+				= content_tag(:i, "", class: "icon-edit")
+		
+		= render 'cal_usuario/cambiar_cedula'
+
+	%li
+		%b Nombre:	
+		= @usuario.nombre_completo
+	- if @admin and @admin.super_admin?
+		%li
+			%b Contraseña:
+			= @usuario.contrasena
+
+
+			%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Resetear Contraseña"}
+				= link_to({controller: 'cal_usuario', action: 'resetear_contrasena', ci: @usuario.id}, {'data-confirm' => 'Esta acción asignará la cédula de identidad como contraseña, ¿está de acuerdo?'}) do
+					%i.icon-lock.icon-white
+					%i.icon-repeat.icon-white
+
+
+%hr
+
+%h5 Datos de contacto:
+%ul.well.well-small{style: "list-style-type: none;"}
+	%li 
+		%b Correo Electrónico:
+		= "#{@usuario.correo_electronico}" 
+	%li 
+		%b Teléfono Móvil:
+		= "#{@usuario.telefono_movil}"
+	%li 
+		%b Teléfono Habitación:
+		= "#{@usuario.telefono_habitacion}"
