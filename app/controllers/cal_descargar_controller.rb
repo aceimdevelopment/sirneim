@@ -3,6 +3,14 @@
 class CalDescargarController < ApplicationController
 	before_filter :cal_filtro_logueado
 
+	def reportes
+		@cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
+		@cal_semestre_actual = CalSemestre.where(:id => @cal_semestre_actual_id).limit(1).first
+		@cal_usuario = session[:cal_usuario]
+		@admin = session[:cal_administrador]
+
+		
+	end
 
 	def programaciones
 		id = params[:id]

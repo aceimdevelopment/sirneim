@@ -21,10 +21,12 @@
               %li=link_to 'Estudiantes-Asignaturas Nuevos', '/sirneim/cal_semestre/lista_estudiantes_asignaturas/nuevos'
 
           -if session[:cal_administrador].cal_tipo_admin_id <3 or session[:cal_administrador].cal_tipo_admin_id == 4 
-            %li= link_to "Configuración General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
+            %li= link_to "Config General", {controller: 'cal_principal_admin', action: 'configuracion_general'} 
 
             %li= link_to "Asignaturas", {controller: 'cal_materia', action: 'index'} 
             %li= link_to "Planes", tipo_plan_index_path
+            %li= link_to "Reportes", {controller: 'cal_descargar', action: 'reportes'}
+            %li= button_to "Inscribir", {controller: 'cal_estudiante_seccion', action: 'buscar_estudiante'}, class: 'btn btn-success pull-right'
 
       .nav.pull-right
 
@@ -36,9 +38,9 @@
             %li= link_to "Cerrar Sesión", {controller: 'cal_inicio', action: 'cerrar_sesion'}
         -if session[:cal_parametros] and session[:cal_parametros][:semestre_actual] and session[:cal_administrador]
           %li
-            .tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
+            .tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Cambiar el período para su sesión actual'}
               = link_to('javascript:void(0)', {onclick: "return $('#cambiar_sesion_periodo').modal();", 'data_toggle' => 'modal'}) do
-                = "Sesión de Período: #{session[:cal_parametros][:semestre_actual]}"
+                = "#{session[:cal_parametros][:semestre_actual]}"
                 = content_tag(:i, "", class: "icon-edit")
             
           = render 'cal_principal_admin/cambiar_sesion_periodo'
