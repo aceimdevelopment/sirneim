@@ -89,7 +89,9 @@ class CalEstudianteSeccionController < ApplicationController
 				flash[:error] = "No se pudo incorporar al estudiante en la seccion correspondiente, intentelo de nuevo"
 			end
 		end
-		redirect_to :controller => params[:controlador], :action => params[:accion], :ci => ci
+		# redirect_to :controller => params[:controlador], :action => params[:accion], :ci => ci, flash: flash[:success]
+
+		redirect_to({ :controller => params[:controlador], :action => params[:accion], :ci => ci}, flash: flash) and return
 	end
 
 	def eliminar
@@ -106,7 +108,8 @@ class CalEstudianteSeccionController < ApplicationController
 		else
 			flash[:error] = "El estudiante no fue encontrado en la sección especificada"
 		end
-		redirect_to :controller => params[:controlador], :action => params[:accion], :ci => ci
+		redirect_to({:controller => params[:controlador], :action => params[:accion], :ci => ci}, flash: flash) and return
+		# redirect_to :controller => params[:controlador], :action => params[:accion], :ci => ci
 	end
 
 	def set_retirar
