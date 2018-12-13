@@ -12,6 +12,25 @@ class CalDescargarController < ApplicationController
 		
 	end
 
+	def contancia_inscripcion
+		pdf = CalArchivo.hacer_constancia_inscripcion params[:id]
+		unless send_data pdf.render,:filename => "constancia_inscripcion_#{params[:id].to_s}.pdf",:type => "application/pdf", :disposition => "attachment"
+			flash[:mensaje] = "En estos momentos no se pueden descargar el acta, intentelo más tarde."
+		end
+		return
+		
+	end
+
+	def contancia_estudio
+		pdf = CalArchivo.hacer_constancia_estudio params[:id]
+		unless send_data pdf.render,:filename => "constancia_estudio_#{params[:id].to_s}.pdf",:type => "application/pdf", :disposition => "attachment"
+			flash[:mensaje] = "En estos momentos no se pueden descargar el acta, intentelo más tarde."
+		end
+		return
+		
+	end
+
+
 	def programaciones
 		id = params[:id]
 		periodo = params[:cal_semestre_id]
@@ -19,23 +38,11 @@ class CalDescargarController < ApplicationController
 		send_file "#{Rails.root}/attachments/programaciones/#{periodo}/PROG_#{id}_#{periodo}.pdf", :type => "application/pdf", :x_sendfile => true, :disposition => "attachment"		
 	end
 
-
-  # def descargas
-
-  #   ids = params[:id]
-  #   alertas = Alerta.where(:id => ids.split(","))
-  #   file_name = Pdf.descargar_alertas_excel(alertas)
-  #   send_file file_name, :type => "application/vnd.ms-excel", :filename => "reporte_alertas.xls", :stream => false
-
-  #   File.delete(file_name)
-  # end
-
-
-  def cita_horaria
+	def cita_horaria
 		file_name = CalArchivo.cita_horaria params[:id]
 		# send_data data, filename: "cita_horaria_#{params[:id]}.xls"
 		send_file file_name, :type => "application/vnd.ms-excel", :x_sendfile => true, :stream => false, :filename => "cita_horaria_#{params[:id]}.xls",:disposition => "attachment"
-  end
+	end
 
 	def listado_estudiantes_x_plan_csv
 		periodo_id = session[:cal_parametros][:semestre_actual]

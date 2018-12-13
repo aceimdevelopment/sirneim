@@ -13,6 +13,19 @@
 						%i.icon-plus.icon-white
 						= "Inscribir en seccion del #{session[:cal_parametros][:semestre_actual]}"
 
+			- if @estudiante.inscrito?
+				%td
+					%b
+						= link_to({controller: 'cal_descargar', action: 'contancia_inscripcion', :id => @estudiante.id}, class: 'btn btn-default btn-mini') do
+							%i.icon-download.icon-white
+							Constancia de Inscripcion
+
+			%td
+				%b
+					= link_to({controller: 'cal_descargar', action: 'contancia_estudio', :id => @estudiante.id}, class: 'btn btn-default btn-mini') do
+						%i.icon-download.icon-white
+						Constancia de Estudio
+
 			.modal.fade#estudiante_seccion{ role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
 				.modal-dialog
 					.modal-content

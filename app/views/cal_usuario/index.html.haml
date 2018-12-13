@@ -36,10 +36,19 @@
 
         - if @super_user
           - if u.cal_estudiante
-            %td
-              = link_to({controller: 'cal_estudiante_seccion', action: 'seleccionar', id: u.id}, class: 'btn btn-mini btn-success') do
-                %span.icon-pencil
-                Inscribir
+            - if u.cal_estudiante.inscrito?
+              %td
+                %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Constancia de Inscripcion"}
+                  = link_to({controller: 'cal_descargar', action: 'contancia_inscripcion', :id => u.cal_estudiante.id}, class: 'btn btn-default btn-mini') do
+                    %i.icon-download-alt.icon-white
+                    %i.icon-certificate.icon-white
+            - else
+              %td
+                %b
+                  = link_to({controller: 'cal_estudiante_seccion', action: 'seleccionar', id: u.id}, class: 'btn btn-mini btn-success') do
+                    %i.icon-pencil
+                    Inscribir
+
 
             %td
               %b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex"}
