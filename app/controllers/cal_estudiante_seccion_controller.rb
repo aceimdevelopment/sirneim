@@ -120,7 +120,7 @@ class CalEstudianteSeccionController < ApplicationController
 		if es = CalEstudianteSeccion.find(id)
 			es.cal_tipo_estado_inscripcion_id = params[:valor]
 			if es.save
-				flash[:success] = "El cambiado el valor de retiro de #{es.cal_estudiante.cal_usuario.nickname} de la sección #{es.cal_seccion.descripcion} se realizó correctamente"
+				flash[:success] = "El cambio el valor de retiro de #{es.cal_estudiante.cal_usuario.nickname} de la sección #{es.cal_seccion.descripcion} se realizó correctamente"
 			else
 				flash[:error] = "No se pudo cambiar el valor de retiro, intentelo de nuevo: #{es.errors.full_messages.join' | '}"
 			end				
