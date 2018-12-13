@@ -1,7 +1,12 @@
 - @accion = action_name
 - @controlador = controller_name
 
-%h3= link_to "<< Regresar", :back, {class: 'btn'}
+%h3
+	= link_to "<< Regresar", :back, {class: 'btn'}
+	- if @estudiante.valido_para_inscribir?
+		= link_to({controller: 'cal_estudiante_seccion', action: 'seleccionar', id: @estudiante.id}, class: 'btn btn-success') do
+			%span.icon-pencil
+			Inscribir
 
 .tabbable.tabs-top
 	%ul.nav.nav-tabs

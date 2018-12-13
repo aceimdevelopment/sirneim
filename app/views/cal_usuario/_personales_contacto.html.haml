@@ -7,7 +7,7 @@
 
 		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Editar'}
 			= link_to('javascript:void(0)', {onclick: "return $('#cambiar_cedula').modal();", 'data_toggle' => 'modal'}) do
-				= content_tag(:i, "", class: "icon-edit")
+				%i.icon-edit
 		
 		= render 'cal_usuario/cambiar_cedula'
 

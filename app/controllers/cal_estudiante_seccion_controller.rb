@@ -46,6 +46,8 @@ class CalEstudianteSeccionController < ApplicationController
 				es_se.cal_materia_id = mat_id
 				es_se.cal_semestre_id = @cal_semestre_actual_id
 				es_se.cal_estudiante_ci = ci
+				es_se.cal_tipo_estado_inscripcion_id = 'INS'
+
 
 				if es_se.save
 					guardadas += 1

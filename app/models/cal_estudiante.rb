@@ -52,6 +52,21 @@ class CalEstudiante <  ActiveRecord::Base
 
 	accepts_nested_attributes_for :combinaciones
 
+	def inactivo?
+		total_materias = cal_estudiantes_secciones.del_semestre_actual.count
+		total_retiradas = cal_estudiantes_secciones.del_semestre_actual.where(cal_tipo_estado_inscripcion_id: 'RET').count
+		(total_materias > 0 and total_materias == total_retiradas)
+	end
+
+	def inscrito?
+		cal_estudiantes_secciones.del_semestre_actual.count > 0
+	end
+
+	def valido_para_inscribir?
+		# cal_estudiantes_secciones.del_semestre_actual.count < 1
+		! inscrito?
+	end
+
 	def ultimo_plan
 		hp = historiales_planes.order("desde_cal_semestre_id DESC").first
 		hp ? hp.tipo_plan_id : ""
