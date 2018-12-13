@@ -39,8 +39,8 @@
         -if session[:cal_parametros] and session[:cal_parametros][:semestre_actual] and session[:cal_administrador]
           %li
             .tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Cambiar el período para su sesión actual'}
-              = link_to('javascript:void(0)', {onclick: "return $('#cambiar_sesion_periodo').modal();", 'data_toggle' => 'modal'}) do
-                = "#{session[:cal_parametros][:semestre_actual]}"
+              = "#{session[:cal_parametros][:semestre_actual]}"
+              = link_to('javascript:void(0)', {onclick: "return $('#cambiar_sesion_periodo').modal();", 'data_toggle' => 'modal', class: 'btn btn-mini pull-right'}) do
                 = content_tag(:i, "", class: "icon-edit")
             
           = render 'cal_principal_admin/cambiar_sesion_periodo'

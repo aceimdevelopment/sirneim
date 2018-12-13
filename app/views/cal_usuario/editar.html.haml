@@ -1,1 +1,2 @@
+%h3= link_to '<< Regresar', {controller: @controlador, action: @accion, ci: params[:ci]}, class: 'btn' if @controlador and @accion
 = render partial: 'form'

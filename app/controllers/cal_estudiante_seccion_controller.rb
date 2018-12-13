@@ -11,14 +11,11 @@ class CalEstudianteSeccionController < ApplicationController
 		if params[:id]
 			@inscripciones = CalEstudianteSeccion.where(cal_estudiante_ci: params[:id], cal_semestre_id: @cal_semestre_actual_id)
 			if @inscripciones.count > 2
-				flash[:info] = "El estudiante ya posee más de 2 asignaturas inscritas en el periodo actual. Por favor haga clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{@inscripciones.first.cal_estudiante_ci}' class='btn btn-primary btn-small'>aquí</a> para para mayor información y realizar ajustes sobre las asignaturas" 
+				flash[:info] = "El estudiante ya posee más de 2 asignaturas inscritas en el periodo actual. Por favor haga clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{@inscripciones.first.cal_estudiante_ci}' class='btn btn-primary btn-small'>aquí</a> para mayor información y realizar ajustes sobre las asignaturas" 
 			end
 		end
-
 		@titulo = "Inscripción para el período #{@cal_semestre_actual_id} - Paso 1 - Buscar Estudiante"
-
 		@estudiantes = CalEstudiante.all.sort_by{|e| e.cal_usuario.apellidos}
-
 	end
 
 	def seleccionar
@@ -37,17 +34,17 @@ class CalEstudianteSeccionController < ApplicationController
 	end
 
 	def inscribir
-		ci = params[:ci]
-		@periodo_id = CalParametroGeneral.cal_semestre_actual_id
+		@cal_semestre_actual_id = CalParametroGeneral.cal_semestre_actual_id
 		secciones = params[:secciones]
 		total_secciones = secciones.count
 		guardadas = 0
+		ci = params[:ci]
 		begin
 			secciones.each_pair do |mat_id, sec_num|
 				es_se = CalEstudianteSeccion.new
 				es_se.numero = sec_num
 				es_se.cal_materia_id = mat_id
-				es_se.cal_semestre_id = @periodo_id
+				es_se.cal_semestre_id = @cal_semestre_actual_id
 				es_se.cal_estudiante_ci = ci
 
 				if es_se.save
@@ -61,10 +58,16 @@ class CalEstudianteSeccionController < ApplicationController
 			flash[:error] = "Error Excepcional: #{e}"
 		end
 		flash[:success] = "Estudiante inscrito en #{guardadas} seccion(es) de #{total_secciones}"
+		redirect_to action: :resumen, id: ci, flash: flash
+	end
+
+	def resumen
+		ci = params[:id]
+		@cal_semestre_actual_id = CalParametroGeneral.cal_semestre_actual_id
 		@estudiante = CalEstudiante.where(cal_usuario_ci: ci).limit(0).first
 		@secciones = @estudiante.cal_secciones.del_periodo_actual
+		@titulo = "Inscripción para el período #{@cal_semestre_actual_id} - Paso 3 - Resultados y Resumen: #{@estudiante.cal_usuario.descripcion}"
 
-		@titulo = "Resumen de Inscripción de #{@estudiante.cal_usuario.nickname} para el Período #{@periodo_id}"
 	end
 
 	def nuevo

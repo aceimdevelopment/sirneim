@@ -1,0 +1,7 @@
+%table
+	%tr
+		%td= button_to 'Inscribir otro Estudiante', {controller: 'cal_estudiante_seccion', action: 'buscar_estudiante'}, class: 'btn btn-success'
+
+		%td= button_to 'Detalle de Usuario', {controller: 'cal_principal_admin', action: 'detalle_usuario', :ci => @estudiante.id}, class: 'btn btn-default'
+
+= render partial: 'cal_estudiante_seccion/tabla_selecciones', locals: {secciones: @secciones, borrar_seleccion: false}

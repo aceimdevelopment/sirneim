@@ -28,7 +28,7 @@ class CalSeccion < ActiveRecord::Base
 
 	accepts_nested_attributes_for :cal_secciones_profesores_secundarios
 
-	has_many :cal_profesores, :through => :cal_secciones_profesores_secundarios, :source => :cal_profesor
+	has_many :cal_profesores, through: :cal_secciones_profesores_secundarios, source: :cal_profesor
 
 	# validates_uniqueness_of :numero, :cal_materia_id, :cal_semestre_id
 

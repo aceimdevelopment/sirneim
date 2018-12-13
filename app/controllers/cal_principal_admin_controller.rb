@@ -215,7 +215,7 @@ class CalPrincipalAdminController < ApplicationController
 		@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
 		@idiomas2 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
 
-		@titulo = "Detalle de Usuario"
+		@titulo = "Detalle de Usuario: #{@usuario.descripcion}"
 	end
 
 	def resetear_contrasena

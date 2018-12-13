@@ -2,11 +2,10 @@
 
 class CalEstudianteSeccion < ActiveRecord::Base
 
-	set_primary_keys :cal_estudiante_ci, :numero, :cal_materia_id, :cal_semestre_id
+	set_primary_keys [:cal_estudiante_ci, :numero, :cal_materia_id, :cal_semestre_id]
 
-	# validates :cal_estudiante_ci, :uniqueness => {:scope => [:cal_materia_id , :cal_semestre_id]}
-	# validates_uniqueness_of :cal_estudiante_ci, scope: [:cal_materia_id, :cal_semestre_id], message: 'El estudiante ya está inscrito en éste periodo en ésta asignatura', field_name: false
-
+	# validates_uniqueness_of :cal_estudiante_ci, scope: [:cal_materia_id, :cal_semestre_id], message: 'El estudiante ya está inscrito en éste periodo en ésta asignatura', field_name: false, unless: Proc.new { |est_sec| est_sec.numero.include? "R" }
+	# OJO: Este Scope no se puede ejecutar ya que hay casos, como la reparacion, en los que un mismo estudiante se inscribe para la misma materia en el mismo periodo.
 	attr_accessible :cal_estudiante_ci, :numero, :cal_materia_id, :cal_semestre_id, 
 	:calificacion_primera, :calificacion_segunda, :calificacion_tercera, :calificacion_final, 
 	:cal_tipo_estado_calificacion_id, :cal_tipo_estado_inscripcion_id, :retirada

@@ -36,7 +36,7 @@ class CalUsuarioController < ApplicationController
       @accion = params[:accion]
       @controlador = params[:controlador]
     end
-
+    @titulo = "Editar Datos Personales y de contacto de: #{@cal_usuario.descripcion}"
   end
 
   def modificar_guardar
