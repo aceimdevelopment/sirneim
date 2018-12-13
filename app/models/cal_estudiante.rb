@@ -97,10 +97,10 @@ class CalEstudiante <  ActiveRecord::Base
 			joins_seccion_materia = secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia)
 			secciones_aux.select("cal_seccion.*, cal_materia.*").joins(:cal_materia).group("cal_materia.anno").each{|x| annos << x.anno if x.anno > 0}
 
-			cal_estudiantes_secciones.delete_if{|es| es.cal_numero.eql? 'R'}.each do |est_sec|
+			cal_estudiantes_secciones.delete_if{|es| es.numero.eql? 'R'}.each do |est_sec|
 				
 				if est_sec.calificacion_final and est_sec.calificacion_final < 10
-					reparacion = cal_estudiantes_secciones.where('cal_estudiante_ci = ? and cal_materia_id = ? and cal_numero = ?', cal_usuario_ci, est_sec.cal_materia_id, 'R').first
+					reparacion = cal_estudiantes_secciones.where('cal_estudiante_ci = ? and cal_materia_id = ? and numero = ?', cal_usuario_ci, est_sec.cal_materia_id, 'R').first
 
 					if reparacion
 						reprobadas = reprobadas + 1 if reparacion.calificacion_final < 10

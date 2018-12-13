@@ -5,7 +5,7 @@ class CalEstudianteSeccion < ActiveRecord::Base
 	set_primary_keys :cal_estudiante_ci, :numero, :cal_materia_id, :cal_semestre_id
 
 	# validates :cal_estudiante_ci, :uniqueness => {:scope => [:cal_materia_id , :cal_semestre_id]}
-	validates_uniqueness_of :cal_estudiante_ci, scope: [:cal_materia_id, :cal_semestre_id], message: 'El estudiante ya está inscrito en éste periodo en ésta asignatura', field_name: false
+	# validates_uniqueness_of :cal_estudiante_ci, scope: [:cal_materia_id, :cal_semestre_id], message: 'El estudiante ya está inscrito en éste periodo en ésta asignatura', field_name: false
 
 	attr_accessible :cal_estudiante_ci, :numero, :cal_materia_id, :cal_semestre_id, 
 	:calificacion_primera, :calificacion_segunda, :calificacion_tercera, :calificacion_final, 

@@ -157,7 +157,7 @@ class CalArchivo
 		# Variable Locales
 		estudiante = CalEstudiante.find id
 		periodos = CalSemestre.order("id ASC").all
-		secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC")
+		secciones = CalEstudianteSeccion.where(:cal_estudiante_ci => estudiante.cal_usuario_ci).order("cal_materia_id ASC, numero DESC")
 
 		pdf = PDF::Writer.new
 

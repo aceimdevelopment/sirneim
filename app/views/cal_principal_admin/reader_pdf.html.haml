@@ -59,7 +59,7 @@
 				%tr
 					%td= i+1
 					%td= estudiante_seccion.cal_estudiante.descripcion
-					%td= estudiante_seccion.cal_numero
+					%td= estudiante_seccion.numero
 					%td= estudiante_seccion.cal_seccion.cal_materia.descripcion if estudiante_seccion.cal_seccion
 				= hidden_field_tag "estudiantes_seccion[]", estudiante_seccion.id
 

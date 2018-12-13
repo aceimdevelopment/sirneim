@@ -15,7 +15,7 @@ class CalSeccion < ActiveRecord::Base
 	has_many :cal_estudiantes_secciones,
 		class_name: 'CalEstudianteSeccion',
  		foreign_key: [:numero, :cal_materia_id, :cal_semestre_id],
- 		primary_key: [:numero, :cal_materia_id, :cal_semestre_id]#, dependent: :delete_all
+ 		primary_key: [:numero, :cal_materia_id, :cal_semestre_id], dependent: :delete_all
 	accepts_nested_attributes_for :cal_estudiantes_secciones
 
 	has_many :cal_estudiantes, through: :cal_estudiantes_secciones, source: :cal_estudiante

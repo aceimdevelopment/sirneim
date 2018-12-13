@@ -45,7 +45,7 @@ class CalEstudianteSeccionController < ApplicationController
 		begin
 			secciones.each_pair do |mat_id, sec_num|
 				es_se = CalEstudianteSeccion.new
-				es_se.cal_numero = sec_num
+				es_se.numero = sec_num
 				es_se.cal_materia_id = mat_id
 				es_se.cal_semestre_id = @periodo_id
 				es_se.cal_estudiante_ci = ci
@@ -76,11 +76,11 @@ class CalEstudianteSeccionController < ApplicationController
 
 	def crear
 		ci = params[:ci]
-		cal_numero, cal_materia_id, cal_semestre_id = params[:cal_seccion][:id].split(",")		
-		if CalEstudianteSeccion.where(:cal_estudiante_ci => ci, :cal_numero => cal_numero, :cal_materia_id => cal_materia_id, :cal_semestre_id => cal_semestre_id).limit(1).first
+		numero, cal_materia_id, cal_semestre_id = params[:cal_seccion][:id].split(",")		
+		if CalEstudianteSeccion.where(:cal_estudiante_ci => ci, :numero => numero, :cal_materia_id => cal_materia_id, :cal_semestre_id => cal_semestre_id).limit(1).first
 			flash[:error] = "El Estudiante ya esta inscrito en esa sección"
 		else
-			if CalEstudianteSeccion.create(:cal_estudiante_ci => ci, :cal_numero => cal_numero, :cal_materia_id => cal_materia_id, :cal_semestre_id => cal_semestre_id, :cal_tipo_estado_inscripcion_id => 'INS', :cal_tipo_estado_calificacion_id => 'SC')
+			if CalEstudianteSeccion.create(:cal_estudiante_ci => ci, :numero => numero, :cal_materia_id => cal_materia_id, :cal_semestre_id => cal_semestre_id, :cal_tipo_estado_inscripcion_id => 'INS', :cal_tipo_estado_calificacion_id => 'SC')
 				flash[:success] = "Estudiante inscrito satisfactoriamente"
 			else
 				flash[:error] = "No se pudo incorporar al estudiante en la seccion correspondiente, intentelo de nuevo"
@@ -91,7 +91,7 @@ class CalEstudianteSeccionController < ApplicationController
 
 	def eliminar
 		# ci = params[:ci]
-		# cal_numero, cal_materia_id, cal_semestre_id = params[:cal_seccion_id].split(",")		
+		# numero, cal_materia_id, cal_semestre_id = params[:cal_seccion_id].split(",")		
 		id = params[:id]
 		ci = id[0]
 		if es = CalEstudianteSeccion.find(id)

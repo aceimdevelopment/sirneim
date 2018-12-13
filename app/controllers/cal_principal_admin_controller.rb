@@ -209,7 +209,7 @@ class CalPrincipalAdminController < ApplicationController
 
 		@periodos = CalSemestre.order("id DESC").all
 
-		@secciones = CalEstudianteSeccion.where(cal_estudiante_ci: @estudiante.cal_usuario_ci).order("cal_materia_id ASC, cal_numero DESC") if @estudiante
+		@secciones = CalEstudianteSeccion.where(cal_estudiante_ci: @estudiante.cal_usuario_ci).order("cal_materia_id ASC, numero DESC") if @estudiante
 
 		# @secciones = CalSeccion.where(:cal_periodo_id => cal_semestre_actual_id)
 		@idiomas1 = CalDepartamento.all.delete_if{|i| i.id.eql? 'EG' or i.id.eql? 'TRA'; }
@@ -380,7 +380,7 @@ class CalPrincipalAdminController < ApplicationController
 						@cal_estudiante_seccion.cal_estudiante_ci = cedula
 						@cal_estudiante_seccion.cal_materia_id = @cal_materia.id if @cal_materia 
 						@cal_estudiante_seccion.cal_semestre_id = cal_semestre_actual_id
-						@cal_estudiante_seccion.cal_numero = @numero_seccion
+						@cal_estudiante_seccion.numero = @numero_seccion
 						@estudiantes_encontrados << @cal_estudiante_seccion
 					else
 						@cedulas_no_encontradas << cedula
@@ -406,7 +406,7 @@ class CalPrincipalAdminController < ApplicationController
 			estudiante_seccion.cal_estudiante_ci = ci
 			estudiante_seccion.cal_materia_id = materia
 			estudiante_seccion.cal_semestre_id = semestre
-			estudiante_seccion.cal_numero = numero
+			estudiante_seccion.numero = numero
 			estudiante_seccion.cal_tipo_estado_calificacion_id = 'SC'
 			estudiante_seccion.cal_tipo_estado_inscripcion_id = 'INS'
 
