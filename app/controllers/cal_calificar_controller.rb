@@ -50,7 +50,7 @@ class CalCalificarController < ApplicationController
 
 		@estudiantes.each_pair do |ci,valores|
 
-			@cal_estudiante_seccion = @cal_seccion.cal_estudiantes_secciones.where(:cal_estudiante_ci => ci).limit(1).first
+			@cal_estudiante_seccion = @cal_seccion.cal_estudiantes_secciones.where(:cal_estudiante_ci => ci).limit(0).first
 			
 			if valores['pi']
 				cal_tipo_estado_calificacion_id = 'PI'

@@ -1,0 +1,24 @@
+%table.table.table-bordered.table-striped.table-condensed.table-hover
+	%thead
+		%tr
+			%th Año
+			%th Departamento
+			%th Cátedra
+			%th Sección
+			%th Período
+			- if borrar_seleccion
+				- hide = 'hide'
+				%th
+			- else
+				- hide = ''
+	%tbody
+		- secciones.each do |sec| 
+			%tr{id: "sel_#{sec.cal_materia_id}_#{sec.numero}", class: "sel_#{sec.cal_materia_id} #{hide}"} 
+
+				%td= sec.cal_materia.anno
+				%td= sec.cal_materia.cal_departamento.descripcion
+				%td= sec.cal_materia.cal_categoria.descripcion
+				%td= sec.descripcion
+				%td= sec.cal_semestre_id
+				- if borrar_seleccion
+					%td= borrar_seleccion_link sec.cal_materia_id

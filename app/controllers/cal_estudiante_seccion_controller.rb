@@ -8,6 +8,13 @@ class CalEstudianteSeccionController < ApplicationController
 	def buscar_estudiante
 		@cal_semestre_actual_id = CalParametroGeneral.cal_semestre_actual_id
 		
+		if params[:id]
+			@inscripciones = CalEstudianteSeccion.where(cal_estudiante_ci: params[:id], cal_semestre_id: @cal_semestre_actual_id)
+			if @inscripciones.count > 2
+				flash[:info] = "El estudiante ya posee más de 2 asignaturas inscritas en el periodo actual. Por favor haga clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{@inscripciones.first.cal_estudiante_ci}' class='btn btn-primary btn-small'>aquí</a> para para mayor información y realizar ajustes sobre las asignaturas" 
+			end
+		end
+
 		@titulo = "Inscripción para el período #{@cal_semestre_actual_id} - Paso 1 - Buscar Estudiante"
 
 		@estudiantes = CalEstudiante.all.sort_by{|e| e.cal_usuario.apellidos}
@@ -31,30 +38,33 @@ class CalEstudianteSeccionController < ApplicationController
 
 	def inscribir
 		ci = params[:ci]
-		periodo_id = CalParametroGeneral.cal_semestre_actual_id
+		@periodo_id = CalParametroGeneral.cal_semestre_actual_id
 		secciones = params[:secciones]
-		error = ""
-		flash[:success] = ""
-		flash[:error] = ""
+		total_secciones = secciones.count
+		guardadas = 0
 		begin
 			secciones.each_pair do |mat_id, sec_num|
 				es_se = CalEstudianteSeccion.new
 				es_se.cal_numero = sec_num
 				es_se.cal_materia_id = mat_id
-				es_se.cal_semestre_id = periodo_id
+				es_se.cal_semestre_id = @periodo_id
 				es_se.cal_estudiante_ci = ci
 
 				if es_se.save
-					flash[:success] += "#{es_se.cal_estudiante.cal_usuario.nickname} fue inscrito en la sección #{sec_num} de #{es_se.cal_seccion.cal_materia.descripcion} para el período #{periodo_id}"
+					guardadas += 1
 				else
-					flash[:error] += "#{es_se.errors.full_messages.join' | '}"
+					flash[:error] = "#{es_se.errors.full_messages.join' | '}"
 				end
-				flash[:info] = "Para mayor información vaya al detalle del estudiante haciendo clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{ci.first.to_i}' class='btn btn-primary btn-small'>aquí</a> "
+				flash[:info] = "Para mayor información vaya al detalle del estudiante haciendo clic <a href='/sirneim/cal_principal_admin/detalle_usuario?ci=#{ci.to_i}' class='btn btn-primary btn-small'>aquí</a> "
 			end 
 		rescue Exception => e
 			flash[:error] = "Error Excepcional: #{e}"
 		end
-		redirect_to action: 'buscar_estudiante', id: ci
+		flash[:success] = "Estudiante inscrito en #{guardadas} seccion(es) de #{total_secciones}"
+		@estudiante = CalEstudiante.where(cal_usuario_ci: ci).limit(0).first
+		@secciones = @estudiante.cal_secciones.del_periodo_actual
+
+		@titulo = "Resumen de Inscripción de #{@estudiante.cal_usuario.nickname} para el Período #{@periodo_id}"
 	end
 
 	def nuevo

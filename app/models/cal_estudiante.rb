@@ -28,12 +28,13 @@ class CalEstudiante <  ActiveRecord::Base
 
 	accepts_nested_attributes_for :cal_estudiantes_secciones
 
-	has_many :cal_secciones, :through => :cal_estudiantes_secciones, :source => :cal_seccion  
+	has_many :cal_secciones, through: :cal_estudiantes_secciones, source: :cal_seccion
+
 	# has_many :categorias, :through => :tipo_curso, :source => :tipo_categoria
 	# has_many :cal_estudiante_en_secciones,
 	# 	:class_name => 'CalEstudianteSeccion',
 	# 	:foreign_key => :estudiante_ci
-	# accepts_nested_attributes_for :cal_estudiante_en_seccionesaawsq
+	# accepts_nested_attributes_for :cal_secciones
 
 	has_many :historiales_planes,
 		class_name: 'CalEstudianteTipoPlan',
