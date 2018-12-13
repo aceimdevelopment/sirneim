@@ -1,27 +1,28 @@
+%table
+	%tr
+		%td
+			%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex de #{@estudiante.cal_usuario.nickname.capitalize}"}
+				= link_to({controller: 'cal_descargar', action: 'kardex', id: @estudiante.id}, {class: 'btn btn-mini'}) do
+					%i.icon-download-alt.icon-white
+					Kardex
 
-%b.tooltip-btn{'data_toggle'=>'tooltip', title: "Descargar Kardex de #{@estudiante.cal_usuario.nickname.capitalize}"}
-	= link_to({controller: 'cal_descargar', action: 'kardex', id: @estudiante.id}, {class: 'btn btn-mini'}) do
-		%i.icon-download-alt.icon-white
-		Kardex
+		- if session[:cal_administrador]
+			%td
+				%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>"Inscribir en una sección del periodo actual: #{session[:cal_parametros][:semestre_actual]}" }		
+					= link_to "#", { class: 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' } do
+						%i.icon-plus.icon-white
+						= "Inscribir en seccion del #{session[:cal_parametros][:semestre_actual]}"
 
-- if session[:cal_administrador]	
-	%h5
-		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Agregar a una sección'}		
-			= link_to "#", { class: 'btn btn-success btn-mini', :onclick => "return $('#estudiante_seccion').modal();", 'data_toggle' => 'modal' } do
-				%i.icon-plus.icon-white
-		Agregar Asignatura:
-
-
-	.modal.fade#estudiante_seccion{ role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
-		.modal-dialog
-			.modal-content
-				.modal-header
-					<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
-				%h2#myModalLabel 
-					Agregar Sección
-				.modal-body
-					= render partial: 'cal_estudiante_seccion/form'
-
+			.modal.fade#estudiante_seccion{ role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden'=> false}
+				.modal-dialog
+					.modal-content
+						.modal-header
+							%h5
+								= "Inscribir a #{@estudiante.descripcion} en sección del periodo #{session[:cal_parametros][:semestre_actual]}"
+								<button type="button" class="close fade" data-dismiss="modal" aria-hidden="true">×</button>
+						.modal-body
+							= render partial: 'cal_estudiante_seccion/form'
+%h5 Registro de Asiganturas:
 .accordion#accordion1
 
 	- @periodos.each do |periodo|

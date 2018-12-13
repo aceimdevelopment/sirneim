@@ -79,7 +79,7 @@ class CalEstudianteSeccionController < ApplicationController
 
 	def crear
 		ci = params[:ci]
-		numero, cal_materia_id, cal_semestre_id = params[:cal_seccion][:id].split(",")		
+		numero, cal_materia_id, cal_semestre_id = params[:cal_seccion][:id].split(",")
 		if CalEstudianteSeccion.where(:cal_estudiante_ci => ci, :numero => numero, :cal_materia_id => cal_materia_id, :cal_semestre_id => cal_semestre_id).limit(1).first
 			flash[:error] = "El Estudiante ya esta inscrito en esa sección"
 		else
