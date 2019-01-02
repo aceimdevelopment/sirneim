@@ -1,6 +1,6 @@
 .well.well-small
 
-	= link_to "FECHAS DEL CRONOGRAMA DOCENTE 2017-2018", controller: "cal_descargar", action: "archivo", id: "FECHAS_CRONOGRAMA_DOCENTE_2017-2018"
+	=# link_to "FECHAS DEL CRONOGRAMA DOCENTE 2017-2018", controller: "cal_descargar", action: "archivo", id: "FECHAS_CRONOGRAMA_DOCENTE_2017-2018"
 
 - @cal_usuario = session[:cal_usuario]
 
@@ -10,7 +10,7 @@
 - if @estudiante.combinaciones.count < 1 and not @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO' 
 	= render partial: 'cal_estudiante/actualizar_idiomas'
 
--if @estudiante.cita_horaria
+-if false# @estudiante.cita_horaria
 	%h3 Cita Horaria:
 	.well.well-small
 		%p
@@ -20,22 +20,24 @@
 			%b Hora:
 			= @estudiante.cita_horaria.hora
 
-- if @archivos
+- if false#@archivos
 	%p
 		%h3= "Horario #{@periodo_actual.id}:"
 		.well.well-small
 			- @archivos.each do |archivo|
 				%p= link_to archivo, controller: 'cal_descargar', action: 'horario', id: archivo
 
-- if false
-	%h3 Exámenes de Reparación y Suficiencia Octubre 2016 
+- if true
+	%h3 Exámenes de Reparación y Suficiencia Enero 2019
 	%ul
 		%li
-			= link_to "Lunes 17 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "01_RepSuf_Lun_17Oct2016.pdf"
+			= link_to "Lunes 08 Enero 2019", controller: 'cal_descargar', action: 'archivo', id: "2019/01_RepSuf_Mar_08Ene2019.pdf"
 		%li
-			= link_to "Martes 18 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "02_RepSuf_Mar_18Oct2016.pdf"
+			= link_to "Martes 09 Enero 2019", controller: 'cal_descargar', action: 'archivo', id: "2019/01_RepSuf_Mie_09Ene2019.pdf"
 		%li
-			= link_to "Miércoles 19 Octubre 2016", controller: 'cal_descargar', action: 'archivo', id: "03_RepSuf_Mier_19 Oct2016.pdf"
+			= link_to "Formato de Solicitud", controller: 'cal_descargar', action: 'archivo', id: "2019/formato_solicitud_rep_sufic_201902A.pdf"
+		%li
+			= link_to "Sobre las Inscripciones", controller: 'cal_descargar', action: 'archivo', id: "2019/SOBRE_INSCRIPCION_201902A.pdf"
 
 - if CalParametroGeneral.programaciones_encendidas
 	%h3 Programaciones (Pdf):
@@ -56,10 +58,10 @@
 
 		%li=link_to "Programación Tradución e Interpretación - Tradución - #{@periodo_actual.id}", {controller: 'cal_descargar',action: 'programaciones', id: "T&I_TRAD", :cal_semestre_id => @periodo_actual.id} 
 
-
-%h3 Otros Archivos:
-%ul
-	%li=link_to "Comunicado Sobre Inscripciones 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "SOBRE_INSCRIP_2017-02A"}
-	%li=link_to "Horario Tentativo 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "HORARIO_TENTATIVO_2017-02A"} 
+- if false
+	%h3 Otros Archivos:
+	%ul
+		%li=link_to "Comunicado Sobre Inscripciones 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "SOBRE_INSCRIP_2017-02A"}
+		%li=link_to "Horario Tentativo 2017-2018", {controller: 'cal_descargar', action: 'archivo', id: "HORARIO_TENTATIVO_2017-02A"} 
 
 = render partial: 'cal_estudiante/historial_academico'
