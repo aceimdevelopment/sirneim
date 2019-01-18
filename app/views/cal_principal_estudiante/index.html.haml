@@ -10,7 +10,20 @@
 - if @estudiante.combinaciones.count < 1 and not @estudiante.cal_tipo_estado_inscripcion_id.eql? 'NUEVO' 
 	= render partial: 'cal_estudiante/actualizar_idiomas'
 
--if false# @estudiante.cita_horaria
+- if @estudiante.combinaciones.count > 0
+	.well.well-small
+		%h5 Combinación de Idiomas:
+		- @estudiante.combinaciones.each do |c| 
+			%p= c.descripcion
+
+- if @estudiante.planes.count > 0
+	.well.well-small
+		%h5 Planes:
+		- @estudiante.planes.each do |pl| 
+			%p= pl.descripcion_completa
+
+
+-if @estudiante.cita_horaria
 	%h3 Cita Horaria:
 	.well.well-small
 		%p
@@ -20,7 +33,7 @@
 			%b Hora:
 			= @estudiante.cita_horaria.hora
 
-- if false#@archivos
+- if @archivos
 	%p
 		%h3= "Horario #{@periodo_actual.id}:"
 		.well.well-small
