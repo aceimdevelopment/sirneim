@@ -1,6 +1,4 @@
-.well.well-small
-
-	=# link_to "FECHAS DEL CRONOGRAMA DOCENTE 2017-2018", controller: "cal_descargar", action: "archivo", id: "FECHAS_CRONOGRAMA_DOCENTE_2017-2018"
+=# link_to "FECHAS DEL CRONOGRAMA DOCENTE 2017-2018", controller: "cal_descargar", action: "archivo", id: "FECHAS_CRONOGRAMA_DOCENTE_2017-2018"
 
 - @cal_usuario = session[:cal_usuario]
 
@@ -24,8 +22,8 @@
 
 
 -if @estudiante.cita_horaria
-	%h3 Cita Horaria:
 	.well.well-small
+		%h5 Cita Horaria:
 		%p
 			%b Fecha:
 			=(I18n.localize(@estudiante.cita_horaria.fecha, :format => "%A, %d de %B de %Y")).capitalize()
