@@ -1,8 +1,12 @@
 .well.well-small
 
 	- if true
-		%h3 Exámenes de Reparación y Suficiencia Enero 2019
+		%h5 Exámenes de Reparación y Suficiencia Enero 2019
 		%ul
+			%li
+				= link_to "Planilla Inscripción 2019", controller: 'cal_descargar', action: 'archivo', id: "2019/planilla_inscripcion"
+			%li
+				= link_to "Instrucciones Inscripciones 2019", controller: 'cal_descargar', action: 'archivo', id: "2019/instrucciones_inscripciones"
 			%li
 				= link_to "Martes 08 Enero 2019", controller: 'cal_descargar', action: 'archivo', id: "2019/01_RepSuf_Mar_08Ene2019"
 			%li
