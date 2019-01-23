@@ -25,7 +25,6 @@
 
 	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>"Eliminar Todas las Secciones del Período #{@cal_semestre_actual_id}"}
 		= link_to "", {href: "/sirneim/cal_seccion/eliminar_todas_secciones_actual", class: 'btn btn-danger', data: {confirm: "Se perderá la totalidad de los estudiantes inscritos en las secciones del período #{@cal_semestre_actual_id}. Esta acción es irreversibe, ¿Está seguro de esta acción?"}, method: :delete} do
-			%i.icon-trash.icon-white
 			%i.icon-list.icon-white
 			%i.icon-trash.icon-white
 
