@@ -37,6 +37,7 @@ class CalPrincipalAdminController < ApplicationController
 	end
 
 	def configuracion_general
+		@admin = session[:cal_administrador]
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual
 		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
 		@cal_periodos = CalSemestre.order("id desc").all
