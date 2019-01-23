@@ -40,6 +40,12 @@ class CalPrincipalAdminController < ApplicationController
 		@admin = session[:cal_administrador]
 		@periodo_actual = CalParametroGeneral.cal_semestre_actual
 		@periodo_anterior = CalParametroGeneral.cal_semestre_anterior
+
+		@cal_semestre_actual_id = session[:cal_parametros][:semestre_actual]
+		@cal_semestre_actual = CalSemestre.where(:id => @cal_semestre_actual_id).limit(1).first
+		@cal_usuario = session[:cal_usuario]
+
+		
 		@cal_periodos = CalSemestre.order("id desc").all
 	end
 
