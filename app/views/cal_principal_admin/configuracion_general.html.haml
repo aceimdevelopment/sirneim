@@ -1,4 +1,34 @@
 %h2 Configuraciones Generales 
+- if @admin.cal_tipo_admin_id < 2
+	%h4 Generales:
+	- if (@cal_semestre_actual.cal_secciones.calificadas.count > 0)
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>"Habilitar calificación para todas las secciones del Período #{@cal_semestre_actual_id}"}
+			= link_to "", {:href => '/sirneim/cal_principal_admin/habilitar_calificar', class: "btn btn-success", 'data_confirm' => "Se Habilitaran todas las secciones del período #{@cal_semestre_actual_id}, ¿Está seguro de esta acción?"},{role: 'button'} do
+				%span.icon.icon-off.icon-white
+				= content_tag(:i, "", class: "icon icon-list icon-white")
+	- else			
+		%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Todas las secciones de este periodo habilidatas para calificar'}
+			= link_to "", {:href => 'javascript:void(0)', class: "btn btn-success disabled", 'data_confirm' => "Se Habilitaran todas las secciones del período #{@cal_semestre_actual_id}, ¿Está seguro de esta acción?"},{role: 'button'} do
+				%i.icon.icon-off.icon-white
+				%i.icon.icon-list.icon-white
+
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>'Importar Secciones y Estudiantes desde un archivo PDF'}
+		= link_to "", {:href => '/sirneim/cal_principal_admin/importar_secciones_paso1', class: 'btn btn-info'},{role: 'button'} do
+			%i.icon-file.icon-white
+			%i.icon-arrow-right.icon-white
+			%i.icon-list.icon-white
+
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>"Clonar Secciones del Período Anterior #{session[:cal_parametros][:semestre_anterior]}" }
+		= link_to "", {:href => '/sirneim/cal_seccion/clonar_secciones_anteriores', class: 'btn btn-success'},{role: 'button'} do
+			%i.icon-retweet.icon-white
+			%i.icon-list.icon-white
+
+	%b.tooltip-btn{'data_toggle'=>'tooltip', 'title'=>"Eliminar Todas las Secciones del Período #{@cal_semestre_actual_id}"}
+		= link_to "", {href: "/sirneim/cal_seccion/eliminar_todas_secciones_actual", class: 'btn btn-danger', data: {confirm: "Se perderá la totalidad de los estudiantes inscritos en las secciones del período #{@cal_semestre_actual_id}. Esta acción es irreversibe, ¿Está seguro de esta acción?"}, method: :delete} do
+			%i.icon-trash.icon-white
+			%i.icon-list.icon-white
+			%i.icon-trash.icon-white
+
 %h3 
 	Programaciones:
 	%span.badge  

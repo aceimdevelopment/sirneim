@@ -17,14 +17,14 @@ class CalSeccionController < ApplicationController
 		@periodo_actual = session[:cal_parametros][:semestre_actual]
 		@periodo_anterior = session[:cal_parametros][:semestre_anterior]
 
-		@secciones = CalSeccion.where(:cal_semestre_id => @periodo_anterior.id)
+		@secciones = CalSeccion.where(:cal_semestre_id => @periodo_anterior)
 
 		total_clonadas = 0
 		errores = 0
 		@secciones.each do |seccion|
 			nueva = CalSeccion.new
 			nueva.numero = seccion.numero
-			nueva.cal_semestre_id = @periodo_actual.id
+			nueva.cal_semestre_id = @periodo_actual
 			nueva.cal_materia_id = seccion.cal_materia_id
 			nueva.cal_profesor_ci = seccion.cal_profesor_ci
 			nueva.calificada = false
