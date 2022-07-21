@@ -131,7 +131,7 @@ GEM
       execjs
       rails (>= 3.1)
       railties (>= 3.1)
-    tzinfo (0.3.52)
+    tzinfo (0.3.61)
     uglifier (2.2.1)
       execjs (>= 0.3.0, < 3)
     unicorn (4.1.1)
